@@ -1,0 +1,4 @@
+AuthType Basic  
+AuthName "restricted area"  
+AuthUserFile /usr/local/nginx/conf/.htpasswd  
+require valid-user

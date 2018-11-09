@@ -1,0 +1,2 @@
+__stream1__out1__ rtmp://a.rtmp.youtube.com/live2/YourKey source
+__stream1__out2__ rtmp://live-api-s.facebook.com:80/rtmp/YourKey 720p

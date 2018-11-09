@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>NGINX HLS Test</title>
+<link href="https://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet"><style type="text/css">body {margin: 0; padding: 0;} .padded {padding: 20px;}</style>
+<!--<script>window.setInterval("reloadIFrame();", 3000); function reloadIFrame() {document.getElementById("statspage").src="/stat";}</script>-->
+</head>
+<body>
+<div class="padded"><h2>Preview of main input</h2><video id="video-player" width="640" height="360" class="video-js vjs-default-skin" controls>
+<source src="/live/input.m3u8" type="application/x-mpegURL"></video>
+<script src="https://vjs.zencdn.net/5.8.8/video.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/3.6.12/videojs-contrib-hls.js"></script>
+<script>  var player = videojs('video-player'); player.play();</script></div>
+
+<div class="padded"><h2>First stream</h2>
+
+<p><a href="/php/1Out1on.php" target="_blank">Turn on first destination</a>   |||   <a href="/php/1Out1off.php" target="_blank">Turn off first destination</a></p>
+<p><a href="/php/1Out2on.php" target="_blank">Turn on FB (720p)</a>   |||   <a href="/php/1Out2off.php" target="_blank">Turn off FB (720p)</a></p>
+
+<p><b>Lower Thirds:</b> <a href="/php/lowerthirdon.php" target="_blank">Add Lower Third</a>   |||   <a href="/php/lowerthirdoff.php" target="_blank">Remove Lower Third</a></p>
+
+<p><b>Volume:</b> <a href="/php/volume0.php" target="_blank">Mute</a>   |||   <a href="/php/volume1.php" target="_blank">Normal</a>   |||   <a href="/php/volume2.php" target="_blank">Double</a> (These "Volume links" are just for testing. We can have a slider or something once we decide how we want to do it.)</p>
+<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/php/1on.php" target="_blank">Turn on main</a>   |||   <a href="/php/1backon.php" target="_blank">Turn on backup</a>   |||   <a href="/php/1holdingon.php" target="_blank">Turn on holding screen</a>   |||   <a href="/php/1videoon.php" target="_blank">Turn on Ad video</a>   |||   <a href="/php/1off.php" target="_blank">Turn off livestream</a></p>
+<p>Main stream should go to rtmp://serverip/stream1/input<br/>
+Backup stream to rtmp://serverip/stream1/backup</p>
+
+<div class="padded" id="stat-frame"><iframe id="statspage" src = "/stat" width = "900" height = "600"></iframe></div>
+
+</body>
+</html>
