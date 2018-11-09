@@ -7,7 +7,6 @@ dest=`cat /usr/local/nginx/scripts/1data.txt | grep '__stream1__'$1'__' | cut -d
 case $1 in
 ####### OUTPUT CONFIGURATION ######
 out1)
-#dest="rtmp://a.rtmp.youtube.com/live2/x6x2-p8m7-0e2q-3scr"
 case $2 in
 
 source)
@@ -55,7 +54,7 @@ then
 #echo "above screen"
 exec screen -dm -S $screenname /bin/bash "$0" "$1" "$2"; 
 fi
-echo $dest
+#echo $dest
 while [ $i -lt 9000 ]
 do
 $inputparam $inputloc1 $encodeparam -f flv $dest $outputparam
@@ -70,7 +69,6 @@ fi
 ;;
 
 out2)
-#dest="rtmp://live-api-s.facebook.com:80/rtmp/1355110834623486?s_ps=1&s_sw=0&s_vt=api-s&a=AbwIlJCdCU4GoAS8"
 case $2 in
 source)
 encodeparam="-c copy"
@@ -117,7 +115,6 @@ then
 #echo "above screen"
 exec screen -dm -S $screenname /bin/bash "$0" "$1" "$2"; 
 fi
-echo $dest
 while [ $i -lt 9000 ]
 do
 $inputparam $inputloc1 $encodeparam -f flv $dest $outputparam
