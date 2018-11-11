@@ -1,7 +1,7 @@
 #!/bin/bash
 inputparam="/usr/bin/ffmpeg -nostdin -i"
 outputparam="-y -async 1 -vsync 1"
-inputloc1="rtmp://127.0.0.1:1935/distribute/1in"
+inputloc1="rtmp://127.0.0.1:1935/distribute/stream1"
 dest=`cat /usr/local/nginx/scripts/1data.txt | grep '__stream1__'$1'__' | cut -d ' ' -f 2`
 
 case $1 in
@@ -191,7 +191,7 @@ fi
 
 while true
 do
-/usr/bin/ffmpeg -nostdin -thread_queue_size 1024 -i rtmp://127.0.0.1:1935/stream1/input -i /usr/local/nginx/scripts/images/lowerthird.png -af azmq,volume=2 -c:a aac -filter_complex 'zmq=bind_address=tcp\\\://127.0.0.1\\\:5556,overlay=0:H' -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 6000k -maxrate 6M -minrate 6M -bufsize 6M -f flv -strict -2 rtmp://127.0.0.1:1935/distribute/1in -y -async 1 -vsync 1
+/usr/bin/ffmpeg -nostdin -thread_queue_size 1024 -i rtmp://127.0.0.1:1935/input/stream1 -i /usr/local/nginx/scripts/images/lowerthird.png -af azmq,volume=2 -c:a aac -filter_complex 'zmq=bind_address=tcp\\\://127.0.0.1\\\:5556,overlay=0:H' -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 6000k -maxrate 6M -minrate 6M -bufsize 6M -f flv -strict -2 rtmp://127.0.0.1:1935/distribute/stream1 -y -async 1 -vsync 1
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -233,7 +233,7 @@ fi
 
 while true
 do
-/usr//bin/ffmpeg -nostdin -re -i rtmp://127.0.0.1:1935/stream1/backup -c copy -f flv rtmp://127.0.0.1:1935/distribute/1in -y -async 1 -vsync 1
+/usr//bin/ffmpeg -nostdin -re -i rtmp://127.0.0.1:1935/backup/stream1 -c copy -f flv rtmp://127.0.0.1:1935/distribute/stream1 -y -async 1 -vsync 1
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -275,7 +275,7 @@ fi
 
 while true
 do
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/holding.mp4 -c copy -f flv rtmp://127.0.0.1:1935/distribute/1in -y
+/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/holding.mp4 -c copy -f flv rtmp://127.0.0.1:1935/distribute/stream1 -y
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -317,7 +317,7 @@ fi
 
 while true
 do
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/video.mp4 -c copy -f flv rtmp://127.0.0.1:1935/distribute/1in -y
+/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/video.mp4 -c copy -f flv rtmp://127.0.0.1:1935/distribute/stream1 -y
 echo "Restarting ffmpeg..."
 sleep .2
 done

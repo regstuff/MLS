@@ -7,7 +7,7 @@ sudo wget http://nginx.org/download/nginx-1.13.12.tar.gz
 sudo tar xzf nginx-1.13.12.tar.gz
 cd nginx-1.13.12
 sudo ./configure --with-http_ssl_module --add-module=../nginx-rtmp-module
-echo "Baking the splitter - please hold"
+echo "Hold on! NGINX is installing."
 sudo make -s
 sudo make install
 
@@ -24,21 +24,24 @@ sudo git clone https://github.com/regstuff/InstagramLive-PHP.git
 sudo composer install -d InstagramLive-PHP/
 
 # Download and move config files
-cd ~/MLS/scripts/images
+cd ~/MLS/scripts/
+sudo mkdir images
+sudo mkdir tmp
+cd images
 sudo wget -O holding.mp4 https://www.dropbox.com/s/yllnqcwe942xpt9/2018-11-04%2020-53-26.mp4?dl=0
 sudo wget -O lowerthird.png https://www.dropbox.com/s/f053xt0o4ekaifz/lowerthird.png?dl=0
+sudo chgrp -R www-data ~/MLS
+sudo chmod g+rw -R ~/MLS
 sudo cp -R ~/MLS/scripts /usr/local/nginx
 sudo chmod +x -R /usr/local/nginx/scripts
 sudo mv /usr/local/nginx/scripts/.htpasswd /usr/local/nginx/conf/
 sudo mv /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.old
 sudo mv /usr/local/nginx/scripts/php.ini /etc/php/7.0/fpm/
 sudo systemctl restart php7.0-fpm
-sudo chgrp -R www-data /usr/local/nginx/scripts
-sudo chmod g+rw -R /usr/local/nginx/scripts
 
 sudo mv /usr/local/nginx/scripts/nginx.conf /usr/local/nginx/conf/
 sudo rm -R /usr/local/nginx/html
-sudo mv /usr/local/nginx/html /usr/local/nginx
+sudo mv ~/MLS/html /usr/local/nginx
 
 #Setup HLS & Recording folders
 sudo mkdir /usr/local/nginx/html/hls
