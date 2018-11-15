@@ -1,151 +1,19 @@
 #!/bin/bash
-inputparam="/usr/bin/ffmpeg -nostdin -i"
-outputparam="-y -async 1 -vsync 1"
-inputloc1="rtmp://127.0.0.1:1935/distribute/stream1"
+oldffmpegparam="/usr/bin/ffmpeg -nostdin -thread_queue_size 512 -i"
+newffmpegparam="/usr/local/bin/ffmpeg -nostdin -thread_queue_size 512 -i"
+outputparam="-y"
+distributeparam="rtmp://127.0.0.1:1935/distribute/stream1"
+inputparam="rtmp://127.0.0.1:1935/input/stream1"
+backupparam="rtmp://127.0.0.1:1935/backup/stream1"
 dest=`cat /usr/local/nginx/scripts/1data.txt | grep '__stream1__'$1'__' | cut -d ' ' -f 2`
 
 case $1 in
-####### OUTPUT CONFIGURATION ######
-out1)
-case $2 in
-
-source)
-encodeparam="-c copy"
-;;
-
-720p)
-encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 1280x720 -b:v 3000k -preset veryfast"
-;;
-
-off)
-ME=$(basename "$0" .sh);
-ME="[S]CREEN.*$ME"$1
-#screenname=$(basename "$0" .sh)$1
-#echo $ME
-if [ $(ps aux | grep $ME | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep $ME | awk '{print $2}')
-echo "Turning off "$1
-sleep 0.5
-else
-echo $1" is already off"
-sleep 0.5
-fi
-exit 0
-;;
-
-*)
-echo "Output parameters are either source/720p/off"
-exit 1
-esac
-
-screenname=$(basename "$0" .sh)$1
-ME=`basename "$0"`;
-ME=$ME"_"$1
-LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
-exec 8>$LCK;
-#echo "After LCK"
-
-if flock -n -x 8; then
-#echo "In flck"
-i="0"
-echo $ME "has started at "$2" resolution"
-if [ -z "$STY" ];
-then
-#echo "above screen"
-exec screen -dm -S $screenname /bin/bash "$0" "$1" "$2"; 
-fi
-#echo $dest
-while [ $i -lt 9000 ]
-do
-$inputparam $inputloc1 $encodeparam -f flv $dest $outputparam
-echo "Waiting for English input... Feed me!!!"
-sleep 0.2
-i=$[$i+1]
-echo $2
-done
-
-else echo $ME " is already running" 
-fi
-;;
-
-out2)
-case $2 in
-source)
-encodeparam="-c copy"
-;;
-
-720p)
-encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 1280x720 -b:v 3000k -preset veryfast"
-;;
-
-off)
-ME=$(basename "$0" .sh);
-ME="[S]CREEN.*$ME"$1
-#screenname=$(basename "$0" .sh)$1
-#echo $ME
-if [ $(ps aux | grep $ME | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep $ME | awk '{print $2}')
-echo "Turning off "$1
-sleep 0.5
-else
-echo $1" is already off"
-sleep 0.5
-fi
-exit 0
-;;
-
-*)
-echo "Output parameters are either source/720p/off"
-exit 1
-esac
-
-screenname=$(basename "$0" .sh)$1
-ME=`basename "$0"`;
-ME=$ME"_"$1
-LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
-exec 8>$LCK;
-#echo "After LCK"
-
-if flock -n -x 8; then
-#echo "In flck"
-i="0"
-echo $ME "has started at "$2" resolution"
-if [ -z "$STY" ];
-then
-#echo "above screen"
-exec screen -dm -S $screenname /bin/bash "$0" "$1" "$2"; 
-fi
-while [ $i -lt 9000 ]
-do
-$inputparam $inputloc1 $encodeparam -f flv $dest $outputparam
-echo "Waiting for English input... Feed me!!!"
-sleep 0.2
-i=$[$i+1]
-echo $2
-done
-
-else echo $ME " is already running" 
-fi
-;;
-
 ####### MODIFICATION CONFIG ########
 volume)
-case $2 in
-0)
-echo 'Parsed_volume_1 volume 0' | /usr/local/bin/tools/zmqsend
+echo 'Parsed_volume_1 volume '$2 | /usr/local/bin/tools/zmqsend
 sleep 0.5
 ;;
-2)
-echo 'Parsed_volume_1 volume 2' | /usr/local/bin/tools/zmqsend
-sleep 0.5
-;;
-4)
-echo 'Parsed_volume_1 volume 4' | /usr/local/bin/tools/zmqsend sleep 0.5
-;;
-*)
-echo "Only mute, single and double volume are used"
-esac
-;;
+
 super)
 case $2 in
 off) 
@@ -191,7 +59,7 @@ fi
 
 while true
 do
-/usr/bin/ffmpeg -nostdin -thread_queue_size 1024 -i rtmp://127.0.0.1:1935/input/stream1 -i /usr/local/nginx/scripts/images/lowerthird.png -af azmq,volume=2 -c:a aac -filter_complex 'zmq=bind_address=tcp\\\://127.0.0.1\\\:5556,overlay=0:H' -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 6000k -maxrate 6M -minrate 6M -bufsize 6M -f flv -strict -2 rtmp://127.0.0.1:1935/distribute/stream1 -y -async 1 -vsync 1
+$oldffmpegparam $inputparam -i /usr/local/nginx/scripts/images/lowerthird.png -af azmq,volume=2 -c:a aac -filter_complex 'zmq=bind_address=tcp\\\://127.0.0.1\\\:5556,overlay=0:H' -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 6000k -maxrate 6M -minrate 6M -bufsize 6M -f flv -strict -2 $distributeparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -233,7 +101,7 @@ fi
 
 while true
 do
-/usr//bin/ffmpeg -nostdin -re -i rtmp://127.0.0.1:1935/backup/stream1 -c copy -f flv rtmp://127.0.0.1:1935/distribute/stream1 -y -async 1 -vsync 1
+$oldffmpegparam $backupparam -c copy -f flv $distributeparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -275,7 +143,7 @@ fi
 
 while true
 do
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/holding.mp4 -c copy -f flv rtmp://127.0.0.1:1935/distribute/stream1 -y
+/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/holding.mp4 -c copy -f flv $distributeparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -317,7 +185,7 @@ fi
 
 while true
 do
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/video.mp4 -c copy -f flv rtmp://127.0.0.1:1935/distribute/stream1 -y
+/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/video.mp4 -c copy -f flv $distributeparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -363,7 +231,67 @@ fi
 sleep 0.5
 ;;
 
+####### OUTPUT CONFIGURATION ######
+
 *)
-echo "Usage options are main/back/holding/video/volume/super/out1,2,3 etc..."
+case $2 in
+
+source)
+encodeparam="-c copy"
+;;
+
+720p)
+encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 1280x720 -b:v 3000k -preset veryfast"
+;;
+
+off)
+ME=$(basename "$0" .sh);
+ME="[S]CREEN.*$ME"$1
+#screenname=$(basename "$0" .sh)$1
+#echo $ME
+if [ $(ps aux | grep $ME | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep $ME | awk '{print $2}')
+echo "Turning off "$1
+sleep 0.5
+else
+echo $1" is already off"
+sleep 0.5
+fi
+exit 0
+;;
+
+*)
+echo "Output parameters are either source/720p/off"
+exit 1
+esac
+
+screenname=$(basename "$0" .sh)$1
+ME=`basename "$0"`;
+ME=$ME"_"$1
+#checkout="[f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/$1"
+LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
+exec 8>$LCK;
+#echo "After LCK"
+
+if flock -n -x 8; then
+#echo "In flck"
+i="0"
+echo $ME "has started at "$2" resolution"
+if [ -z "$STY" ];
+then
+#echo "above screen"
+exec screen -dm -S $screenname /bin/bash "$0" "$1" "$2"; 
+fi
+#echo $dest
+while [ $i -lt 9000 ]
+do
+$oldffmpegparam $distributeparam $encodeparam -f flv $dest $outputparam
+echo "Waiting for English input... Feed me!!!"
+sleep 0.2
+i=$[$i+1]
+done
+
+else echo $ME " is already running" 
+fi
 esac
 ########## OFF ENDS. ALL END ################
