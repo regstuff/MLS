@@ -6,7 +6,12 @@ echo $output;
 }
 
 if (isset($_GET['1dest2on'])) {
-$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1on.sh out2 720p');
+$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1on.sh out2 source');
+echo $output;
+}
+
+if (isset($_GET['1dest3on'])) {
+$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1on.sh out3 source');
 echo $output;
 }
 
@@ -20,6 +25,10 @@ $output = exec('sudo /bin/bash /usr/local/nginx/scripts/1on.sh out2 off');
 echo $output;
 }
 
+if (isset($_GET['1dest3off'])) {
+$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1on.sh out3 off');
+echo $output;
+}
 ####END OF DESTINATIONS START INPUTS#####
 
 if (isset($_GET['1main'])) {
