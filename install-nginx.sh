@@ -37,6 +37,8 @@ sudo chmod +x -R /usr/local/nginx/scripts
 sudo mv /usr/local/nginx/scripts/.htpasswd /usr/local/nginx/conf/
 sudo mv /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.old
 sudo mv /usr/local/nginx/scripts/php.ini /etc/php/7.0/fpm/
+sudo rm -R ~/MLS/scripts/images
+sudo rm -R ~/MLS/scripts/tmp
 sudo systemctl restart php7.0-fpm
 
 sudo mv /usr/local/nginx/scripts/nginx.conf /usr/local/nginx/conf/

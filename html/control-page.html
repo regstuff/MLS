@@ -20,12 +20,32 @@ Backup stream to rtmp://serverip/backup/stream1</p>
 
 <p><a href="/1.php?1dest1on" target="_blank">Turn on YT</a>   |||   <a href="/1.php?1dest1off" target="_blank">Turn off YT</a></p>
 <p><a href="/1.php?1dest2on" target="_blank">Turn on FB</a>   |||   <a href="/1.php?1dest2off" target="_blank">Turn off FB</a></p>
-<p><a href="/1.php?1dest3on" target="_blank">Turn on YT Test</a>   |||   <a href="/1.php?1dest3off" target="_blank">Turn off YT Test</a></p>
+<p><a href="/1.php?1dest3on" target="_blank">Turn on Third Dest</a>   |||   <a href="/1.php?1dest3off" target="_blank">Turn off Third Dest</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/1.php?1superon" target="_blank">Add Lower Third</a>   |||   <a href="/1.php?1superoff" target="_blank">Remove Lower Third</a></p>
 
 <p><b>Volume:</b> <a href="/1.php?1vol0" target="_blank">Mute</a>   |||   <a href="/1.php?1vol1" target="_blank">Normal</a>   |||   <a href="/1.php?1vol2" target="_blank">Double</a> (These "Volume links" are just for testing. We can have a slider or something once we decide how we want to do it.)</p>
 <p><b>Main/backup/holding/Ad video Switch:</b> <a href="/1.php?1main" target="_blank">Turn on main</a>   |||   <a href="/1.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/1.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/1.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/1.php?1off" target="_blank">Turn off livestream</a></p></div>
+<hr>
+<h2 class="padded">Second stream</h2>
+<p class="padded">Main stream should go to rtmp://serverip/input/stream2<br/>
+Backup stream to rtmp://serverip/backup/stream2</p>
+<div class="padleft"><video id="video-player" width="320" height="180" class="video-js vjs-default-skin" controls>
+<source src="/live/input.m3u8" type="application/x-mpegURL"></video>
+<script src="https://vjs.zencdn.net/5.8.8/video.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/3.6.12/videojs-contrib-hls.js"></script>
+<script>  var player = videojs('video-player'); player.play();</script></div>
+
+<div class="padded">
+
+<p><a href="/2.php?1dest1on" target="_blank">Turn on YT</a>   |||   <a href="/2.php?1dest1off" target="_blank">Turn off YT</a></p>
+<p><a href="/2.php?1dest2on" target="_blank">Turn on FB</a>   |||   <a href="/2.php?1dest2off" target="_blank">Turn off FB</a></p>
+<p><a href="/2.php?1dest3on" target="_blank">Turn on Third Dest</a>   |||   <a href="/2.php?1dest3off" target="_blank">Turn off Third Dest</a></p>
+
+<p><b>Lower Thirds:</b> <a href="/2.php?1superon" target="_blank">Add Lower Third</a>   |||   <a href="/2.php?1superoff" target="_blank">Remove Lower Third</a></p>
+
+<p><b>Volume:</b> <a href="/2.php?1vol0" target="_blank">Mute</a>   |||   <a href="/2.php?1vol1" target="_blank">Normal</a>   |||   <a href="/2.php?1vol2" target="_blank">Double</a> (These "Volume links" are just for testing. We can have a slider or something once we decide how we want to do it.)</p>
+<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/2.php?1main" target="_blank">Turn on main</a>   |||   <a href="/2.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/2.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/2.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/2.php?1off" target="_blank">Turn off livestream</a></p></div>
 <hr>
 </body>
 </html>
