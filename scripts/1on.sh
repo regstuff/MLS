@@ -326,7 +326,7 @@ esac
 screenname=$(basename "$0" .sh)$1
 ME=`basename "$0"`;
 ME=$ME"_"$1
-#checkout="[f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/$1"
+checkout="[f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/stream1-$1"
 LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
 exec 8>$LCK;
 #echo "After LCK"
@@ -343,7 +343,7 @@ fi
 #echo $dest
 while [ $i -lt 9000 ]
 do
-$oldffmpegparam $distributeparam $encodeparam -f flv $dest $outputparam
+$oldffmpegparam $distributeparam $encodeparam -f tee -map 0:v -map 0:a $checkout $outputparam
 echo "Waiting for English input... Feed me!!!"
 sleep 0.2
 i=$[$i+1]
