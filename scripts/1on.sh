@@ -240,7 +240,7 @@ sleep 0.5
 
 ####### OUTPUT CONFIGURATION ######
 
-out4)
+out99)
 case $2 in 
 off)
 ME=$(basename "$0" .sh);
@@ -263,7 +263,7 @@ encodeparam="-acodec copy -vcodec libx264 -preset faster -vprofile baseline -g 5
 screenname=$(basename "$0" .sh)$1
 ME=`basename "$0"`;
 ME=$ME"_"$1
-#checkout="[f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/$1"
+checkout="[f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/stream1-$1"
 LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
 exec 8>$LCK;
 #echo "After LCK"
@@ -280,7 +280,7 @@ fi
 #echo $dest
 while [ $i -lt 9000 ]
 do
-$oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" -f flv $dest $outputparam
+$oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" -f flv "$checkout" $outputparam
 echo "Waiting for English input... Feed me!!!"
 sleep 0.2
 i=$[$i+1]

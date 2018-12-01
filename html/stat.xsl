@@ -13,6 +13,7 @@
     <html>
         <head>
             <title>RTMP statistics</title>
+            <meta http-equiv="refresh" content="10" />
         </head>
         <body>
             <xsl:apply-templates select="rtmp"/>

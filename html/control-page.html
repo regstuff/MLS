@@ -20,7 +20,7 @@ Backup stream to rtmp://serverip/backup/stream1</p>
 
 <p><a href="/1.php?1dest1on" target="_blank">Turn on YT</a>   |||   <a href="/1.php?1dest1off" target="_blank">Turn off YT</a></p>
 <p><a href="/1.php?1dest2on" target="_blank">Turn on FB</a>   |||   <a href="/1.php?1dest2off" target="_blank">Turn off FB</a></p>
-<p><a href="/1.php?1dest3on" target="_blank">Turn on Third Dest</a>   |||   <a href="/1.php?1dest3off" target="_blank">Turn off Third Dest</a></p>
+<p><a href="/1.php?1dest99on" target="_blank">Turn on Instagram (out99)</a>   |||   <a href="/1.php?1dest99off" target="_blank">Turn off Instagram</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/1.php?1superon" target="_blank">Add Lower Third</a>   |||   <a href="/1.php?1superoff" target="_blank">Remove Lower Third</a></p>
 
@@ -58,9 +58,9 @@ Backup stream to rtmp://serverip/backup/stream2</p>
 <h2>Add New Destination</h2>
 <form method="post" target="_blank" action="adddestination.php?add">
 Full RTMP Url: <br /> <input type="text" name="rtmp_url" size="35" placeholder="rtmp://a.rtmp.youtube.com/1234-abcd-2345-rewq"/> <br/>
-Stream Id: <br /> <input type="text" name="stream_id" size="35" placeholder="Enter a number"/> <br/>  
-Output Id: <br /> <input type="text" name="output_id" size="35" placeholder="Enter a number"/> <br/>
-<select name="resolution"><option value="source">Source</option><option value="720p">720p</option></select><br/><br/>
+Name: <input type="text" name="name_id" size="15" placeholder="English YT"/> <br/> Stream Id: <select name="stream_id"><option value="1">Stream 1</option><option value="2">Stream 2</option><option value="3">Stream 3</option><option value="4">Stream 4</option><option value="5">Stream 5</option><option value="6">Stream 6</option><option value="7">Stream 7</option><option value="8">Stream 8</option><option value="9">Stream 9</option><option value="10">Stream 10</option></select> <br/> 
+Output Id: <select name="output_id"><option value="1">Out 1</option><option value="2">Out 2</option><option value="3">Out 3</option><option value="4">Out 4</option><option value="5">Out 5</option><option value="6">Out 6</option><option value="7">Out 7</option><option value="8">Out 8</option><option value="9">Out 9</option><option value="10">Out 10</option></select> <br/>
+Resolution: <select name="resolution"><option value="source">Source</option><option value="720p">720p</option></select><br/><br/>
 <input type="submit" value="Add destination" /> <br/>
 </form>
 </div>
