@@ -1,4 +1,5 @@
-__stream1__out1__ rtmp://a.rtmp.youtube.com/live2/YourKey source
-__stream1__out2__ rtmp://live-api-s.facebook.com:80/rtmp/YourKey 720p
-__stream2__out1__ rtmp://a.rtmp.youtube.com/live2/YourKey source
-__stream2__out2__ rtmp://live-api-s.facebook.com:80/rtmp/YourKey 720p
+__stream1__out1__ rtmp://a.rtmp.youtube.com/live2/YourKey source YT
+__stream1__out2__ rtmp://live-api-s.facebook.com:80/rtmp/YourKey 720p FB
+__stream1__out99__ rtmp://live-api-s.instagram.com:80/rtmp/YourKey source Instagram
+__stream2__out1__ rtmp://a.rtmp.youtube.com/live2/YourKey source Another_YT
+__stream2__out2__ rtmp://live-api-s.facebook.com:80/rtmp/YourKey 720p Another_FB
