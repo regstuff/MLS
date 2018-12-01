@@ -24,7 +24,8 @@ Backup stream to rtmp://serverip/backup/stream1</p>
 
 <p><b>Lower Thirds:</b> <a href="/1.php?1superon" target="_blank">Add Lower Third</a>   |||   <a href="/1.php?1superoff" target="_blank">Remove Lower Third</a></p>
 
-<p><b>Volume:</b> <a href="/1.php?1vol0" target="_blank">Mute</a>   |||   <a href="/1.php?1vol1" target="_blank">Normal</a>   |||   <a href="/1.php?1vol2" target="_blank">Double</a> (These "Volume links" are just for testing. We can have a slider or something once we decide how we want to do it.)</p>
+<p><form method="post" target="_blank" action="/1.php?1vol"><b>Volume: </b><input type="text" name="1vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></form></p>
+
 <p><b>Main/backup/holding/Ad video Switch:</b> <a href="/1.php?1main" target="_blank">Turn on main</a>   |||   <a href="/1.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/1.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/1.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/1.php?1off" target="_blank">Turn off livestream</a></p></div>
 <hr>
 <h2 class="padded">Second stream</h2>
@@ -44,14 +45,29 @@ Backup stream to rtmp://serverip/backup/stream2</p>
 
 <p><b>Lower Thirds:</b> <a href="/2.php?1superon" target="_blank">Add Lower Third</a>   |||   <a href="/2.php?1superoff" target="_blank">Remove Lower Third</a></p>
 
-<p><b>Volume:</b> <a href="/2.php?1vol0" target="_blank">Mute</a>   |||   <a href="/2.php?1vol1" target="_blank">Normal</a>   |||   <a href="/2.php?1vol2" target="_blank">Double</a> (These "Volume links" are just for testing. We can have a slider or something once we decide how we want to do it.)</p>
+<p><form method="post" target="_blank" action="/2.php?1vol"><b>Volume: </b><input type="text" name="2vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></form></p>
+
 <p><b>Main/backup/holding/Ad video Switch:</b> <a href="/2.php?1main" target="_blank">Turn on main</a>   |||   <a href="/2.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/2.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/2.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/2.php?1off" target="_blank">Turn off livestream</a></p></div>
 <hr>
-</body>
+
+
+
+
+<div class="padded">
+<p><a href="/adddestination.php?list" target="_blank">Destination List</a></p>
+<h2>Add New Destination</h2>
+<form method="post" target="_blank" action="adddestination.php?add">
+Full RTMP Url: <br /> <input type="text" name="rtmp_url" size="35" placeholder="rtmp://a.rtmp.youtube.com/1234-abcd-2345-rewq"/> <br/>
+Stream Id: <br /> <input type="text" name="stream_id" size="35" placeholder="Enter a number"/> <br/>  
+Output Id: <br /> <input type="text" name="output_id" size="35" placeholder="Enter a number"/> <br/>
+<select name="resolution"><option value="source">Source</option><option value="720p">720p</option></select><br/><br/>
+<input type="submit" value="Add destination" /> <br/>
+</form>
+</div>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+</body> 
 </html>
-
-
-
-
-
 

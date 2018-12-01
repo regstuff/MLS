@@ -343,7 +343,7 @@ fi
 #echo $dest
 while [ $i -lt 9000 ]
 do
-$oldffmpegparam $distributeparam $encodeparam -f tee -map 0:v -map 0:a $checkout $outputparam
+$oldffmpegparam $distributeparam $encodeparam -f tee -map 0:v -map 0:a "$checkout" $outputparam
 echo "Waiting for English input... Feed me!!!"
 sleep 0.2
 i=$[$i+1]

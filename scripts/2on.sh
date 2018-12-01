@@ -232,7 +232,7 @@ echo "Turning off 2mainon.sh"
 fi
 
 else
-echo "Stream1 is already off"
+echo "Stream2 is already off"
 fi
 
 sleep 0.5
@@ -292,7 +292,7 @@ fi
 #echo $dest
 while [ $i -lt 9000 ]
 do
-$oldffmpegparam $distributeparam $encodeparam -f tee -map 0:v -map 0:a $checkout $outputparam
+$oldffmpegparam $distributeparam $encodeparam -f tee -map 0:v -map 0:a "$checkout" $outputparam
 echo "Waiting for English input... Feed me!!!"
 sleep 0.2
 i=$[$i+1]

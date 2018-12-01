@@ -58,8 +58,10 @@ echo $output;
 
 ####END OF INPUTS START MODS#####
 
-if (isset($_GET['1vol0'])) {
-$output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh volume 0');
+if (isset($_GET['1vol'])) {
+$vol = $_POST['2vol_level'];
+$vol_level = 2*$vol;
+$output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh volume $vol_level');
 echo $output;
 }
 
