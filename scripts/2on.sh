@@ -214,25 +214,25 @@ if flock -n -x 8; then
 if [ $(ps aux | grep '[S]CREEN.*2on_back' | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep '[S]CREEN.*2on_back' | awk '{print $2}')
 echo "Turning off 2backon.sh"
-fi
 
-if [ $(ps aux | grep '[S]CREEN.*2on_holding' | awk '{print $2}' | wc -l) -gt 0 ]; then
+elif [ $(ps aux | grep '[S]CREEN.*2on_holding' | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep '[S]CREEN.*2on_holding' | awk '{print $2}')
 echo "Turning off 2holdingon.sh"
-fi
 
-if [ $(ps aux | grep '[S]CREEN.*2on_video' | awk '{print $2}' | wc -l) -gt 0 ]; then
+elif [ $(ps aux | grep '[S]CREEN.*2on_video' | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep '[S]CREEN.*2on_video' | awk '{print $2}')
 echo "Turning off 2videoon.sh"
-fi
 
-if [ $(ps aux | grep '[S]CREEN.*2on_main' | awk '{print $2}' | wc -l) -gt 0 ]; then
+elif [ $(ps aux | grep '[S]CREEN.*2on_main' | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep '[S]CREEN.*2on_main' | awk '{print $2}')
 echo "Turning off 2mainon.sh"
-fi
 
 else
 echo "Stream2 is already off"
+fi
+
+else
+echo "You're already trying to turn off Stream2. Hold on!"
 fi
 
 sleep 0.5

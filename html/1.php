@@ -11,7 +11,7 @@ echo $output;
 }
 
 if (isset($_GET['1dest99on'])) {
-$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1on.sh out3 source');
+$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1on.sh out99 source');
 echo $output;
 }
 
@@ -26,7 +26,7 @@ echo $output;
 }
 
 if (isset($_GET['1dest99off'])) {
-$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1on.sh out3 off');
+$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1on.sh out99 off');
 echo $output;
 }
 ####END OF DESTINATIONS START INPUTS#####
@@ -59,22 +59,12 @@ echo $output;
 ####END OF INPUTS START MODS#####
 
 if (isset($_GET['1vol'])) {
-$vol = $_POST[1vol_level'];
+$vol = $_POST['vol_level'];
 $vol_level = 2*$vol;
-$output = exec("sudo /bin/bash /usr/local/nginx/scripts/1on.sh volume $vol_level");
-echo "$output";
-}
-
-/*if (isset($_GET['1vol1'])) {
-$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1on.sh volume 2');
+$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1on.sh volume $vol_level');
 echo $output;
 }
 
-if (isset($_GET['1vol2'])) {
-$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1on.sh volume 4');
-echo $output;
-}
-*/
 if (isset($_GET['1superon'])) {
 $output = exec('sudo /bin/bash /usr/local/nginx/scripts/1on.sh super on');
 echo $output;
