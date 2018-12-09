@@ -15,6 +15,13 @@ $output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out3 source');
 echo $output;
 }
 
+if (isset($_GET['1dest3on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out3 source');echo $output;}
+if (isset($_GET['1dest4on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out4 source');echo $output;}
+if (isset($_GET['1dest5on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out5 source');echo $output;}
+if (isset($_GET['1dest6on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out6 source');echo $output;}
+if (isset($_GET['1dest7on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out7 source');echo $output;}
+if (isset($_GET['1dest8on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out8 source');echo $output;}
+
 if (isset($_GET['1dest1off'])) {
 $output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out1 off');
 echo $output;
@@ -29,6 +36,14 @@ if (isset($_GET['1dest3off'])) {
 $output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out3 off');
 echo $output;
 }
+
+if (isset($_GET['1dest3off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out3 off');echo $output;}
+if (isset($_GET['1dest4off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out4 off');echo $output;}
+if (isset($_GET['1dest5off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out5 off');echo $output;}
+if (isset($_GET['1dest6off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out6 off');echo $output;}
+if (isset($_GET['1dest7off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out7 off');echo $output;}
+if (isset($_GET['1dest8off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/2on.sh out8 off');echo $output;}
+
 ####END OF DESTINATIONS START INPUTS#####
 
 if (isset($_GET['1main'])) {
