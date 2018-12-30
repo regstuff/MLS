@@ -1,20 +1,12 @@
 <!DOCTYPE html>
-<html>
-<head>
-<title>NGINX HLS Test</title>
-<link href="https://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet"><style type="text/css">body {margin: 0; padding: 0;} .padleft {padding: 20px; float:left;} .padded {padding: 5px 20px 5px 20px}</style>
-
-    <script src="https://releases.flowplayer.org/js/flowplayer-3.2.12.min.js"></script>
-
-<!--<script>window.setInterval("reloadIFrame();", 3000); function reloadIFrame() {document.getElementById("statspage").src="/stat";}</script>-->
-</head>
-<body>
-<div style="text-align:center" class="padded"><a href="/stat" target="_blank">Stats</a>   |||   <a href="/recording" target="_blank">Recordings</a></div>
+<html><head><title>NGINX Restreaming</title><link href="https://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet"><style type="text/css">body {margin: 0; padding: 0;} .padleft {padding: 20px; float:left;} .padded {padding: 5px 20px 5px 20px}</style>
+<script src="https://releases.flowplayer.org/js/flowplayer-3.2.12.min.js"></script></head><body>
+<div style="text-align:center" class="padded"><a href="/stat" target="_blank">Stats</a>   |||   <a href="/recording" target="_blank">Recordings</a><br/>
+<p id="serverdetails">Test</p><script>var address = window.location.hostname; var rtmp = "Send primary stream to rtmp://"; fulladdress = rtmp.concat(address, "/input/stream1 or stream2 or stream 3 etc."); rtmp = "Send backup stream to rtmp://"; backupaddress = rtmp.concat(address, "/backup/stream1 or stream2 or stream 3 etc.");document.getElementById("serverdetails").innerHTML = fulladdress + "<br/>" + backupaddress;</script></div>
 <h2 class="padded">First stream</h2>
-<p class="padded">Main stream should go to rtmp://serverip/input/stream1<br/>
-Backup stream to rtmp://serverip/backup/stream1</p>
 <div class="padleft" id="player" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
-<script>$f("player", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream1', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: 'rtmp://209.97.175.83/input'}}, canvas: {backgroundGradient: 'none'}}); $f("player").play();</script>
+<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/input");
+$f("player", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream1', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player").play();</script>
 
 <div class="padded">
 <p>Out1:  <a href="/1.php?1dest1on" target="_blank">On</a> ||| <a href="/1.php?1dest1off" target="_blank">Off</a></p> 
@@ -24,7 +16,7 @@ Backup stream to rtmp://serverip/backup/stream1</p>
 <p>Out5:  <a href="/1.php?1dest5on" target="_blank">On</a> ||| <a href="/1.php?1dest5off" target="_blank">Off</a></p> 
 <p>Out6:  <a href="/1.php?1dest6on" target="_blank">On</a> ||| <a href="/1.php?1dest6off" target="_blank">Off</a></p>
 <p>Out7:  <a href="/1.php?1dest7on" target="_blank">On</a> ||| <a href="/1.php?1dest7off" target="_blank">Off</a></p>
-<p>Out8:  <a href="/1.php?1dest8on" target="_blank">On</a> |||   <a href="/1.php?1dest8off" target="_blank">Off</a></p>
+<p>Out8:  <a href="/1.php?1dest8on" target="_blank">On</a> ||| <a href="/1.php?1dest8off" target="_blank">Off</a></p>
 <p><a href="/1.php?1dest99on" target="_blank">Turn on Instagram (out99)</a>   |||   <a href="/1.php?1dest99off" target="_blank">Turn off Instagram</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/1.php?1superon" target="_blank">Add Lower Third</a>   |||   <a href="/1.php?1superoff" target="_blank">Remove Lower Third</a></p>
@@ -34,13 +26,11 @@ Backup stream to rtmp://serverip/backup/stream1</p>
 <p><b>Main/backup/holding/Ad video Switch:</b> <a href="/1.php?1main" target="_blank">Turn on main</a>   |||   <a href="/1.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/1.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/1.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/1.php?1off" target="_blank">Turn off livestream</a></p></div>
 <hr>
 <h2 class="padded">Second stream</h2>
-<p class="padded">Main stream should go to rtmp://serverip/input/stream2<br/>
-Backup stream to rtmp://serverip/backup/stream2</p>
 <div class="padleft" id="player2" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
-<script>$f("player2", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream2', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: 'rtmp://209.97.175.83/input'}}, canvas: {backgroundGradient: 'none'}}); $f("player2").play();</script>
+<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/input");
+$f("player2", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream2', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player2").play();</script>
 
 <div class="padded">
-
 <p>Out1: <a href="/2.php?1dest1on" target="_blank">On</a> ||| <a href="/2.php?1dest1off" target="_blank">Off</a></p> 
 <p>Out2: <a href="/2.php?1dest2on" target="_blank">On</a> ||| <a href="/2.php?1dest2off" target="_blank">Off</a></p> 
 <p>Out3: <a href="/2.php?1dest3on" target="_blank">On</a> ||| <a href="/2.php?1dest3off" target="_blank">Off</a></p>
@@ -48,7 +38,7 @@ Backup stream to rtmp://serverip/backup/stream2</p>
 <p>Out5: <a href="/2.php?1dest5on" target="_blank">On</a> ||| <a href="/2.php?1dest5off" target="_blank">Off</a></p>
 <p>Out6: <a href="/2.php?1dest6on" target="_blank">On</a> ||| <a href="/2.php?1dest6off" target="_blank">Off</a></p>
 <p>Out7: <a href="/2.php?1dest7on" target="_blank">On</a> ||| <a href="/2.php?1dest7off" target="_blank">Off</a></p>
-<p>Out8:  <a href="/2.php?1dest8on" target="_blank">On</a>   |||   <a href="/2.php?1dest8off" target="_blank">Off</a></p>
+<p>Out8: <a href="/2.php?1dest8on" target="_blank">On</a> ||| <a href="/2.php?1dest8off" target="_blank">Off</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/2.php?1superon" target="_blank">Add Lower Third</a>   |||   <a href="/2.php?1superoff" target="_blank">Remove Lower Third</a></p>
 
@@ -56,9 +46,6 @@ Backup stream to rtmp://serverip/backup/stream2</p>
 
 <p><b>Main/backup/holding/Ad video Switch:</b> <a href="/2.php?1main" target="_blank">Turn on main</a>   |||   <a href="/2.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/2.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/2.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/2.php?1off" target="_blank">Turn off livestream</a></p></div>
 <hr>
-
-
-
 
 <div class="padded">
 <p><a href="/adddestination.php?list" target="_blank">Destination List</a></p>
@@ -69,12 +56,4 @@ Name: <input type="text" name="name_id" size="15" placeholder="English YT"/> <br
 Output Id: <select name="output_id"><option value="1">Out 1</option><option value="2">Out 2</option><option value="3">Out 3</option><option value="4">Out 4</option><option value="5">Out 5</option><option value="6">Out 6</option><option value="7">Out 7</option><option value="8">Out 8</option><option value="9">Out 9</option><option value="10">Out 10</option></select> <br/>
 Resolution: <select name="resolution"><option value="source">Source</option><option value="720p">720p</option></select><br/><br/>
 <input type="submit" value="Add destination" /> <br/>
-</form>
-</div>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-</body> 
-</html>
-
+</form></div><br/><br/><br/><br/><br/><br/><br/><br/></body></html>
