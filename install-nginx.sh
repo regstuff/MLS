@@ -13,7 +13,7 @@ sudo make install
 
 # Clear the default nginx.config
 sudo /usr/local/nginx/sbin/nginx -s stop
-sudo mv /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.old
+sudo cp /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.old
 
 #Install PHP
 cd ~
@@ -34,16 +34,16 @@ sudo chgrp -R www-data ~/MLS
 sudo chmod g+rw -R ~/MLS
 sudo cp -R ~/MLS/scripts /usr/local/nginx
 sudo chmod +x -R /usr/local/nginx/scripts
-sudo mv /usr/local/nginx/scripts/.htpasswd /usr/local/nginx/conf/
-sudo mv /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.old
-sudo mv /usr/local/nginx/scripts/php.ini /etc/php/7.0/fpm/
+sudo cp /usr/local/nginx/scripts/.htpasswd /usr/local/nginx/conf/
+sudo cp /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.old
+sudo cp /usr/local/nginx/scripts/php.ini /etc/php/7.0/fpm/
 sudo rm -R ~/MLS/scripts/images
 sudo rm -R ~/MLS/scripts/tmp
 sudo systemctl restart php7.0-fpm
 
-sudo mv /usr/local/nginx/scripts/nginx.conf /usr/local/nginx/conf/
+sudo cp /usr/local/nginx/scripts/nginx.conf /usr/local/nginx/conf/
 sudo rm -R /usr/local/nginx/html
-sudo mv ~/MLS/html /usr/local/nginx
+sudo cp -R ~/MLS/html /usr/local/nginx
 
 #Setup HLS & Recording folders
 sudo mkdir /usr/local/nginx/html/hls
