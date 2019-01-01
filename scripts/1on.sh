@@ -275,7 +275,7 @@ exec 8>$LCK;
 if flock -n -x 8; then
 #echo "In flck"
 i="0"
-echo $ME "has started at "$resolution" resolution"
+echo $ME "has started at "$2" resolution"
 if [ -z "$STY" ];
 then
 #echo "above screen"
@@ -304,9 +304,18 @@ encodeparam="-c copy"
 
 720p)
 encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 1280x720 -b:v 3000k -preset veryfast"
+;;
+
+540p)
+encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 960x540 -b:v 1500k -preset veryfast"
+;;
+
+576p)
+encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 720x576 -b:v 1000k -preset veryfast"
 esac
 
 case $2 in
+
 off)
 ME=$(basename "$0" .sh);
 ME="[S]CREEN.*$ME"$1
@@ -321,11 +330,11 @@ echo $1" is already off"
 sleep 0.5
 fi
 exit 0
-;;
+#;;
 
-*)
-echo "Only output parameter allowed is off"
-exit 1
+#*)
+#echo "Output parameters are either source/720p/off"
+#exit 1
 esac
 
 screenname=$(basename "$0" .sh)$1
@@ -339,11 +348,11 @@ exec 8>$LCK;
 if flock -n -x 8; then
 #echo "In flck"
 i="0"
-echo $ME "has started at "$2" resolution"
+echo $ME "has started at "$resolution" resolution"
 if [ -z "$STY" ];
 then
 #echo "above screen"
-exec screen -dm -S $screenname /bin/bash "$0" "$1" "$2"; 
+exec screen -dm -S $screenname /bin/bash "$0" "$1"; 
 fi
 #echo $dest
 while [ $i -lt 9000 ]
