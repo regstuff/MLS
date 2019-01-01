@@ -11,6 +11,7 @@ inputencodeparam="-af azmq,volume=2 -c:a aac -ar 44100 -vcodec copy -f flv -stri
 
 
 dest=`cat /usr/local/nginx/scripts/1data.txt | grep '__stream1__'$1'__' | cut -d ' ' -f 2`
+resolution=`cat /usr/local/nginx/scripts/1data.txt | grep '__stream1__'$1'__' | cut -d ' ' -f 3`
 
 case $1 in
 ####### MODIFICATION CONFIG ########
@@ -274,7 +275,7 @@ exec 8>$LCK;
 if flock -n -x 8; then
 #echo "In flck"
 i="0"
-echo $ME "has started at "$2" resolution"
+echo $ME "has started at "$resolution" resolution"
 if [ -z "$STY" ];
 then
 #echo "above screen"
@@ -295,7 +296,7 @@ esac
 ;;
 
 *)
-case $2 in
+case $resolution in
 
 source)
 encodeparam="-c copy"
@@ -303,8 +304,9 @@ encodeparam="-c copy"
 
 720p)
 encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 1280x720 -b:v 3000k -preset veryfast"
-;;
+esac
 
+case $2 in
 off)
 ME=$(basename "$0" .sh);
 ME="[S]CREEN.*$ME"$1
@@ -322,7 +324,7 @@ exit 0
 ;;
 
 *)
-echo "Output parameters are either source/720p/off"
+echo "Only output parameter allowed is off"
 exit 1
 esac
 
