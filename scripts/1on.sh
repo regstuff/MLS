@@ -267,7 +267,7 @@ encodeparam="-acodec copy -vcodec libx264 -preset faster -vprofile baseline -g 5
 screenname=$(basename "$0" .sh)$1
 ME=`basename "$0"`;
 ME=$ME"_"$1
-checkout="[f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/stream1-$1"
+checkout="-flags +global_header [f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/stream1-$1"
 LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
 exec 8>$LCK;
 #echo "After LCK"
@@ -284,7 +284,7 @@ fi
 #echo $dest
 while [ $i -lt 9000 ]
 do
-$oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" -f flv "$checkout" $outputparam
+$oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" "$checkout" $outputparam
 echo "Waiting for English input... Feed me!!!"
 sleep 0.2
 i=$[$i+1]
@@ -303,15 +303,15 @@ encodeparam="-c copy"
 ;;
 
 720p)
-encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 1280x720 -b:v 3000k -preset veryfast"
+encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 1280x720 -b:v 3000k -preset veryfast -flags +global_header"
 ;;
 
 540p)
-encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 960x540 -b:v 1500k -preset veryfast"
+encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 960x540 -b:v 1500k -preset veryfast -flags +global_header"
 ;;
 
 576p)
-encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 720x576 -b:v 1000k -preset veryfast"
+encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 720x576 -b:v 1000k -preset veryfast -flags +global_header"
 esac
 
 case $2 in
