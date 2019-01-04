@@ -2,14 +2,17 @@
 id="$(basename "$0" .sh)";
 streamid="stream"$id;
 #echo $streamid;
-oldffmpegparam="/usr/bin/ffmpeg -nostdin -thread_queue_size 512 -i"
-newffmpegparam="/usr/local/bin/ffmpeg -nostdin -thread_queue_size 512 -i"
-outputparam="-y"
-distributeparam="rtmp://127.0.0.1:1935/distribute/"$streamid
-inputparam="rtmp://127.0.0.1:1935/input/"$streamid
-backupparam="rtmp://127.0.0.1:1935/backup/"$streamid
+oldffmpegparam="/usr/bin/ffmpeg -nostdin -thread_queue_size 512 -i";
+newffmpegparam="/usr/local/bin/ffmpeg -nostdin -thread_queue_size 512 -i";
+outputparam="-y";
+distributeparam="rtmp://127.0.0.1:1935/distribute/"$streamid;
+inputparam="rtmp://127.0.0.1:1935/input/"$streamid;
+backupparam="rtmp://127.0.0.1:1935/backup/"$streamid;
+advideo=$id"video.mp4";
+holdingvideo=$id"holding.mp4";
+lowerthird=$id"lowerthird.png";
 
-inputencodeparam="-i /usr/local/nginx/scripts/images/lowerthird.png -af azmq,volume=2 -c:a aac -ar 44100 -filter_complex zmq=bind_address=tcp\\\://127.0.0.1\\\:5556,overlay=0:H -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 6000k -maxrate 6M -minrate 6M -bufsize 6M -f flv -strict -2"
+inputencodeparam="-i /usr/local/nginx/scripts/images/$lowerthird -af azmq,volume=2 -c:a aac -ar 44100 -filter_complex zmq=bind_address=tcp\\\://127.0.0.1\\\:5556,overlay=0:H -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 6000k -maxrate 6M -minrate 6M -bufsize 6M -f flv -strict -2"
 #inputencodeparam="-af azmq,volume=2 -c:a aac -ar 44100 -vcodec copy -f flv -strict -2"
 
 
@@ -162,7 +165,7 @@ fi
 
 while true
 do
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/holding.mp4 -c copy -f flv $distributeparam $outputparam
+/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$holdingvideo -c copy -f flv $distributeparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -204,7 +207,7 @@ fi
 
 while true
 do
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/video.mp4 -c copy -f flv $distributeparam $outputparam
+/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$advideo -c copy -f flv $distributeparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
