@@ -1,6 +1,6 @@
 #!/bin/bash
-id="$(basename "$0")";
-streamid="stream""${id%%.*}";
+id="$(basename "$0" .sh)";
+streamid="stream"$id;
 oldffmpegparam="/usr/bin/ffmpeg -nostdin -thread_queue_size 512 -i"
 newffmpegparam="/usr/local/bin/ffmpeg -nostdin -thread_queue_size 512 -i"
 outputparam="-y"
@@ -40,15 +40,15 @@ esac
 
 ###### INPUT CONFIGURATION #######
 main)
-ME=`basename "$0"`;
-ME=$ME"main";
-LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
+#ME=`basename "$0"`;
+#ME=$streamid"main";
+screenname=$id"main";
+LCK="/usr/local/nginx/scripts/tmp/${screenname}.LCK";
 
-screenname=$(basename "$0" .sh)"main"
-screenback="[S]CREEN.*"$streamid"back";
-screenmain="[S]CREEN.*"$streamid"main";
-screenholding="[S]CREEN.*"$streamid"holding";
-screenvideo="[S]CREEN.*"$streamid"video";
+screenback="[S]CREEN.*"$id"back";
+screenmain="[S]CREEN.*"$id"main";
+screenholding="[S]CREEN.*"$id"holding";
+screenvideo="[S]CREEN.*"$id"video";
 exec 8>$LCK;
 
 if flock -n -x 8; then
@@ -68,7 +68,7 @@ echo "Turning off $streamid ad video"
 fi
 
 if [ -z "$STY" ]; then
-echo $ME "has started"
+echo "$screenname has started"
 exec screen -dm -S $screenname /bin/bash "$0" main;
 fi
 
@@ -80,17 +80,18 @@ sleep .2
 done
 
 else
-echo $ME " is already running"
+echo $screenname " is already running"
 fi
 ;;
 ########## MAIN ENDS. BACKUP BEGINS ################
 
 back)
-ME=`basename "$0"`;
-ME=$ME"_back";
-LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
+#ME=`basename "$0"`;
+#ME=$id"back";
+screenname=$id"back";
+LCK="/usr/local/nginx/scripts/tmp/${screenname}.LCK";
 
-screenname=$(basename "$0" .sh)"_back"
+
 exec 8>$LCK;
 
 if flock -n -x 8; then
@@ -110,7 +111,7 @@ echo "Turning off $streamid ad video"
 fi
 
 if [ -z "$STY" ]; then
-echo $ME "has started"
+echo "$screenname has started"
 exec screen -dm -S $screenname /bin/bash "$0" back;
 fi
 
@@ -122,17 +123,17 @@ sleep .2
 done
 
 else
-echo $ME " is already running"
+echo $screenname " is already running"
 fi
 ;;
 ########## BACKUP ENDS. HOLDING BEGINS ################
 
 holding)
-ME=`basename "$0"`;
-ME=$ME"_holding";
-LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
+#ME=`basename "$0"`;
+#ME=$streamid"holding";
+screenname=$id"holding";
+LCK="/usr/local/nginx/scripts/tmp/${screenname}.LCK";
 
-screenname=$(basename "$0" .sh)"_holding"
 exec 8>$LCK;
 
 if flock -n -x 8; then
@@ -143,7 +144,7 @@ fi
 
 if [ $(ps aux | grep "$screenmain" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenmain" | awk '{print $2}')
-echo "Turning off 1mainon.sh"
+echo "Turning off $streamid main input"
 fi
 
 if [ $(ps aux | grep "$screenvideo" | awk '{print $2}' | wc -l) -gt 0 ]; then
@@ -152,7 +153,7 @@ echo "Turning off $streamid ad video"
 fi
 
 if [ -z "$STY" ]; then
-echo $ME "has started"
+echo "$screenname has started"
 exec screen -dm -S $screenname /bin/bash "$0" holding;
 fi
 
@@ -164,17 +165,17 @@ sleep .2
 done
 
 else
-echo $ME " is already running"
+echo $screenname " is already running"
 fi
 ;;
 ########## HOLDING ENDS. AD VIDEO BEGINS ################
 
 video)
-ME=`basename "$0"`;
-ME=$ME"_video";
-LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
+#ME=`basename "$0"`;
+#ME=$streamid"video";
+screenname=$id"video";
+LCK="/usr/local/nginx/scripts/tmp/${screenname}.LCK";
 
-screenname=$(basename "$0" .sh)"_video"
 exec 8>$LCK;
 
 if flock -n -x 8; then
@@ -190,11 +191,11 @@ fi
 
 if [ $(ps aux | grep "$screenmain" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenmain" | awk '{print $2}')
-echo "Turning off 1mainon.sh"
+echo "Turning off $streamid main input"
 fi
 
 if [ -z "$STY" ]; then
-echo $ME "has started"
+echo "$screenname has started"
 exec screen -dm -S $screenname /bin/bash "$0" video;
 fi
 
@@ -212,8 +213,8 @@ fi
 ########## AD VIDEO ENDS. TURN OFF BEGINS ################
 
 off)
-ME=`basename "$0"`;
-ME=$ME"_off";
+#ME=`basename "$0"`;
+ME=$id"off";
 LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
 
 exec 8>$LCK;
@@ -236,14 +237,14 @@ echo "Turning off $streamid ad video"
 
 elif [ $(ps aux | grep "$screenmain" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenmain" | awk '{print $2}')
-echo "Turning off 1mainon.sh"
+echo "Turning off $streamid main input"
 
 else
-echo "Stream1 is already off"
+echo "$streamid is already off"
 fi
 
 else
-echo "You're already trying to turn off Stream1. Hold on!"
+echo "You're already trying to turn off $streamid. Hold on!"
 fi
 
 sleep 0.5
@@ -254,9 +255,9 @@ sleep 0.5
 out99)
 case $2 in 
 off)
-ME=$(basename "$0" .sh);
-ME="[S]CREEN.*$ME"$1
-#screenname=$(basename "$0" .sh)$1
+#ME=$id;
+ME="[S]CREEN.*"$id$1;
+#screenname=$id$1
 #echo $ME
 if [ $(ps aux | grep $ME | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep $ME | awk '{print $2}')
@@ -271,9 +272,9 @@ exit 0
 
 *)
 encodeparam="-acodec copy -vcodec libx264 -preset faster -vprofile baseline -g 50 -s 480x854 -b:v 1M"
-screenname=$(basename "$0" .sh)$1
-ME=`basename "$0"`;
-ME=$ME"_"$1
+screenname=$id$1;
+#ME=`basename "$0"`;
+#ME=$id$1
 checkout="-flags +global_header [f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/$streamid-$streamname"
 LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
 exec 8>$LCK;
@@ -282,7 +283,7 @@ exec 8>$LCK;
 if flock -n -x 8; then
 #echo "In flck"
 i="0"
-echo $ME "has started at "$2" resolution"
+echo $screenname "has started at "$resolution" resolution"
 if [ -z "$STY" ];
 then
 #echo "above screen"
@@ -297,7 +298,7 @@ sleep 0.2
 i=$[$i+1]
 done
 
-else echo $ME " is already running" 
+else echo $screenname " is already running" 
 fi
 esac
 ;;
@@ -324,9 +325,9 @@ esac
 case $2 in
 
 off)
-ME=$(basename "$0" .sh);
-ME="[S]CREEN.*$ME"$1
-#screenname=$(basename "$0" .sh)$1
+#ME=$id;
+ME="[S]CREEN.*"$id$1;
+#screenname=$id$1
 #echo $ME
 if [ $(ps aux | grep $ME | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep $ME | awk '{print $2}')
@@ -344,9 +345,9 @@ exit 0
 #exit 1
 esac
 
-screenname=$(basename "$0" .sh)$1
-ME=`basename "$0"`;
-ME=$ME"_"$1
+screenname=$id$1;
+#ME=`basename "$0"`;
+#ME=$id$1
 checkout="[f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/$streamid-$streamname"
 LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
 exec 8>$LCK;
@@ -355,7 +356,7 @@ exec 8>$LCK;
 if flock -n -x 8; then
 #echo "In flck"
 i="0"
-echo $ME "has started at "$resolution" resolution"
+echo $screenname "has started at "$resolution" resolution"
 if [ -z "$STY" ];
 then
 #echo "above screen"
@@ -370,7 +371,7 @@ sleep 0.2
 i=$[$i+1]
 done
 
-else echo $ME " is already running" 
+else echo $screenname " is already running" 
 fi
 esac
 ########## OFF ENDS. ALL END ################
