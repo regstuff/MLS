@@ -1,17 +1,20 @@
 #!/bin/bash
+id="$(basename "$0")";
+streamid="stream""${id%%.*}";
 oldffmpegparam="/usr/bin/ffmpeg -nostdin -thread_queue_size 512 -i"
 newffmpegparam="/usr/local/bin/ffmpeg -nostdin -thread_queue_size 512 -i"
 outputparam="-y"
-distributeparam="rtmp://127.0.0.1:1935/distribute/stream1"
-inputparam="rtmp://127.0.0.1:1935/input/stream1"
-backupparam="rtmp://127.0.0.1:1935/backup/stream1"
+distributeparam="rtmp://127.0.0.1:1935/distribute/"$streamid
+inputparam="rtmp://127.0.0.1:1935/input/"$streamid
+backupparam="rtmp://127.0.0.1:1935/backup/"$streamid
 
 inputencodeparam="-i /usr/local/nginx/scripts/images/lowerthird.png -af azmq,volume=2 -c:a aac -ar 44100 -filter_complex zmq=bind_address=tcp\\\://127.0.0.1\\\:5556,overlay=0:H -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 6000k -maxrate 6M -minrate 6M -bufsize 6M -f flv -strict -2"
 #inputencodeparam="-af azmq,volume=2 -c:a aac -ar 44100 -vcodec copy -f flv -strict -2"
 
 
-dest=`cat /usr/local/nginx/scripts/1data.txt | grep '__stream1__'$1'__' | cut -d ' ' -f 2`
-resolution=`cat /usr/local/nginx/scripts/1data.txt | grep '__stream1__'$1'__' | cut -d ' ' -f 3`
+dest=`cat /usr/local/nginx/scripts/1data.txt | grep '__$streamid__'$1'__' | cut -d ' ' -f 2`
+resolution=`cat /usr/local/nginx/scripts/1data.txt | grep '__$streamid__'$1'__' | cut -d ' ' -f 3`
+streamname=`cat /usr/local/nginx/scripts/1data.txt | grep '__$streamid__'$1'__' | cut -d ' ' -f 4`
 
 case $1 in
 ####### MODIFICATION CONFIG ########
@@ -38,26 +41,30 @@ esac
 ###### INPUT CONFIGURATION #######
 main)
 ME=`basename "$0"`;
-ME=$ME"_main";
+ME=$ME"main";
 LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
 
-screenname=$(basename "$0" .sh)"_main"
+screenname=$(basename "$0" .sh)"main"
+screenback="[S]CREEN.*"$streamid"back";
+screenmain="[S]CREEN.*"$streamid"main";
+screenholding="[S]CREEN.*"$streamid"holding";
+screenvideo="[S]CREEN.*"$streamid"video";
 exec 8>$LCK;
 
 if flock -n -x 8; then
-if [ $(ps aux | grep '[S]CREEN.*1on_back' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_back' | awk '{print $2}')
-echo "Turning off 1backon.sh"
+if [ $(ps aux | grep "$screenback" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenback" | awk '{print $2}')
+echo "Turning off $streamid backup input"
 fi
 
-if [ $(ps aux | grep '[S]CREEN.*1on_holding' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_holding' | awk '{print $2}')
-echo "Turning off 1holdingon.sh"
+if [ $(ps aux | grep "$screenholding" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenholding" | awk '{print $2}')
+echo "Turning off $streamid holding screen"
 fi
 
-if [ $(ps aux | grep '[S]CREEN.*1on_video' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_video' | awk '{print $2}')
-echo "Turning off 1videoon.sh"
+if [ $(ps aux | grep "$screenvideo" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenvideo" | awk '{print $2}')
+echo "Turning off $streamid ad video"
 fi
 
 if [ -z "$STY" ]; then
@@ -87,19 +94,19 @@ screenname=$(basename "$0" .sh)"_back"
 exec 8>$LCK;
 
 if flock -n -x 8; then
-if [ $(ps aux | grep '[S]CREEN.*1on_main' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_main' | awk '{print $2}')
-echo "Turning off 1on.sh"
+if [ $(ps aux | grep "$screenmain" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenmain" | awk '{print $2}')
+echo "Turning off $streamid main input"
 fi
 
-if [ $(ps aux | grep '[S]CREEN.*1on_holding' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_holding' | awk '{print $2}')
-echo "Turning off 1holdingon.sh"
+if [ $(ps aux | grep "$screenholding" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenholding" | awk '{print $2}')
+echo "Turning off $streamid holding screen"
 fi
 
-if [ $(ps aux | grep '[S]CREEN.*1on_video' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_video' | awk '{print $2}')
-echo "Turning off 1videoon.sh"
+if [ $(ps aux | grep "$screenvideo" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenvideo" | awk '{print $2}')
+echo "Turning off $streamid ad video"
 fi
 
 if [ -z "$STY" ]; then
@@ -129,19 +136,19 @@ screenname=$(basename "$0" .sh)"_holding"
 exec 8>$LCK;
 
 if flock -n -x 8; then
-if [ $(ps aux | grep '[S]CREEN.*1on_back' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_back' | awk '{print $2}')
-echo "Turning off 1backon.sh"
+if [ $(ps aux | grep "$screenback" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenback" | awk '{print $2}')
+echo "Turning off $streamid backup input"
 fi
 
-if [ $(ps aux | grep '[S]CREEN.*1on_main' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_main' | awk '{print $2}')
+if [ $(ps aux | grep "$screenmain" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenmain" | awk '{print $2}')
 echo "Turning off 1mainon.sh"
 fi
 
-if [ $(ps aux | grep '[S]CREEN.*1on_video' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_video' | awk '{print $2}')
-echo "Turning off 1videoon.sh"
+if [ $(ps aux | grep "$screenvideo" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenvideo" | awk '{print $2}')
+echo "Turning off $streamid ad video"
 fi
 
 if [ -z "$STY" ]; then
@@ -171,18 +178,18 @@ screenname=$(basename "$0" .sh)"_video"
 exec 8>$LCK;
 
 if flock -n -x 8; then
-if [ $(ps aux | grep '[S]CREEN.*1on_back' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_back' | awk '{print $2}')
-echo "Turning off 1backon.sh"
+if [ $(ps aux | grep "$screenback" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenback" | awk '{print $2}')
+echo "Turning off $streamid backup input"
 fi
 
-if [ $(ps aux | grep '[S]CREEN.*1on_holding' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_holding' | awk '{print $2}')
-echo "Turning off 1holdingon.sh"
+if [ $(ps aux | grep "$screenholding" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenholding" | awk '{print $2}')
+echo "Turning off $streamid holding screen"
 fi
 
-if [ $(ps aux | grep '[S]CREEN.*1on_main' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_main' | awk '{print $2}')
+if [ $(ps aux | grep "$screenmain" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenmain" | awk '{print $2}')
 echo "Turning off 1mainon.sh"
 fi
 
@@ -212,23 +219,23 @@ LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
 exec 8>$LCK;
 
 if flock -n -x 8; then
-if [ $(ps aux | grep '[S]CREEN.*1on_back' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_back' | awk '{print $2}')
-echo "Turning off 1backon.sh"
+if [ $(ps aux | grep "$screenback" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenback" | awk '{print $2}')
+echo "Turning off $streamid backup input"
 
 
-elif [ $(ps aux | grep '[S]CREEN.*1on_holding' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_holding' | awk '{print $2}')
-echo "Turning off 1holdingon.sh"
+elif [ $(ps aux | grep "$screenholding" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenholding" | awk '{print $2}')
+echo "Turning off $streamid holding screen"
 
 
-elif [ $(ps aux | grep '[S]CREEN.*1on_video' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_video' | awk '{print $2}')
-echo "Turning off 1videoon.sh"
+elif [ $(ps aux | grep "$screenvideo" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenvideo" | awk '{print $2}')
+echo "Turning off $streamid ad video"
 
 
-elif [ $(ps aux | grep '[S]CREEN.*1on_main' | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep '[S]CREEN.*1on_main' | awk '{print $2}')
+elif [ $(ps aux | grep "$screenmain" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenmain" | awk '{print $2}')
 echo "Turning off 1mainon.sh"
 
 else
@@ -267,7 +274,7 @@ encodeparam="-acodec copy -vcodec libx264 -preset faster -vprofile baseline -g 5
 screenname=$(basename "$0" .sh)$1
 ME=`basename "$0"`;
 ME=$ME"_"$1
-checkout="-flags +global_header [f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/stream1-$1"
+checkout="-flags +global_header [f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/$streamid-$streamname"
 LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
 exec 8>$LCK;
 #echo "After LCK"
@@ -340,7 +347,7 @@ esac
 screenname=$(basename "$0" .sh)$1
 ME=`basename "$0"`;
 ME=$ME"_"$1
-checkout="[f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/stream1-$1"
+checkout="[f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/$streamid-$streamname"
 LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
 exec 8>$LCK;
 #echo "After LCK"
