@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Configure TImezone For Recording Timestamps
+sudo dpkg-reconfigure tzdata
+
 sudo apt-get update && sudo apt-get -y install build-essential checkinstall libpcre3 libpcre3-dev libssl-dev libx264-dev libx265-dev libnuma-dev libvpx-dev libfdk-aac-dev libmp3lame-dev libopus-dev libsdl2-dev libfreetype6-dev libass-dev libtool git zip unzip curl php-cli php-mbstring php-fpm php-mysql php7.0-curl php7.0-gd autoconf automake cmake git-core pkg-config texinfo zlib1g-dev uuid-dev libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm yasm htop ffmpeg
 sudo mkdir ~/build && cd ~/build
 sudo git clone git://github.com/arut/nginx-rtmp-module.git
@@ -28,8 +31,9 @@ cd ~/MLS/scripts/
 sudo mkdir images
 sudo mkdir tmp
 cd images
-sudo wget -O holding.mp4 https://www.dropbox.com/s/yllnqcwe942xpt9/2018-11-04%2020-53-26.mp4?dl=0
-sudo wget -O lowerthird.png https://www.dropbox.com/s/f053xt0o4ekaifz/lowerthird.png?dl=0
+sudo wget -O 1holding.mp4 https://www.dropbox.com/s/yllnqcwe942xpt9/2018-11-04%2020-53-26.mp4?dl=0
+sudo wget -O 1lowerthird.png https://www.dropbox.com/s/f053xt0o4ekaifz/lowerthird.png?dl=0
+sudo cp 1holding.mp4 1video.mp4
 sudo chgrp -R www-data ~/MLS
 sudo chmod g+rw -R ~/MLS
 sudo cp -R ~/MLS/scripts /usr/local/nginx
@@ -51,9 +55,6 @@ sudo chmod -R 777 /usr/local/nginx/html/hls
 
 sudo mkdir /usr/local/nginx/html/recording
 sudo chmod -R 777 /usr/local/nginx/html/recording
-
-#Configure TImezone For Recording Timestamps
-sudo dpkg-reconfigure tzdata
 
 #Install FFMPEG Controller
 cd ~ && sudo wget https://github.com/zeromq/libzmq/releases/download/v4.2.2/zeromq-4.2.2.tar.gz && tar xvzf zeromq-4.2.2.tar.gz && cd zeromq-4.2.2
