@@ -76,7 +76,7 @@ echo "Turning off $streamid ad video"
 fi
 
 if [ -z "$STY" ]; then
-echo "$screenname has started"
+echo "Turning on $streamid main input"
 exec screen -dm -S $screenname /bin/bash "$0" main;
 fi
 
@@ -119,7 +119,7 @@ echo "Turning off $streamid ad video"
 fi
 
 if [ -z "$STY" ]; then
-echo "$screenname has started"
+echo "Turning on $streamid backup input"
 exec screen -dm -S $screenname /bin/bash "$0" back;
 fi
 
@@ -161,7 +161,7 @@ echo "Turning off $streamid ad video"
 fi
 
 if [ -z "$STY" ]; then
-echo "$screenname has started"
+echo "Turning on $streamid holding screen"
 exec screen -dm -S $screenname /bin/bash "$0" holding;
 fi
 
@@ -203,7 +203,7 @@ echo "Turning off $streamid main input"
 fi
 
 if [ -z "$STY" ]; then
-echo "$screenname has started"
+echo "Turning on $streamid Ad video"
 exec screen -dm -S $screenname /bin/bash "$0" video;
 fi
 
@@ -269,10 +269,10 @@ ME="[S]CREEN.*"$id$1;
 #echo $ME
 if [ $(ps aux | grep $ME | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep $ME | awk '{print $2}')
-echo "Turning off "$1
+echo "Turning off "$streamid $1
 sleep 0.5
 else
-echo $1" is already off"
+echo $streamid $1" is already off"
 sleep 0.5
 fi
 exit 0
@@ -291,7 +291,7 @@ exec 8>$LCK;
 if flock -n -x 8; then
 #echo "In flck"
 i="0"
-echo $screenname "has started at "$resolution" resolution"
+echo $streamid $1 " has started at "$resolution" resolution"
 if [ -z "$STY" ];
 then
 #echo "above screen"
@@ -301,12 +301,12 @@ fi
 while [ $i -lt 9000 ]
 do
 $oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" "$checkout" $outputparam
-echo "Waiting for English input... Feed me!!!"
+echo "Waiting for input... Feed me!!!"
 sleep 0.2
 i=$[$i+1]
 done
 
-else echo $screenname " is already running" 
+else echo $streamid $1 " is already running" 
 fi
 esac
 ;;
@@ -339,10 +339,10 @@ ME="[S]CREEN.*"$id$1;
 #echo $ME
 if [ $(ps aux | grep $ME | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep $ME | awk '{print $2}')
-echo "Turning off "$1
+echo "Turning off "$streamid $1
 sleep 0.5
 else
-echo $1" is already off"
+echo $streamid $1 " is already off"
 sleep 0.5
 fi
 exit 0
@@ -364,7 +364,7 @@ exec 8>$LCK;
 if flock -n -x 8; then
 #echo "In flck"
 i="0"
-echo $screenname "has started at "$resolution" resolution"
+echo $streamid $1 " has started at "$resolution" resolution"
 if [ -z "$STY" ];
 then
 #echo "above screen"
@@ -379,7 +379,7 @@ sleep 0.2
 i=$[$i+1]
 done
 
-else echo $screenname " is already running" 
+else echo $streamid $1 " is already running" 
 fi
 esac
 ########## OFF ENDS. ALL END ################
