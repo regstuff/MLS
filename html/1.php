@@ -1,6 +1,10 @@
 <?php
 
-if (isset($_GET['1dest1on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out1');echo $output;}
+$id = basename(__FILE__, ".php");
+$id .= ".sh"; 
+//echo $id;
+
+if (isset($_GET['1dest1on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out1");echo $output;}
 if (isset($_GET['1dest2on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out2');echo $output;}
 if (isset($_GET['1dest3on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out3');echo $output;}
 if (isset($_GET['1dest4on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out4');echo $output;}
