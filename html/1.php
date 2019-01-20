@@ -2,75 +2,46 @@
 
 $id = basename(__FILE__, ".php");
 $id .= ".sh"; 
-//echo $id;
 
 if (isset($_GET['1dest1on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out1");echo $output;}
-if (isset($_GET['1dest2on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out2');echo $output;}
-if (isset($_GET['1dest3on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out3');echo $output;}
-if (isset($_GET['1dest4on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out4');echo $output;}
-if (isset($_GET['1dest5on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out5');echo $output;}
-if (isset($_GET['1dest6on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out6');echo $output;}
-if (isset($_GET['1dest7on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out7');echo $output;}
-if (isset($_GET['1dest8on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out8');echo $output;}
+if (isset($_GET['1dest2on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out2");echo $output;}
+if (isset($_GET['1dest3on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out3");echo $output;}
+if (isset($_GET['1dest4on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out4");echo $output;}
+if (isset($_GET['1dest5on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out5");echo $output;}
+if (isset($_GET['1dest6on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out6");echo $output;}
+if (isset($_GET['1dest7on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out7");echo $output;}
+if (isset($_GET['1dest8on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out8");echo $output;}
 
-if (isset($_GET['1dest99on'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out99');echo $output;}
+if (isset($_GET['1dest99on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out99");echo $output;}
 
-if (isset($_GET['1dest1off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out1 off');echo $output;}
-if (isset($_GET['1dest2off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out2 off');echo $output;}
-if (isset($_GET['1dest3off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out3 off');echo $output;}
-if (isset($_GET['1dest4off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out4 off');echo $output;}
-if (isset($_GET['1dest5off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out5 off');echo $output;}
-if (isset($_GET['1dest6off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out6 off');echo $output;}
-if (isset($_GET['1dest7off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out7 off');echo $output;}
-if (isset($_GET['1dest8off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out8 off');echo $output;}
+if (isset($_GET['1dest1off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out1 off");echo $output;}
+if (isset($_GET['1dest2off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out2 off");echo $output;}
+if (isset($_GET['1dest3off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out3 off");echo $output;}
+if (isset($_GET['1dest4off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out4 off");echo $output;}
+if (isset($_GET['1dest5off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out5 off");echo $output;}
+if (isset($_GET['1dest6off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out6 off");echo $output;}
+if (isset($_GET['1dest7off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out7 off");echo $output;}
+if (isset($_GET['1dest8off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out8 off");echo $output;}
 
-if (isset($_GET['1dest99off'])) {$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh out99 off');echo $output;}
+if (isset($_GET['1dest99off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out99 off");echo $output;}
 
 ####END OF DESTINATIONS START INPUTS#####
 
-if (isset($_GET['1main'])) {
-$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh main');
-echo $output;
-}
-
-if (isset($_GET['1back'])) {
-$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh back');
-echo $output;
-}
-
-if (isset($_GET['1holding'])) {
-$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh holding');
-echo $output;
-}
-
-if (isset($_GET['1video'])) {
-$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh video');
-echo $output;
-}
-
-if (isset($_GET['1off'])) {
-$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh off');
-echo $output;
-}
+if (isset($_GET['1main'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id main");echo $output;}
+if (isset($_GET['1back'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id back");echo $output;}
+if (isset($_GET['1holding'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id holding");echo $output;}
+if (isset($_GET['1video'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id video");echo $output;}
+if (isset($_GET['1off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id off");echo $output;}
 
 ####END OF INPUTS START MODS#####
 
 if (isset($_GET['1vol'])) {
 $vol = $_POST['vol_level'];
 $vol_level = 2*$vol;
-$output = exec("sudo /bin/bash /usr/local/nginx/scripts/1.sh volume $vol_level");
-echo $output;
-}
+$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id volume $vol_level");echo $output;}
 
-if (isset($_GET['1superon'])) {
-$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh super on');
-echo $output;
-}
-
-if (isset($_GET['1superoff'])) {
-$output = exec('sudo /bin/bash /usr/local/nginx/scripts/1.sh super off');
-echo $output;
-}
+if (isset($_GET['1superon'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super on");echo $output;}
+if (isset($_GET['1superoff'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super off");echo $output;}
 
 ?>
 
