@@ -27,6 +27,7 @@ screenback="[S]CREEN.*"$id"back";
 screenmain="[S]CREEN.*"$id"main";
 screenholding="[S]CREEN.*"$id"holding";
 screenvideo="[S]CREEN.*"$id"video";
+screenplaylist="[S]CREEN.*"$id"playlist";
 
 case $1 in
 ####### MODIFICATION CONFIG ########
@@ -63,6 +64,11 @@ if flock -n -x 8; then
 if [ $(ps aux | grep "$screenback" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenback" | awk '{print $2}')
 echo "Turning off $streamid backup input"
+fi
+
+if [ $(ps aux | grep "$screenplaylist" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenplaylist" | awk '{print $2}')
+echo "Turning off $streamid playlist"
 fi
 
 if [ $(ps aux | grep "$screenholding" | awk '{print $2}' | wc -l) -gt 0 ]; then
@@ -108,6 +114,11 @@ kill $(ps aux | grep "$screenmain" | awk '{print $2}')
 echo "Turning off $streamid main input"
 fi
 
+if [ $(ps aux | grep "$screenplaylist" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenplaylist" | awk '{print $2}')
+echo "Turning off $streamid playlist"
+fi
+
 if [ $(ps aux | grep "$screenholding" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenholding" | awk '{print $2}')
 echo "Turning off $streamid holding screen"
@@ -148,6 +159,11 @@ if flock -n -x 8; then
 if [ $(ps aux | grep "$screenback" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenback" | awk '{print $2}')
 echo "Turning off $streamid backup input"
+fi
+
+if [ $(ps aux | grep "$screenplaylist" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenplaylist" | awk '{print $2}')
+echo "Turning off $streamid playlist"
 fi
 
 if [ $(ps aux | grep "$screenmain" | awk '{print $2}' | wc -l) -gt 0 ]; then
@@ -192,6 +208,11 @@ kill $(ps aux | grep "$screenback" | awk '{print $2}')
 echo "Turning off $streamid backup input"
 fi
 
+if [ $(ps aux | grep "$screenplaylist" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenplaylist" | awk '{print $2}')
+echo "Turning off $streamid playlist"
+fi
+
 if [ $(ps aux | grep "$screenholding" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenholding" | awk '{print $2}')
 echo "Turning off $streamid holding screen"
@@ -210,6 +231,54 @@ fi
 while true
 do
 /usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$advideo -c copy -f flv $distributeparam $outputparam
+echo "Restarting ffmpeg..."
+sleep .2
+done
+
+else
+echo $ME " is already running"
+fi
+;;
+
+########## AD VIDEO ENDS. PLAYLIST BEGINS ################
+
+playlist)
+#ME=`basename "$0"`;
+#ME=$streamid"video";
+screenname=$id"playlist";
+LCK="/usr/local/nginx/scripts/tmp/${screenname}.LCK";
+
+exec 8>$LCK;
+
+if flock -n -x 8; then
+if [ $(ps aux | grep "$screenback" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenback" | awk '{print $2}')
+echo "Turning off $streamid backup input"
+fi
+
+if [ $(ps aux | grep "$screenholding" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenholding" | awk '{print $2}')
+echo "Turning off $streamid holding screen"
+fi
+
+if [ $(ps aux | grep "$screenvideo" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenvideo" | awk '{print $2}')
+echo "Turning off $streamid video"
+fi
+
+if [ $(ps aux | grep "$screenmain" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenmain" | awk '{print $2}')
+echo "Turning off $streamid main input"
+fi
+
+if [ -z "$STY" ]; then
+echo "Turning on $streamid playlist"
+exec screen -dm -S $screenname /bin/bash "$0" playlist;
+fi
+
+while true
+do
+/usr/bin/ffmpeg -nostdin -thread_queue_size 512 -re -f concat -safe 0 -i /usr/local/nginx/scripts/images/set/list.txt -c copy -f flv $distributeparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -241,6 +310,10 @@ echo "Turning off $streamid holding screen"
 elif [ $(ps aux | grep "$screenvideo" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenvideo" | awk '{print $2}')
 echo "Turning off $streamid ad video"
+
+elif [ $(ps aux | grep "$screenplaylist" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenplaylist" | awk '{print $2}')
+echo "Turning off $streamid playlist"
 
 
 elif [ $(ps aux | grep "$screenmain" | awk '{print $2}' | wc -l) -gt 0 ]; then
@@ -284,6 +357,8 @@ screenname=$id$1;
 #ME=`basename "$0"`;
 #ME=$id$1
 checkout="-flags +global_header [f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/$streamid-$streamname"
+#checkout="-f flv $dest"
+#echo $checkout;
 LCK="/usr/local/nginx/scripts/tmp/${screenname}.LCK";
 exec 8>$LCK;
 #echo "After LCK"
@@ -300,7 +375,12 @@ fi
 #echo $dest
 while [ $i -lt 9000 ]
 do
-$oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" "$checkout" $outputparam
+#/usr/bin/ffmpeg -i $distributeparam $encodeparam -vf "transpose=1" $checkout $outputparam
+#$oldffmpegparam $distributeparam $encodeparam -f tee -map 0:v -map 0:a "$checkout" $outputparam
+#$oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" -f tee -map 0:v -map 0:a "$checkout" $outputparam
+$oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" -f tee -map 0:v -map 0:a $checkout $outputparam;
+#echo $output
+
 echo "Waiting for input... Feed me!!!"
 sleep 0.2
 i=$[$i+1]

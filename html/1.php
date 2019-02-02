@@ -12,6 +12,7 @@ if (isset($_GET['1dest6on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/s
 if (isset($_GET['1dest7on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out7");echo $output;}
 if (isset($_GET['1dest8on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out8");echo $output;}
 
+if (isset($_GET['instagramon'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/insta.sh on");echo $output;}
 if (isset($_GET['1dest99on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out99");echo $output;}
 
 if (isset($_GET['1dest1off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out1 off");echo $output;}
@@ -23,6 +24,7 @@ if (isset($_GET['1dest6off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/
 if (isset($_GET['1dest7off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out7 off");echo $output;}
 if (isset($_GET['1dest8off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out8 off");echo $output;}
 
+if (isset($_GET['instagramoff'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/insta.sh off");echo $output;}
 if (isset($_GET['1dest99off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out99 off");echo $output;}
 
 ####END OF DESTINATIONS START INPUTS#####
@@ -31,6 +33,7 @@ if (isset($_GET['1main'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scri
 if (isset($_GET['1back'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id back");echo $output;}
 if (isset($_GET['1holding'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id holding");echo $output;}
 if (isset($_GET['1video'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id video");echo $output;}
+if (isset($_GET['1playlist'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id playlist");echo $output;}
 if (isset($_GET['1off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id off");echo $output;}
 
 ####END OF INPUTS START MODS#####
