@@ -27,6 +27,7 @@ screenback="[S]CREEN.*"$id"back";
 screenmain="[S]CREEN.*"$id"main";
 screenholding="[S]CREEN.*"$id"holding";
 screenvideo="[S]CREEN.*"$id"video";
+screenplaylist="[S]CREEN.*"$id"playlist";
 
 case $1 in
 ####### MODIFICATION CONFIG ########
@@ -65,6 +66,11 @@ kill $(ps aux | grep "$screenback" | awk '{print $2}')
 echo "Turning off $streamid backup input"
 fi
 
+if [ $(ps aux | grep "$screenplaylist" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenplaylist" | awk '{print $2}')
+echo "Turning off $streamid playlist"
+fi
+
 if [ $(ps aux | grep "$screenholding" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenholding" | awk '{print $2}')
 echo "Turning off $streamid holding screen"
@@ -76,7 +82,7 @@ echo "Turning off $streamid ad video"
 fi
 
 if [ -z "$STY" ]; then
-echo "$screenname has started"
+echo "Turning on $streamid main input"
 exec screen -dm -S $screenname /bin/bash "$0" main;
 fi
 
@@ -108,6 +114,11 @@ kill $(ps aux | grep "$screenmain" | awk '{print $2}')
 echo "Turning off $streamid main input"
 fi
 
+if [ $(ps aux | grep "$screenplaylist" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenplaylist" | awk '{print $2}')
+echo "Turning off $streamid playlist"
+fi
+
 if [ $(ps aux | grep "$screenholding" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenholding" | awk '{print $2}')
 echo "Turning off $streamid holding screen"
@@ -119,7 +130,7 @@ echo "Turning off $streamid ad video"
 fi
 
 if [ -z "$STY" ]; then
-echo "$screenname has started"
+echo "Turning on $streamid backup input"
 exec screen -dm -S $screenname /bin/bash "$0" back;
 fi
 
@@ -150,6 +161,11 @@ kill $(ps aux | grep "$screenback" | awk '{print $2}')
 echo "Turning off $streamid backup input"
 fi
 
+if [ $(ps aux | grep "$screenplaylist" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenplaylist" | awk '{print $2}')
+echo "Turning off $streamid playlist"
+fi
+
 if [ $(ps aux | grep "$screenmain" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenmain" | awk '{print $2}')
 echo "Turning off $streamid main input"
@@ -161,7 +177,7 @@ echo "Turning off $streamid ad video"
 fi
 
 if [ -z "$STY" ]; then
-echo "$screenname has started"
+echo "Turning on $streamid holding screen"
 exec screen -dm -S $screenname /bin/bash "$0" holding;
 fi
 
@@ -192,6 +208,11 @@ kill $(ps aux | grep "$screenback" | awk '{print $2}')
 echo "Turning off $streamid backup input"
 fi
 
+if [ $(ps aux | grep "$screenplaylist" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenplaylist" | awk '{print $2}')
+echo "Turning off $streamid playlist"
+fi
+
 if [ $(ps aux | grep "$screenholding" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenholding" | awk '{print $2}')
 echo "Turning off $streamid holding screen"
@@ -203,13 +224,61 @@ echo "Turning off $streamid main input"
 fi
 
 if [ -z "$STY" ]; then
-echo "$screenname has started"
+echo "Turning on $streamid Ad video"
 exec screen -dm -S $screenname /bin/bash "$0" video;
 fi
 
 while true
 do
 /usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$advideo -c copy -f flv $distributeparam $outputparam
+echo "Restarting ffmpeg..."
+sleep .2
+done
+
+else
+echo $ME " is already running"
+fi
+;;
+
+########## AD VIDEO ENDS. PLAYLIST BEGINS ################
+
+playlist)
+#ME=`basename "$0"`;
+#ME=$streamid"video";
+screenname=$id"playlist";
+LCK="/usr/local/nginx/scripts/tmp/${screenname}.LCK";
+
+exec 8>$LCK;
+
+if flock -n -x 8; then
+if [ $(ps aux | grep "$screenback" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenback" | awk '{print $2}')
+echo "Turning off $streamid backup input"
+fi
+
+if [ $(ps aux | grep "$screenholding" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenholding" | awk '{print $2}')
+echo "Turning off $streamid holding screen"
+fi
+
+if [ $(ps aux | grep "$screenvideo" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenvideo" | awk '{print $2}')
+echo "Turning off $streamid video"
+fi
+
+if [ $(ps aux | grep "$screenmain" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenmain" | awk '{print $2}')
+echo "Turning off $streamid main input"
+fi
+
+if [ -z "$STY" ]; then
+echo "Turning on $streamid playlist"
+exec screen -dm -S $screenname /bin/bash "$0" playlist;
+fi
+
+while true
+do
+/usr/bin/ffmpeg -nostdin -thread_queue_size 512 -re -f concat -safe 0 -i /usr/local/nginx/scripts/images/set/list.txt -c copy -f flv $distributeparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -242,6 +311,10 @@ elif [ $(ps aux | grep "$screenvideo" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenvideo" | awk '{print $2}')
 echo "Turning off $streamid ad video"
 
+elif [ $(ps aux | grep "$screenplaylist" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenplaylist" | awk '{print $2}')
+echo "Turning off $streamid playlist"
+
 
 elif [ $(ps aux | grep "$screenmain" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenmain" | awk '{print $2}')
@@ -269,10 +342,10 @@ ME="[S]CREEN.*"$id$1;
 #echo $ME
 if [ $(ps aux | grep $ME | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep $ME | awk '{print $2}')
-echo "Turning off "$1
+echo "Turning off "$streamid $1
 sleep 0.5
 else
-echo $1" is already off"
+echo $streamid $1" is already off"
 sleep 0.5
 fi
 exit 0
@@ -284,6 +357,8 @@ screenname=$id$1;
 #ME=`basename "$0"`;
 #ME=$id$1
 checkout="-flags +global_header [f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/$streamid-$streamname"
+#checkout="-f flv $dest"
+#echo $checkout;
 LCK="/usr/local/nginx/scripts/tmp/${screenname}.LCK";
 exec 8>$LCK;
 #echo "After LCK"
@@ -291,7 +366,7 @@ exec 8>$LCK;
 if flock -n -x 8; then
 #echo "In flck"
 i="0"
-echo $screenname "has started at "$resolution" resolution"
+echo $streamid $1 " has started at "$resolution" resolution"
 if [ -z "$STY" ];
 then
 #echo "above screen"
@@ -300,13 +375,18 @@ fi
 #echo $dest
 while [ $i -lt 9000 ]
 do
-$oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" "$checkout" $outputparam
-echo "Waiting for English input... Feed me!!!"
+#/usr/bin/ffmpeg -i $distributeparam $encodeparam -vf "transpose=1" $checkout $outputparam
+#$oldffmpegparam $distributeparam $encodeparam -f tee -map 0:v -map 0:a "$checkout" $outputparam
+#$oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" -f tee -map 0:v -map 0:a "$checkout" $outputparam
+$oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" -f tee -map 0:v -map 0:a $checkout $outputparam;
+#echo $output
+
+echo "Waiting for input... Feed me!!!"
 sleep 0.2
 i=$[$i+1]
 done
 
-else echo $screenname " is already running" 
+else echo $streamid $1 " is already running" 
 fi
 esac
 ;;
@@ -339,10 +419,10 @@ ME="[S]CREEN.*"$id$1;
 #echo $ME
 if [ $(ps aux | grep $ME | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep $ME | awk '{print $2}')
-echo "Turning off "$1
+echo "Turning off "$streamid $1
 sleep 0.5
 else
-echo $1" is already off"
+echo $streamid $1 " is already off"
 sleep 0.5
 fi
 exit 0
@@ -364,7 +444,7 @@ exec 8>$LCK;
 if flock -n -x 8; then
 #echo "In flck"
 i="0"
-echo $screenname "has started at "$resolution" resolution"
+echo $streamid $1 " has started at "$resolution" resolution"
 if [ -z "$STY" ];
 then
 #echo "above screen"
@@ -379,7 +459,7 @@ sleep 0.2
 i=$[$i+1]
 done
 
-else echo $screenname " is already running" 
+else echo $streamid $1 " is already running" 
 fi
 esac
 ########## OFF ENDS. ALL END ################
