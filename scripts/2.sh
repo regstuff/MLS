@@ -14,7 +14,23 @@ lowerthird=$id"lowerthird.png";
 videoport=`expr 5554 + 2 \* $id`;
 audioport=`expr 5553 + 2 \* $id`;
 
+encoding=`cat /usr/local/nginx/scripts/streamconfig.txt | grep '__'$streamid'__' | cut -d ' ' -f 2`
+#echo $encoding
+case $encoding in
+none)
+inputencodeparam="-acodec copy -vcodec copy -f flv";
+;;
+
+audio)
+inputencodeparam="-af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2 -c:a aac -ar 44100 -vcodec copy -f flv -strict -2";
+;;
+
+*)
 inputencodeparam="-i /usr/local/nginx/scripts/images/$lowerthird -af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2 -c:a aac -ar 44100 -filter_complex zmq=bind_address=tcp\\\://127.0.0.1\\\:"$videoport",overlay=0:H -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 6000k -maxrate 6M -minrate 6M -bufsize 6M -f flv -strict -2";
+esac
+
+
+#inputencodeparam="-i /usr/local/nginx/scripts/images/$lowerthird -af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2 -c:a aac -ar 44100 -filter_complex zmq=bind_address=tcp\\\://127.0.0.1\\\:"$videoport",overlay=0:H -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 6000k -maxrate 6M -minrate 6M -bufsize 6M -f flv -strict -2";
 #inputencodeparam="-af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2 -c:a aac -ar 44100 -vcodec copy -f flv -strict -2";
 
 
