@@ -22,7 +22,7 @@ screen -S $screenname -X stuff "cd /root/InstagramLive-PHP && php goLive.php
 "
 sleep 3480
 i=$[$i+1]
-echo "Two times $i minutes up"
+echo "$i hours up"
 screen -S $screenname -X stuff "stop
 "
 sleep 10
