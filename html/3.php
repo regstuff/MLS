@@ -11,6 +11,9 @@ if (isset($_GET['1dest5on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/s
 if (isset($_GET['1dest6on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out6");echo $output;}
 if (isset($_GET['1dest7on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out7");echo $output;}
 if (isset($_GET['1dest8on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out8");echo $output;}
+if (isset($_GET['1dest9on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out9");echo $output;}
+if (isset($_GET['1dest10on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out10");echo $output;}
+if (isset($_GET['1dest11on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out11");echo $output;}
 
 if (isset($_GET['instagramon'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/insta.sh on");echo $output;}
 if (isset($_GET['1dest99on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out99");echo $output;}
@@ -23,6 +26,9 @@ if (isset($_GET['1dest5off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/
 if (isset($_GET['1dest6off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out6 off");echo $output;}
 if (isset($_GET['1dest7off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out7 off");echo $output;}
 if (isset($_GET['1dest8off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out8 off");echo $output;}
+if (isset($_GET['1dest9off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out9 off");echo $output;}
+if (isset($_GET['1dest10off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out10 off");echo $output;}
+if (isset($_GET['1dest11off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out11 off");echo $output;}
 
 if (isset($_GET['instagramoff'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/insta.sh off");echo $output;}
 if (isset($_GET['1dest99off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out99 off");echo $output;}
