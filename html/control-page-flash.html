@@ -1,12 +1,40 @@
 <!DOCTYPE html>
-<html><head><title>NGINX Restreaming</title><link href="https://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet"><style type="text/css">body {margin: 0; padding: 0;} .padleft {padding: 20px; float:left;} .padded {padding: 5px 20px 5px 20px}</style>
-<script src="https://releases.flowplayer.org/js/flowplayer-3.2.12.min.js"></script></head><body>
+<html><head><title>NGINX Restreaming</title><link href="https://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet"><style type="text/css">body {margin: 0; padding: 0;} .padleft {padding: 20px; float:left;} .padded {padding: 5px 20px 5px 20px}
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+</style>
+<script src="https://releases.flowplayer.org/js/flowplayer-3.2.12.min.js"></script>
+</head><body>
 <div style="text-align:center" class="padded"><a href="/stat" target="_blank">Stats</a>   |||   <a href="/recording" target="_blank">Recordings</a><br/>
 <p id="serverdetails">Test</p><script>var address = window.location.hostname; var rtmp = "Send primary stream to rtmp://"; fulladdress = rtmp.concat(address, "/input/stream1 or stream2 or stream 3 etc."); rtmp = "Send backup stream to rtmp://"; backupaddress = rtmp.concat(address, "/backup/stream1 or stream2 or stream 3 etc.");document.getElementById("serverdetails").innerHTML = fulladdress + "<br/>" + backupaddress;</script></div>
 <h2 class="padded">Stream 1</h2>
 <div class="padleft" id="player" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
 <script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/input");
 $f("player", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream1', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player").play();</script>
+
 
 <div class="padded">
 <p>Out1:  <a href="/1.php?1dest1on" target="_blank">On</a> ||| <a href="/1.php?1dest1off" target="_blank">Off</a></p> 
@@ -54,8 +82,8 @@ $f("player2", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <p><b>Main/backup/holding/Ad video Switch:</b> <a href="/2.php?1main" target="_blank">Turn on main</a>   |||   <a href="/2.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/2.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/2.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/2.php?1off" target="_blank">Turn off livestream</a></p></div>
 <hr>
 
-<h2 class="padded">Stream 3</h2>
-<div class="padleft" id="player3" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
+<button class="collapsible"><h2 class="padded">Stream 3</h2></button>
+<div class="content"><div class="padleft" id="player3" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
 <script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/input");
 $f("player3", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream3', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player3").play();</script>
 
@@ -76,11 +104,11 @@ $f("player3", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 
 <p><form method="post" target="_blank" action="/3.php?1vol"><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></form></p>
 
-<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/3.php?1main" target="_blank">Turn on main</a>   |||   <a href="/3.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/3.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/3.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/3.php?1off" target="_blank">Turn off livestream</a></p></div>
+<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/3.php?1main" target="_blank">Turn on main</a>   |||   <a href="/3.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/3.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/3.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/3.php?1off" target="_blank">Turn off livestream</a></p></div></div>
 <hr>
 
-<h2 class="padded">Stream 4</h2>
-<div class="padleft" id="player4" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
+<button class="collapsible"><h2 class="padded">Stream 4</h2></button>
+<div class="content"><div class="padleft" id="player4" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
 <script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/input");
 $f("player4", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream4', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player4").play();</script>
 
@@ -101,11 +129,11 @@ $f("player4", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 
 <p><form method="post" target="_blank" action="/4.php?1vol"><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></form></p>
 
-<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/4.php?1main" target="_blank">Turn on main</a>   |||   <a href="/4.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/4.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/4.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/4.php?1off" target="_blank">Turn off livestream</a></p></div>
+<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/4.php?1main" target="_blank">Turn on main</a>   |||   <a href="/4.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/4.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/4.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/4.php?1off" target="_blank">Turn off livestream</a></p></div></div>
 <hr>
 
-<h2 class="padded">Stream 5</h2>
-<div class="padleft" id="player5" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
+<button class="collapsible"><h2 class="padded">Stream 5</h2></button>
+<div class="content"><div class="padleft" id="player5" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
 <script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/input");
 $f("player5", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream5', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player5").play();</script>
 
@@ -126,11 +154,11 @@ $f("player5", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 
 <p><form method="post" target="_blank" action="/5.php?1vol"><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></form></p>
 
-<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/5.php?1main" target="_blank">Turn on main</a>   |||   <a href="/5.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/5.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/5.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/5.php?1off" target="_blank">Turn off livestream</a></p></div>
+<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/5.php?1main" target="_blank">Turn on main</a>   |||   <a href="/5.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/5.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/5.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/5.php?1off" target="_blank">Turn off livestream</a></p></div></div>
 <hr>
 
-<h2 class="padded">Stream 6</h2>
-<div class="padleft" id="player6" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
+<button class="collapsible"><h2 class="padded">Stream 6</h2></button>
+<div class="content"><div class="padleft" id="player6" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
 <script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/input");
 $f("player6", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream6', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player6").play();</script>
 
@@ -151,11 +179,11 @@ $f("player6", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 
 <p><form method="post" target="_blank" action="/6.php?1vol"><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></form></p>
 
-<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/6.php?1main" target="_blank">Turn on main</a>   |||   <a href="/6.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/6.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/6.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/6.php?1off" target="_blank">Turn off livestream</a></p></div>
+<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/6.php?1main" target="_blank">Turn on main</a>   |||   <a href="/6.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/6.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/6.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/6.php?1off" target="_blank">Turn off livestream</a></p></div></div>
 <hr>
 
-<h2 class="padded">Stream 7</h2>
-<div class="padleft" id="player7" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
+<button class="collapsible"><h2 class="padded">Stream 7</h2></button>
+<div class="content"><div class="padleft" id="player7" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
 <script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/input");
 $f("player7", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream7', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player7").play();</script>
 
@@ -176,11 +204,11 @@ $f("player7", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 
 <p><form method="post" target="_blank" action="/7.php?1vol"><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></form></p>
 
-<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/7.php?1main" target="_blank">Turn on main</a>   |||   <a href="/7.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/7.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/7.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/7.php?1off" target="_blank">Turn off livestream</a></p></div>
+<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/7.php?1main" target="_blank">Turn on main</a>   |||   <a href="/7.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/7.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/7.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/7.php?1off" target="_blank">Turn off livestream</a></p></div></div>
 <hr>
 
-<h2 class="padded">Stream 8</h2>
-<div class="padleft" id="player8" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
+<button class="collapsible"><h2 class="padded">Stream 8</h2></button>
+<div class="content"><div class="padleft" id="player8" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
 <script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/input");
 $f("player8", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream8', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player8").play();</script>
 
@@ -201,11 +229,11 @@ $f("player8", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 
 <p><form method="post" target="_blank" action="/8.php?1vol"><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></form></p>
 
-<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/8.php?1main" target="_blank">Turn on main</a>   |||   <a href="/8.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/8.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/8.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/8.php?1off" target="_blank">Turn off livestream</a></p></div>
+<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/8.php?1main" target="_blank">Turn on main</a>   |||   <a href="/8.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/8.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/8.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/8.php?1off" target="_blank">Turn off livestream</a></p></div></div>
 <hr>
 
-<h2 class="padded">Stream 9</h2>
-<div class="padleft" id="player9" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
+<button class="collapsible"><h2 class="padded">Stream 9</h2></button>
+<div class="content"><div class="padleft" id="player9" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
 <script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/input");
 $f("player9", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream9', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player9").play();</script>
 
@@ -226,11 +254,11 @@ $f("player9", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 
 <p><form method="post" target="_blank" action="/9.php?1vol"><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></form></p>
 
-<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/9.php?1main" target="_blank">Turn on main</a>   |||   <a href="/9.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/9.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/9.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/9.php?1off" target="_blank">Turn off livestream</a></p></div>
+<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/9.php?1main" target="_blank">Turn on main</a>   |||   <a href="/9.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/9.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/9.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/9.php?1off" target="_blank">Turn off livestream</a></p></div></div>
 <hr>
 
-<h2 class="padded">Stream 10</h2>
-<div class="padleft" id="player10" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
+<button class="collapsible"><h2 class="padded">Stream 10</h2></button>
+<div class="content"><div class="padleft" id="player10" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
 <script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/input");
 $f("player10", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream10', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player10").play();</script>
 
@@ -251,7 +279,7 @@ $f("player10", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {cli
 
 <p><form method="post" target="_blank" action="/10.php?1vol"><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></form></p>
 
-<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/10.php?1main" target="_blank">Turn on main</a>   |||   <a href="/10.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/10.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/10.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/10.php?1off" target="_blank">Turn off livestream</a></p></div>
+<p><b>Main/backup/holding/Ad video Switch:</b> <a href="/10.php?1main" target="_blank">Turn on main</a>   |||   <a href="/10.php?1back" target="_blank">Turn on backup</a>   |||   <a href="/10.php?1holding" target="_blank">Turn on holding screen</a>   |||   <a href="/10.php?1video" target="_blank">Turn on Ad video</a>   |||   <a href="/10.php?1off" target="_blank">Turn off livestream</a></p></div></div>
 <hr>
 
 <div class="padded">
@@ -274,4 +302,18 @@ Resolution: <select name="resolution"><option value="source">Source</option><opt
 Stream Id: <select name="stream_id"><option value="1">Stream 1</option><option value="2">Stream 2</option><option value="3">Stream 3</option><option value="4">Stream 4</option><option value="5">Stream 5</option><option value="6">Stream 6</option><option value="7">Stream 7</option><option value="8">Stream 8</option><option value="9">Stream 9</option><option value="10">Stream 10</option></select> <br/> 
 Config: <select name="encodeparam"><option value="audio">Audio</option><option value="none">None</option><option value="both">Audio & Video</option></select> <br/>
 <input type="submit" value="Add Config" /> <br/>
-</form></div><br/><br/><br/><br/><br/><br/><br/><br/></body></html>
+</form></div><br/><br/><br/><br/><br/><br/><br/><br/>
+<script>var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}</script></body></html>
