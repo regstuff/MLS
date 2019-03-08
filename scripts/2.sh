@@ -39,11 +39,11 @@ resolution=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__'$1'__
 streamname=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__'$1'__' | cut -d ' ' -f 4`
 echo "$dest $resolution $streamname";
 
-screenback="[S]CREEN.*"$id"back";
-screenmain="[S]CREEN.*"$id"main";
-screenholding="[S]CREEN.*"$id"holding";
-screenvideo="[S]CREEN.*"$id"video";
-screenplaylist="[S]CREEN.*"$id"playlist";
+screenback="[S]CREEN.* "$id"back";
+screenmain="[S]CREEN.* "$id"main";
+screenholding="[S]CREEN.* "$id"holding";
+screenvideo="[S]CREEN.* "$id"video";
+screenplaylist="[S]CREEN.* "$id"playlist";
 
 case $1 in
 ####### MODIFICATION CONFIG ########
@@ -308,6 +308,7 @@ fi
 off)
 #ME=`basename "$0"`;
 ME=$id"off";
+echo $screenmain
 LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
 
 exec 8>$LCK;
@@ -353,7 +354,7 @@ out99)
 case $2 in 
 off)
 #ME=$id;
-ME="[S]CREEN.*"$id$1;
+ME="[S]CREEN.* "$id$1;
 #screenname=$id$1
 #echo $ME
 if [ $(ps aux | grep $ME | awk '{print $2}' | wc -l) -gt 0 ]; then
@@ -430,11 +431,11 @@ case $2 in
 
 off)
 #ME=$id;
-ME="[S]CREEN.*"$id$1;
+ME="[S]CREEN.* $id$1";
 #screenname=$id$1
-#echo $ME
-if [ $(ps aux | grep $ME | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep $ME | awk '{print $2}')
+echo $ME
+if [ $(ps aux | grep "$ME" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$ME" | awk '{print $2}')
 echo "Turning off "$streamid $1
 sleep 0.5
 else
