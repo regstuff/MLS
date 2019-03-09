@@ -29,9 +29,10 @@ cd ~/MLS/scripts/
 sudo mkdir images
 sudo mkdir tmp
 cd images
-sudo wget -O 1holding.mp4 https://www.dropbox.com/s/yllnqcwe942xpt9/2018-11-04%2020-53-26.mp4?dl=0
 sudo wget -O 1lowerthird.png https://www.dropbox.com/s/f053xt0o4ekaifz/lowerthird.png?dl=0
-sudo cp 1holding.mp4 1video.mp4
+sudo wget -O 8video.mp4 https://www.dropbox.com/s/ma7vxehxhndmkf7/4%20Track%20Recording.mp4?dl=0
+sudo cp 8video.mp4 1video.mp4
+sudo cp 8video.mp4 1holding.mp4
 sudo chgrp -R www-data ~/MLS
 sudo chmod g+rw -R ~/MLS
 sudo cp -R ~/MLS/scripts /usr/local/nginx
