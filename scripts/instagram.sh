@@ -2,15 +2,15 @@
 
 #case $1 in
 #on)
-screenname="$(basename "$0" .sh)";
-#exec screen -dm -S $screenname "php ~/InstagramLive-PHP/goLive.php";
+screenname="$1$(basename "$0" .sh)";
+#exec screen -dm -S $screenname "php /usr/local/nginx/scripts/InstagramLive-PHP$1/goLive.php";
 #if [ -z "$STY" ]; then
 #exec screen -dm -S insta /bin/bash "$0";
 #exit 0;
 #fi
 
 #screen -dmS insta;
-echo "Turning on instagram"
+echo "Turning on $1instagram"
 screen -dmS $screenname;
 sleep 1
 
@@ -18,7 +18,7 @@ i="0"
 #while [ $i -lt 10 ]
 while true
 do
-screen -S $screenname -X stuff "cd /usr/local/nginx/scripts/InstagramLive-PHP1 && php goLive.php
+screen -S $screenname -X stuff "cd /usr/local/nginx/scripts/InstagramLive-PHP$1 && php goLive.php
 "
 sleep 3480
 i=$[$i+1]
