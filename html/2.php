@@ -1,7 +1,7 @@
 <?php
 
-$id = basename(__FILE__, ".php");
-$id .= ".sh"; 
+$numberid = basename(__FILE__, ".php");
+$id = $numberid.".sh"; 
 
 if (isset($_GET['1dest1on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out1");echo $output;}
 if (isset($_GET['1dest2on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out2");echo $output;}
@@ -15,7 +15,7 @@ if (isset($_GET['1dest9on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/s
 if (isset($_GET['1dest10on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out10");echo $output;}
 if (isset($_GET['1dest11on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out11");echo $output;}
 
-if (isset($_GET['instagramon'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/insta.sh on 1");echo $output;}
+if (isset($_GET['instagramon'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/insta.sh on $numberid");echo $output;}
 if (isset($_GET['1dest99on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out99");echo $output;}
 
 if (isset($_GET['1dest1off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out1 off");echo $output;}
@@ -30,7 +30,7 @@ if (isset($_GET['1dest9off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/
 if (isset($_GET['1dest10off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out10 off");echo $output;}
 if (isset($_GET['1dest11off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out11 off");echo $output;}
 
-if (isset($_GET['instagramoff'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/insta.sh off 1");echo $output;}
+if (isset($_GET['instagramoff'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/insta.sh off $numberid");echo $output;}
 if (isset($_GET['1dest99off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id out99 off");echo $output;}
 
 ####END OF DESTINATIONS START INPUTS#####
