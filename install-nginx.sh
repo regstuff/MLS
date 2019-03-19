@@ -118,7 +118,7 @@ sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts
 
 # restart nginx with new config. Set it to start on boot.
 sudo /usr/local/nginx/sbin/nginx
-sudo cp /usr/local/nginx/scripts/nginxrestart.sh /etc/init.d && sudo update-rc.d /etc/init.d/nginxrestart.sh defaults
+sudo cp /usr/local/nginx/scripts/nginxrestart.sh /etc/init.d && sudo update-rc.d nginxrestart.sh defaults
 
 #make a little announcment with useful data for the user
 WANIP=$(curl -s http://whatismyip.akamai.com/)
