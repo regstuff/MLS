@@ -26,4 +26,11 @@ echo "<br>";
 $output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/streamconfig.sh \"$stream_id\" $encodeparam");
 echo $output;
 }
+
+if (isset($_GET['remap'])) {
+$channel = $_POST['channel_no'];
+$output = exec("sudo /bin/bash /usr/local/nginx/scripts/remap.sh $channel");echo $output;}
+
+if (isset($_GET['remapoff'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/remap.sh off");echo $output;}
+
 ?>
