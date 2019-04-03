@@ -43,6 +43,9 @@ sudo chgrp -R www-data ~/MLS
 sudo chmod g+rw -R ~/MLS
 sudo cp -R ~/MLS/scripts /usr/local/nginx
 sudo chmod +x -R /usr/local/nginx/scripts
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/2.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/3.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/4.sh
 sudo cp /usr/local/nginx/scripts/.htpasswd /usr/local/nginx/conf/
 sudo cp /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.old
 sudo cp /usr/local/nginx/scripts/php.ini /etc/php/7.0/fpm/
@@ -53,6 +56,9 @@ sudo systemctl restart php7.0-fpm
 sudo cp /usr/local/nginx/scripts/nginx.conf /usr/local/nginx/conf/
 sudo rm -R /usr/local/nginx/html
 sudo cp -R ~/MLS/html /usr/local/nginx
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/2.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/3.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/4.php
 
 #Setup HLS & Recording folders
 sudo mkdir /usr/local/nginx/html/hls
@@ -115,6 +121,8 @@ sudo cp -R tools /usr/local/bin && sudo cp ~/ffmpeg_build/bin/ffmpeg /usr/local/
 #Shift Instagram-Live to generic folder
 sudo cp -R ~/InstagramLive-PHP /usr/local/nginx/scripts/ && sudo mv /usr/local/nginx/scripts/InstagramLive-PHP/ /usr/local/nginx/scripts/InstagramLive-PHP1/
 sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP2/
+sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP3/
+sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP4/
 
 # restart nginx with new config. Set it to start on boot.
 sudo /usr/local/nginx/sbin/nginx

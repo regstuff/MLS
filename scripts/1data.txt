@@ -20,4 +20,9 @@ __stream2__out9__ rtmp://a.rtmp.youtube.com/live2/Key source YouTube_Event
 __stream2__out10__ rtmp://anyserver.com source Stream
 __stream1__out98__ rtmp://localhost/recording/stream1 source Stream1_record
 __stream2__out98__ rtmp://localhost/recording/stream2 source Stream2_record
-__stream1__out99__ rtmp://live-api-s.instagram.com:80/rtmp/YourKey source Instagram
+__stream3__out98__ rtmp://localhost/recording/stream1 source Stream3_record
+__stream4__out98__ rtmp://localhost/recording/stream2 source Stream4_record
+__stream1__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram1
+__stream2__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram2
+__stream3__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram3
+__stream4__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram4
