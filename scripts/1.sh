@@ -6,6 +6,7 @@ oldffmpegparam="/usr/bin/ffmpeg -nostdin -thread_queue_size 512 -i";
 newffmpegparam="/usr/local/bin/ffmpeg -nostdin -thread_queue_size 512 -i";
 outputparam="-y";
 distributeparam="rtmp://127.0.0.1:1935/distribute/"$streamid;
+mainparam="rtmp://127.0.0.1:1935/main/"$streamid;
 inputparam="rtmp://127.0.0.1:1935/input/"$streamid;
 backupparam="rtmp://127.0.0.1:1935/backup/"$streamid;
 advideo=$id"video.mp4";
@@ -104,7 +105,7 @@ fi
 
 while true
 do
-$oldffmpegparam $inputparam $inputencodeparam $distributeparam $outputparam
+$oldffmpegparam $inputparam $inputencodeparam $mainparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -152,7 +153,7 @@ fi
 
 while true
 do
-$oldffmpegparam $backupparam -c copy -f flv $distributeparam $outputparam
+$oldffmpegparam $backupparam -c copy -f flv $mainparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -199,7 +200,7 @@ fi
 
 while true
 do
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$holdingvideo -c copy -f flv $distributeparam $outputparam
+/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$holdingvideo -c copy -f flv $mainparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -354,11 +355,10 @@ out99)
 case $2 in 
 off)
 #ME=$id;
-ME="[S]CREEN.* "$id$1;
+ME="[S]CREEN.* $id$1";
 #screenname=$id$1
-#echo $ME
-if [ $(ps aux | grep $ME | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep $ME | awk '{print $2}')
+if [ $(ps aux | grep "$ME" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$ME" | awk '{print $2}')
 echo "Turning off "$streamid $1
 sleep 0.5
 else
