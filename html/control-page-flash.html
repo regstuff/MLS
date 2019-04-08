@@ -29,8 +29,8 @@
 <div style="text-align:center" class="padded"><a href="/stat" target="_blank">Stats</a>   |||   <a href="/recording" target="_blank">Recordings</a><br/>
 <p id="serverdetails">Test</p><script>var address = window.location.hostname; var rtmp = "Send primary stream to rtmp://"; fulladdress = rtmp.concat(address, "/input/stream1 or stream2 or stream 3 etc."); rtmp = "Send backup stream to rtmp://"; backupaddress = rtmp.concat(address, "/backup/stream1 or stream2 or stream 3 etc.");document.getElementById("serverdetails").innerHTML = fulladdress + "<br/>" + backupaddress;</script></div>
 
-<div style="text-align:center" class="padded"><p><form method="post" target="_blank" action="/streamconfig.php?remap"><b>No. of Audio Channels: </b><input type="text" name="channel_no" size="5" placeholder="4"/><input type="submit" value="Remap" /></form></p>
-<p><a href="/streamconfig.php?remapoff" target="_blank">Turn off Remapping</a></p></div>
+<div style="text-align:center" class="padded"><p><form method="post" target="_blank" action="/config.php?remap"><b>No. of Audio Channels: </b><input type="text" name="channel_no" size="5" placeholder="4"/><input type="submit" value="Remap" /></form></p>
+<p><a href="/config.php?remapoff" target="_blank">Turn off Remapping</a></p></div>
 
 <h2 class="padded">Stream 1</h2>
 <div class="padleft" id="player" style="width:320px;height:180px"><img src="splash_black.jpg" height="180" width="320" /></div>
@@ -154,6 +154,7 @@ $f("player5", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <p>Out9: <a href="/5.php?1dest9on" target="_blank">On</a> ||| <a href="/5.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/5.php?1dest10on" target="_blank">On</a> ||| <a href="/5.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/5.php?1dest98on" target="_blank">On</a> ||| <a href="/5.php?1dest98off" target="_blank">Off</a></p>
+<p><a href="/5.php?instagramon" target="_blank">Turn on Instagram</a>   |||   <a href="/5.php?instagramoff" target="_blank">Turn off Instagram</a>   ||| For Emergencies --> |||   <a href="/5.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/5.php?1dest99off" target="_blank">Turn off out99</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/5.php?1superon" target="_blank">Add Lower Third</a>   |||   <a href="/5.php?1superoff" target="_blank">Remove Lower Third</a></p>
 
@@ -179,6 +180,7 @@ $f("player6", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <p>Out9: <a href="/6.php?1dest9on" target="_blank">On</a> ||| <a href="/6.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/6.php?1dest10on" target="_blank">On</a> ||| <a href="/6.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/6.php?1dest98on" target="_blank">On</a> ||| <a href="/6.php?1dest98off" target="_blank">Off</a></p>
+<p><a href="/6.php?instagramon" target="_blank">Turn on Instagram</a>   |||   <a href="/6.php?instagramoff" target="_blank">Turn off Instagram</a>   ||| For Emergencies --> |||   <a href="/6.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/6.php?1dest99off" target="_blank">Turn off out99</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/6.php?1superon" target="_blank">Add Lower Third</a>   |||   <a href="/6.php?1superoff" target="_blank">Remove Lower Third</a></p>
 
@@ -204,6 +206,7 @@ $f("player7", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <p>Out9: <a href="/7.php?1dest9on" target="_blank">On</a> ||| <a href="/7.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/7.php?1dest10on" target="_blank">On</a> ||| <a href="/7.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/7.php?1dest98on" target="_blank">On</a> ||| <a href="/7.php?1dest98off" target="_blank">Off</a></p>
+<p><a href="/7.php?instagramon" target="_blank">Turn on Instagram</a>   |||   <a href="/7.php?instagramoff" target="_blank">Turn off Instagram</a>   ||| For Emergencies --> |||   <a href="/7.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/7.php?1dest99off" target="_blank">Turn off out99</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/7.php?1superon" target="_blank">Add Lower Third</a>   |||   <a href="/7.php?1superoff" target="_blank">Remove Lower Third</a></p>
 
@@ -229,6 +232,7 @@ $f("player8", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <p>Out9: <a href="/8.php?1dest9on" target="_blank">On</a> ||| <a href="/8.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/8.php?1dest10on" target="_blank">On</a> ||| <a href="/8.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/8.php?1dest98on" target="_blank">On</a> ||| <a href="/8.php?1dest98off" target="_blank">Off</a></p>
+<p><a href="/8.php?instagramon" target="_blank">Turn on Instagram</a>   |||   <a href="/8.php?instagramoff" target="_blank">Turn off Instagram</a>   ||| For Emergencies --> |||   <a href="/8.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/8.php?1dest99off" target="_blank">Turn off out99</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/8.php?1superon" target="_blank">Add Lower Third</a>   |||   <a href="/8.php?1superoff" target="_blank">Remove Lower Third</a></p>
 
@@ -254,6 +258,7 @@ $f("player9", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <p>Out9: <a href="/9.php?1dest9on" target="_blank">On</a> ||| <a href="/9.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/9.php?1dest10on" target="_blank">On</a> ||| <a href="/9.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/9.php?1dest98on" target="_blank">On</a> ||| <a href="/9.php?1dest98off" target="_blank">Off</a></p>
+<p><a href="/9.php?instagramon" target="_blank">Turn on Instagram</a>   |||   <a href="/9.php?instagramoff" target="_blank">Turn off Instagram</a>   ||| For Emergencies --> |||   <a href="/9.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/9.php?1dest99off" target="_blank">Turn off out99</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/9.php?1superon" target="_blank">Add Lower Third</a>   |||   <a href="/9.php?1superoff" target="_blank">Remove Lower Third</a></p>
 
@@ -279,6 +284,7 @@ $f("player10", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {cli
 <p>Out9: <a href="/10.php?1dest9on" target="_blank">On</a> ||| <a href="/10.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/10.php?1dest10on" target="_blank">On</a> ||| <a href="/10.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/10.php?1dest98on" target="_blank">On</a> ||| <a href="/10.php?1dest98off" target="_blank">Off</a></p>
+<p><a href="/10.php?instagramon" target="_blank">Turn on Instagram</a>   |||   <a href="/10.php?instagramoff" target="_blank">Turn off Instagram</a>   ||| For Emergencies --> |||   <a href="/10.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/10.php?1dest99off" target="_blank">Turn off out99</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/10.php?1superon" target="_blank">Add Lower Third</a>   |||   <a href="/10.php?1superoff" target="_blank">Remove Lower Third</a></p>
 
@@ -288,9 +294,9 @@ $f("player10", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {cli
 <hr>
 
 <div class="padded">
-<p><a href="/adddestination.php?list" target="_blank">Destination List</a></p>
+<p><a href="/config.php?destlist" target="_blank">Destination List</a></p>
 <h2>Add New Destination</h2>
-<form method="post" target="_blank" action="adddestination.php?add">
+<form method="post" target="_blank" action="config.php?destadd">
 Full RTMP Url: <br /> <input type="text" name="rtmp_url" size="35" placeholder="rtmp://a.rtmp.youtube.com/1234-abcd-2345-rewq"/> <br/>
 Name: <input type="text" name="name_id" size="15" placeholder="English YT"/> <br/> 
 Stream Id: <select name="stream_id"><option value="1">Stream 1</option><option value="2">Stream 2</option><option value="3">Stream 3</option><option value="4">Stream 4</option><option value="5">Stream 5</option><option value="6">Stream 6</option><option value="7">Stream 7</option><option value="8">Stream 8</option><option value="9">Stream 9</option><option value="10">Stream 10</option></select> <br/> 
@@ -301,9 +307,9 @@ Resolution: <select name="resolution"><option value="source">Source</option><opt
 
 <hr>
 <div class="padded">
-<p><a href="/streamconfig.php?list" target="_blank">Stream Configs List</a></p>
+<p><a href="/config.php?streamlist" target="_blank">Stream Configs List</a></p>
 <h2>Add Stream Config</h2>
-<form method="post" target="_blank" action="streamconfig.php?add">
+<form method="post" target="_blank" action="config.php?streamadd">
 Stream Id: <select name="stream_id"><option value="1">Stream 1</option><option value="2">Stream 2</option><option value="3">Stream 3</option><option value="4">Stream 4</option><option value="5">Stream 5</option><option value="6">Stream 6</option><option value="7">Stream 7</option><option value="8">Stream 8</option><option value="9">Stream 9</option><option value="10">Stream 10</option></select> <br/> 
 Config: <select name="encodeparam"><option value="audio">Audio</option><option value="none">None</option><option value="both">Audio & Video</option></select> <br/>
 <input type="submit" value="Add Config" /> <br/>

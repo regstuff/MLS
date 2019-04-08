@@ -36,9 +36,37 @@ sudo mkdir images
 sudo mkdir tmp
 cd images
 sudo wget -O 1lowerthird.png https://www.dropbox.com/s/f053xt0o4ekaifz/lowerthird.png?dl=0
-sudo wget -O 8video.mp4 https://www.dropbox.com/s/ma7vxehxhndmkf7/4%20Track%20Recording.mp4?dl=0
-sudo cp 8video.mp4 1video.mp4
-sudo cp 8video.mp4 1holding.mp4
+sudo wget -O 1video.mp4 https://www.dropbox.com/s/p0meos1nc0p605u/1video.mp4?dl=0
+sudo wget -O 1holding.mp4 https://www.dropbox.com/s/gwpv11fqnavzkix/1holding.mp4?dl=0
+sudo cp 1lowerthird.png 2lowerthird.png
+sudo cp 1lowerthird.png 3lowerthird.png
+sudo cp 1lowerthird.png 4lowerthird.png
+sudo cp 1lowerthird.png 5lowerthird.png
+sudo cp 1lowerthird.png 6lowerthird.png
+sudo cp 1lowerthird.png 7lowerthird.png
+sudo cp 1lowerthird.png 8lowerthird.png
+sudo cp 1lowerthird.png 9lowerthird.png
+sudo cp 1lowerthird.png 10lowerthird.png
+sudo cp 1video.mp4 2video.mp4
+sudo cp 1video.mp4 3video.mp4
+sudo cp 1video.mp4 4video.mp4
+sudo cp 1video.mp4 5video.mp4
+sudo cp 1video.mp4 6video.mp4
+sudo cp 1video.mp4 7video.mp4
+sudo cp 1video.mp4 8video.mp4
+sudo cp 1video.mp4 9video.mp4
+sudo cp 1video.mp4 10video.mp4
+sudo cp 1holding.mp4 2holding.mp4
+sudo cp 1holding.mp4 3holding.mp4
+sudo cp 1holding.mp4 4holding.mp4
+sudo cp 1holding.mp4 5holding.mp4
+sudo cp 1holding.mp4 6holding.mp4
+sudo cp 1holding.mp4 7holding.mp4
+sudo cp 1holding.mp4 8holding.mp4
+sudo cp 1holding.mp4 9holding.mp4
+sudo cp 1holding.mp4 10holding.mp4
+
+#Shift files to right locations
 sudo chgrp -R www-data ~/MLS
 sudo chmod g+rw -R ~/MLS
 sudo cp -R ~/MLS/scripts /usr/local/nginx
@@ -46,6 +74,12 @@ sudo chmod +x -R /usr/local/nginx/scripts
 sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/2.sh
 sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/3.sh
 sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/4.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/5.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/6.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/7.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/8.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/9.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/10.sh
 sudo cp /usr/local/nginx/scripts/.htpasswd /usr/local/nginx/conf/
 sudo cp /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.old
 sudo cp /usr/local/nginx/scripts/php.ini /etc/php/7.0/fpm/
@@ -59,6 +93,12 @@ sudo cp -R ~/MLS/html /usr/local/nginx
 sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/2.php
 sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/3.php
 sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/4.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/5.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/6.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/7.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/8.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/9.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/10.php
 
 #Setup HLS & Recording folders
 sudo mkdir /usr/local/nginx/html/hls
@@ -123,6 +163,12 @@ sudo cp -R ~/InstagramLive-PHP /usr/local/nginx/scripts/ && sudo mv /usr/local/n
 sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP2/
 sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP3/
 sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP4/
+sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP5/
+sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP6/
+sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP7/
+sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP8/
+sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP9/
+sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP10/
 
 # restart nginx with new config. Set it to start on boot.
 sudo /usr/local/nginx/sbin/nginx
