@@ -1,13 +1,16 @@
 #!/bin/bash
 id="$(basename "$0" .sh)";
 streamid="stream"$id;
-#echo $streamid;
+
 oldffmpegparam="/usr/bin/ffmpeg -nostdin -thread_queue_size 512 -i";
 newffmpegparam="/usr/local/bin/ffmpeg -nostdin -thread_queue_size 512 -i";
 outputparam="-y";
-distributeparam="rtmp://127.0.0.1:1935/distribute/"$streamid;
-inputparam="rtmp://127.0.0.1:1935/input/"$streamid;
+
+mainparam="rtmp://127.0.0.1:1935/main/"$streamid;
 backupparam="rtmp://127.0.0.1:1935/backup/"$streamid;
+inputparam="rtmp://127.0.0.1:1935/input/"$streamid;
+distributeparam="rtmp://127.0.0.1:1935/distribute/"$streamid;
+
 advideo=$id"video.mp4";
 holdingvideo=$id"holding.mp4";
 lowerthird=$id"lowerthird.png";
@@ -15,7 +18,7 @@ videoport=`expr 5554 + 2 \* $id`;
 audioport=`expr 5553 + 2 \* $id`;
 
 encoding=`cat /usr/local/nginx/scripts/streamconfig.txt | grep '__'$streamid'__' | cut -d ' ' -f 2`
-#echo $encoding
+
 case $encoding in
 none)
 inputencodeparam="-acodec copy -vcodec copy -f flv";
@@ -37,7 +40,6 @@ esac
 dest=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__'$1'__' | cut -d ' ' -f 2`
 resolution=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__'$1'__' | cut -d ' ' -f 3`
 streamname=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__'$1'__' | cut -d ' ' -f 4`
-echo "$dest $resolution $streamname";
 
 screenback="[S]CREEN.* "$id"back";
 screenmain="[S]CREEN.* "$id"main";
@@ -104,7 +106,7 @@ fi
 
 while true
 do
-$oldffmpegparam $inputparam $inputencodeparam $distributeparam $outputparam
+$oldffmpegparam $mainparam -c copy -f flv $inputparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -152,7 +154,7 @@ fi
 
 while true
 do
-$oldffmpegparam $backupparam -c copy -f flv $distributeparam $outputparam
+$oldffmpegparam $backupparam -c copy -f flv $inputparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -199,7 +201,7 @@ fi
 
 while true
 do
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$holdingvideo -c copy -f flv $distributeparam $outputparam
+/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$holdingvideo -c copy -f flv $inputparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -246,7 +248,7 @@ fi
 
 while true
 do
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$advideo -c copy -f flv $distributeparam $outputparam
+/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$advideo -c copy -f flv $inputparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -294,7 +296,7 @@ fi
 
 while true
 do
-/usr/bin/ffmpeg -nostdin -thread_queue_size 512 -re -f concat -safe 0 -i /usr/local/nginx/scripts/images/set/list.txt -c copy -f flv $distributeparam
+/usr/bin/ffmpeg -nostdin -thread_queue_size 512 -re -f concat -safe 0 -i /usr/local/nginx/scripts/images/set/list.txt -c copy -f flv $inputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -392,12 +394,7 @@ fi
 #echo $dest
 while [ $i -lt 9000 ]
 do
-#/usr/bin/ffmpeg -i $distributeparam $encodeparam -vf "transpose=1" $checkout $outputparam
-#$oldffmpegparam $distributeparam $encodeparam -f tee -map 0:v -map 0:a "$checkout" $outputparam
-#$oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" -f tee -map 0:v -map 0:a "$checkout" $outputparam
 $oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" -f tee -map 0:v -map 0:a $checkout $outputparam;
-#echo $output
-
 echo "Waiting for input... Feed me!!!"
 sleep 0.2
 i=$[$i+1]
@@ -416,15 +413,15 @@ encodeparam="-c copy"
 ;;
 
 720p)
-encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 1280x720 -b:v 3000k -preset veryfast -flags +global_header"
+encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 1280x720 -b:v 1300k -preset veryfast -flags +global_header"
 ;;
 
 540p)
-encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 960x540 -b:v 1500k -preset veryfast -flags +global_header"
+encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 960x540 -b:v 1000k -preset veryfast -flags +global_header"
 ;;
 
 576p)
-encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 720x576 -b:v 1000k -preset veryfast -flags +global_header"
+encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 720x576 -b:v 800k -preset veryfast -flags +global_header"
 esac
 
 case $2 in

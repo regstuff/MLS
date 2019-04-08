@@ -27,7 +27,7 @@
 <script src="https://releases.flowplayer.org/js/flowplayer-3.2.12.min.js"></script>
 </head><body>
 <div style="text-align:center" class="padded"><a href="/stat" target="_blank">Stats</a>   |||   <a href="/recording" target="_blank">Recordings</a><br/>
-<p id="serverdetails">Test</p><script>var address = window.location.hostname; var rtmp = "Send primary stream to rtmp://"; fulladdress = rtmp.concat(address, "/input/stream1 or stream2 or stream 3 etc."); rtmp = "Send backup stream to rtmp://"; backupaddress = rtmp.concat(address, "/backup/stream1 or stream2 or stream 3 etc.");document.getElementById("serverdetails").innerHTML = fulladdress + "<br/>" + backupaddress;</script></div>
+<p id="serverdetails">Test</p><script>var address = window.location.hostname; var rtmp = "Send primary stream to rtmp://"; fulladdress = rtmp.concat(address, "/main/stream1 or stream2 or stream 3 etc."); rtmp = "Send backup stream to rtmp://"; backupaddress = rtmp.concat(address, "/backup/stream1 or stream2 or stream 3 etc.");document.getElementById("serverdetails").innerHTML = fulladdress + "<br/>" + backupaddress;</script></div>
 
 <div style="text-align:center" class="padded"><p><form method="post" target="_blank" action="/config.php?remap"><b>No. of Audio Channels: </b><input type="text" name="channel_no" size="5" placeholder="4"/><input type="submit" value="Remap" /></form></p>
 <p><a href="/config.php?remapoff" target="_blank">Turn off Remapping</a></p></div>
