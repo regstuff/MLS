@@ -21,7 +21,7 @@ encoding=`cat /usr/local/nginx/scripts/streamconfig.txt | grep '__'$streamid'__'
 
 case $encoding in
 none)
-inputencodeparam="-acodec copy -vcodec copy -f flv";
+inputencodeparam="-acodec aac -ar 44100 -vcodec copy -f flv -strict -2";
 ;;
 
 audio)
@@ -41,8 +41,9 @@ dest=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__'$1'__' | cu
 resolution=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__'$1'__' | cut -d ' ' -f 3`
 streamname=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__'$1'__' | cut -d ' ' -f 4`
 
-screenback="[S]CREEN.* "$id"back";
+screenon="[S]CREEN.* "$id"on";
 screenmain="[S]CREEN.* "$id"main";
+screenback="[S]CREEN.* "$id"back";
 screenholding="[S]CREEN.* "$id"holding";
 screenvideo="[S]CREEN.* "$id"video";
 screenplaylist="[S]CREEN.* "$id"playlist";
@@ -70,9 +71,33 @@ esac
 ;;
 
 ###### INPUT CONFIGURATION #######
+on)
+screenname=$id"on";
+LCK="/usr/local/nginx/scripts/tmp/${screenname}.LCK";
+
+exec 8>$LCK;
+
+if flock -n -x 8; then
+if [ -z "$STY" ]; then
+echo "Turning on $streamid"
+exec screen -dm -S $screenname /bin/bash "$0" on;
+fi
+
+while true
+do
+$oldffmpegparam $inputparam $inputencodeparam $distributeparam $outputparam
+echo "Restarting ffmpeg..."
+sleep .2
+done
+
+else
+echo $screenname " is already running"
+fi
+;;
+
+########## TURN ON ENDS. MAIN BEGINS ################
+
 main)
-#ME=`basename "$0"`;
-#ME=$streamid"main";
 screenname=$id"main";
 LCK="/usr/local/nginx/scripts/tmp/${screenname}.LCK";
 
@@ -316,6 +341,12 @@ LCK="/usr/local/nginx/scripts/tmp/${ME}.LCK";
 exec 8>$LCK;
 
 if flock -n -x 8; then
+
+if [ $(ps aux | grep "$screenon" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep "$screenon" | awk '{print $2}')
+echo "Turning off $streamid"
+fi
+
 if [ $(ps aux | grep "$screenback" | awk '{print $2}' | wc -l) -gt 0 ]; then
 kill $(ps aux | grep "$screenback" | awk '{print $2}')
 echo "Turning off $streamid backup input"
