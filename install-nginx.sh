@@ -36,8 +36,8 @@ sudo mkdir images
 sudo mkdir tmp
 cd images
 sudo wget -O 1lowerthird.png https://www.dropbox.com/s/f053xt0o4ekaifz/lowerthird.png?dl=0
-sudo wget -O 1video.mp4 https://www.dropbox.com/s/p0meos1nc0p605u/1video.mp4?dl=0
-sudo wget -O 1holding.mp4 https://www.dropbox.com/s/gwpv11fqnavzkix/1holding.mp4?dl=0
+sudo wget -O 1video.mp4 https://www.dropbox.com/s/unpdnop2432ta3z/1video1080.mp4?dl=0
+sudo wget -O 1holding.mp4 https://www.dropbox.com/s/a48pk5axkb7ss8x/1holding1080.mp4?dl=0
 sudo cp 1lowerthird.png 2lowerthird.png
 sudo cp 1lowerthird.png 3lowerthird.png
 sudo cp 1lowerthird.png 4lowerthird.png
