@@ -4,6 +4,7 @@ streamid="stream"$id;
 
 oldffmpegparam="/usr/bin/ffmpeg -nostdin -thread_queue_size 512 -i";
 newffmpegparam="/usr/local/bin/ffmpeg -nostdin -thread_queue_size 512 -i";
+ffmpegtsparam="/usr/local/bin/ffmpeg -nostdin -thread_queue_size 512 -fflags +genpts+igndts+ignidx -avoid_negative_ts make_zero -use_wallclock_as_timestamps 1 -i";
 outputparam="-y";
 
 mainparam="rtmp://127.0.0.1:1935/main/"$streamid;
@@ -21,15 +22,15 @@ encoding=`cat /usr/local/nginx/scripts/streamconfig.txt | grep '__'$streamid'__'
 
 case $encoding in
 none)
-inputencodeparam="-acodec aac -ar 44100 -vcodec copy -f flv -strict -2";
+inputencodeparam="-acodec aac -af aresample=44100:async=1 -vcodec copy -f flv -strict -2";
 ;;
 
 audio)
-inputencodeparam="-af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2 -c:a aac -ar 44100 -vcodec copy -f flv -strict -2";
+inputencodeparam="-af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2 -c:a aac -ar 44100 -async 1 -vcodec copy -f flv -strict -2";
 ;;
 
 *)
-inputencodeparam="-i /usr/local/nginx/scripts/images/$lowerthird -af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2 -c:a aac -ar 44100 -filter_complex zmq=bind_address=tcp\\\://127.0.0.1\\\:"$videoport",overlay=0:H -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 6000k -maxrate 6M -minrate 6M -bufsize 6M -f flv -strict -2";
+inputencodeparam="-i /usr/local/nginx/scripts/images/$lowerthird -af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2,aresample=44100:async=1 -c:a aac -filter_complex zmq=bind_address=tcp\\\://127.0.0.1\\\:"$videoport",overlay=0:H -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 600k -maxrate 600k -minrate 600k -bufsize 600k -vsync 1 -f flv -strict -2";
 esac
 
 
@@ -85,7 +86,7 @@ fi
 
 while true
 do
-$oldffmpegparam $inputparam $inputencodeparam $distributeparam $outputparam
+$ffmpegtsparam $inputparam $inputencodeparam $distributeparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -425,7 +426,7 @@ fi
 #echo $dest
 while [ $i -lt 9000 ]
 do
-$oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" -f tee -map 0:v -map 0:a $checkout $outputparam;
+$oldffmpegparam $inputparam $encodeparam -vf "transpose=1" -f tee -map 0:v -map 0:a $checkout $outputparam;
 echo "Waiting for input... Feed me!!!"
 sleep 0.2
 i=$[$i+1]
@@ -440,6 +441,7 @@ esac
 case $resolution in
 
 source)
+#encodeparam="-acodec aac -af aresample=44100:async=1 -vcodec copy -vsync 0"
 encodeparam="-c copy"
 ;;
 
@@ -448,7 +450,7 @@ encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 1280x7
 ;;
 
 540p)
-encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 960x540 -b:v 1000k -preset veryfast -flags +global_header"
+encodeparam="-acodec aac -async 1 -ar 44100 -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 960x540 -b:v 1000k -preset veryfast -flags +global_header"
 ;;
 
 576p)
@@ -498,7 +500,7 @@ fi
 #echo $dest
 while [ $i -lt 9000 ]
 do
-$oldffmpegparam $distributeparam $encodeparam -f tee -map 0:v -map 0:a "$checkout" $outputparam
+$oldffmpegparam $distributeparam $encodeparam -strict -2 -f tee -map 0:v -map 0:a "$checkout" $outputparam
 echo "Waiting for English input... Feed me!!!"
 sleep 0.2
 i=$[$i+1]
