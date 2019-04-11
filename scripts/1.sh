@@ -403,7 +403,7 @@ exit 0
 ;;
 
 *)
-encodeparam="-acodec copy -vcodec libx264 -preset faster -vprofile baseline -g 50 -s 480x854 -b:v 1M"
+encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 480x854 -b:v 1000k -preset veryfast -flags +global_header"
 screenname=$id$1;
 #ME=`basename "$0"`;
 #ME=$id$1
@@ -426,7 +426,7 @@ fi
 #echo $dest
 while [ $i -lt 9000 ]
 do
-$oldffmpegparam $inputparam $encodeparam -vf "transpose=1" -f tee -map 0:v -map 0:a $checkout $outputparam;
+$oldffmpegparam $distributeparam $encodeparam -vf "transpose=1" -f tee -map 0:v -map 0:a $checkout $outputparam;
 echo "Waiting for input... Feed me!!!"
 sleep 0.2
 i=$[$i+1]
