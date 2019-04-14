@@ -38,33 +38,33 @@ cd images
 sudo wget -O 1lowerthird.png https://www.dropbox.com/s/f053xt0o4ekaifz/lowerthird.png?dl=0
 sudo wget -O 1video.mp4 https://www.dropbox.com/s/6rh85usdpj6v9kf/1video-OBS-profile.mp4?dl=0
 sudo wget -O 1holding.mp4 https://www.dropbox.com/s/b1usf5dgnr2l09f/1holding-OBSProfileFixed.mp4?dl=0
-sudo cp 1lowerthird.png 2lowerthird.png
-sudo cp 1lowerthird.png 3lowerthird.png
-sudo cp 1lowerthird.png 4lowerthird.png
-sudo cp 1lowerthird.png 5lowerthird.png
-sudo cp 1lowerthird.png 6lowerthird.png
-sudo cp 1lowerthird.png 7lowerthird.png
-sudo cp 1lowerthird.png 8lowerthird.png
-sudo cp 1lowerthird.png 9lowerthird.png
-sudo cp 1lowerthird.png 10lowerthird.png
-sudo cp 1video.mp4 2video.mp4
-sudo cp 1video.mp4 3video.mp4
-sudo cp 1video.mp4 4video.mp4
-sudo cp 1video.mp4 5video.mp4
-sudo cp 1video.mp4 6video.mp4
-sudo cp 1video.mp4 7video.mp4
-sudo cp 1video.mp4 8video.mp4
-sudo cp 1video.mp4 9video.mp4
-sudo cp 1video.mp4 10video.mp4
-sudo cp 1holding.mp4 2holding.mp4
-sudo cp 1holding.mp4 3holding.mp4
-sudo cp 1holding.mp4 4holding.mp4
-sudo cp 1holding.mp4 5holding.mp4
-sudo cp 1holding.mp4 6holding.mp4
-sudo cp 1holding.mp4 7holding.mp4
-sudo cp 1holding.mp4 8holding.mp4
-sudo cp 1holding.mp4 9holding.mp4
-sudo cp 1holding.mp4 10holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/2lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/3lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/4lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/5lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/6lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/7lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/8lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/9lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/10lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/2video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/3video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/4video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/5video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/6video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/7video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/8video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/9video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/10video.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/2holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/3holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/4holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/5holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/6holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/7holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/8holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/9holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/10holding.mp4
 
 #Shift files to right locations
 sudo chgrp -R www-data ~/MLS
