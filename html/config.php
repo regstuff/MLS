@@ -21,6 +21,11 @@ $output = exec("sudo /bin/bash /usr/local/nginx/scripts/remap.sh $channel");echo
 
 if (isset($_GET['remapoff'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/remap.sh off");echo $output;}
 
+if (isset($_GET['srtaccept'])) {
+$output = exec("sudo /bin/bash /usr/local/nginx/scripts/srtaccept.sh on");echo $output;}
+
+if (isset($_GET['srtacceptoff'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/srtaccept.sh off");echo $output;}
+
 if (isset($_GET['destlist'])) {
 $output = file_get_contents( "../scripts/1data.txt" ); // get the contents, and echo it out.
 echo "<pre>$output</pre>";
