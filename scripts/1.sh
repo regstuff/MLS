@@ -23,6 +23,7 @@ encoding=`cat /usr/local/nginx/scripts/streamconfig.txt | grep '__'$streamid'__'
 case $encoding in
 none)
 inputencodeparam="-acodec aac -af aresample=44100:async=1 -vcodec copy -f flv -strict -2";
+ffmpegtsparam=$oldffmpegparam
 ;;
 
 audio)
