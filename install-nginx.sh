@@ -171,6 +171,8 @@ sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts
 sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP10/
 
 sudo cp -R ~/ffmpeg_sources/srt /usr/local/nginx/scripts/
+sudo cp -R ~/MLS /usr/local/nginx/scripts
+
 # restart nginx with new config. Set it to start on boot.
 sudo /usr/local/nginx/sbin/nginx
 sudo cp /usr/local/nginx/scripts/nginxrestart.sh /etc/init.d && sudo update-rc.d nginxrestart.sh defaults
