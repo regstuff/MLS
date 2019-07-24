@@ -409,7 +409,7 @@ encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 480x85
 screenname=$id$1;
 #ME=`basename "$0"`;
 #ME=$id$1
-checkout="-flags +global_header [f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/$streamid-$streamname"
+checkout="[f=flv]$dest|[f=flv]rtmp://127.0.0.1:1935/output/$streamid-$streamname"
 #checkout="-f flv $dest"
 #echo $checkout;
 LCK="/usr/local/nginx/scripts/tmp/${screenname}.LCK";
