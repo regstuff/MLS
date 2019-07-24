@@ -37,7 +37,7 @@ sudo mkdir tmp
 cd images
 sudo wget -O 1lowerthird.png https://www.dropbox.com/s/f053xt0o4ekaifz/lowerthird.png?dl=0
 sudo wget -O 1video.mp4 https://www.dropbox.com/s/6rh85usdpj6v9kf/1video-OBS-profile.mp4?dl=0
-sudo wget -O 1holding.mp4 https://www.dropbox.com/s/b1usf5dgnr2l09f/1holding-OBSProfileFixed.mp4?dl=0
+sudo wget -O 1holding.mp4 https://www.dropbox.com/s/lz0file9wizdytt/1holding.mp4?dl=0
 sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/2lowerthird.png
 sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/3lowerthird.png
 sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/4lowerthird.png
@@ -170,6 +170,7 @@ sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts
 sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP9/
 sudo cp -R /usr/local/nginx/scripts/InstagramLive-PHP1/ /usr/local/nginx/scripts/InstagramLive-PHP10/
 
+sudo cp -R ~/ffmpeg_sources/srt /usr/local/nginx/scripts/
 # restart nginx with new config. Set it to start on boot.
 sudo /usr/local/nginx/sbin/nginx
 sudo cp /usr/local/nginx/scripts/nginxrestart.sh /etc/init.d && sudo update-rc.d nginxrestart.sh defaults
