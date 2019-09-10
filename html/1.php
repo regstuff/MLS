@@ -36,10 +36,10 @@ if (isset($_GET['1dest99off'])) {$output = exec("sudo /bin/bash /usr/local/nginx
 ####END OF DESTINATIONS START INPUTS#####
 
 if (isset($_GET['1on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id on");echo $output;}
-if (isset($_GET['1main'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id main");echo $output;}
-if (isset($_GET['1back'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id back");echo $output;}
-if (isset($_GET['1holding'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id holding");echo $output;}
-if (isset($_GET['1video'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id video");echo $output;}
+if (isset($_GET['1main'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id on && sudo /bin/bash /usr/local/nginx/scripts/$id main");echo $output;}
+if (isset($_GET['1back'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id on && sudo /bin/bash /usr/local/nginx/scripts/$id back");echo $output;}
+if (isset($_GET['1holding'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id on && sudo /bin/bash /usr/local/nginx/scripts/$id holding");echo $output;}
+if (isset($_GET['1video'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id on && sudo /bin/bash /usr/local/nginx/scripts/$id video");echo $output;}
 if (isset($_GET['1playlist'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id playlist");echo $output;}
 if (isset($_GET['1off'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id off");echo $output;}
 
