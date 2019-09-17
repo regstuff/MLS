@@ -26,7 +26,7 @@
 </style>
 <script src="https://releases.flowplayer.org/js/flowplayer-3.2.12.min.js"></script>
 </head><body>
-<div style="text-align:center" class="padded"><a href="/stat" target="_blank">Stats</a>   |||   <a href="/recording" target="_blank">Recordings</a><br/>
+<div style="text-align:center" class="padded"><a href="/stat" target="_blank">Stats</a>   |||   <a href="/recording" target="_blank">Recordings</a>   |||   <a href="/settings.html" target="_blank">Settings</a><br/>
 <p id="serverdetails">Test</p><script>var address = window.location.hostname; var rtmp = "Send primary stream to rtmp://"; fulladdress = rtmp.concat(address, "/main/stream1 or stream2 or stream 3 etc."); rtmp = "Send backup stream to rtmp://"; backupaddress = rtmp.concat(address, "/backup/stream1 or stream2 or stream 3 etc.");document.getElementById("serverdetails").innerHTML = fulladdress + "<br/>" + backupaddress;</script></div>
 
 <div style="text-align:center" class="padded"><form method="post" target="_blank" action="/config.php?remap"><p><b>No. of Audio Channels: </b><input type="text" name="channel_no" size="5" placeholder="4"/><input type="submit" value="Remap" /></p></form>
@@ -293,29 +293,8 @@ $f("player10", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {cli
 <form method="post" target="_blank" action="/10.php?1vol"><p><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></p></form>
 
 <p><b>Choose Input:</b> <a href="/10.php?1main" target="_blank">Main</a>   |||   <a href="/10.php?1back" target="_blank">Backup</a>   |||   <a href="/10.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/10.php?1video" target="_blank">Ad Video</a>   |||   <a href="/10.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/10.php?1off" target="_blank">Turn off</a></p></div></div>
-<hr>
 
-<div class="padded">
-<p><a href="/config.php?destlist" target="_blank">Destination List</a></p>
-<h2>Add New Destination</h2>
-<form method="post" target="_blank" action="config.php?destadd">
-Full RTMP Url: <br /> <input type="text" name="rtmp_url" size="35" placeholder="rtmp://a.rtmp.youtube.com/1234-abcd-2345-rewq"/> <br/>
-Name: <input type="text" name="name_id" size="15" placeholder="English YT"/> <br/> 
-Stream Id: <select name="stream_id"><option value="1">Stream 1</option><option value="2">Stream 2</option><option value="3">Stream 3</option><option value="4">Stream 4</option><option value="5">Stream 5</option><option value="6">Stream 6</option><option value="7">Stream 7</option><option value="8">Stream 8</option><option value="9">Stream 9</option><option value="10">Stream 10</option></select> <br/> 
-Output Id: <select name="output_id"><option value="1">Out 1</option><option value="2">Out 2</option><option value="3">Out 3</option><option value="4">Out 4</option><option value="5">Out 5</option><option value="6">Out 6</option><option value="7">Out 7</option><option value="8">Out 8</option><option value="9">Out 9</option><option value="10">Out 10</option></select> <br/>
-Resolution: <select name="resolution"><option value="source">Source</option><option value="720p">720p</option><option value="540p">540p</option><option value="576p">PAL-720x576</option></select><br/><br/>
-<input type="submit" value="Add destination" /> <br/>
-</form></div>
-
-<hr>
-<div class="padded">
-<p><a href="/config.php?streamlist" target="_blank">Stream Configs List</a></p>
-<h2>Add Stream Config</h2>
-<form method="post" target="_blank" action="config.php?streamadd">
-Stream Id: <select name="stream_id"><option value="1">Stream 1</option><option value="2">Stream 2</option><option value="3">Stream 3</option><option value="4">Stream 4</option><option value="5">Stream 5</option><option value="6">Stream 6</option><option value="7">Stream 7</option><option value="8">Stream 8</option><option value="9">Stream 9</option><option value="10">Stream 10</option></select> <br/> 
-Config: <select name="encodeparam"><option value="audio">Audio</option><option value="none">None</option><option value="both">Audio & Video</option></select> <br/>
-<input type="submit" value="Add Config" /> <br/>
-</form></div><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/>
 <script>var coll = document.getElementsByClassName("collapsible");
 var i;
 for (i = 0; i < coll.length; i++) {
