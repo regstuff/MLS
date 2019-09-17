@@ -181,5 +181,5 @@ sudo cp /usr/local/nginx/scripts/nginxrestart.sh /etc/init.d && sudo update-rc.d
 WANIP=$(curl -s http://whatismyip.akamai.com/)
 echo "Send source RTMP input on port 1935 to $WANIP" 
 echo " "
-echo "Add www-data ALL=NOPASSWD: /bin/bash to sudo visudo"
+echo "Add www-data ALL=NOPASSWD: /bin/bash, /bin/ls to sudo visudo"
 echo " "

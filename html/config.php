@@ -49,7 +49,10 @@ $output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/adddestination.sh 
 echo $output;
 }
 
-if (isset($_GET['proclist'])) {$output = exec("sudo screen -ls | grep 'main\|back\|holding\|video' | cut -f 1,2,3 | cut -d '.' -f 2");echo $output;}
+if (isset($_GET['proclist'])) {
+	$output = shell_exec("sudo ls -laR /var/run/screen/S-root | grep 'main\|back\|holding\|video' | cut -d ' ' -f 8,9,10,11");
+	echo "<pre>$output</pre>";
+	}
 
 
 if (isset($_GET['upload'])) {
