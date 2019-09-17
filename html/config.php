@@ -49,6 +49,10 @@ $output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/adddestination.sh 
 echo $output;
 }
 
+if (isset($_GET['proclist'])) {$output = exec("sudo screen -ls | grep 'main\|back\|holding\|video' | cut -f 1,2,3 | cut -d '.
+' -f 2");echo $output;}
+
+
 if (isset($_GET['upload'])) {
 	$target_dir = "../scripts/images/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
