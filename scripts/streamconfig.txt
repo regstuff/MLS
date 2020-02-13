@@ -8,3 +8,13 @@ __stream7__ both
 __stream8__ both
 __stream9__ both
 __stream10__ both
+__stream11__ both
+__stream12__ both
+__stream13__ both
+__stream14__ both
+__stream15__ both
+__stream16__ both
+__stream17__ both
+__stream18__ both
+__stream19__ both
+__stream20__ both

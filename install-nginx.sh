@@ -38,33 +38,6 @@ cd images
 sudo wget -O 1lowerthird.png https://www.dropbox.com/s/f053xt0o4ekaifz/lowerthird.png?dl=0
 sudo wget -O 1video.mp4 https://www.dropbox.com/s/6rh85usdpj6v9kf/1video-OBS-profile.mp4?dl=0
 sudo wget -O 1holding.mp4 https://www.dropbox.com/s/lz0file9wizdytt/1holding.mp4?dl=0
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/2lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/3lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/4lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/5lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/6lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/7lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/8lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/9lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/10lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/2video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/3video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/4video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/5video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/6video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/7video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/8video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/9video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/10video.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/2holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/3holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/4holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/5holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/6holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/7holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/8holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/9holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/10holding.mp4
 
 #Shift files to right locations
 sudo chgrp -R www-data ~/MLS
@@ -80,9 +53,76 @@ sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/7.sh
 sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/8.sh
 sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/9.sh
 sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/10.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/11.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/12.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/13.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/14.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/15.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/16.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/17.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/18.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/19.sh
+sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/20.sh
 sudo cp /usr/local/nginx/scripts/.htpasswd /usr/local/nginx/conf/
 sudo cp /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.old
 sudo cp /usr/local/nginx/scripts/php.ini /etc/php/7.0/fpm/
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/2lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/3lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/4lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/5lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/6lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/7lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/8lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/9lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/10lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/11lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/12lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/13lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/14lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/15lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/16lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/17lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/18lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/19lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/20lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/2video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/3video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/4video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/5video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/6video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/7video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/8video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/9video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/10video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/11video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/12video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/13video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/14video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/15video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/16video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/17video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/18video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/19video.mp4
+sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/20video.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/2holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/3holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/4holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/5holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/6holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/7holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/8holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/9holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/10holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/11holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/12holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/13holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/14holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/15holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/16holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/17holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/18holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/19holding.mp4
+sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/20holding.mp4
 sudo rm -R ~/MLS/scripts/images
 sudo rm -R ~/MLS/scripts/tmp
 sudo systemctl restart php7.0-fpm
@@ -99,6 +139,16 @@ sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/7.php
 sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/8.php
 sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/9.php
 sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/10.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/11.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/12.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/13.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/14.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/15.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/16.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/17.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/18.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/19.php
+sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/20.php
 
 #Setup HLS & Recording folders
 sudo mkdir /usr/local/nginx/html/hls

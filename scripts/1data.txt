@@ -1,28 +1,66 @@
-__stream1__out1__ rtmp://a.rtmp.youtube.com/live2/MY_KEY source YouTube
-__stream1__out2__ rtmp://live-api-s.facebook.com:80/rtmp/MY_KEY source Facebook
-__stream1__out3__ rtmp://noserveryet.com source Name_With_Underscore
-__stream1__out4__ rtmp://noserveryet.com source Name_With_Underscore
-__stream1__out5__ rtmp://noserveryet.com source Name_With_Underscore
-__stream1__out6__ rtmp://noserveryet.com source Name_With_Underscore
-__stream1__out7__ rtmp://a.rtmp.youtube.com/live2/ANOTHER_KEY source YouTube_Events
-__stream1__out8__ rtmp://someserver.com source Stream_Name
-__stream1__out9__ rtmp://someserver.com source Stream_Name
-__stream1__out10__ rtmp://someserver.com source Stream_Name
-__stream2__out1__ rtmp://a.rtmp.youtube.com/live2/A_Key source YT_Event
-__stream2__out2__ rtmp://live-api-s.facebook.com:80/rtmp/YourKey 720p Another_FB
-__stream2__out3__ rtmp://noserveryet.com source Name_With_Underscore
-__stream2__out4__ rtmp://noserveryet.com source Name_With_Underscore
-__stream2__out5__ rtmp://noserveryet.com source Name_With_Underscore
-__stream2__out6__ rtmp://noserveryet.com source Name_With_Underscore
-__stream2__out7__ rtmp://a.rtmp.youtube.com/live2/Key source YouTube_Event
-__stream2__out8__ rtmp://anyserver.com source Stream
-__stream2__out9__ rtmp://a.rtmp.youtube.com/live2/Key source YouTube_Event
-__stream2__out10__ rtmp://anyserver.com source Stream
-__stream1__out98__ rtmp://localhost/recording/stream1 source Stream1_record
-__stream2__out98__ rtmp://localhost/recording/stream2 source Stream2_record
-__stream3__out98__ rtmp://localhost/recording/stream1 source Stream3_record
-__stream4__out98__ rtmp://localhost/recording/stream2 source Stream4_record
-__stream1__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram1
-__stream2__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram2
-__stream3__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram3
-__stream4__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram4
+__stream1__out1__ rtmp://anyserver.com channel_name
+__stream1__out2__ rtmp://anyserver.com channel_name
+__stream1__out3__ rtmp://anyserver.com channel_name
+__stream1__out4__ rtmp://anyserver.com channel_name
+__stream1__out5__ rtmp://anyserver.com channel_name
+__stream1__out6__ rtmp://anyserver.com channel_name
+__stream1__out7__ rtmp://anyserver.com channel_name
+__stream1__out8__ rtmp://anyserver.com channel_name
+__stream1__out9__ rtmp://anyserver.com channel_name
+__stream1__out10__ rtmp://anyserver.com channel_name
+__stream2__out1__ rtmp://anyserver.com channel_name
+__stream2__out2__ rtmp://anyserver.com channel_name
+__stream2__out3__ rtmp://anyserver.com channel_name
+__stream2__out4__ rtmp://anyserver.com channel_name
+__stream2__out5__ rtmp://anyserver.com channel_name
+__stream2__out6__ rtmp://anyserver.com channel_name
+__stream2__out7__ rtmp://anyserver.com channel_name
+__stream2__out8__ rtmp://anyserver.com channel_name
+__stream2__out9__ rtmp://anyserver.com channel_name
+__stream2__out10__ rtmp://anyserver.com channel_name
+__stream3__out1__ rtmp://anyserver.com channel_name
+__stream3__out2__ rtmp://anyserver.com channel_name
+__stream4__out1__ rtmp://anyserver.com channel_name
+__stream4__out2__ rtmp://anyserver.com channel_name
+__stream5__out1__ rtmp://anyserver.com channel_name
+__stream5__out2__ rtmp://anyserver.com channel_name
+__stream6__out1__ rtmp://anyserver.com channel_name
+__stream6__out2__ rtmp://anyserver.com channel_name
+__stream7__out1__ rtmp://anyserver.com channel_name
+__stream7__out2__ rtmp://anyserver.com channel_name
+__stream8__out1__ rtmp://anyserver.com channel_name
+__stream8__out2__ rtmp://anyserver.com channel_name
+__stream9__out1__ rtmp://anyserver.com channel_name
+__stream9__out2__ rtmp://anyserver.com channel_name
+__stream10__out1__ rtmp://anyserver.com channel_name
+__stream10__out2__ rtmp://anyserver.com channel_name
+__stream11__out1__ rtmp://anyserver.com channel_name
+__stream11__out2__ rtmp://anyserver.com channel_name
+__stream12__out1__ rtmp://anyserver.com channel_name
+__stream12__out2__ rtmp://anyserver.com channel_name
+__stream13__out1__ rtmp://anyserver.com channel_name
+__stream13__out2__ rtmp://anyserver.com channel_name
+__stream14__out1__ rtmp://anyserver.com channel_name
+__stream14__out2__ rtmp://anyserver.com channel_name
+__stream15__out1__ rtmp://anyserver.com channel_name
+__stream15__out2__ rtmp://anyserver.com channel_name
+__stream16__out1__ rtmp://anyserver.com channel_name
+__stream16__out2__ rtmp://anyserver.com channel_name
+__stream17__out1__ rtmp://anyserver.com channel_name
+__stream17__out2__ rtmp://anyserver.com channel_name
+__stream18__out1__ rtmp://anyserver.com channel_name
+__stream18__out2__ rtmp://anyserver.com channel_name
+__stream19__out1__ rtmp://anyserver.com channel_name
+__stream19__out2__ rtmp://anyserver.com channel_name
+__stream20__out1__ rtmp://anyserver.com channel_name
+__stream20__out2__ rtmp://anyserver.com channel_name
+__stream1__out98__ rtmp://anyserver.com channel_name
+__stream2__out98__ rtmp://anyserver.com channel_name
+__stream3__out98__ rtmp://anyserver.com channel_name
+__stream4__out98__ rtmp://anyserver.com channel_name
+__stream11__out98__ rtmp://anyserver.com channel_name
+__stream1__out99__ rtmp://anyserver.com channel_name
+__stream2__out99__ rtmp://anyserver.com channel_name
+__stream3__out99__ rtmp://anyserver.com channel_name
+__stream4__out99__ rtmp://anyserver.com channel_name
+
