@@ -18,7 +18,7 @@ i="0"
 #while [ $i -lt 10 ]
 while true
 do
-screen -S $screenname -X stuff "cd /usr/local/nginx/scripts/InstagramLive-PHP$1 && php goLive.php
+screen -S $screenname -X stuff "cd /usr/local/nginx/scripts/InstagramLive-PHP$1 && php goLive.php -a
 "
 sleep 3480
 i=$[$i+1]
