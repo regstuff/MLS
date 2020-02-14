@@ -14,6 +14,7 @@ distributeparam="rtmp://127.0.0.1:1935/distribute/"$streamid;
 
 advideo=$id"video.mp4";
 holdingvideo=$id"holding.mp4";
+failovervideo=$id"failover.mp4";
 lowerthird=$id"lowerthird.png";
 videoport=`expr 5554 + 2 \* $id`;
 audioport=`expr 5553 + 2 \* $id`;
@@ -137,7 +138,7 @@ do
 #$oldffmpegparam $mainparam -vcodec libx264 -s 1280x720 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 6000k -maxrate 6M -minrate 6M -bufsize 6M -profile:v high -acodec copy -f flv $inputparam $outputparam
 $oldffmpegparam $mainparam -c copy -f flv $inputparam $outputparam
 #$oldffmpegparam $backupparam -c copy -f flv $inputparam $outputparam
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$holdingvideo -c copy -f flv $inputparam $outputparam
+/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$failovervideo -c copy -f flv $inputparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -187,7 +188,7 @@ while true
 do
 $oldffmpegparam $backupparam -c copy -f flv $inputparam $outputparam
 #$oldffmpegparam $mainparam -c copy -f flv $inputparam $outputparam
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$holdingvideo -c copy -f flv $inputparam $outputparam
+/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$failovervideo -c copy -f flv $inputparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
