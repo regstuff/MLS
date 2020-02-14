@@ -7,11 +7,13 @@ echo "<pre>$output</pre>";
 if (isset($_GET['streamadd'])) {
 $encodeparam = $_POST['encodeparam'];
 $stream_id = $_POST['stream_id'];
+$stream_res = $_POST['stream_res'];
 echo "<h2>You entered the following information:</h2>";
 echo "<b>Encode Parameter: </b> $encodeparam";
 echo "<br><b>Stream Id: </b> $stream_id";
+echo "<br><b>Stream Reolution: </b> $stream_res";
 echo "<br>";
-$output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/streamconfig.sh \"$stream_id\" $encodeparam");
+$output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/streamconfig.sh \"$stream_id\" \"$encodeparam\" $stream_res");
 echo $output;
 }
 

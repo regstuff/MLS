@@ -20,6 +20,29 @@ videoport=`expr 5554 + 2 \* $id`;
 audioport=`expr 5553 + 2 \* $id`;
 
 encoding=`cat /usr/local/nginx/scripts/streamconfig.txt | grep '__'$streamid'__' | cut -d ' ' -f 2`
+streamres=`cat /usr/local/nginx/scripts/streamconfig.txt | grep '__'$streamid'__' | cut -d ' ' -f 3`
+
+case $streamres in
+1080p)
+$inputres="1920x1080";
+$inputbitrate="4M";
+;;
+
+720p)
+$inputres="1280x720";
+$inputbitrate="1.5M";
+;;
+
+480p)
+$inputres="854x480";
+$inputbitrate="700K";
+;;
+
+576p)
+$inputres="720x576";
+$inputbitrate="1M";
+;;
+esac
 
 case $encoding in
 none)
@@ -33,7 +56,7 @@ ffmpegtsparam=$oldffmpegparam
 ;;
 
 *)
-inputencodeparam="-i /usr/local/nginx/scripts/images/$lowerthird -af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2,aresample=44100:async=1 -c:a aac -filter_complex zmq=bind_address=tcp\\\://127.0.0.1\\\:"$videoport",overlay=0:H -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 1.3M -maxrate 1.3M -minrate 1.3M -bufsize 1.3M -profile:v high -vsync 1 -f flv -strict -2";
+inputencodeparam="-i /usr/local/nginx/scripts/images/$lowerthird -af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2,aresample=44100:async=1 -c:a aac -filter_complex zmq=bind_address=tcp\\\://127.0.0.1\\\:"$videoport",overlay=0:H -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -s $inputres -b:v $inputbitrate -maxrate $inputbitrate -minrate $inputbitrate -bufsize $inputbitrate -profile:v high -vsync 1 -f flv -strict -2";
 esac
 
 
