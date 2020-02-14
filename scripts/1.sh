@@ -28,11 +28,6 @@ inputres="1920x1080";
 inputbitrate="4M";
 ;;
 
-720p)
-inputres="1280x720";
-inputbitrate="1.5M";
-;;
-
 480p)
 inputres="854x480";
 inputbitrate="700K";
@@ -42,6 +37,10 @@ inputbitrate="700K";
 inputres="720x576";
 inputbitrate="1M";
 ;;
+
+*)
+inputres="1280x720";
+inputbitrate="1.5M";
 esac
 
 case $encoding in
