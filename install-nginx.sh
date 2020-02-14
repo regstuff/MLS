@@ -27,6 +27,7 @@ sudo curl -sS https://getcomposer.org/installer -o composer-setup.php
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 #Install Instagram-Live scripts
+sudo unzip ~/MLS/insta_php.zip -d ~/
 #sudo git clone https://github.com/regstuff/InstagramLive-PHP.git
 #sudo composer install -d InstagramLive-PHP/
 
