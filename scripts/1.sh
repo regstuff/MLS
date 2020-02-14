@@ -24,23 +24,23 @@ streamres=`cat /usr/local/nginx/scripts/streamconfig.txt | grep '__'$streamid'__
 
 case $streamres in
 1080p)
-$inputres="1920x1080";
-$inputbitrate="4M";
+inputres="1920x1080";
+inputbitrate="4M";
 ;;
 
 720p)
-$inputres="1280x720";
-$inputbitrate="1.5M";
+inputres="1280x720";
+inputbitrate="1.5M";
 ;;
 
 480p)
-$inputres="854x480";
-$inputbitrate="700K";
+inputres="854x480";
+inputbitrate="700K";
 ;;
 
 576p)
-$inputres="720x576";
-$inputbitrate="1M";
+inputres="720x576";
+inputbitrate="1M";
 ;;
 esac
 
