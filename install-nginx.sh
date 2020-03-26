@@ -37,8 +37,9 @@ sudo mkdir images
 sudo mkdir tmp
 cd images
 sudo wget -O 1lowerthird.png https://www.dropbox.com/s/f053xt0o4ekaifz/lowerthird.png?dl=0
-sudo wget -O 1video.mp4 https://www.dropbox.com/s/6rh85usdpj6v9kf/1video-OBS-profile.mp4?dl=0
-sudo wget -O 1holding.mp4 https://www.dropbox.com/s/lz0file9wizdytt/1holding.mp4?dl=0
+sudo wget -O 1video.mp4 https://www.dropbox.com/s/il7qa994iv9r7gu/1video.mp4?dl=0
+sudo wget -O 1holding.mp4 https://www.dropbox.com/s/vnphorklxm1xopz/1holding.mp4?dl=0
+sudo wget -O 1failover.mp4 https://www.dropbox.com/s/b595qj68l3t5g6f/1failover.mp4?dl=0
 
 #Shift files to right locations
 sudo chgrp -R www-data ~/MLS
