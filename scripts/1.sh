@@ -492,7 +492,7 @@ case $2 in
 
 off)
 #ME=$id;
-ME="[S]CREEN.* $id$1";
+ME="[S]CREEN.* $id$1 ";
 #screenname=$id$1
 echo $ME
 if [ $(ps aux | grep "$ME" | awk '{print $2}' | wc -l) -gt 0 ]; then
