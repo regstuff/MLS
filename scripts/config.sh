@@ -1,5 +1,83 @@
 #!/bin/bash
 
+##### START ADD DESTINATION ##########
+case $1 in
+destination)
+sudo sed -i "s|stream$3__out$4_.*|stream$3__out$4__ $(echo $2 | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g') $5 $6|" /usr/local/nginx/scripts/1data.txt;
+
+;;
+
+##### END DESTINATION - START STREAM CONFIG ##########
+
+streamconfig)
+sudo sed -i "s|stream$2__.*|stream$2__ $3 $4|" /usr/local/nginx/scripts/streamconfig.txt;
+
+;;
+
+##### END STREAM CONFIG - START UPLOAD FILE ##########
+
+uploadfile)
+sudo wget -O $3$4 $2 && sudo chmod +x $3$4 && sudo mv $3$4 /usr/local/nginx/scripts/images
+
+;;
+
+##### END UPLOAD FILE - START SRT ACCEPT ##########
+
+srtaccept)
+LCK="/usr/local/nginx/scripts/tmp/srtaccept.LCK";
+
+exec 8>$LCK;
+
+if flock -n -x 8; then
+
+
+if [ -z "$STY" ]; then
+echo "Turning $2 SRT Accept"
+exec screen -dm -S srtaccept /bin/bash "$0" "$1" "$2";
+fi
+
+case $2 in
+off)
+echo "SRT Accept is already off"
+exit 0
+;;
+
+*)
+while true
+do
+/usr/local/nginx/scripts/srt/build/srt-live-transmit "srt://:9000" "file://con" | /usr/bin/ffmpeg -re -i pipe:0 -map 0:0 -map 0:1 -vcodec libx264 -preset veryfast -profile:v high -acodec aac -f flv -strict -2 rtmp://127.0.0.1/main/stream1080
+echo "Restarting SRT Accept..."
+sleep .2
+done
+esac
+#~/ffmpeg_sources/srt/build/srt-live-transmit "srt://:9000" "file://con" | /usr/bin/ffmpeg -re -i pipe:0 -map 0:0 -map 0:1 -vcodec libx264 -preset veryfast -level high -acodec aac -f flv -strict -2 rtmp://127.0.0.1/input/stream1 -map 0:0 -map 0:2 -vcodec copy -acodec aac -f flv -strict -2 rtmp://127.0.0.1/input/stream2 -map 0:0 -map 0:3 -vcodec copy -acodec aac -f flv -strict -2 rtmp://127.0.0.1/input/stream3;
+
+else
+case $2 in
+off)
+kill $(ps aux | grep "[S]CREEN.* srtaccept" | awk '{print $2}')
+echo "Turning off SRT Accept"
+;;
+
+*)
+echo "SRT Accept is already on"
+esac
+fi
+
+;;
+
+##### END SRT ACCEPT - START SRT SEND ##########
+
+srtsend)
+if [ -z "$STY" ]; then
+exec screen -dm -S srtsend /bin/bash "$0" "$1";
+fi
+/usr/local/bin/ffmpeg -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/8video.mp4 -map 0:0 -map 0:1 -map 0:2 -map 0:3 -vcodec copy -acodec copy -f mpegts - | ~/ffmpeg_sources/srt/build/srt-live-transmit -v "file://con" "srt://139.59.46.142:9000"
+
+;;
+
+##### END SRT SEND - START REMAP ##########
+remap)
 LCK="/usr/local/nginx/scripts/tmp/remap.LCK";
 
 exec 8>$LCK;
@@ -7,11 +85,11 @@ exec 8>$LCK;
 if flock -n -x 8; then
 
 if [ -z "$STY" ]; then
-echo "Remapping $1 channels"
-exec screen -dm -S remap /bin/bash "$0" "$1";
+echo "Remapping $2 channels"
+exec screen -dm -S remap /bin/bash "$0" "$1" "$2";
 fi
 
-case $1 in
+case $2 in
 
 2)
 while true
@@ -154,15 +232,15 @@ exit 0
 esac
 
 else
-case $1 in
+case $2 in
 off)
 kill $(ps aux | grep "[S]CREEN.* remap" | awk '{print $2}')
 echo "Turning off remapping"
 ;;
 
 *)
-echo "Audio is already being remapped with $1 channels"
+echo "Audio is already being remapped with $2 channels"
 esac
 fi
 
-
+esac
