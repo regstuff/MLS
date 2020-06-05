@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>NGINX Restreaming</title><link href="https://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet"><style type="text/css">body {margin: 0; padding: 0;} .padleft {padding: 20px; float:left;} .padded {padding: 5px 20px 5px 20px}
+<html><head><title>Primary Server - Location</title><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><style type="text/css">body {margin: 0; padding: 0;} .padleft {padding: 20px; float:left;} .padded {padding: 5px 20px 5px 20px}
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
   background-color: #eee;
@@ -24,9 +24,11 @@
   background-color: #f1f1f1;
 }
 </style>
-<script src="https://releases.flowplayer.org/js/flowplayer-3.2.12.min.js"></script>
+<script type="text/javascript" src="jsmpeg.min.js"></script>
+<script type="text/javascript">function playersstop() {player1.stop(); player2.stop(); player3.stop(); player4.stop(); player5.stop(); player6.stop(); player7.stop(); player8.stop(); player9.stop(); player10.stop(); player11.stop(); player12.stop(); player13.stop(); player14.stop(); player15.stop(); player16.stop(); player17.stop(); player18.stop(); player19.stop(); player20.stop();}</script>
 </head><body>
-<div style="text-align:center" class="padded"><a href="/stat" target="_blank">Stats</a>   |||   <a href="/recording" target="_blank">Recordings</a>   |||   <a href="/settings.html" target="_blank">Settings</a>   |||   <a href="/config.php?proclist" target="_blank">Processes</a><br/>
+<p align="center"><b>Primary/Secondary Server - Location</b></p>
+<div style="text-align:center" class="padded"><a href="/stat" target="_blank">Stats</a>   |||   <a href="/recording" target="_blank">Recordings</a>   |||   <a href="/settings.html" target="_blank">Settings</a>   |||   <a href="/config.php?proclist" target="_blank">Processes</a>   |||   <a href="/control.html" target="_blank">Desktop Version</a><br/>
 <p id="serverdetails">Test</p><script>var address = window.location.hostname; var rtmp = "Send primary stream to rtmp://"; fulladdress = rtmp.concat(address, "/main/stream1 or stream2 or stream 3 etc."); rtmp = "Send backup stream to rtmp://"; backupaddress = rtmp.concat(address, "/backup/stream1 or stream2 or stream 3 etc.");document.getElementById("serverdetails").innerHTML = fulladdress + "<br/>" + backupaddress;</script></div>
 
 <div style="text-align:center" class="padded"><form method="post" target="_blank" action="/config.php?remap"><p><b>No. of Audio Channels: </b><input type="text" name="channel_no" size="5" placeholder="4"/><input type="submit" value="Remap" /></p></form>
@@ -35,11 +37,37 @@
 <div style="text-align:center" class="padded"><p>SRT Accept: <a href="/config.php?srtaccept" target="_blank">   ON</a>    |||    <a href="/config.php?srtacceptoff" target="_blank">   OFF</a></p></div>
 
 <h2 class="padded">Stream 1</h2>
-<div class="padleft"><video id="video-player" width="320" height="180" class="video-js vjs-default-skin" controls>
-<source src="/live/input.m3u8" type="application/x-mpegURL"></video>
-<script src="https://vjs.zencdn.net/5.8.8/video.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/3.6.12/videojs-contrib-hls.js"></script>
-<script>  var player = videojs('video-player'); player.play();</script></div>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas1"></canvas>
+        <script type="text/javascript">
+                var canvas1 = document.getElementById('video-canvas1');
+                var url1 = 'ws://'+document.location.hostname+':443/';
+                var player1 = new JSMpeg.Player(url1, {canvas: canvas1, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?1on" onclick="play1()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play1() {
+playersstop();
+player1.play();
+player1.volume = 1;
+return false;
+}
+function stop1() {
+player1.stop();
+return false;
+}
+function volumeup1() {
+player1.volume = player1.volume + 0.2;
+return false;
+}
+function volumedown1() {
+player1.volume = player1.volume - 0.2;
+if (player1.volume < 0) {player1.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 
 <div class="padded">
@@ -64,9 +92,37 @@
 <hr>
 
 <h2 class="padded">Stream 2</h2>
-<div class="padleft" id="player2" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player2", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream2', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player2").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas2"></canvas>
+        <script type="text/javascript">
+                var canvas2 = document.getElementById('video-canvas2');
+                var url2 = 'ws://'+document.location.hostname+':443/';
+                var player2 = new JSMpeg.Player(url2, {canvas: canvas2, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?2on" onclick="play2()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop2()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup2()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown2()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play2() {
+playersstop();
+player2.play();
+player2.volume = 1;
+return false;
+}
+function stop2() {
+player2.stop();
+return false;
+}
+function volumeup2() {
+player2.volume = player2.volume + 0.2;
+return false;
+}
+function volumedown2() {
+player2.volume = player2.volume - 0.2;
+if (player2.volume < 0) {player2.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/2.php?1dest1on" target="_blank">On</a> ||| <a href="/2.php?1dest1off" target="_blank">Off</a></p> 
@@ -90,9 +146,37 @@ $f("player2", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 3</h2></button>
-<div class="content"><div class="padleft" id="player3" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player3", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream3', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player3").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas3"></canvas>
+        <script type="text/javascript">
+                var canvas3 = document.getElementById('video-canvas3');
+                var url3 = 'ws://'+document.location.hostname+':443/';
+                var player3 = new JSMpeg.Player(url3, {canvas: canvas3, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?3on" onclick="play3()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop3()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup3()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown3()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play3() {
+playersstop();
+player3.play();
+player3.volume = 1;
+return false;
+}
+function stop3() {
+player3.stop();
+return false;
+}
+function volumeup3() {
+player3.volume = player3.volume + 0.2;
+return false;
+}
+function volumedown3() {
+player3.volume = player3.volume - 0.2;
+if (player3.volume < 0) {player3.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/3.php?1dest1on" target="_blank">On</a> ||| <a href="/3.php?1dest1off" target="_blank">Off</a></p> 
@@ -115,10 +199,37 @@ $f("player3", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <p><b>Choose Input:</b> <a href="/3.php?1main" target="_blank">Main</a>   |||   <a href="/3.php?1back" target="_blank">Backup</a>   |||   <a href="/3.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/3.php?1video" target="_blank">Ad Video</a>   |||   <a href="/3.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/3.php?1off" target="_blank">Turn off</a></p></div></div>
 <hr>
 
-<button class="collapsible"><h2 class="padded">Stream 4</h2></button>
-<div class="content"><div class="padleft" id="player4" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player4", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream4', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player4").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas4"></canvas>
+        <script type="text/javascript">
+                var canvas4 = document.getElementById('video-canvas4');
+                var url4 = 'ws://'+document.location.hostname+':443/';
+                var player4 = new JSMpeg.Player(url4, {canvas: canvas4, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?4on" onclick="play4()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop4()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup4()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown4()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play4() {
+playersstop();
+player4.play();
+player4.volume = 1;
+return false;
+}
+function stop4() {
+player4.stop();
+return false;
+}
+function volumeup4() {
+player4.volume = player4.volume + 0.2;
+return false;
+}
+function volumedown4() {
+player4.volume = player4.volume - 0.2;
+if (player4.volume < 0) {player4.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/4.php?1dest1on" target="_blank">On</a> ||| <a href="/4.php?1dest1off" target="_blank">Off</a></p> 
@@ -142,9 +253,37 @@ $f("player4", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 5</h2></button>
-<div class="content"><div class="padleft" id="player5" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player5", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream5', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player5").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas5"></canvas>
+        <script type="text/javascript">
+                var canvas5 = document.getElementById('video-canvas5');
+                var url5 = 'ws://'+document.location.hostname+':443/';
+                var player5 = new JSMpeg.Player(url5, {canvas: canvas5, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?5on" onclick="play5()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop5()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup5()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown5()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play5() {
+playersstop();
+player5.play();
+player5.volume = 1;
+return false;
+}
+function stop5() {
+player5.stop();
+return false;
+}
+function volumeup5() {
+player5.volume = player5.volume + 0.2;
+return false;
+}
+function volumedown5() {
+player5.volume = player5.volume - 0.2;
+if (player5.volume < 0) {player5.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/5.php?1dest1on" target="_blank">On</a> ||| <a href="/5.php?1dest1off" target="_blank">Off</a></p> 
@@ -168,9 +307,37 @@ $f("player5", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 6</h2></button>
-<div class="content"><div class="padleft" id="player6" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player6", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream6', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player6").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas6"></canvas>
+        <script type="text/javascript">
+                var canvas6 = document.getElementById('video-canvas6');
+                var url6 = 'ws://'+document.location.hostname+':443/';
+                var player6 = new JSMpeg.Player(url6, {canvas: canvas6, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?6on" onclick="play6()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop6()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup6()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown6()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play6() {
+playersstop();
+player6.play();
+player6.volume = 1;
+return false;
+}
+function stop6() {
+player6.stop();
+return false;
+}
+function volumeup6() {
+player6.volume = player6.volume + 0.2;
+return false;
+}
+function volumedown6() {
+player6.volume = player6.volume - 0.2;
+if (player6.volume < 0) {player6.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/6.php?1dest1on" target="_blank">On</a> ||| <a href="/6.php?1dest1off" target="_blank">Off</a></p> 
@@ -194,9 +361,37 @@ $f("player6", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 7</h2></button>
-<div class="content"><div class="padleft" id="player7" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player7", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream7', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player7").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas7"></canvas>
+        <script type="text/javascript">
+                var canvas7 = document.getElementById('video-canvas7');
+                var url7 = 'ws://'+document.location.hostname+':443/';
+                var player7 = new JSMpeg.Player(url7, {canvas: canvas7, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?7on" onclick="play7()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop7()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup7()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown7()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play7() {
+playersstop();
+player7.play();
+player7.volume = 1;
+return false;
+}
+function stop7() {
+player7.stop();
+return false;
+}
+function volumeup7() {
+player7.volume = player7.volume + 0.2;
+return false;
+}
+function volumedown7() {
+player7.volume = player7.volume - 0.2;
+if (player7.volume < 0) {player7.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/7.php?1dest1on" target="_blank">On</a> ||| <a href="/7.php?1dest1off" target="_blank">Off</a></p> 
@@ -220,9 +415,37 @@ $f("player7", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 8</h2></button>
-<div class="content"><div class="padleft" id="player8" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player8", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream8', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player8").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas8"></canvas>
+        <script type="text/javascript">
+                var canvas8 = document.getElementById('video-canvas8');
+                var url8 = 'ws://'+document.location.hostname+':443/';
+                var player8 = new JSMpeg.Player(url8, {canvas: canvas8, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?8on" onclick="play8()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop8()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup8()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown8()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play8() {
+playersstop();
+player8.play();
+player8.volume = 1;
+return false;
+}
+function stop8() {
+player8.stop();
+return false;
+}
+function volumeup8() {
+player8.volume = player8.volume + 0.2;
+return false;
+}
+function volumedown8() {
+player8.volume = player8.volume - 0.2;
+if (player8.volume < 0) {player8.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/8.php?1dest1on" target="_blank">On</a> ||| <a href="/8.php?1dest1off" target="_blank">Off</a></p> 
@@ -246,9 +469,37 @@ $f("player8", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 9</h2></button>
-<div class="content"><div class="padleft" id="player9" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player9", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream9', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player9").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas9"></canvas>
+        <script type="text/javascript">
+                var canvas9 = document.getElementById('video-canvas9');
+                var url9 = 'ws://'+document.location.hostname+':443/';
+                var player9 = new JSMpeg.Player(url9, {canvas: canvas9, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?9on" onclick="play9()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop9()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup9()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown9()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play9() {
+playersstop();
+player9.play();
+player9.volume = 1;
+return false;
+}
+function stop9() {
+player9.stop();
+return false;
+}
+function volumeup9() {
+player9.volume = player9.volume + 0.2;
+return false;
+}
+function volumedown9() {
+player9.volume = player9.volume - 0.2;
+if (player9.volume < 0) {player9.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/9.php?1dest1on" target="_blank">On</a> ||| <a href="/9.php?1dest1off" target="_blank">Off</a></p> 
@@ -272,9 +523,37 @@ $f("player9", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 10</h2></button>
-<div class="content"><div class="padleft" id="player10" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player10", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream10', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player10").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas10"></canvas>
+        <script type="text/javascript">
+                var canvas10 = document.getElementById('video-canvas10');
+                var url10 = 'ws://'+document.location.hostname+':443/';
+                var player10 = new JSMpeg.Player(url10, {canvas: canvas10, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?10on" onclick="play10()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop10()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup10()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown10()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play10() {
+playersstop();
+player10.play();
+player10.volume = 1;
+return false;
+}
+function stop10() {
+player10.stop();
+return false;
+}
+function volumeup10() {
+player10.volume = player10.volume + 0.2;
+return false;
+}
+function volumedown10() {
+player10.volume = player10.volume - 0.2;
+if (player10.volume < 0) {player10.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/10.php?1dest1on" target="_blank">On</a> ||| <a href="/10.php?1dest1off" target="_blank">Off</a></p> 
@@ -299,9 +578,37 @@ $f("player10", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {cli
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 11</h2></button>
-<div class="content"><div class="padleft" id="player11" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player11", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream11', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player11").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas11"></canvas>
+        <script type="text/javascript">
+                var canvas11 = document.getElementById('video-canvas11');
+                var url11 = 'ws://'+document.location.hostname+':443/';
+                var player11 = new JSMpeg.Player(url11, {canvas: canvas11, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?11on" onclick="play11()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop11()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup11()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown11()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play11() {
+playersstop();
+player11.play();
+player11.volume = 1;
+return false;
+}
+function stop11() {
+player11.stop();
+return false;
+}
+function volumeup11() {
+player11.volume = player11.volume + 0.2;
+return false;
+}
+function volumedown11() {
+player11.volume = player11.volume - 0.2;
+if (player11.volume < 0) {player11.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/11.php?1dest1on" target="_blank">On</a> ||| <a href="/11.php?1dest1off" target="_blank">Off</a></p> 
@@ -326,9 +633,37 @@ $f("player11", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {cli
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 12</h2></button>
-<div class="content"><div class="padleft" id="player12" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player12", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream12', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player12").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas12"></canvas>
+        <script type="text/javascript">
+                var canvas12 = document.getElementById('video-canvas12');
+                var url12 = 'ws://'+document.location.hostname+':443/';
+                var player12 = new JSMpeg.Player(url12, {canvas: canvas12, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?12on" onclick="play12()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop12()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup12()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown12()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play12() {
+playersstop();
+player12.play();
+player12.volume = 1;
+return false;
+}
+function stop12() {
+player12.stop();
+return false;
+}
+function volumeup12() {
+player12.volume = player12.volume + 0.2;
+return false;
+}
+function volumedown12() {
+player12.volume = player12.volume - 0.2;
+if (player12.volume < 0) {player12.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/12.php?1dest1on" target="_blank">On</a> ||| <a href="/12.php?1dest1off" target="_blank">Off</a></p> 
@@ -353,9 +688,37 @@ $f("player12", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {cli
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 13</h2></button>
-<div class="content"><div class="padleft" id="player13" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player13", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream13', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player13").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas13"></canvas>
+        <script type="text/javascript">
+                var canvas13 = document.getElementById('video-canvas13');
+                var url13 = 'ws://'+document.location.hostname+':443/';
+                var player13 = new JSMpeg.Player(url13, {canvas: canvas13, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?13on" onclick="play13()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop13()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup13()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown13()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play13() {
+playersstop();
+player13.play();
+player13.volume = 1;
+return false;
+}
+function stop13() {
+player13.stop();
+return false;
+}
+function volumeup13() {
+player13.volume = player13.volume + 0.2;
+return false;
+}
+function volumedown13() {
+player13.volume = player13.volume - 0.2;
+if (player13.volume < 0) {player13.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/13.php?1dest1on" target="_blank">On</a> ||| <a href="/13.php?1dest1off" target="_blank">Off</a></p> 
@@ -381,9 +744,37 @@ $f("player13", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {cli
 
 
 <button class="collapsible"><h2 class="padded">Stream 14</h2></button>
-<div class="content"><div class="padleft" id="player14" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player14", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream14', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player14").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas14"></canvas>
+        <script type="text/javascript">
+                var canvas14 = document.getElementById('video-canvas14');
+                var url14 = 'ws://'+document.location.hostname+':443/';
+                var player14 = new JSMpeg.Player(url14, {canvas: canvas14, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?14on" onclick="play14()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop14()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup14()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown14()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play14() {
+playersstop();
+player14.play();
+player14.volume = 1;
+return false;
+}
+function stop14() {
+player14.stop();
+return false;
+}
+function volumeup14() {
+player14.volume = player14.volume + 0.2;
+return false;
+}
+function volumedown14() {
+player14.volume = player14.volume - 0.2;
+if (player14.volume < 0) {player14.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/14.php?1dest1on" target="_blank">On</a> ||| <a href="/14.php?1dest1off" target="_blank">Off</a></p> 
@@ -409,9 +800,37 @@ $f("player14", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {cli
 
 
 <button class="collapsible"><h2 class="padded">Stream 15</h2></button>
-<div class="content"><div class="padleft" id="player15" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player15", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream15', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player15").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas15"></canvas>
+        <script type="text/javascript">
+                var canvas15 = document.getElementById('video-canvas15');
+                var url15 = 'ws://'+document.location.hostname+':443/';
+                var player15 = new JSMpeg.Player(url15, {canvas: canvas15, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?15on" onclick="play15()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop15()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup15()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown15()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play15() {
+playersstop();
+player15.play();
+player15.volume = 1;
+return false;
+}
+function stop15() {
+player15.stop();
+return false;
+}
+function volumeup15() {
+player15.volume = player15.volume + 0.2;
+return false;
+}
+function volumedown15() {
+player15.volume = player15.volume - 0.2;
+if (player15.volume < 0) {player15.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/15.php?1dest1on" target="_blank">On</a> ||| <a href="/15.php?1dest1off" target="_blank">Off</a></p> 
@@ -437,9 +856,37 @@ $f("player15", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {cli
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 16</h2></button>
-<div class="content"><div class="padleft" id="player16" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player16", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream16', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player16").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas16"></canvas>
+        <script type="text/javascript">
+                var canvas16 = document.getElementById('video-canvas16');
+                var url16 = 'ws://'+document.location.hostname+':443/';
+                var player16 = new JSMpeg.Player(url16, {canvas: canvas16, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?16on" onclick="play16()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop16()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup16()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown16()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play16() {
+playersstop();
+player16.play();
+player16.volume = 1;
+return false;
+}
+function stop16() {
+player16.stop();
+return false;
+}
+function volumeup16() {
+player16.volume = player16.volume + 0.2;
+return false;
+}
+function volumedown16() {
+player16.volume = player16.volume - 0.2;
+if (player16.volume < 0) {player16.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/16.php?1dest1on" target="_blank">On</a> ||| <a href="/16.php?1dest1off" target="_blank">Off</a></p> 
@@ -466,9 +913,37 @@ $f("player16", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {cli
 
 
 <button class="collapsible"><h2 class="padded">Stream 17</h2></button>
-<div class="content"><div class="padleft" id="player17" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player17", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream17', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player17").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas17"></canvas>
+        <script type="text/javascript">
+                var canvas17 = document.getElementById('video-canvas17');
+                var url17 = 'ws://'+document.location.hostname+':443/';
+                var player17 = new JSMpeg.Player(url17, {canvas: canvas17, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?17on" onclick="play17()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop17()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup17()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown17()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play17() {
+playersstop();
+player17.play();
+player17.volume = 1;
+return false;
+}
+function stop17() {
+player17.stop();
+return false;
+}
+function volumeup17() {
+player17.volume = player17.volume + 0.2;
+return false;
+}
+function volumedown17() {
+player17.volume = player17.volume - 0.2;
+if (player17.volume < 0) {player17.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/17.php?1dest1on" target="_blank">On</a> ||| <a href="/17.php?1dest1off" target="_blank">Off</a></p> 
@@ -495,9 +970,37 @@ $f("player17", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {cli
 
 
 <button class="collapsible"><h2 class="padded">Stream 18</h2></button>
-<div class="content"><div class="padleft" id="player18" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player18", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream18', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player18").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas18"></canvas>
+        <script type="text/javascript">
+                var canvas18 = document.getElementById('video-canvas18');
+                var url18 = 'ws://'+document.location.hostname+':443/';
+                var player18 = new JSMpeg.Player(url18, {canvas: canvas18, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?18on" onclick="play18()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop18()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup18()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown18()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play18() {
+playersstop();
+player18.play();
+player18.volume = 1;
+return false;
+}
+function stop18() {
+player18.stop();
+return false;
+}
+function volumeup18() {
+player18.volume = player18.volume + 0.2;
+return false;
+}
+function volumedown18() {
+player18.volume = player18.volume - 0.2;
+if (player18.volume < 0) {player18.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/18.php?1dest1on" target="_blank">On</a> ||| <a href="/18.php?1dest1off" target="_blank">Off</a></p> 
@@ -524,9 +1027,37 @@ $f("player18", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {cli
 
 
 <button class="collapsible"><h2 class="padded">Stream 19</h2></button>
-<div class="content"><div class="padleft" id="player19" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player19", "https://releases.flowplayer.org/swf/flowp1layer-3.2.16.swf", {clip: {url: 'stream19', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player19").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas19"></canvas>
+        <script type="text/javascript">
+                var canvas19 = document.getElementById('video-canvas19');
+                var url19 = 'ws://'+document.location.hostname+':443/';
+                var player19 = new JSMpeg.Player(url19, {canvas: canvas19, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?19on" onclick="play19()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop19()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup19()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown19()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play19() {
+playersstop();
+player19.play();
+player19.volume = 1;
+return false;
+}
+function stop19() {
+player19.stop();
+return false;
+}
+function volumeup19() {
+player19.volume = player19.volume + 0.2;
+return false;
+}
+function volumedown19() {
+player19.volume = player19.volume - 0.2;
+if (player19.volume < 0) {player19.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/19.php?1dest1on" target="_blank">On</a> ||| <a href="/19.php?1dest1off" target="_blank">Off</a></p> 
@@ -553,9 +1084,37 @@ $f("player19", "https://releases.flowplayer.org/swf/flowp1layer-3.2.16.swf", {cl
 
 
 <button class="collapsible"><h2 class="padded">Stream 20</h2></button>
-<div class="content"><div class="padleft" id="player20" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
-<script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
-$f("player20", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream20', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player20").play();</script>
+<div class="padleft jsmpeg">
+<canvas width="320" height="180" id="video-canvas20"></canvas>
+        <script type="text/javascript">
+                var canvas20 = document.getElementById('video-canvas20');
+                var url20 = 'ws://'+document.location.hostname+':443/';
+                var player20 = new JSMpeg.Player(url20, {canvas: canvas20, autoplay: false, pauseWhenHidden: false});
+        </script>
+	
+<p style="text-align:center;"><a href="/player.php?20on" onclick="play20()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop20()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup20()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown20()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<script type="text/javascript">
+function play20() {
+playersstop();
+player20.play();
+player20.volume = 1;
+return false;
+}
+function stop20() {
+player20.stop();
+return false;
+}
+function volumeup20() {
+player20.volume = player20.volume + 0.2;
+return false;
+}
+function volumedown20() {
+player20.volume = player20.volume - 0.2;
+if (player20.volume < 0) {player20.volume = 0;}
+return false;
+}
+</script>
+</div>
 
 <div class="padded">
 <p>Out1: <a href="/20.php?1dest1on" target="_blank">On</a> ||| <a href="/20.php?1dest1off" target="_blank">Off</a></p> 
