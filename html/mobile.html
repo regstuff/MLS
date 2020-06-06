@@ -25,7 +25,7 @@
 }
 </style>
 <script type="text/javascript" src="jsmpeg.min.js"></script>
-<script type="text/javascript">function playersstop() {player1.stop(); player2.stop(); player3.stop(); player4.stop(); player5.stop(); player6.stop(); player7.stop(); player8.stop(); player9.stop(); player10.stop(); player11.stop(); player12.stop(); player13.stop(); player14.stop(); player15.stop(); player16.stop(); player17.stop(); player18.stop(); player19.stop(); player20.stop();}</script>
+<script type="text/javascript">function playersstop() {player1.stop(); player2.stop(); player3.stop(); player4.stop(); player5.stop(); player6.stop(); player7.stop(); player8.stop();}</script>
 </head><body>
 <p align="center"><b>Primary/Secondary Server - Location</b></p>
 <div style="text-align:center" class="padded"><a href="/stat" target="_blank">Stats</a>   |||   <a href="/recording" target="_blank">Recordings</a>   |||   <a href="/settings.html" target="_blank">Settings</a>   |||   <a href="/config.php?proclist" target="_blank">Processes</a>   |||   <a href="/control.html" target="_blank">Desktop Version</a><br/>
@@ -146,7 +146,7 @@ return false;
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 3</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas3"></canvas>
         <script type="text/javascript">
                 var canvas3 = document.getElementById('video-canvas3');
@@ -199,7 +199,8 @@ return false;
 <p><b>Choose Input:</b> <a href="/3.php?1main" target="_blank">Main</a>   |||   <a href="/3.php?1back" target="_blank">Backup</a>   |||   <a href="/3.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/3.php?1video" target="_blank">Ad Video</a>   |||   <a href="/3.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/3.php?1off" target="_blank">Turn off</a></p></div></div>
 <hr>
 
-<div class="padleft jsmpeg">
+<button class="collapsible"><h2 class="padded">Stream 4</h2></button>
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas4"></canvas>
         <script type="text/javascript">
                 var canvas4 = document.getElementById('video-canvas4');
@@ -253,7 +254,7 @@ return false;
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 5</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas5"></canvas>
         <script type="text/javascript">
                 var canvas5 = document.getElementById('video-canvas5');
@@ -307,7 +308,7 @@ return false;
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 6</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas6"></canvas>
         <script type="text/javascript">
                 var canvas6 = document.getElementById('video-canvas6');
@@ -361,7 +362,7 @@ return false;
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 7</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas7"></canvas>
         <script type="text/javascript">
                 var canvas7 = document.getElementById('video-canvas7');
@@ -415,7 +416,7 @@ return false;
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 8</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas8"></canvas>
         <script type="text/javascript">
                 var canvas8 = document.getElementById('video-canvas8');
@@ -469,12 +470,12 @@ return false;
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 9</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas9"></canvas>
         <script type="text/javascript">
                 var canvas9 = document.getElementById('video-canvas9');
                 var url9 = 'ws://'+document.location.hostname+':443/';
-                var player9 = new JSMpeg.Player(url9, {canvas: canvas9, autoplay: false, pauseWhenHidden: false});
+ //               var player9 = new JSMpeg.Player(url9, {canvas: canvas9, autoplay: false, pauseWhenHidden: false});
         </script>
 	
 <p style="text-align:center;"><a href="/player.php?9on" onclick="play9()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop9()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup9()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown9()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
@@ -523,12 +524,12 @@ return false;
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 10</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas10"></canvas>
         <script type="text/javascript">
                 var canvas10 = document.getElementById('video-canvas10');
                 var url10 = 'ws://'+document.location.hostname+':443/';
-                var player10 = new JSMpeg.Player(url10, {canvas: canvas10, autoplay: false, pauseWhenHidden: false});
+ //               var player10 = new JSMpeg.Player(url10, {canvas: canvas10, autoplay: false, pauseWhenHidden: false});
         </script>
 	
 <p style="text-align:center;"><a href="/player.php?10on" onclick="play10()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop10()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup10()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown10()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
@@ -578,12 +579,12 @@ return false;
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 11</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas11"></canvas>
         <script type="text/javascript">
                 var canvas11 = document.getElementById('video-canvas11');
                 var url11 = 'ws://'+document.location.hostname+':443/';
-                var player11 = new JSMpeg.Player(url11, {canvas: canvas11, autoplay: false, pauseWhenHidden: false});
+ //               var player11 = new JSMpeg.Player(url11, {canvas: canvas11, autoplay: false, pauseWhenHidden: false});
         </script>
 	
 <p style="text-align:center;"><a href="/player.php?11on" onclick="play11()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop11()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup11()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown11()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
@@ -633,12 +634,12 @@ return false;
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 12</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas12"></canvas>
         <script type="text/javascript">
                 var canvas12 = document.getElementById('video-canvas12');
                 var url12 = 'ws://'+document.location.hostname+':443/';
-                var player12 = new JSMpeg.Player(url12, {canvas: canvas12, autoplay: false, pauseWhenHidden: false});
+ //               var player12 = new JSMpeg.Player(url12, {canvas: canvas12, autoplay: false, pauseWhenHidden: false});
         </script>
 	
 <p style="text-align:center;"><a href="/player.php?12on" onclick="play12()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop12()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup12()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown12()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
@@ -688,12 +689,12 @@ return false;
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 13</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas13"></canvas>
         <script type="text/javascript">
                 var canvas13 = document.getElementById('video-canvas13');
                 var url13 = 'ws://'+document.location.hostname+':443/';
-                var player13 = new JSMpeg.Player(url13, {canvas: canvas13, autoplay: false, pauseWhenHidden: false});
+ //               var player13 = new JSMpeg.Player(url13, {canvas: canvas13, autoplay: false, pauseWhenHidden: false});
         </script>
 	
 <p style="text-align:center;"><a href="/player.php?13on" onclick="play13()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop13()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup13()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown13()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
@@ -744,12 +745,12 @@ return false;
 
 
 <button class="collapsible"><h2 class="padded">Stream 14</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas14"></canvas>
         <script type="text/javascript">
                 var canvas14 = document.getElementById('video-canvas14');
                 var url14 = 'ws://'+document.location.hostname+':443/';
-                var player14 = new JSMpeg.Player(url14, {canvas: canvas14, autoplay: false, pauseWhenHidden: false});
+ //               var player14 = new JSMpeg.Player(url14, {canvas: canvas14, autoplay: false, pauseWhenHidden: false});
         </script>
 	
 <p style="text-align:center;"><a href="/player.php?14on" onclick="play14()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop14()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup14()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown14()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
@@ -800,12 +801,12 @@ return false;
 
 
 <button class="collapsible"><h2 class="padded">Stream 15</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas15"></canvas>
         <script type="text/javascript">
                 var canvas15 = document.getElementById('video-canvas15');
                 var url15 = 'ws://'+document.location.hostname+':443/';
-                var player15 = new JSMpeg.Player(url15, {canvas: canvas15, autoplay: false, pauseWhenHidden: false});
+ //               var player15 = new JSMpeg.Player(url15, {canvas: canvas15, autoplay: false, pauseWhenHidden: false});
         </script>
 	
 <p style="text-align:center;"><a href="/player.php?15on" onclick="play15()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop15()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup15()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown15()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
@@ -856,12 +857,12 @@ return false;
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 16</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas16"></canvas>
         <script type="text/javascript">
                 var canvas16 = document.getElementById('video-canvas16');
                 var url16 = 'ws://'+document.location.hostname+':443/';
-                var player16 = new JSMpeg.Player(url16, {canvas: canvas16, autoplay: false, pauseWhenHidden: false});
+ //              var player16 = new JSMpeg.Player(url16, {canvas: canvas16, autoplay: false, pauseWhenHidden: false});
         </script>
 	
 <p style="text-align:center;"><a href="/player.php?16on" onclick="play16()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop16()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup16()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown16()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
@@ -913,12 +914,12 @@ return false;
 
 
 <button class="collapsible"><h2 class="padded">Stream 17</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas17"></canvas>
         <script type="text/javascript">
                 var canvas17 = document.getElementById('video-canvas17');
                 var url17 = 'ws://'+document.location.hostname+':443/';
-                var player17 = new JSMpeg.Player(url17, {canvas: canvas17, autoplay: false, pauseWhenHidden: false});
+ //               var player17 = new JSMpeg.Player(url17, {canvas: canvas17, autoplay: false, pauseWhenHidden: false});
         </script>
 	
 <p style="text-align:center;"><a href="/player.php?17on" onclick="play17()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop17()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup17()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown17()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
@@ -970,12 +971,12 @@ return false;
 
 
 <button class="collapsible"><h2 class="padded">Stream 18</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas18"></canvas>
         <script type="text/javascript">
                 var canvas18 = document.getElementById('video-canvas18');
                 var url18 = 'ws://'+document.location.hostname+':443/';
-                var player18 = new JSMpeg.Player(url18, {canvas: canvas18, autoplay: false, pauseWhenHidden: false});
+ //               var player18 = new JSMpeg.Player(url18, {canvas: canvas18, autoplay: false, pauseWhenHidden: false});
         </script>
 	
 <p style="text-align:center;"><a href="/player.php?18on" onclick="play18()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop18()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup18()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown18()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
@@ -1027,12 +1028,12 @@ return false;
 
 
 <button class="collapsible"><h2 class="padded">Stream 19</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas19"></canvas>
         <script type="text/javascript">
                 var canvas19 = document.getElementById('video-canvas19');
                 var url19 = 'ws://'+document.location.hostname+':443/';
-                var player19 = new JSMpeg.Player(url19, {canvas: canvas19, autoplay: false, pauseWhenHidden: false});
+//                var player19 = new JSMpeg.Player(url19, {canvas: canvas19, autoplay: false, pauseWhenHidden: false});
         </script>
 	
 <p style="text-align:center;"><a href="/player.php?19on" onclick="play19()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop19()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup19()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown19()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
@@ -1084,12 +1085,12 @@ return false;
 
 
 <button class="collapsible"><h2 class="padded">Stream 20</h2></button>
-<div class="padleft jsmpeg">
+<div class="content"><div class="padleft jsmpeg">
 <canvas width="320" height="180" id="video-canvas20"></canvas>
         <script type="text/javascript">
                 var canvas20 = document.getElementById('video-canvas20');
                 var url20 = 'ws://'+document.location.hostname+':443/';
-                var player20 = new JSMpeg.Player(url20, {canvas: canvas20, autoplay: false, pauseWhenHidden: false});
+//                var player20 = new JSMpeg.Player(url20, {canvas: canvas20, autoplay: false, pauseWhenHidden: false});
         </script>
 	
 <p style="text-align:center;"><a href="/player.php?20on" onclick="play20()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop20()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup20()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown20()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
