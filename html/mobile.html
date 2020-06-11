@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html><head><title>Primary Server - Location</title><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><style type="text/css">body {margin: 0; padding: 0;} .padleft {padding: 20px; float:left;} .padded {padding: 5px 20px 5px 20px}
 /* Style the button that is used to open and close the collapsible content */
@@ -25,7 +26,7 @@
 }
 </style>
 <script type="text/javascript" src="jsmpeg.min.js"></script>
-<script type="text/javascript">function playersstop() {player1.stop(); player2.stop(); player3.stop(); player4.stop(); player5.stop(); player6.stop(); player7.stop(); player8.stop();}</script>
+
 </head><body>
 <p align="center"><b>Primary/Secondary Server - Location</b></p>
 <div style="text-align:center" class="padded"><a href="/stat" target="_blank">Stats</a>   |||   <a href="/recording" target="_blank">Recordings</a>   |||   <a href="/settings.html" target="_blank">Settings</a>   |||   <a href="/config.php?proclist" target="_blank">Processes</a>   |||   <a href="/control.html" target="_blank">Desktop Version</a><br/>
@@ -42,13 +43,16 @@
         <script type="text/javascript">
                 var canvas1 = document.getElementById('video-canvas1');
                 var url1 = 'ws://'+document.location.hostname+':443/';
-                var player1 = new JSMpeg.Player(url1, {canvas: canvas1, autoplay: false, pauseWhenHidden: false});
-        </script>
+                var player1 = new JSMpeg.Player(url1, {canvas: canvas1, autoplay: false, pauseWhenHidden: false, videoBufferSize: 250*1024, audioBufferSize: 100*1024});
+       </script>
 	
-<p style="text-align:center;"><a href="/player.php?1on" onclick="play1()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream1" style="text-align:center;"><a href="/player.php?1on" onclick="play1()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play1() {
-playersstop();
+var stream1 = document.getElementById('stream1');
+var canvas1 = document.getElementById('video-canvas1');
+stream1.parentElement.insertBefore(canvas1,stream1);
+player1.stop();
 player1.play();
 player1.volume = 1;
 return false;
@@ -93,32 +97,16 @@ return false;
 
 <h2 class="padded">Stream 2</h2>
 <div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas2"></canvas>
-        <script type="text/javascript">
-                var canvas2 = document.getElementById('video-canvas2');
-                var url2 = 'ws://'+document.location.hostname+':443/';
-                var player2 = new JSMpeg.Player(url2, {canvas: canvas2, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?2on" onclick="play2()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop2()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup2()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown2()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream2" style="text-align:center;"><a href="/player.php?2on" onclick="play2()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play2() {
-playersstop();
-player2.play();
-player2.volume = 1;
-return false;
-}
-function stop2() {
-player2.stop();
-return false;
-}
-function volumeup2() {
-player2.volume = player2.volume + 0.2;
-return false;
-}
-function volumedown2() {
-player2.volume = player2.volume - 0.2;
-if (player2.volume < 0) {player2.volume = 0;}
+var stream1 = document.getElementById('stream2');
+var canvas1 = document.getElementById('video-canvas1');
+stream2.parentElement.insertBefore(canvas1,stream2);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -147,32 +135,16 @@ return false;
 
 <button class="collapsible"><h2 class="padded">Stream 3</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas3"></canvas>
-        <script type="text/javascript">
-                var canvas3 = document.getElementById('video-canvas3');
-                var url3 = 'ws://'+document.location.hostname+':443/';
-                var player3 = new JSMpeg.Player(url3, {canvas: canvas3, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?3on" onclick="play3()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop3()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup3()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown3()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream3" style="text-align:center;"><a href="/player.php?3on" onclick="play3()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play3() {
-playersstop();
-player3.play();
-player3.volume = 1;
-return false;
-}
-function stop3() {
-player3.stop();
-return false;
-}
-function volumeup3() {
-player3.volume = player3.volume + 0.2;
-return false;
-}
-function volumedown3() {
-player3.volume = player3.volume - 0.2;
-if (player3.volume < 0) {player3.volume = 0;}
+var stream3 = document.getElementById('stream3');
+var canvas1 = document.getElementById('video-canvas1');
+stream3.parentElement.insertBefore(canvas1,stream3);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -201,32 +173,16 @@ return false;
 
 <button class="collapsible"><h2 class="padded">Stream 4</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas4"></canvas>
-        <script type="text/javascript">
-                var canvas4 = document.getElementById('video-canvas4');
-                var url4 = 'ws://'+document.location.hostname+':443/';
-                var player4 = new JSMpeg.Player(url4, {canvas: canvas4, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?4on" onclick="play4()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop4()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup4()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown4()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream4" style="text-align:center;"><a href="/player.php?4on" onclick="play4()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play4() {
-playersstop();
-player4.play();
-player4.volume = 1;
-return false;
-}
-function stop4() {
-player4.stop();
-return false;
-}
-function volumeup4() {
-player4.volume = player4.volume + 0.2;
-return false;
-}
-function volumedown4() {
-player4.volume = player4.volume - 0.2;
-if (player4.volume < 0) {player4.volume = 0;}
+var stream4 = document.getElementById('stream4');
+var canvas1 = document.getElementById('video-canvas1');
+stream4.parentElement.insertBefore(canvas1,stream4);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -255,32 +211,16 @@ return false;
 
 <button class="collapsible"><h2 class="padded">Stream 5</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas5"></canvas>
-        <script type="text/javascript">
-                var canvas5 = document.getElementById('video-canvas5');
-                var url5 = 'ws://'+document.location.hostname+':443/';
-                var player5 = new JSMpeg.Player(url5, {canvas: canvas5, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?5on" onclick="play5()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop5()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup5()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown5()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream5" style="text-align:center;"><a href="/player.php?5on" onclick="play5()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play5() {
-playersstop();
-player5.play();
-player5.volume = 1;
-return false;
-}
-function stop5() {
-player5.stop();
-return false;
-}
-function volumeup5() {
-player5.volume = player5.volume + 0.2;
-return false;
-}
-function volumedown5() {
-player5.volume = player5.volume - 0.2;
-if (player5.volume < 0) {player5.volume = 0;}
+var stream5 = document.getElementById('stream5');
+var canvas1 = document.getElementById('video-canvas1');
+stream5.parentElement.insertBefore(canvas1,stream5);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -309,32 +249,16 @@ return false;
 
 <button class="collapsible"><h2 class="padded">Stream 6</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas6"></canvas>
-        <script type="text/javascript">
-                var canvas6 = document.getElementById('video-canvas6');
-                var url6 = 'ws://'+document.location.hostname+':443/';
-                var player6 = new JSMpeg.Player(url6, {canvas: canvas6, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?6on" onclick="play6()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop6()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup6()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown6()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream6" style="text-align:center;"><a href="/player.php?6on" onclick="play6()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play6() {
-playersstop();
-player6.play();
-player6.volume = 1;
-return false;
-}
-function stop6() {
-player6.stop();
-return false;
-}
-function volumeup6() {
-player6.volume = player6.volume + 0.2;
-return false;
-}
-function volumedown6() {
-player6.volume = player6.volume - 0.2;
-if (player6.volume < 0) {player6.volume = 0;}
+var stream6 = document.getElementById('stream6');
+var canvas1 = document.getElementById('video-canvas1');
+stream6.parentElement.insertBefore(canvas1,stream6);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -363,32 +287,16 @@ return false;
 
 <button class="collapsible"><h2 class="padded">Stream 7</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas7"></canvas>
-        <script type="text/javascript">
-                var canvas7 = document.getElementById('video-canvas7');
-                var url7 = 'ws://'+document.location.hostname+':443/';
-                var player7 = new JSMpeg.Player(url7, {canvas: canvas7, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?7on" onclick="play7()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop7()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup7()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown7()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream7" style="text-align:center;"><a href="/player.php?7on" onclick="play7()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play7() {
-playersstop();
-player7.play();
-player7.volume = 1;
-return false;
-}
-function stop7() {
-player7.stop();
-return false;
-}
-function volumeup7() {
-player7.volume = player7.volume + 0.2;
-return false;
-}
-function volumedown7() {
-player7.volume = player7.volume - 0.2;
-if (player7.volume < 0) {player7.volume = 0;}
+var stream7 = document.getElementById('stream7');
+var canvas1 = document.getElementById('video-canvas1');
+stream7.parentElement.insertBefore(canvas1,stream7);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -417,32 +325,16 @@ return false;
 
 <button class="collapsible"><h2 class="padded">Stream 8</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas8"></canvas>
-        <script type="text/javascript">
-                var canvas8 = document.getElementById('video-canvas8');
-                var url8 = 'ws://'+document.location.hostname+':443/';
-                var player8 = new JSMpeg.Player(url8, {canvas: canvas8, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?8on" onclick="play8()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop8()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup8()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown8()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream8" style="text-align:center;"><a href="/player.php?8on" onclick="play8()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play8() {
-playersstop();
-player8.play();
-player8.volume = 1;
-return false;
-}
-function stop8() {
-player8.stop();
-return false;
-}
-function volumeup8() {
-player8.volume = player8.volume + 0.2;
-return false;
-}
-function volumedown8() {
-player8.volume = player8.volume - 0.2;
-if (player8.volume < 0) {player8.volume = 0;}
+var stream8 = document.getElementById('stream8');
+var canvas1 = document.getElementById('video-canvas1');
+stream8.parentElement.insertBefore(canvas1,stream8);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -471,32 +363,16 @@ return false;
 
 <button class="collapsible"><h2 class="padded">Stream 9</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas9"></canvas>
-        <script type="text/javascript">
-                var canvas9 = document.getElementById('video-canvas9');
-                var url9 = 'ws://'+document.location.hostname+':443/';
- //               var player9 = new JSMpeg.Player(url9, {canvas: canvas9, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?9on" onclick="play9()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop9()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup9()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown9()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream9" style="text-align:center;"><a href="/player.php?9on" onclick="play9()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play9() {
-playersstop();
-player9.play();
-player9.volume = 1;
-return false;
-}
-function stop9() {
-player9.stop();
-return false;
-}
-function volumeup9() {
-player9.volume = player9.volume + 0.2;
-return false;
-}
-function volumedown9() {
-player9.volume = player9.volume - 0.2;
-if (player9.volume < 0) {player9.volume = 0;}
+var stream9 = document.getElementById('stream9');
+var canvas1 = document.getElementById('video-canvas1');
+stream9.parentElement.insertBefore(canvas1,stream9);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -525,32 +401,16 @@ return false;
 
 <button class="collapsible"><h2 class="padded">Stream 10</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas10"></canvas>
-        <script type="text/javascript">
-                var canvas10 = document.getElementById('video-canvas10');
-                var url10 = 'ws://'+document.location.hostname+':443/';
- //               var player10 = new JSMpeg.Player(url10, {canvas: canvas10, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?10on" onclick="play10()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop10()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup10()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown10()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream10" style="text-align:center;"><a href="/player.php?10on" onclick="play10()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play10() {
-playersstop();
-player10.play();
-player10.volume = 1;
-return false;
-}
-function stop10() {
-player10.stop();
-return false;
-}
-function volumeup10() {
-player10.volume = player10.volume + 0.2;
-return false;
-}
-function volumedown10() {
-player10.volume = player10.volume - 0.2;
-if (player10.volume < 0) {player10.volume = 0;}
+var stream10 = document.getElementById('stream10');
+var canvas1 = document.getElementById('video-canvas1');
+stream10.parentElement.insertBefore(canvas1,stream10);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -568,44 +428,27 @@ return false;
 <p>Out9: <a href="/10.php?1dest9on" target="_blank">On</a> ||| <a href="/10.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/10.php?1dest10on" target="_blank">On</a> ||| <a href="/10.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/10.php?1dest98on" target="_blank">On</a> ||| <a href="/10.php?1dest98off" target="_blank">Off</a></p>
-<p>Instagram:  <a href="/10.php?instagramon" target="_blank">On</a>   |||   <a href="/10.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/10.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/10.php?1dest99off" target="_blank">Turn off out99</a></p>
+<p>Instagram:  <a href="/10.php?instagramon" target="_blank">On</a>   |||   <a href="/10.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/10.php?1dest99on" target="_blank">Turn on out910</a>   |||   <a href="/10.php?1dest99off" target="_blank">Turn off out910</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/10.php?1superon" target="_blank">Insert</a>   |||   <a href="/10.php?1superoff" target="_blank">Remove</a></p>
 
 <form method="post" target="_blank" action="/10.php?1vol"><p><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></p></form>
 
 <p><b>Choose Input:</b> <a href="/10.php?1main" target="_blank">Main</a>   |||   <a href="/10.php?1back" target="_blank">Backup</a>   |||   <a href="/10.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/10.php?1video" target="_blank">Ad Video</a>   |||   <a href="/10.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/10.php?1off" target="_blank">Turn off</a></p></div></div>
-
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 11</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas11"></canvas>
-        <script type="text/javascript">
-                var canvas11 = document.getElementById('video-canvas11');
-                var url11 = 'ws://'+document.location.hostname+':443/';
- //               var player11 = new JSMpeg.Player(url11, {canvas: canvas11, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?11on" onclick="play11()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop11()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup11()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown11()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream11" style="text-align:center;"><a href="/player.php?11on" onclick="play11()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play11() {
-playersstop();
-player11.play();
-player11.volume = 1;
-return false;
-}
-function stop11() {
-player11.stop();
-return false;
-}
-function volumeup11() {
-player11.volume = player11.volume + 0.2;
-return false;
-}
-function volumedown11() {
-player11.volume = player11.volume - 0.2;
-if (player11.volume < 0) {player11.volume = 0;}
+var stream11 = document.getElementById('stream11');
+var canvas1 = document.getElementById('video-canvas1');
+stream11.parentElement.insertBefore(canvas1,stream11);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -623,44 +466,27 @@ return false;
 <p>Out9: <a href="/11.php?1dest9on" target="_blank">On</a> ||| <a href="/11.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/11.php?1dest10on" target="_blank">On</a> ||| <a href="/11.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/11.php?1dest98on" target="_blank">On</a> ||| <a href="/11.php?1dest98off" target="_blank">Off</a></p>
-<p>Instagram:  <a href="/11.php?instagramon" target="_blank">On</a>   |||   <a href="/11.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/11.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/11.php?1dest99off" target="_blank">Turn off out99</a></p>
+<p>Instagram:  <a href="/11.php?instagramon" target="_blank">On</a>   |||   <a href="/11.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/11.php?1dest99on" target="_blank">Turn on out911</a>   |||   <a href="/11.php?1dest99off" target="_blank">Turn off out911</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/11.php?1superon" target="_blank">Insert</a>   |||   <a href="/11.php?1superoff" target="_blank">Remove</a></p>
 
 <form method="post" target="_blank" action="/11.php?1vol"><p><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></p></form>
 
 <p><b>Choose Input:</b> <a href="/11.php?1main" target="_blank">Main</a>   |||   <a href="/11.php?1back" target="_blank">Backup</a>   |||   <a href="/11.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/11.php?1video" target="_blank">Ad Video</a>   |||   <a href="/11.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/11.php?1off" target="_blank">Turn off</a></p></div></div>
-
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 12</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas12"></canvas>
-        <script type="text/javascript">
-                var canvas12 = document.getElementById('video-canvas12');
-                var url12 = 'ws://'+document.location.hostname+':443/';
- //               var player12 = new JSMpeg.Player(url12, {canvas: canvas12, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?12on" onclick="play12()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop12()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup12()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown12()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream12" style="text-align:center;"><a href="/player.php?12on" onclick="play12()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play12() {
-playersstop();
-player12.play();
-player12.volume = 1;
-return false;
-}
-function stop12() {
-player12.stop();
-return false;
-}
-function volumeup12() {
-player12.volume = player12.volume + 0.2;
-return false;
-}
-function volumedown12() {
-player12.volume = player12.volume - 0.2;
-if (player12.volume < 0) {player12.volume = 0;}
+var stream12 = document.getElementById('stream12');
+var canvas1 = document.getElementById('video-canvas1');
+stream12.parentElement.insertBefore(canvas1,stream12);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -678,44 +504,27 @@ return false;
 <p>Out9: <a href="/12.php?1dest9on" target="_blank">On</a> ||| <a href="/12.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/12.php?1dest10on" target="_blank">On</a> ||| <a href="/12.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/12.php?1dest98on" target="_blank">On</a> ||| <a href="/12.php?1dest98off" target="_blank">Off</a></p>
-<p>Instagram:  <a href="/12.php?instagramon" target="_blank">On</a>   |||   <a href="/12.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/12.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/12.php?1dest99off" target="_blank">Turn off out99</a></p>
+<p>Instagram:  <a href="/12.php?instagramon" target="_blank">On</a>   |||   <a href="/12.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/12.php?1dest99on" target="_blank">Turn on out912</a>   |||   <a href="/12.php?1dest99off" target="_blank">Turn off out912</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/12.php?1superon" target="_blank">Insert</a>   |||   <a href="/12.php?1superoff" target="_blank">Remove</a></p>
 
 <form method="post" target="_blank" action="/12.php?1vol"><p><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></p></form>
 
 <p><b>Choose Input:</b> <a href="/12.php?1main" target="_blank">Main</a>   |||   <a href="/12.php?1back" target="_blank">Backup</a>   |||   <a href="/12.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/12.php?1video" target="_blank">Ad Video</a>   |||   <a href="/12.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/12.php?1off" target="_blank">Turn off</a></p></div></div>
-
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 13</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas13"></canvas>
-        <script type="text/javascript">
-                var canvas13 = document.getElementById('video-canvas13');
-                var url13 = 'ws://'+document.location.hostname+':443/';
- //               var player13 = new JSMpeg.Player(url13, {canvas: canvas13, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?13on" onclick="play13()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop13()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup13()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown13()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream13" style="text-align:center;"><a href="/player.php?13on" onclick="play13()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play13() {
-playersstop();
-player13.play();
-player13.volume = 1;
-return false;
-}
-function stop13() {
-player13.stop();
-return false;
-}
-function volumeup13() {
-player13.volume = player13.volume + 0.2;
-return false;
-}
-function volumedown13() {
-player13.volume = player13.volume - 0.2;
-if (player13.volume < 0) {player13.volume = 0;}
+var stream13 = document.getElementById('stream13');
+var canvas1 = document.getElementById('video-canvas1');
+stream13.parentElement.insertBefore(canvas1,stream13);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -733,45 +542,27 @@ return false;
 <p>Out9: <a href="/13.php?1dest9on" target="_blank">On</a> ||| <a href="/13.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/13.php?1dest10on" target="_blank">On</a> ||| <a href="/13.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/13.php?1dest98on" target="_blank">On</a> ||| <a href="/13.php?1dest98off" target="_blank">Off</a></p>
-<p>Instagram:  <a href="/13.php?instagramon" target="_blank">On</a>   |||   <a href="/13.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/13.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/13.php?1dest99off" target="_blank">Turn off out99</a></p>
+<p>Instagram:  <a href="/13.php?instagramon" target="_blank">On</a>   |||   <a href="/13.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/13.php?1dest99on" target="_blank">Turn on out913</a>   |||   <a href="/13.php?1dest99off" target="_blank">Turn off out913</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/13.php?1superon" target="_blank">Insert</a>   |||   <a href="/13.php?1superoff" target="_blank">Remove</a></p>
 
 <form method="post" target="_blank" action="/13.php?1vol"><p><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></p></form>
 
 <p><b>Choose Input:</b> <a href="/13.php?1main" target="_blank">Main</a>   |||   <a href="/13.php?1back" target="_blank">Backup</a>   |||   <a href="/13.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/13.php?1video" target="_blank">Ad Video</a>   |||   <a href="/13.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/13.php?1off" target="_blank">Turn off</a></p></div></div>
-
 <hr>
-
 
 <button class="collapsible"><h2 class="padded">Stream 14</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas14"></canvas>
-        <script type="text/javascript">
-                var canvas14 = document.getElementById('video-canvas14');
-                var url14 = 'ws://'+document.location.hostname+':443/';
- //               var player14 = new JSMpeg.Player(url14, {canvas: canvas14, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?14on" onclick="play14()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop14()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup14()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown14()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream14" style="text-align:center;"><a href="/player.php?14on" onclick="play14()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play14() {
-playersstop();
-player14.play();
-player14.volume = 1;
-return false;
-}
-function stop14() {
-player14.stop();
-return false;
-}
-function volumeup14() {
-player14.volume = player14.volume + 0.2;
-return false;
-}
-function volumedown14() {
-player14.volume = player14.volume - 0.2;
-if (player14.volume < 0) {player14.volume = 0;}
+var stream14 = document.getElementById('stream14');
+var canvas1 = document.getElementById('video-canvas1');
+stream14.parentElement.insertBefore(canvas1,stream14);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -789,45 +580,27 @@ return false;
 <p>Out9: <a href="/14.php?1dest9on" target="_blank">On</a> ||| <a href="/14.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/14.php?1dest10on" target="_blank">On</a> ||| <a href="/14.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/14.php?1dest98on" target="_blank">On</a> ||| <a href="/14.php?1dest98off" target="_blank">Off</a></p>
-<p>Instagram:  <a href="/14.php?instagramon" target="_blank">On</a>   |||   <a href="/14.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/14.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/14.php?1dest99off" target="_blank">Turn off out99</a></p>
+<p>Instagram:  <a href="/14.php?instagramon" target="_blank">On</a>   |||   <a href="/14.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/14.php?1dest99on" target="_blank">Turn on out914</a>   |||   <a href="/14.php?1dest99off" target="_blank">Turn off out914</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/14.php?1superon" target="_blank">Insert</a>   |||   <a href="/14.php?1superoff" target="_blank">Remove</a></p>
 
 <form method="post" target="_blank" action="/14.php?1vol"><p><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></p></form>
 
 <p><b>Choose Input:</b> <a href="/14.php?1main" target="_blank">Main</a>   |||   <a href="/14.php?1back" target="_blank">Backup</a>   |||   <a href="/14.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/14.php?1video" target="_blank">Ad Video</a>   |||   <a href="/14.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/14.php?1off" target="_blank">Turn off</a></p></div></div>
-
 <hr>
-
 
 <button class="collapsible"><h2 class="padded">Stream 15</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas15"></canvas>
-        <script type="text/javascript">
-                var canvas15 = document.getElementById('video-canvas15');
-                var url15 = 'ws://'+document.location.hostname+':443/';
- //               var player15 = new JSMpeg.Player(url15, {canvas: canvas15, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?15on" onclick="play15()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop15()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup15()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown15()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream15" style="text-align:center;"><a href="/player.php?15on" onclick="play15()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play15() {
-playersstop();
-player15.play();
-player15.volume = 1;
-return false;
-}
-function stop15() {
-player15.stop();
-return false;
-}
-function volumeup15() {
-player15.volume = player15.volume + 0.2;
-return false;
-}
-function volumedown15() {
-player15.volume = player15.volume - 0.2;
-if (player15.volume < 0) {player15.volume = 0;}
+var stream15 = document.getElementById('stream15');
+var canvas1 = document.getElementById('video-canvas1');
+stream15.parentElement.insertBefore(canvas1,stream15);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -845,45 +618,27 @@ return false;
 <p>Out9: <a href="/15.php?1dest9on" target="_blank">On</a> ||| <a href="/15.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/15.php?1dest10on" target="_blank">On</a> ||| <a href="/15.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/15.php?1dest98on" target="_blank">On</a> ||| <a href="/15.php?1dest98off" target="_blank">Off</a></p>
-<p>Instagram:  <a href="/15.php?instagramon" target="_blank">On</a>   |||   <a href="/15.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/15.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/15.php?1dest99off" target="_blank">Turn off out99</a></p>
+<p>Instagram:  <a href="/15.php?instagramon" target="_blank">On</a>   |||   <a href="/15.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/15.php?1dest99on" target="_blank">Turn on out915</a>   |||   <a href="/15.php?1dest99off" target="_blank">Turn off out915</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/15.php?1superon" target="_blank">Insert</a>   |||   <a href="/15.php?1superoff" target="_blank">Remove</a></p>
 
 <form method="post" target="_blank" action="/15.php?1vol"><p><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></p></form>
 
 <p><b>Choose Input:</b> <a href="/15.php?1main" target="_blank">Main</a>   |||   <a href="/15.php?1back" target="_blank">Backup</a>   |||   <a href="/15.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/15.php?1video" target="_blank">Ad Video</a>   |||   <a href="/15.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/15.php?1off" target="_blank">Turn off</a></p></div></div>
-
-
 <hr>
 
 <button class="collapsible"><h2 class="padded">Stream 16</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas16"></canvas>
-        <script type="text/javascript">
-                var canvas16 = document.getElementById('video-canvas16');
-                var url16 = 'ws://'+document.location.hostname+':443/';
- //              var player16 = new JSMpeg.Player(url16, {canvas: canvas16, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?16on" onclick="play16()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop16()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup16()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown16()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream16" style="text-align:center;"><a href="/player.php?16on" onclick="play16()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play16() {
-playersstop();
-player16.play();
-player16.volume = 1;
-return false;
-}
-function stop16() {
-player16.stop();
-return false;
-}
-function volumeup16() {
-player16.volume = player16.volume + 0.2;
-return false;
-}
-function volumedown16() {
-player16.volume = player16.volume - 0.2;
-if (player16.volume < 0) {player16.volume = 0;}
+var stream16 = document.getElementById('stream16');
+var canvas1 = document.getElementById('video-canvas1');
+stream16.parentElement.insertBefore(canvas1,stream16);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -901,46 +656,27 @@ return false;
 <p>Out9: <a href="/16.php?1dest9on" target="_blank">On</a> ||| <a href="/16.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/16.php?1dest10on" target="_blank">On</a> ||| <a href="/16.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/16.php?1dest98on" target="_blank">On</a> ||| <a href="/16.php?1dest98off" target="_blank">Off</a></p>
-<p>Instagram:  <a href="/16.php?instagramon" target="_blank">On</a>   |||   <a href="/16.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/16.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/16.php?1dest99off" target="_blank">Turn off out99</a></p>
+<p>Instagram:  <a href="/16.php?instagramon" target="_blank">On</a>   |||   <a href="/16.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/16.php?1dest99on" target="_blank">Turn on out916</a>   |||   <a href="/16.php?1dest99off" target="_blank">Turn off out916</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/16.php?1superon" target="_blank">Insert</a>   |||   <a href="/16.php?1superoff" target="_blank">Remove</a></p>
 
 <form method="post" target="_blank" action="/16.php?1vol"><p><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></p></form>
 
 <p><b>Choose Input:</b> <a href="/16.php?1main" target="_blank">Main</a>   |||   <a href="/16.php?1back" target="_blank">Backup</a>   |||   <a href="/16.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/16.php?1video" target="_blank">Ad Video</a>   |||   <a href="/16.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/16.php?1off" target="_blank">Turn off</a></p></div></div>
-
 <hr>
-
-
 
 <button class="collapsible"><h2 class="padded">Stream 17</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas17"></canvas>
-        <script type="text/javascript">
-                var canvas17 = document.getElementById('video-canvas17');
-                var url17 = 'ws://'+document.location.hostname+':443/';
- //               var player17 = new JSMpeg.Player(url17, {canvas: canvas17, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?17on" onclick="play17()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop17()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup17()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown17()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream17" style="text-align:center;"><a href="/player.php?17on" onclick="play17()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play17() {
-playersstop();
-player17.play();
-player17.volume = 1;
-return false;
-}
-function stop17() {
-player17.stop();
-return false;
-}
-function volumeup17() {
-player17.volume = player17.volume + 0.2;
-return false;
-}
-function volumedown17() {
-player17.volume = player17.volume - 0.2;
-if (player17.volume < 0) {player17.volume = 0;}
+var stream17 = document.getElementById('stream17');
+var canvas1 = document.getElementById('video-canvas1');
+stream17.parentElement.insertBefore(canvas1,stream17);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -958,46 +694,27 @@ return false;
 <p>Out9: <a href="/17.php?1dest9on" target="_blank">On</a> ||| <a href="/17.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/17.php?1dest10on" target="_blank">On</a> ||| <a href="/17.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/17.php?1dest98on" target="_blank">On</a> ||| <a href="/17.php?1dest98off" target="_blank">Off</a></p>
-<p>Instagram:  <a href="/17.php?instagramon" target="_blank">On</a>   |||   <a href="/17.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/17.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/17.php?1dest99off" target="_blank">Turn off out99</a></p>
+<p>Instagram:  <a href="/17.php?instagramon" target="_blank">On</a>   |||   <a href="/17.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/17.php?1dest99on" target="_blank">Turn on out917</a>   |||   <a href="/17.php?1dest99off" target="_blank">Turn off out917</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/17.php?1superon" target="_blank">Insert</a>   |||   <a href="/17.php?1superoff" target="_blank">Remove</a></p>
 
 <form method="post" target="_blank" action="/17.php?1vol"><p><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></p></form>
 
 <p><b>Choose Input:</b> <a href="/17.php?1main" target="_blank">Main</a>   |||   <a href="/17.php?1back" target="_blank">Backup</a>   |||   <a href="/17.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/17.php?1video" target="_blank">Ad Video</a>   |||   <a href="/17.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/17.php?1off" target="_blank">Turn off</a></p></div></div>
-
 <hr>
-
-
 
 <button class="collapsible"><h2 class="padded">Stream 18</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas18"></canvas>
-        <script type="text/javascript">
-                var canvas18 = document.getElementById('video-canvas18');
-                var url18 = 'ws://'+document.location.hostname+':443/';
- //               var player18 = new JSMpeg.Player(url18, {canvas: canvas18, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?18on" onclick="play18()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop18()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup18()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown18()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream18" style="text-align:center;"><a href="/player.php?18on" onclick="play18()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play18() {
-playersstop();
-player18.play();
-player18.volume = 1;
-return false;
-}
-function stop18() {
-player18.stop();
-return false;
-}
-function volumeup18() {
-player18.volume = player18.volume + 0.2;
-return false;
-}
-function volumedown18() {
-player18.volume = player18.volume - 0.2;
-if (player18.volume < 0) {player18.volume = 0;}
+var stream18 = document.getElementById('stream18');
+var canvas1 = document.getElementById('video-canvas1');
+stream18.parentElement.insertBefore(canvas1,stream18);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -1015,46 +732,27 @@ return false;
 <p>Out9: <a href="/18.php?1dest9on" target="_blank">On</a> ||| <a href="/18.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/18.php?1dest10on" target="_blank">On</a> ||| <a href="/18.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/18.php?1dest98on" target="_blank">On</a> ||| <a href="/18.php?1dest98off" target="_blank">Off</a></p>
-<p>Instagram:  <a href="/18.php?instagramon" target="_blank">On</a>   |||   <a href="/18.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/18.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/18.php?1dest99off" target="_blank">Turn off out99</a></p>
+<p>Instagram:  <a href="/18.php?instagramon" target="_blank">On</a>   |||   <a href="/18.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/18.php?1dest99on" target="_blank">Turn on out918</a>   |||   <a href="/18.php?1dest99off" target="_blank">Turn off out918</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/18.php?1superon" target="_blank">Insert</a>   |||   <a href="/18.php?1superoff" target="_blank">Remove</a></p>
 
 <form method="post" target="_blank" action="/18.php?1vol"><p><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></p></form>
 
 <p><b>Choose Input:</b> <a href="/18.php?1main" target="_blank">Main</a>   |||   <a href="/18.php?1back" target="_blank">Backup</a>   |||   <a href="/18.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/18.php?1video" target="_blank">Ad Video</a>   |||   <a href="/18.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/18.php?1off" target="_blank">Turn off</a></p></div></div>
-
 <hr>
-
-
 
 <button class="collapsible"><h2 class="padded">Stream 19</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas19"></canvas>
-        <script type="text/javascript">
-                var canvas19 = document.getElementById('video-canvas19');
-                var url19 = 'ws://'+document.location.hostname+':443/';
-//                var player19 = new JSMpeg.Player(url19, {canvas: canvas19, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?19on" onclick="play19()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop19()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup19()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown19()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream19" style="text-align:center;"><a href="/player.php?19on" onclick="play19()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play19() {
-playersstop();
-player19.play();
-player19.volume = 1;
-return false;
-}
-function stop19() {
-player19.stop();
-return false;
-}
-function volumeup19() {
-player19.volume = player19.volume + 0.2;
-return false;
-}
-function volumedown19() {
-player19.volume = player19.volume - 0.2;
-if (player19.volume < 0) {player19.volume = 0;}
+var stream19 = document.getElementById('stream19');
+var canvas1 = document.getElementById('video-canvas1');
+stream19.parentElement.insertBefore(canvas1,stream19);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -1072,46 +770,27 @@ return false;
 <p>Out9: <a href="/19.php?1dest9on" target="_blank">On</a> ||| <a href="/19.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/19.php?1dest10on" target="_blank">On</a> ||| <a href="/19.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/19.php?1dest98on" target="_blank">On</a> ||| <a href="/19.php?1dest98off" target="_blank">Off</a></p>
-<p>Instagram:  <a href="/19.php?instagramon" target="_blank">On</a>   |||   <a href="/19.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/19.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/19.php?1dest99off" target="_blank">Turn off out99</a></p>
+<p>Instagram:  <a href="/19.php?instagramon" target="_blank">On</a>   |||   <a href="/19.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/19.php?1dest99on" target="_blank">Turn on out919</a>   |||   <a href="/19.php?1dest99off" target="_blank">Turn off out919</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/19.php?1superon" target="_blank">Insert</a>   |||   <a href="/19.php?1superoff" target="_blank">Remove</a></p>
 
 <form method="post" target="_blank" action="/19.php?1vol"><p><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></p></form>
 
 <p><b>Choose Input:</b> <a href="/19.php?1main" target="_blank">Main</a>   |||   <a href="/19.php?1back" target="_blank">Backup</a>   |||   <a href="/19.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/19.php?1video" target="_blank">Ad Video</a>   |||   <a href="/19.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/19.php?1off" target="_blank">Turn off</a></p></div></div>
-
 <hr>
-
-
 
 <button class="collapsible"><h2 class="padded">Stream 20</h2></button>
 <div class="content"><div class="padleft jsmpeg">
-<canvas width="320" height="180" id="video-canvas20"></canvas>
-        <script type="text/javascript">
-                var canvas20 = document.getElementById('video-canvas20');
-                var url20 = 'ws://'+document.location.hostname+':443/';
-//                var player20 = new JSMpeg.Player(url20, {canvas: canvas20, autoplay: false, pauseWhenHidden: false});
-        </script>
 	
-<p style="text-align:center;"><a href="/player.php?20on" onclick="play20()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop20()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup20()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown20()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
+<p id="stream20" style="text-align:center;"><a href="/player.php?20on" onclick="play20()" target="_blank"><i style="font-size:36px" class="material-icons">play_arrow</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="stop1()"><i style="font-size:36px" class="material-icons">stop</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumeup1()"><i style="font-size:36px" class="material-icons">volume_up</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="volumedown1()"><i style="font-size:36px" class="material-icons">volume_down</i></a></p>
 <script type="text/javascript">
 function play20() {
-playersstop();
-player20.play();
-player20.volume = 1;
-return false;
-}
-function stop20() {
-player20.stop();
-return false;
-}
-function volumeup20() {
-player20.volume = player20.volume + 0.2;
-return false;
-}
-function volumedown20() {
-player20.volume = player20.volume - 0.2;
-if (player20.volume < 0) {player20.volume = 0;}
+var stream20 = document.getElementById('stream20');
+var canvas1 = document.getElementById('video-canvas1');
+stream20.parentElement.insertBefore(canvas1,stream20);
+player1.stop();
+player1.play();
+player1.volume = 1;
 return false;
 }
 </script>
@@ -1129,17 +808,14 @@ return false;
 <p>Out9: <a href="/20.php?1dest9on" target="_blank">On</a> ||| <a href="/20.php?1dest9off" target="_blank">Off</a></p>
 <p>Out10: <a href="/20.php?1dest10on" target="_blank">On</a> ||| <a href="/20.php?1dest10off" target="_blank">Off</a></p>
 <p>Record: <a href="/20.php?1dest98on" target="_blank">On</a> ||| <a href="/20.php?1dest98off" target="_blank">Off</a></p>
-<p>Instagram:  <a href="/20.php?instagramon" target="_blank">On</a>   |||   <a href="/20.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/20.php?1dest99on" target="_blank">Turn on out99</a>   |||   <a href="/20.php?1dest99off" target="_blank">Turn off out99</a></p>
+<p>Instagram:  <a href="/20.php?instagramon" target="_blank">On</a>   |||   <a href="/20.php?instagramoff" target="_blank">Off</a>   ||| For Emergencies --> |||   <a href="/20.php?1dest99on" target="_blank">Turn on out920</a>   |||   <a href="/20.php?1dest99off" target="_blank">Turn off out920</a></p>
 
 <p><b>Lower Thirds:</b> <a href="/20.php?1superon" target="_blank">Insert</a>   |||   <a href="/20.php?1superoff" target="_blank">Remove</a></p>
 
 <form method="post" target="_blank" action="/20.php?1vol"><p><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1"/><input type="submit" value="Change" /></p></form>
 
 <p><b>Choose Input:</b> <a href="/20.php?1main" target="_blank">Main</a>   |||   <a href="/20.php?1back" target="_blank">Backup</a>   |||   <a href="/20.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/20.php?1video" target="_blank">Ad Video</a>   |||   <a href="/20.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/20.php?1off" target="_blank">Turn off</a></p></div></div>
-
 <hr>
-
-
 <br/><br/><br/><br/><br/><br/><br/><br/>
 <script>var coll = document.getElementsByClassName("collapsible");
 var i;
