@@ -22,7 +22,7 @@ fi
 
 while true
 do
-ffmpeg -i rtmp://127.0.0.1/main/$streamid -f mpegts -acodec mp2 -ar 44100 -ac 1 -b:a 96k -vcodec mpeg1video -r 25 -bf 0 -s 320x180 -b:v 200k -muxdelay 0.001 http://localhost:8031/supersecret
+ffmpeg -i rtmp://127.0.0.1/distribute/$streamid -f mpegts -acodec mp2 -ar 44100 -ac 1 -b:a 96k -vcodec mpeg1video -r 25 -bf 0 -s 320x180 -b:v 200k -muxdelay 0.001 http://localhost:8031/supersecret
 echo "Restarting ffmpeg..."
 sleep .2
 done
