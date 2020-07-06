@@ -55,7 +55,8 @@ ffmpegtsparam=$oldffmpegparam
 ;;
 
 *)
-inputencodeparam="-i /usr/local/nginx/scripts/images/$lowerthird -af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2,aresample=44100:async=1 -c:a aac -filter_complex zmq=bind_address=tcp\\\://127.0.0.1\\\:"$videoport",overlay=0:H -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -s $inputres -b:v $inputbitrate -maxrate $inputbitrate -minrate $inputbitrate -bufsize $inputbitrate -profile:v high -vsync 1 -f flv -strict -2";
+#inputencodeparam="-i /usr/local/nginx/scripts/images/$lowerthird -af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2,aresample=44100:async=1 -c:a aac -b:a 128k -filter_complex zmq=bind_address=tcp\\\://127.0.0.1\\\:"$videoport",overlay=0:H -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -s $inputres -b:v $inputbitrate -maxrate $inputbitrate -minrate $inputbitrate -bufsize $inputbitrate -profile:v high -vsync 1 -f flv -strict -2";
+inputencodeparam="-f image2 -loop 1 -i /usr/local/nginx/scripts/images/$lowerthird -af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2,aresample=44100:async=1 -c:a aac -b:a 128k -filter_complex overlay=0:H-h -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -s $inputres -b:v $inputbitrate -maxrate $inputbitrate -minrate $inputbitrate -bufsize $inputbitrate -profile:v high -vsync 1 -f flv -strict -2";
 esac
 
 
@@ -84,16 +85,24 @@ sleep 0.5
 
 super)
 case $2 in
-off) 
-echo Parsed_overlay_1 y H | /usr/local/bin/tools/zmqsend -b tcp://127.0.0.1:$videoport
-sleep 0.5
-;;
-on)
-echo Parsed_overlay_1 y H-h | /usr/local/bin/tools/zmqsend -b tcp://127.0.0.1:$videoport
-sleep 0.5
+off)
+sudo cp /usr/local/nginx/scripts/images/lowerthird/$lowerthird /usr/local/nginx/scripts/images/$lowerthird
+echo $lowerthird " Removed"
+#echo Parsed_overlay_1 y H-h | /usr/local/bin/tools/zmqsend -b tcp://127.0.0.1:$videoport
+sleep 0.2
 ;;
 *)
-echo "Usage is on.sh super on/off"
+lowerthirdid=$id"lowerthird"$2".png"
+if test -f "/usr/local/nginx/scripts/images/lowerthird/"$lowerthirdid; then
+sudo cp /usr/local/nginx/scripts/images/lowerthird/$lowerthirdid /usr/local/nginx/scripts/images/$lowerthird
+echo $lowerthirdid " added"
+
+else
+echo $lowerthirdid " does not exist. Please upload it."
+fi
+
+#echo Parsed_overlay_1 y H-h | /usr/local/bin/tools/zmqsend -b tcp://127.0.0.1:$videoport
+sleep 0.2
 esac
 ;;
 

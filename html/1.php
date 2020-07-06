@@ -50,8 +50,17 @@ $vol = $_POST['vol_level'];
 $vol_level = 2*$vol;
 $output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id volume $vol_level");echo $output;}
 
-if (isset($_GET['1superon'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super on");echo $output;}
-if (isset($_GET['1superoff'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super off");echo $output;}
+#if (isset($_GET['1superon'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super on");echo $output;}
+#if (isset($_GET['1superoff'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super off");echo $output;}
 
+if (isset($_GET['1super1on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super 1");echo $output;}
+if (isset($_GET['1super2on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super 2");echo $output;}
+if (isset($_GET['1super3on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super 3");echo $output;}
+if (isset($_GET['1super4on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super 4");echo $output;}
+if (isset($_GET['1super5on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super 5");echo $output;}
+if (isset($_GET['1super6on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super 6");echo $output;}
+if (isset($_GET['1super7on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super 7");echo $output;}
+if (isset($_GET['1super8on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super 8");echo $output;}
+if (isset($_GET['1superoff'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/$id super off");echo $output;}
 ?>
 

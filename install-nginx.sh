@@ -43,11 +43,14 @@ sudo wget -O 1lowerthird.png https://www.dropbox.com/s/25xvndu4hzrtvom/1lowerthi
 sudo wget -O 1video.mp4 https://www.dropbox.com/s/il7qa994iv9r7gu/1video.mp4?dl=0
 sudo wget -O 1holding.mp4 https://www.dropbox.com/s/vnphorklxm1xopz/1holding.mp4?dl=0
 sudo wget -O 1failover.mp4 https://www.dropbox.com/s/b595qj68l3t5g6f/1failover.mp4?dl=0
+sudo mkdir lowerthird
 
 #Shift files to right locations
 sudo chgrp -R www-data ~/MLS
 sudo chmod g+rw -R ~/MLS
 sudo cp -R ~/MLS/scripts /usr/local/nginx
+sudo chmod +x -R /usr/local/nginx/scripts
+sudo mkdir /usr/local/nginx/scripts
 sudo chmod +x -R /usr/local/nginx/scripts
 sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/2.sh
 sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/3.sh
@@ -90,6 +93,7 @@ sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts
 sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/18lowerthird.png
 sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/19lowerthird.png
 sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/20lowerthird.png
+sudo cp /usr/local/nginx/scripts/images/*lowerthird.png /usr/local/nginx/scripts/images/lowerthird
 sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/2video.mp4
 sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/3video.mp4
 sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/4video.mp4
