@@ -12,7 +12,7 @@ Don't use Ubuntu minimal. Use the regular 16.04 image
 4. To the bottom of the file that opens up, add: www-data ALL=NOPASSWD: /bin/bash, /bin/ls
 5. Ctrl+o to save the file, Ctrl+X to exit the notepad editor. This process is needed to give the NGINX server access to the shell scripting
 6. Recommended additional step: You can choose to clear all server logs on instance boot. This will ensure hardisk space isn't consumed too much. It's optional. The logs aren't too big, but they are unlikely to be of much use, so might as well clear them. On the terminal, type: sudo nano /etc/init.d/nginxrestart.sh
-7. In the editor, above the line "sudo /usr/local/nginx/sbin/nginx -s stop; sudo /usr/local/nginx/sbin/nginx", add the line: sudo rm /usr/local/nginx/logs/*.log
+7. In the editor, above the line "sudo /usr/local/nginx/sbin/nginx -s stop; sudo /usr/local/nginx/sbin/nginx", comment the line (Add # before it): sudo rm /usr/local/nginx/logs/*.log
 8. Ctrl+o to save the file, Ctrl+X to exit the notepad editor.
 9. Installation is complete
 
