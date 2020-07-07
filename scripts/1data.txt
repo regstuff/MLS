@@ -1,3 +1,4 @@
+***DESTINATION CONFIG***
 __stream1__out1__ rtmp://anyserver.com source channel_name
 __stream1__out2__ rtmp://anyserver.com source channel_name
 __stream1__out3__ rtmp://anyserver.com source channel_name
@@ -231,3 +232,28 @@ __stream14__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Inst
 __stream15__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram15
 __stream16__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram16
 
+***STREAM CONFIG***
+__stream1__ both 1080p
+__stream2__ both 1080p
+__stream3__ both 720p
+__stream4__ both 720p
+__stream5__ both 720p
+__stream6__ both 720p
+__stream7__ both 720p
+__stream8__ both 720p
+__stream9__ both 720p
+__stream10__ both 720p
+__stream11__ both 720p
+__stream12__ both 720p
+__stream13__ both 720p
+__stream14__ both 720p
+__stream15__ both 720p
+__stream16__ both 720p
+__stream17__ both 720p
+__stream18__ both 720p
+__stream19__ both 720p
+__stream20__ both 720p
+
+***AUDIO CONFIG***
+
+***NEXT CONFIG***
