@@ -1,7 +1,9 @@
 <?php
 if (isset($_GET['streamlist'])) {
-$output = file_get_contents( "../scripts/streamconfig.txt" ); // get the contents, and echo it out.
+$output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh streamlist");
 echo "<pre>$output</pre>";
+#$output = file_get_contents( "../scripts/streamconfig.txt" ); // get the contents, and echo it out.
+#echo "<pre>$output</pre>";
 }
 
 if (isset($_GET['streamadd'])) {
@@ -14,6 +16,31 @@ echo "<br><b>Stream Id: </b> $stream_id";
 echo "<br><b>Stream Reolution: </b> $stream_res";
 echo "<br>";
 $output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh streamconfig \"$stream_id\" \"$encodeparam\" $stream_res");
+echo $output;
+}
+
+if (isset($_GET['audioadd'])) {
+$audioparam = $_POST['audioparam'];
+$stream_id = $_POST['stream_id'];
+$channel1 = $_POST['channel_1'];
+$channel2 = $_POST['channel_2'];
+$rtmpparam = $_POST['rtmpparam'];
+echo "<h2>You entered the following information:</h2>";
+echo "<b>Channel Layout: </b> $audioparam";
+echo "<br><b>Stream Id: </b> $stream_id";
+echo "<br><b>Channel 1: </b> $channel1";
+echo "<br><b>Channel 2: </b> $channel2";
+echo "<br><b>Destination: </b> $rtmpparam";
+echo "<br>";
+$output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh audioconfig \"$stream_id\" \"$audioparam\" \"$channel1\" \"$channel2\" $rtmpparam");
+echo $output;
+}
+
+if (isset($_GET['audiopreset'])) {
+$audiopreset = $_POST['audiopreset'];
+echo "<b>You loaded </b> $audiopreset";
+echo "<br>";
+$output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh audiopreset $audiopreset");
 echo $output;
 }
 
@@ -34,6 +61,13 @@ if (isset($_GET['remap'])) {
 $channel = $_POST['channel_no'];
 $output = exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh remap $channel");echo $output;}
 
+if (isset($_GET['audiolist'])) {
+$output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh audiolist");
+echo "<pre>$output</pre>";
+#$output = file_get_contents( "../scripts/streamconfig.txt" ); // get the contents, and echo it out.
+#echo "<pre>$output</pre>";
+}
+
 if (isset($_GET['remapoff'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh remap off");echo $output;}
 
 if (isset($_GET['srtaccept'])) {
@@ -42,8 +76,10 @@ $output = exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh srtaccept on")
 if (isset($_GET['srtacceptoff'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh srtaccept off");echo $output;}
 
 if (isset($_GET['destlist'])) {
-$output = file_get_contents( "../scripts/1data.txt" ); // get the contents, and echo it out.
+$output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh destlist");
 echo "<pre>$output</pre>";
+#$output = file_get_contents( "../scripts/1data.txt" ); // get the contents, and echo it out.
+#echo "<pre>$output</pre>";
 }
 
 if (isset($_GET['destadd'])) {

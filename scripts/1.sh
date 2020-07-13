@@ -19,8 +19,8 @@ lowerthird=$id"lowerthird.png";
 videoport=`expr 5554 + 2 \* $id`;
 audioport=`expr 5553 + 2 \* $id`;
 
-encoding=`cat /usr/local/nginx/scripts/streamconfig.txt | grep '__'$streamid'__' | cut -d ' ' -f 2`
-streamres=`cat /usr/local/nginx/scripts/streamconfig.txt | grep '__'$streamid'__' | cut -d ' ' -f 3`
+encoding=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__config__' | cut -d ' ' -f 2`
+streamres=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__config__' | cut -d ' ' -f 3`
 
 case $streamres in
 1080p)

@@ -255,5 +255,25 @@ __stream19__ both 720p
 __stream20__ both 720p
 
 ***AUDIO CONFIG***
+__stream1__audio__ c0 c1 stereo distribute
+__stream2__audio__ c2 c3 mono main
+__stream3__audio__ c3 c5 mono main
+__stream4__audio__ c4 c7 mono main
+__stream5__audio__ c5 c9 mono main
+__stream6__audio__ c6 c11 mono main
+__stream7__audio__ c7 c13 mono main
+__stream8__audio__ c8 c15 mono main
+__stream9__audio__ c9 c17 mono main
+__stream10__audio__ c10 c19 mono main
+__stream11__audio__ c11 c21 mono main
+__stream12__audio__ c12 c23 mono main
+__stream13__audio__ c13 c25 mono main
+__stream14__audio__ c14 c27 mono main
+__stream15__audio__ c15 c29 mono main
+__stream16__audio__ c16 c31 mono main
+__stream17__audio__ c17 c33 mono main
+__stream18__audio__ c18 c35 mono main
+__stream19__audio__ c19 c37 mono main
+__stream20__audio__ c20 c39 mono main
 
 ***NEXT CONFIG***
