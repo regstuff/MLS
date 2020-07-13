@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>Zoom and Darshan</title><link href="https://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet"><style type="text/css">body {margin: 0; padding: 0;} .padleft {padding: 20px; float:left;} .padded {padding: 5px 20px 5px 20px}
+<html><head><title>Primary Server - Location</title><link href="https://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet"><style type="text/css">body {margin: 0; padding: 0;} .padleft {padding: 20px; float:left;} .padded {padding: 5px 20px 5px 20px}
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
   background-color: #eee;
@@ -26,7 +26,7 @@
 </style>
 <script src="https://releases.flowplayer.org/js/flowplayer-3.2.12.min.js"></script>
 </head><body>
-<p align="center"><b>Zoom and Darshan - Singapore</b></p>
+<p align="center"><b>Primary/Secondary Server - Location</b></p>
 <div style="text-align:center" class="padded"><a href="/stat" target="_blank">Stats</a>   |||   <a href="/recording" target="_blank">Recordings</a>   |||   <a href="/settings.html" target="_blank">Settings</a>   |||   <a href="/config.php?proclist" target="_blank">Processes</a>   |||   <a href="/mobile.html" target="_blank">Mobile Version</a><br/>
 <p id="serverdetails">Test</p><script>var address = window.location.hostname; var rtmp = "Send primary stream to rtmp://"; fulladdress = rtmp.concat(address, "/main/stream1 or stream2 or stream 3 etc."); rtmp = "Send backup stream to rtmp://"; backupaddress = rtmp.concat(address, "/backup/stream1 or stream2 or stream 3 etc.");document.getElementById("serverdetails").innerHTML = fulladdress + "<br/>" + backupaddress;</script></div>
 
@@ -37,7 +37,7 @@
 
 <div class="padded"><p><b>Supers - Global Control:</b> <a href="/1.php?allsuper1on" target="_blank">Add 1</a> ||| <a href="/1.php?allsuper2on" target="_blank">Add 2</a> ||| <a href="/1.php?allsuper3on" target="_blank">Add 3</a> ||| <a href="/1.php?allsuper4on" target="_blank">Add 4</a> ||| <a href="/1.php?allsuper5on" target="_blank">Add 5</a>   |||   <a href="/1.php?allsuper6on" target="_blank">Add 6</a> ||| <a href="/1.php?allsuper7on" target="_blank">Add 7</a> ||| <a href="/1.php?allsuper8on" target="_blank">Add 8</a> ||| <a href="/1.php?allsuperoff" target="_blank">Remove</a></p></div>
 
-<h2 class="padded">Zoom - Stream 1</h2>
+<h2 class="padded">Stream 1</h2>
 <div class="padleft" id="player" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
 <script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
 $f("player", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream1', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player").play();</script>
@@ -65,7 +65,7 @@ $f("player", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip:
 <p><b>Choose Input:</b> <a href="/1.php?1main" target="_blank">Main</a>   |||   <a href="/1.php?1back" target="_blank">Backup</a>   |||   <a href="/1.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/1.php?1video" target="_blank">Ad Video</a>   |||   <a href="/1.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/1.php?1off" target="_blank">Turn off</a></p></div>
 <hr>
 
-<h2 class="padded">Darshan Primary - Stream 2</h2>
+<h2 class="padded">Stream 2</h2>
 <div class="padleft" id="player2" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
 <script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
 $f("player2", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream2', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player2").play();</script>
@@ -91,7 +91,7 @@ $f("player2", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <p><b>Choose Input:</b> <a href="/2.php?1main" target="_blank">Main</a>   |||   <a href="/2.php?1back" target="_blank">Backup</a>   |||   <a href="/2.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/2.php?1video" target="_blank">Ad Video</a>   |||   <a href="/2.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/2.php?1off" target="_blank">Turn off</a></p></div>
 <hr>
 
-<button class="collapsible"><h2 class="padded">Darshan Secondary - Stream 3</h2></button>
+<button class="collapsible"><h2 class="padded">Stream 3</h2></button>
 <div class="content"><div class="padleft" id="player3" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
 <script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
 $f("player3", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream3', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player3").play();</script>
@@ -143,7 +143,7 @@ $f("player4", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip
 <p><b>Choose Input:</b> <a href="/4.php?1main" target="_blank">Main</a>   |||   <a href="/4.php?1back" target="_blank">Backup</a>   |||   <a href="/4.php?1holding" target="_blank">Holding Screen</a>   |||   <a href="/4.php?1video" target="_blank">Ad Video</a>   |||   <a href="/4.php?1playlist" target="_blank">Playlist</a>   |||   <a href="/4.php?1off" target="_blank">Turn off</a></p></div></div>
 <hr>
 
-<button class="collapsible"><h2 class="padded">Zoom via OBS - Stream 5</h2></button>
+<button class="collapsible"><h2 class="padded">Stream 5</h2></button>
 <div class="content"><div class="padleft" id="player5" style="width:320px;height:180px"><img src="splash_black.jpg" alt="black" height="180" width="320" /></div>
 <script>var address = window.location.hostname; var rtmp = "rtmp://"; fulladdress = rtmp.concat(address, "/main");
 $f("player5", "https://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {clip: {url: 'stream5', scaling: 'fit', live: true, autoPlay: true, provider: 'hddn'}, plugins: {hddn: {url: "flowplayer.rtmp-3.2.13.swf", netConnectionUrl: fulladdress}}, canvas: {backgroundGradient: 'none'}}); $f("player5").play();</script>
