@@ -169,8 +169,10 @@ while true
 do
 #$oldffmpegparam $mainparam -vcodec libx264 -s 1280x720 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 6000k -maxrate 6M -minrate 6M -bufsize 6M -profile:v high -acodec copy -f flv $inputparam $outputparam
 $oldffmpegparam $mainparam -c copy -f flv $inputparam $outputparam
+screenname=$id"back";
+screen -dm -S $screenname /bin/bash "$0" back;
 #$oldffmpegparam $backupparam -c copy -f flv $inputparam $outputparam
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$failovervideo -c copy -f flv $inputparam $outputparam
+#/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$failovervideo -c copy -f flv $inputparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
