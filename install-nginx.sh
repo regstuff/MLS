@@ -6,9 +6,6 @@ sudo dpkg-reconfigure tzdata
 #Install dependencies
 sudo apt-get update && sudo apt-get -y install build-essential checkinstall libpcre3 libpcre3-dev libssl-dev libx264-dev libx265-dev libnuma-dev libvpx-dev libfdk-aac-dev libmp3lame-dev libopus-dev libsdl2-dev libfreetype6-dev libass-dev libtool git zip unzip curl php7.0-cli php7.0-mbstring php7.0-fpm php7.0-mysql php7.0-curl php7.0-gd php7.0-bcmath autoconf automake cmake git-core pkg-config texinfo zlib1g-dev uuid-dev libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm yasm htop ffmpeg youtube-dl 
 
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo apt-get install -y nodejs && cd /usr/local/nginx/html && sudo npm init -y && sudo npm install ws && cd ~
-
 #Install NGINX with RTMP module
 sudo mkdir ~/build && cd ~/build
 sudo git clone git://github.com/arut/nginx-rtmp-module.git
@@ -185,6 +182,9 @@ sudo chmod -R 777 /usr/local/nginx/html/hls
 
 sudo mkdir /usr/local/nginx/html/recording
 sudo chmod -R 777 /usr/local/nginx/html/recording
+
+cd ~ && curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install -y nodejs && cd /usr/local/nginx/html && sudo npm init -y && sudo npm install ws && cd ~
 
 #Install FFMPEG Controller
 cd ~ && sudo wget https://github.com/zeromq/libzmq/releases/download/v4.2.2/zeromq-4.2.2.tar.gz && tar xvzf zeromq-4.2.2.tar.gz && cd zeromq-4.2.2
