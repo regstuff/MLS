@@ -19,8 +19,8 @@ lowerthird=$id"lowerthird.png";
 videoport=`expr 5554 + 2 \* $id`;
 audioport=`expr 5553 + 2 \* $id`;
 
-encoding=`cat /usr/local/nginx/scripts/streamconfig.txt | grep '__'$streamid'__' | cut -d ' ' -f 2`
-streamres=`cat /usr/local/nginx/scripts/streamconfig.txt | grep '__'$streamid'__' | cut -d ' ' -f 3`
+encoding=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__config__' | cut -d ' ' -f 2`
+streamres=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__config__' | cut -d ' ' -f 3`
 
 case $streamres in
 1080p)
@@ -55,7 +55,8 @@ ffmpegtsparam=$oldffmpegparam
 ;;
 
 *)
-inputencodeparam="-i /usr/local/nginx/scripts/images/$lowerthird -af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2,aresample=44100:async=1 -c:a aac -b:a 128k -filter_complex zmq=bind_address=tcp\\\://127.0.0.1\\\:"$videoport",overlay=0:H -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -s $inputres -b:v $inputbitrate -maxrate $inputbitrate -minrate $inputbitrate -bufsize $inputbitrate -profile:v high -vsync 1 -f flv -strict -2";
+#inputencodeparam="-i /usr/local/nginx/scripts/images/$lowerthird -af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2,aresample=44100:async=1 -c:a aac -b:a 128k -filter_complex zmq=bind_address=tcp\\\://127.0.0.1\\\:"$videoport",overlay=0:H -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -s $inputres -b:v $inputbitrate -maxrate $inputbitrate -minrate $inputbitrate -bufsize $inputbitrate -profile:v high -vsync 1 -f flv -strict -2";
+inputencodeparam="-f image2 -loop 1 -i /usr/local/nginx/scripts/images/$lowerthird -af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2,aresample=44100:async=1 -c:a aac -b:a 128k -filter_complex overlay=0:H-h -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -s $inputres -b:v $inputbitrate -maxrate $inputbitrate -minrate $inputbitrate -bufsize $inputbitrate -profile:v high -vsync 1 -f flv -strict -2";
 esac
 
 
@@ -87,16 +88,24 @@ sleep 0.5
 
 super)
 case $2 in
-off) 
-echo Parsed_overlay_1 y H | /usr/local/bin/tools/zmqsend -b tcp://127.0.0.1:$videoport
-sleep 0.5
-;;
-on)
-echo Parsed_overlay_1 y H-h | /usr/local/bin/tools/zmqsend -b tcp://127.0.0.1:$videoport
-sleep 0.5
+off)
+sudo cp /usr/local/nginx/scripts/images/lowerthird/$lowerthird /usr/local/nginx/scripts/images/$lowerthird
+echo $lowerthird " Removed"
+#echo Parsed_overlay_1 y H-h | /usr/local/bin/tools/zmqsend -b tcp://127.0.0.1:$videoport
+sleep 0.2
 ;;
 *)
-echo "Usage is on.sh super on/off"
+lowerthirdid=$id"lowerthird"$2".png"
+if test -f "/usr/local/nginx/scripts/images/lowerthird/"$lowerthirdid; then
+sudo cp /usr/local/nginx/scripts/images/lowerthird/$lowerthirdid /usr/local/nginx/scripts/images/$lowerthird
+echo $lowerthirdid " added"
+
+else
+echo $lowerthirdid " does not exist. Please upload it."
+fi
+
+#echo Parsed_overlay_1 y H-h | /usr/local/bin/tools/zmqsend -b tcp://127.0.0.1:$videoport
+sleep 0.2
 esac
 ;;
 
@@ -171,8 +180,10 @@ while true
 do
 #$oldffmpegparam $mainparam -vcodec libx264 -s 1280x720 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 6000k -maxrate 6M -minrate 6M -bufsize 6M -profile:v high -acodec copy -f flv $inputparam $outputparam
 $oldffmpegparam $mainparam -c copy -f flv $inputparam $outputparam
+screenname=$id"back";
+screen -dm -S $screenname /bin/bash "$0" back;
 #$oldffmpegparam $backupparam -c copy -f flv $inputparam $outputparam
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$failovervideo -c copy -f flv $inputparam $outputparam
+#/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$failovervideo -c copy -f flv $inputparam $outputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -396,7 +407,7 @@ fi
 
 while true
 do
-$oldffmpegparam -nostdin -thread_queue_size 512 -re -f concat -safe 0 -i /usr/local/nginx/scripts/images/set/list.txt -c copy -f flv $inputparam
+/usr/bin/ffmpeg -nostdin -thread_queue_size 512 -re -f concat -safe 0 -i /usr/local/nginx/scripts/images/set/list.txt -c copy -f flv $inputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -405,7 +416,6 @@ else
 echo $screenname " is already running"
 fi
 ;;
-
 ########## PLAYLIST ENDS. FAILOVER VIDEO BEGINS ################
 
 failover)
@@ -503,15 +513,14 @@ fi
 
 offstatus="$streamid is already off"
 for (( i=0; i<$len; i++ )); do
-if [ $(ps aux | grep -E "${inputscreens[i]}" | grep -v "$screenback" | awk '{print $2}' | wc -l) -gt 0 ]; then
-kill $(ps aux | grep -E "${inputscreens[i]}" | grep -v "$screenback" | awk '{print $2}')
+if [ $(ps aux | grep -E "${inputscreens[i]}" | awk '{print $2}' | wc -l) -gt 0 ]; then
+kill $(ps aux | grep -E "${inputscreens[i]}" | awk '{print $2}')
 offstatus="Turning off ${inputscreens[i]:11} input"
 i=$len;
 fi
 done
 
 echo $offstatus
-
 
 else
 echo "You're already trying to turn off $streamid. Hold on!"

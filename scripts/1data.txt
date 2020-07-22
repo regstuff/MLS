@@ -233,26 +233,26 @@ __stream15__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Inst
 __stream16__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram16
 
 ***STREAM CONFIG***
-__stream1__ both 1080p
-__stream2__ both 1080p
-__stream3__ both 720p
-__stream4__ both 720p
-__stream5__ both 720p
-__stream6__ both 720p
-__stream7__ both 720p
-__stream8__ both 720p
-__stream9__ both 720p
-__stream10__ both 720p
-__stream11__ both 720p
-__stream12__ both 720p
-__stream13__ both 720p
-__stream14__ both 720p
-__stream15__ both 720p
-__stream16__ both 720p
-__stream17__ both 720p
-__stream18__ both 720p
-__stream19__ both 720p
-__stream20__ both 720p
+__stream1__config__ both 1080p
+__stream2__config__ both 1080p
+__stream3__config__ both 720p
+__stream4__config__ both 720p
+__stream5__config__ both 720p
+__stream6__config__ both 720p
+__stream7__config__ both 720p
+__stream8__config__ none 720p
+__stream9__config__ both 720p
+__stream10__config__ both 720p
+__stream11__config__ both 720p
+__stream12__config__ both 720p
+__stream13__config__ both 720p
+__stream14__config__ both 720p
+__stream15__config__ both 720p
+__stream16__config__ both 720p
+__stream17__config__ both 720p
+__stream18__config__ both 720p
+__stream19__config__ both 720p
+__stream20__config__ both 720p
 
 ***AUDIO CONFIG***
 __stream1__audio__ c0 c1 stereo distribute
