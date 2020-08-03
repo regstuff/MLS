@@ -10,7 +10,7 @@ sudo sed -i "s|stream$3__out$4__.*|stream$3__out$4__ $(echo $2 | sed -e 's/\\/\\
 ##### END DESTINATION - START STREAM CONFIG ##########
 
 streamconfig)
-sudo sed -i "s|stream$2__config__.*|stream$2__config__ $3 $4|" /usr/local/nginx/scripts/1data.txt;
+sudo sed -i "s|stream$2__config__.*|stream$2__config__ $3 $4 $5|" /usr/local/nginx/scripts/1data.txt;
 
 ;;
 

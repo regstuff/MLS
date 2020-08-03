@@ -10,12 +10,14 @@ if (isset($_GET['streamadd'])) {
 $encodeparam = $_POST['encodeparam'];
 $stream_id = $_POST['stream_id'];
 $stream_res = $_POST['stream_res'];
+$failover_method = $_POST['failover_method'];
 echo "<h2>You entered the following information:</h2>";
 echo "<b>Encode Parameter: </b> $encodeparam";
 echo "<br><b>Stream Id: </b> $stream_id";
 echo "<br><b>Stream Reolution: </b> $stream_res";
+echo "<br><b>Failover: </b> $failover_method";
 echo "<br>";
-$output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh streamconfig \"$stream_id\" \"$encodeparam\" $stream_res");
+$output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh streamconfig \"$stream_id\" \"$encodeparam\" \"$stream_res\" $failover_method");
 echo $output;
 }
 

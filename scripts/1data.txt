@@ -233,26 +233,26 @@ __stream15__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Inst
 __stream16__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram16
 
 ***STREAM CONFIG***
-__stream1__config__ both 1080p
-__stream2__config__ both 1080p
-__stream3__config__ both 720p
-__stream4__config__ both 720p
-__stream5__config__ both 720p
-__stream6__config__ both 720p
-__stream7__config__ both 720p
-__stream8__config__ none 720p
-__stream9__config__ both 720p
-__stream10__config__ both 720p
-__stream11__config__ both 720p
-__stream12__config__ both 720p
-__stream13__config__ both 720p
-__stream14__config__ both 720p
-__stream15__config__ both 720p
-__stream16__config__ both 720p
-__stream17__config__ both 720p
-__stream18__config__ both 720p
-__stream19__config__ both 720p
-__stream20__config__ both 720p
+__stream1__config__ both 1080p nofailover
+__stream2__config__ both 1080p nofailover
+__stream3__config__ both 1080p nofailover
+__stream4__config__ both 1080p nofailover
+__stream5__config__ both 1080p nofailover
+__stream6__config__ both 1080p nofailover
+__stream7__config__ both 1080p nofailover
+__stream8__config__ none 1080p nofailover
+__stream9__config__ both 1080p nofailover
+__stream10__config__ both 1080p nofailover
+__stream11__config__ both 1080p nofailover
+__stream12__config__ both 1080p nofailover
+__stream13__config__ both 1080p nofailover
+__stream14__config__ both 1080p nofailover
+__stream15__config__ both 1080p nofailover
+__stream16__config__ both 1080p nofailover
+__stream17__config__ both 1080p nofailover
+__stream18__config__ both 1080p nofailover
+__stream19__config__ both 1080p nofailover
+__stream20__config__ both 1080p nofailover
 
 ***AUDIO CONFIG***
 __stream1__audio__ c0 c1 stereo distribute

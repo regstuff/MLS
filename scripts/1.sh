@@ -21,6 +21,7 @@ audioport=`expr 5553 + 2 \* $id`;
 
 encoding=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__config__' | cut -d ' ' -f 2`
 streamres=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__config__' | cut -d ' ' -f 3`
+failmethod=`cat /usr/local/nginx/scripts/1data.txt | grep '__'$streamid'__config__' | cut -d ' ' -f 4`
 
 case $streamres in
 1080p)
@@ -180,12 +181,27 @@ while true
 do
 #$oldffmpegparam $mainparam -vcodec libx264 -s 1280x720 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -b:v 6000k -maxrate 6M -minrate 6M -bufsize 6M -profile:v high -acodec copy -f flv $inputparam $outputparam
 $oldffmpegparam $mainparam -c copy -f flv $inputparam $outputparam
+
+case $failmethod in
+mainback)
 screenname=$id"back";
 screen -dm -S $screenname /bin/bash "$0" back;
-#$oldffmpegparam $backupparam -c copy -f flv $inputparam $outputparam
-#/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$failovervideo -c copy -f flv $inputparam $outputparam
+;;
+
+mainbackfail)
+screenname=$id"back";
+screen -dm -S $screenname /bin/bash "$0" back;
+;;
+
+mainfail)
+screenname=$id"failover";
+screen -dm -S $screenname /bin/bash "$0" failover;
+;;
+
+*)
 echo "Restarting ffmpeg..."
 sleep .2
+esac
 done
 
 else
@@ -241,9 +257,22 @@ while true
 do
 $oldffmpegparam $backupparam -c copy -f flv $inputparam $outputparam
 #$oldffmpegparam $mainparam -c copy -f flv $inputparam $outputparam
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$failovervideo -c copy -f flv $inputparam $outputparam
+
+case $failmethod in
+mainback)
+screenname=$id"main";
+screen -dm -S $screenname /bin/bash "$0" main;
+;;
+
+mainbackfail)
+screenname=$id"failover";
+screen -dm -S $screenname /bin/bash "$0" failover;
+;;
+
+*)
 echo "Restarting ffmpeg..."
 sleep .2
+esac
 done
 
 else
