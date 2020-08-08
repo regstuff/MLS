@@ -52,8 +52,18 @@ Video Type: <select name="type_id"><option value="">Choose</option><option value
 <input type="submit" value="Upload File" /> <br/>
 </form>
 </div>
-
 <hr>
+
+<div class="padded">
+<h2>Upload Lowerthirds</h2>
+<form method="post" target="_blank" action="config.php?uploadlower" enctype="multipart/form-data">
+  Select image to upload:
+  <input type="file" name="fileToUpload" id="fileToUpload">
+  <input type="submit" value="Upload Image" name="submit">
+</form>
+</div>
+<hr>
+
 <div class="padded">
 <h2>Add Stream Config</h2>
 <form method="post" target="_blank" action="config.php?streamadd">

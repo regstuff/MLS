@@ -104,7 +104,16 @@ sudo wget -O $3$4 $2 && sudo chmod +x $3$4 && sudo mv $3$4 /usr/local/nginx/scri
 
 ;;
 
-##### END UPLOAD FILE - START STREAM LIST ##########
+##### END UPLOAD FILE - START UPLOAD LOWERTHIRD ##########
+
+uploadlower)
+sudo mv $2 $3;
+sudo chmod 755 $3;
+sudo chown root:root $3;
+echo $3 uploaded
+;;
+
+##### END UPLOAD LOWERTHIRD - START STREAM LIST ##########
 
 streamlist)
 startline=`grep -n '***STREAM CONFIG***' /usr/local/nginx/scripts/1data.txt | cut -d: -f 1`
