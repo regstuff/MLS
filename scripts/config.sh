@@ -21,7 +21,15 @@ sudo php /usr/local/nginx/scripts/InstagramLive-PHP$2/testAuth.php;
 
 ;;
 
-##### END INSTA TEST AUTH - START AUDIO CONFIG ##########
+##### END INSTA TEST AUTH - START INSTA LOGIN ##########
+
+instalogin)
+sudo sed -i "s|'IG_USERNAME', '.*|'IG_USERNAME', '$3');|" /usr/local/nginx/scripts/InstagramLive-PHP$2/config.php;
+sudo sed -i "s|'IG_PASS', '.*|'IG_PASS', '$4');|" /usr/local/nginx/scripts/InstagramLive-PHP$2/config.php;
+
+;;
+
+##### END INSTA LOGIN - START AUDIO CONFIG ##########
 
 audioconfig)
 sudo sed -i "s|stream$2__audio__.*|stream$2__audio__ $4 $5 $3 $6|" /usr/local/nginx/scripts/1data.txt;

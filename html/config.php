@@ -113,6 +113,20 @@ if (isset($_GET['instatestauth'])) {
 	echo $folder_id." : <pre>$output</pre>";
 	}
 
+if (isset($_GET['instalogin'])) {
+$insta_id = $_POST['insta_id'];
+$insta_login = $_POST['insta_login'];
+$insta_pass = $_POST['insta_pass'];
+
+echo "<h2>You Entered the following information:</h2>";
+echo "<b>Stream id: </b> $insta_id";
+echo "<br><b>Login: </b> $insta_login";
+echo "<br><b>Password: </b> $insta_pass";
+echo "<br>";
+
+	$output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh instalogin \"$insta_id\" \"$insta_login\" $insta_pass");
+	echo $folder_id." : <pre>$output</pre>";
+	}
 
 if (isset($_GET['uploadlower'])) {
 error_reporting(E_ALL);
