@@ -107,6 +107,12 @@ if (isset($_GET['proclist'])) {
 	echo "<pre>$output</pre>";
 	}
 
+if (isset($_GET['instatestauth'])) {
+        $insta_id = $_POST['insta_id'];
+	$output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh instatestauth $insta_id");
+	echo $folder_id." : <pre>$output</pre>";
+	}
+
 
 if (isset($_GET['uploadlower'])) {
 error_reporting(E_ALL);
@@ -146,4 +152,5 @@ $temp_filename = $_FILES["fileToUpload"]["tmp_name"];
 $output = exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh uploadlower $temp_filename $target_file");echo $output;
 }
 }
+
 ?>

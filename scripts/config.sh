@@ -14,7 +14,14 @@ sudo sed -i "s|stream$2__config__.*|stream$2__config__ $3 $4 $5|" /usr/local/ngi
 
 ;;
 
-##### END STREAM CONFIG - START AUDIO CONFIG ##########
+##### END STREAM CONFIG - START INSTA TEST AUTH ##########
+
+instatestauth)
+sudo php /usr/local/nginx/scripts/InstagramLive-PHP$2/testAuth.php;
+
+;;
+
+##### END INSTA TEST AUTH - START AUDIO CONFIG ##########
 
 audioconfig)
 sudo sed -i "s|stream$2__audio__.*|stream$2__audio__ $4 $5 $3 $6|" /usr/local/nginx/scripts/1data.txt;
