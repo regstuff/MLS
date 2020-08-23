@@ -499,15 +499,15 @@ if [ -z "$STY" ];
 then
 exec screen -dm -S $screenname /bin/bash "$0" "$1";
 fi
-#No auto turn off for regular outputs
-#while [ $i -lt 9000 ]
-#do
+
+while [ $i -lt 9000 ]
+do
 $newffmpegparam $distributeparam $encodeparam -strict -2 -f tee -map 0:v -map 0:a "$checkout";
 echo "Waiting for English input... Feed me!!!"
-#sleep 0.2
-#i=$[$i+1]
-#done
-read -p "prompt"
+sleep 0.2
+i=$[$i+1]
+done
+
 else echo $streamid $1 " is already running"
 fi
 esac
