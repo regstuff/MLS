@@ -3,14 +3,14 @@
 ##### START ADD DESTINATION ##########
 case $1 in
 destination)
-sudo sed -i "s|stream$3__out$4__.*|stream$3__out$4__ $(echo $2 | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g') $5 $6|" /usr/local/nginx/scripts/1data.txt;
+sudo sed -i "s|stream$3__out$4__.*|stream$3__out$4__ $(echo $2 | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g') $5 $6|" /usr/local/nginx/scripts/config.txt;
 
 ;;
 
 ##### END DESTINATION - START STREAM CONFIG ##########
 
 streamconfig)
-sudo sed -i "s|stream$2__config__.*|stream$2__config__ $3 $4 $5|" /usr/local/nginx/scripts/1data.txt;
+sudo sed -i "s|stream$2__config__.*|stream$2__config__ $3 $4 $5|" /usr/local/nginx/scripts/config.txt;
 
 ;;
 
@@ -32,7 +32,7 @@ sudo sed -i "s|'IG_PASS', '.*|'IG_PASS', '$4');|" /usr/local/nginx/scripts/Insta
 ##### END INSTA LOGIN - START AUDIO CONFIG ##########
 
 audioconfig)
-sudo sed -i "s|stream$2__audio__.*|stream$2__audio__ $4 $5 $3 $6|" /usr/local/nginx/scripts/1data.txt;
+sudo sed -i "s|stream$2__audio__.*|stream$2__audio__ $4 $5 $3 $6|" /usr/local/nginx/scripts/config.txt;
 
 ;;
 
@@ -42,72 +42,72 @@ audiopreset)
 
 case $2 in
 allmono)
-sudo sed -i "s|stream1__audio__.*|stream1__audio__ c0 c2 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream2__audio__.*|stream2__audio__ c1 c4 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream3__audio__.*|stream3__audio__ c2 c6 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream4__audio__.*|stream4__audio__ c3 c8 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream5__audio__.*|stream5__audio__ c4 c10 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream6__audio__.*|stream6__audio__ c5 c12 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream7__audio__.*|stream7__audio__ c6 c14 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream8__audio__.*|stream8__audio__ c7 c16 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream9__audio__.*|stream9__audio__ c8 c18 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream10__audio__.*|stream10__audio__ c9 c20 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream11__audio__.*|stream11__audio__ c10 c22 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream12__audio__.*|stream12__audio__ c11 c24 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream13__audio__.*|stream13__audio__ c12 c26 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream14__audio__.*|stream14__audio__ c13 c28 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream15__audio__.*|stream15__audio__ c14 c30 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream16__audio__.*|stream16__audio__ c15 c32 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream17__audio__.*|stream17__audio__ c16 c34 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream18__audio__.*|stream18__audio__ c17 c36 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream19__audio__.*|stream19__audio__ c18 c38 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream20__audio__.*|stream20__audio__ c19 c40 mono main|" /usr/local/nginx/scripts/1data.txt;
+sudo sed -i "s|stream1__audio__.*|stream1__audio__ c0 c2 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream2__audio__.*|stream2__audio__ c1 c4 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream3__audio__.*|stream3__audio__ c2 c6 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream4__audio__.*|stream4__audio__ c3 c8 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream5__audio__.*|stream5__audio__ c4 c10 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream6__audio__.*|stream6__audio__ c5 c12 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream7__audio__.*|stream7__audio__ c6 c14 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream8__audio__.*|stream8__audio__ c7 c16 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream9__audio__.*|stream9__audio__ c8 c18 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream10__audio__.*|stream10__audio__ c9 c20 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream11__audio__.*|stream11__audio__ c10 c22 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream12__audio__.*|stream12__audio__ c11 c24 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream13__audio__.*|stream13__audio__ c12 c26 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream14__audio__.*|stream14__audio__ c13 c28 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream15__audio__.*|stream15__audio__ c14 c30 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream16__audio__.*|stream16__audio__ c15 c32 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream17__audio__.*|stream17__audio__ c16 c34 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream18__audio__.*|stream18__audio__ c17 c36 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream19__audio__.*|stream19__audio__ c18 c38 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream20__audio__.*|stream20__audio__ c19 c40 mono main|" /usr/local/nginx/scripts/config.txt;
 ;;
 
 firststereo)
-sudo sed -i "s|stream1__audio__.*|stream1__audio__ c0 c1 stereo distribute|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream2__audio__.*|stream2__audio__ c2 c3 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream3__audio__.*|stream3__audio__ c3 c6 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream4__audio__.*|stream4__audio__ c4 c8 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream5__audio__.*|stream5__audio__ c5 c10 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream6__audio__.*|stream6__audio__ c6 c12 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream7__audio__.*|stream7__audio__ c7 c14 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream8__audio__.*|stream8__audio__ c8 c16 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream9__audio__.*|stream9__audio__ c9 c18 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream10__audio__.*|stream10__audio__ c10 c20 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream11__audio__.*|stream11__audio__ c11 c22 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream12__audio__.*|stream12__audio__ c12 c24 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream13__audio__.*|stream13__audio__ c13 c26 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream14__audio__.*|stream14__audio__ c14 c28 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream15__audio__.*|stream15__audio__ c15 c30 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream16__audio__.*|stream16__audio__ c16 c32 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream17__audio__.*|stream17__audio__ c17 c34 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream18__audio__.*|stream18__audio__ c18 c36 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream19__audio__.*|stream19__audio__ c19 c38 mono main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream20__audio__.*|stream20__audio__ c20 c40 mono main|" /usr/local/nginx/scripts/1data.txt;
+sudo sed -i "s|stream1__audio__.*|stream1__audio__ c0 c1 stereo distribute|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream2__audio__.*|stream2__audio__ c2 c3 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream3__audio__.*|stream3__audio__ c3 c6 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream4__audio__.*|stream4__audio__ c4 c8 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream5__audio__.*|stream5__audio__ c5 c10 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream6__audio__.*|stream6__audio__ c6 c12 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream7__audio__.*|stream7__audio__ c7 c14 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream8__audio__.*|stream8__audio__ c8 c16 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream9__audio__.*|stream9__audio__ c9 c18 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream10__audio__.*|stream10__audio__ c10 c20 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream11__audio__.*|stream11__audio__ c11 c22 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream12__audio__.*|stream12__audio__ c12 c24 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream13__audio__.*|stream13__audio__ c13 c26 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream14__audio__.*|stream14__audio__ c14 c28 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream15__audio__.*|stream15__audio__ c15 c30 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream16__audio__.*|stream16__audio__ c16 c32 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream17__audio__.*|stream17__audio__ c17 c34 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream18__audio__.*|stream18__audio__ c18 c36 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream19__audio__.*|stream19__audio__ c19 c38 mono main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream20__audio__.*|stream20__audio__ c20 c40 mono main|" /usr/local/nginx/scripts/config.txt;
 ;;
 
 allstereo)
-sudo sed -i "s|stream1__audio__.*|stream1__audio__ c0 c1 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream2__audio__.*|stream2__audio__ c2 c3 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream3__audio__.*|stream3__audio__ c4 c5 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream4__audio__.*|stream4__audio__ c6 c7 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream5__audio__.*|stream5__audio__ c8 c9 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream6__audio__.*|stream6__audio__ c10 c11 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream7__audio__.*|stream7__audio__ c12 c13 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream8__audio__.*|stream8__audio__ c14 c15 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream9__audio__.*|stream9__audio__ c16 c17 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream10__audio__.*|stream10__audio__ c18 c19 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream11__audio__.*|stream11__audio__ c20 c21 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream12__audio__.*|stream12__audio__ c22 c23 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream13__audio__.*|stream13__audio__ c24 c25 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream14__audio__.*|stream14__audio__ c26 c27 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream15__audio__.*|stream15__audio__ c28 c29 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream16__audio__.*|stream16__audio__ c30 c31 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream17__audio__.*|stream17__audio__ c32 c33 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream18__audio__.*|stream18__audio__ c34 c35 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream19__audio__.*|stream19__audio__ c36 c37 stereo main|" /usr/local/nginx/scripts/1data.txt;
-sudo sed -i "s|stream20__audio__.*|stream20__audio__ c38 c39 stereo main|" /usr/local/nginx/scripts/1data.txt;
+sudo sed -i "s|stream1__audio__.*|stream1__audio__ c0 c1 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream2__audio__.*|stream2__audio__ c2 c3 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream3__audio__.*|stream3__audio__ c4 c5 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream4__audio__.*|stream4__audio__ c6 c7 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream5__audio__.*|stream5__audio__ c8 c9 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream6__audio__.*|stream6__audio__ c10 c11 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream7__audio__.*|stream7__audio__ c12 c13 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream8__audio__.*|stream8__audio__ c14 c15 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream9__audio__.*|stream9__audio__ c16 c17 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream10__audio__.*|stream10__audio__ c18 c19 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream11__audio__.*|stream11__audio__ c20 c21 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream12__audio__.*|stream12__audio__ c22 c23 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream13__audio__.*|stream13__audio__ c24 c25 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream14__audio__.*|stream14__audio__ c26 c27 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream15__audio__.*|stream15__audio__ c28 c29 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream16__audio__.*|stream16__audio__ c30 c31 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream17__audio__.*|stream17__audio__ c32 c33 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream18__audio__.*|stream18__audio__ c34 c35 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream19__audio__.*|stream19__audio__ c36 c37 stereo main|" /usr/local/nginx/scripts/config.txt;
+sudo sed -i "s|stream20__audio__.*|stream20__audio__ c38 c39 stereo main|" /usr/local/nginx/scripts/config.txt;
 esac
 
 ;;
@@ -131,28 +131,28 @@ echo $3 uploaded
 ##### END UPLOAD LOWERTHIRD - START STREAM LIST ##########
 
 streamlist)
-startline=`grep -n '***STREAM CONFIG***' /usr/local/nginx/scripts/1data.txt | cut -d: -f 1`
-endline=`grep -n '***AUDIO CONFIG***' /usr/local/nginx/scripts/1data.txt | cut -d: -f 1`
+startline=`grep -n '***STREAM CONFIG***' /usr/local/nginx/scripts/config.txt | cut -d: -f 1`
+endline=`grep -n '***AUDIO CONFIG***' /usr/local/nginx/scripts/config.txt | cut -d: -f 1`
 rangeoflines=$startline','$endline'p'
-sed -n $rangeoflines /usr/local/nginx/scripts/1data.txt
+sed -n $rangeoflines /usr/local/nginx/scripts/config.txt
 
 ;;
 
 ##### END STREAM LIST - START DESTINATION LIST ##########
 destlist)
-startline=`grep -n '***DESTINATION CONFIG***' /usr/local/nginx/scripts/1data.txt | cut -d: -f 1`
-endline=`grep -n '***STREAM CONFIG***' /usr/local/nginx/scripts/1data.txt | cut -d: -f 1`
+startline=`grep -n '***DESTINATION CONFIG***' /usr/local/nginx/scripts/config.txt | cut -d: -f 1`
+endline=`grep -n '***STREAM CONFIG***' /usr/local/nginx/scripts/config.txt | cut -d: -f 1`
 rangeoflines=$startline','$endline'p'
-sed -n $rangeoflines /usr/local/nginx/scripts/1data.txt
+sed -n $rangeoflines /usr/local/nginx/scripts/config.txt
 
 ;;
 
 ##### END DESTINATION LIST - START AUDIO LIST ##########
 audiolist)
-startline=`grep -n '***AUDIO CONFIG***' /usr/local/nginx/scripts/1data.txt | cut -d: -f 1`
-endline=`grep -n '***NEXT CONFIG***' /usr/local/nginx/scripts/1data.txt | cut -d: -f 1`
+startline=`grep -n '***AUDIO CONFIG***' /usr/local/nginx/scripts/config.txt | cut -d: -f 1`
+endline=`grep -n '***NEXT CONFIG***' /usr/local/nginx/scripts/config.txt | cut -d: -f 1`
 rangeoflines=$startline','$endline'p'
-sed -n $rangeoflines /usr/local/nginx/scripts/1data.txt
+sed -n $rangeoflines /usr/local/nginx/scripts/config.txt
 
 ;;
 
@@ -228,10 +228,10 @@ i=0
 j=1
 chcount=$2
 for (( i=0; i<$chcount; i++ )); do
-c0=`cat /usr/local/nginx/scripts/1data.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 2`
-c1=`cat /usr/local/nginx/scripts/1data.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 3`
-mapping=`cat /usr/local/nginx/scripts/1data.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 4`
-rtmpapp=`cat /usr/local/nginx/scripts/1data.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 5`
+c0=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 2`
+c1=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 3`
+mapping=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 4`
+rtmpapp=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 5`
 
 if [[ $mapping = "mono" ]]
 then
