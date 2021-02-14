@@ -197,7 +197,7 @@ cd rtmpdump
 make SYS=posix
 sudo checkinstall --pkgname=rtmpdump --pkgversion="2:$(date +%Y%m%d%H%M)-git" --backup=no --deldoc=yes --fstrans=no --default
 
-sudo mkdir -p ~/ffmpeg_sources ~/bin && cd ~ && sudo wget -O ffmpeg-snapshot.tar.bz2 https://www.dropbox.com/s/ouciwwc2wpjpf4e/ffmpeg-snapshot.tar.bz2?dl=0 && tar xjvf ffmpeg-snapshot.tar.bz2
+sudo mkdir -p ~/ffmpeg_sources ~/bin && cd ~ && tar xjvf ~/MLS/assets/ffmpeg-4.0.6.tar.bz2
 
 #Install SRT Components
 cd ~/ffmpeg_sources
