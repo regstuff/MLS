@@ -199,14 +199,14 @@ sudo checkinstall --pkgname=rtmpdump --pkgversion="2:$(date +%Y%m%d%H%M)-git" --
 
 sudo mkdir -p ~/ffmpeg_sources ~/bin && cd ~ && sudo wget -O ffmpeg-4.0.6.tar.bz2 https://www.dropbox.com/s/s40ux50c5d42x6s/ffmpeg-4.0.6.tar.bz2?dl=0 && tar xjvf ffmpeg-4.0.6.tar.bz2 && sudo chmod 775 -R ffmpeg-4.0.6/ && mv ffmpeg-4.0.6/ ffmpeg
 
-#Install SRT Components
-cd ~/ffmpeg_sources
-sudo git clone --depth 1 https://github.com/Haivision/srt.git && sudo mkdir srt/build && cd srt/build
-sudo cmake -DCMAKE_INSTALL_PREFIX="$HOME/ffmpeg_build" -DENABLE_C_DEPS=ON -DENABLE_SHARED=OFF -DENABLE_STATIC=ON ..
-sudo make
-sudo make install
+#Install SRT Components - Disabled because enable-libsrt is failing in ffmpeg
+#cd ~/ffmpeg_sources
+#sudo git clone --depth 1 https://github.com/Haivision/srt.git && sudo mkdir srt/build && cd srt/build
+#sudo cmake -DCMAKE_INSTALL_PREFIX="$HOME/ffmpeg_build" -DENABLE_C_DEPS=ON -DENABLE_SHARED=OFF -DENABLE_STATIC=ON ..
+#sudo make
+#sudo make install
 
-#install Latest FFMPEG
+#install Latest FFMPEG   --enable-libsrt \ removed because ffmpeg build is failing with it
 cd ~/ffmpeg && \
 PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
   --prefix="$HOME/ffmpeg_build" \
@@ -226,7 +226,6 @@ PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./conf
   --enable-libx264 \
   --enable-libx265 \
   --enable-libzmq \
-  --enable-libsrt \
   --enable-network \
   --enable-nonfree && \
 PATH="$HOME/bin:$PATH" make
