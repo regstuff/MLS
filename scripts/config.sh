@@ -156,7 +156,17 @@ sed -n $rangeoflines /usr/local/nginx/scripts/config.txt
 
 ;;
 
-##### END AUDIO LIST - START SRT ACCEPT ##########
+##### END AUDIO LIST - START CONVERT RECORDING ##########
+convertrecording)
+#mv --backup=numbered $3/$4.mp4 $3/$4_`date +%Y%m%d-%H_%M_%S`.mp4;
+mv --backup=numbered $3/$4.mp4 $3/$4_old.mp4;
+ffmpeg -y -i $2 -c copy $3/$4.mp4;
+rm -f $2;
+echo "Recording Converted"
+
+;;
+
+##### END CONVERT RECORDING - START SRT ACCEPT ##########
 
 srtaccept)
 LCK="/usr/local/nginx/scripts/tmp/srtaccept.LCK";
