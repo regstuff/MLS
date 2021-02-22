@@ -229,19 +229,170 @@ exec 8>$LCK;
 
 if flock -n -x 8; then
 
+chcount=$2
 if [ -z "$STY" ]; then
+if [ $chcount == "6" ]; then
+#echo "6 channel remapping is not possible due to OBS issues. Set OBS audio to 7.0 and remap in NGINX with 7. Stream 1-6 will have channels 1-6. Stream 7 will have no audio."
+chcount=1000
+else
 echo "Remapping $2 channels"
 exec screen -dm -S remap /bin/bash "$0" "$1" "$2";
+fi
 fi
 
 i=0
 j=1
-chcount=$2
+
 for (( i=0; i<$chcount; i++ )); do
 c0=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 2`
 c1=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 3`
 mapping=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 4`
 rtmpapp=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 5`
+
+#Fix for OBS-ffmpeg remap diff
+#To generate multi-channel files with ffmpeg for OBS use, upto 5.0 is safe. Beyond that there are mapping issues
+#OBS-ffmpeg mapping match for 3,4,5,9,10,11,12,13,14. 6 seems to have lfe issue on channel 4 in OBS
+#7,8 and 16 need to be remapped as below
+#7 -- 1-2,2-3,3-1,4-6,5-7,6-4,7-5
+#8 -- 1-2,2-3,3-1,4-6,5-7,6-8,7-4,8-5
+#16 -- 1-3,2-4,3-15,4-16,5-1,6-2,7-7,8-8,9-5,10-6,11-9,12-10,13-11,14-12,15-13,16-14
+case $2 in
+7)
+if [ $c0 == "c0" ]; then
+c0="c2"
+elif [ $c0 == "c1" ]; then
+c0="c0"
+elif [ $c0 == "c2" ]; then
+c0="c1"
+elif [ $c0 == "c3" ]; then
+c0="c5"
+elif [ $c0 == "c4" ]; then
+c0="c6"
+elif [ $c0 == "c5" ]; then
+c0="c3"
+elif [ $c0 == "c6" ]; then
+c0="c4"
+fi
+
+if [ $c1 == "c0" ]; then
+c1="c2"
+elif [ $c1 == "c1" ]; then
+c1="c0"
+elif [ $c1 == "c2" ]; then
+c1="c1"
+elif [ $c1 == "c3" ]; then
+c1="c5"
+elif [ $c1 == "c4" ]; then
+c1="c6"
+elif [ $c1 == "c5" ]; then
+c1="c3"
+elif [ $c1 == "c6" ]; then
+c1="c4"
+fi
+;;
+
+8)
+if [ $c0 == "c0" ]; then
+c0="c2"
+elif [ $c0 == "c1" ]; then
+c0="c0"
+elif [ $c0 == "c2" ]; then
+c0="c1"
+elif [ $c0 == "c3" ]; then
+c0="c6"
+elif [ $c0 == "c4" ]; then
+c0="c7"
+elif [ $c0 == "c5" ]; then
+c0="c3"
+elif [ $c0 == "c6" ]; then
+c0="c4"
+elif [ $c0 == "c7" ]; then
+c0="c5"
+fi
+
+if [ $c1 == "c0" ]; then
+c1="c2"
+elif [ $c1 == "c1" ]; then
+c1="c0"
+elif [ $c1 == "c2" ]; then
+c1="c1"
+elif [ $c1 == "c3" ]; then
+c1="c6"
+elif [ $c1 == "c4" ]; then
+c1="c7"
+elif [ $c1 == "c5" ]; then
+c1="c3"
+elif [ $c1 == "c6" ]; then
+c1="c4"
+elif [ $c1 == "c7" ]; then
+c1="c5"
+fi
+;;
+
+16)
+if [ $c0 == "c0" ]; then
+c0="c4"
+elif [ $c0 == "c1" ]; then
+c0="c5"
+elif [ $c0 == "c2" ]; then
+c0="c0"
+elif [ $c0 == "c3" ]; then
+c0="c1"
+elif [ $c0 == "c4" ]; then
+c0="c8"
+elif [ $c0 == "c5" ]; then
+c0="c9"
+#No change for c6 and c7
+elif [ $c0 == "c8" ]; then
+c0="c10"
+elif [ $c0 == "c9" ]; then
+c0="c11"
+elif [ $c0 == "c10" ]; then
+c0="c12"
+elif [ $c0 == "c11" ]; then
+c0="c13"
+elif [ $c0 == "c12" ]; then
+c0="c14"
+elif [ $c0 == "c13" ]; then
+c0="c15"
+elif [ $c0 == "c14" ]; then
+c0="c2"
+elif [ $c0 == "c15" ]; then
+c0="c3"
+fi
+
+if [ $c1 == "c0" ]; then
+c1="c4"
+elif [ $c1 == "c1" ]; then
+c1="c5"
+elif [ $c1 == "c2" ]; then
+c1="c0"
+elif [ $c1 == "c3" ]; then
+c1="c1"
+elif [ $c1 == "c4" ]; then
+c1="c8"
+elif [ $c1 == "c5" ]; then
+c1="c9"
+#No change for c6 and c7
+elif [ $c1 == "c8" ]; then
+c1="c10"
+elif [ $c1 == "c9" ]; then
+c1="c11"
+elif [ $c1 == "c10" ]; then
+c1="c12"
+elif [ $c1 == "c11" ]; then
+c1="c13"
+elif [ $c1 == "c12" ]; then
+c1="c14"
+elif [ $c1 == "c13" ]; then
+c1="c15"
+elif [ $c1 == "c14" ]; then
+c1="c2"
+elif [ $c1 == "c15" ]; then
+c1="c3"
+fi
+esac
+#OBS-ffmpeg remap adjustment complete
 
 if [[ $mapping = "mono" ]]
 then
@@ -251,12 +402,12 @@ else
 stream[j]="-map 0:v -map [a$i] -vcodec copy -acodec aac -ac 2 -ab 256k -f flv -strict -2 rtmp://127.0.0.1/$rtmpapp/stream$j"
 map[i]="[0:a]pan=stereo|c0=$c0|c1=$c1,aresample=async=1000[a$i]"
 ((chcount=chcount-1))
-echo $chcount
+#echo $chcount
 fi
 ((j=j+1))
 done
-echo ${map[2]}
-echo ${stream[2]}
+#echo ${map[2]}
+#echo ${stream[2]}
 
 case $chcount in
 0)
@@ -416,14 +567,15 @@ done
 16)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1];[0:a]pan=mono|c0=c2,aresample=async=1000[a2];[0:a]pan=mono|c0=c3,aresample=async=1000[a3];[0:a]pan=mono|c0=c4,aresample=async=1000[a4];[0:a]pan=mono|c0=c5,aresample=async=1000[a5];[0:a]pan=mono|c0=c6,aresample=async=1000[a6];[0:a]pan=mono|c0=c7,aresample=async=1000[a7];[0:a]pan=mono|c0=c8,aresample=async=1000[a8];[0:a]pan=mono|c0=c9,aresample=async=1000[a9];[0:a]pan=mono|c0=c10,aresample=async=1000[a10];[0:a]pan=mono|c0=c11,aresample=async=1000[a11];[0:a]pan=mono|c0=c12,aresample=async=1000[a12];[0:a]pan=mono|c0=c13,aresample=async=1000[a13];[0:a]pan=mono|c0=c14,aresample=async=1000[a14];[0:a]pan=mono|c0=c15,aresample=async=1000[a15]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream15 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream16 -map 0:v -map [a4] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a5] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a6] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream7 -map 0:v -map [a7] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream8 -map 0:v -map [a8] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream5 -map 0:v -map [a9] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream6 -map 0:v -map [a10] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream9 -map 0:v -map [a11] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream10 -map 0:v -map [a12] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream11 -map 0:v -map [a13] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream12 -map 0:v -map [a14] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream13 -map 0:v -map [a15] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream14
+#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1];[0:a]pan=mono|c0=c2,aresample=async=1000[a2];[0:a]pan=mono|c0=c3,aresample=async=1000[a3];[0:a]pan=mono|c0=c4,aresample=async=1000[a4];[0:a]pan=mono|c0=c5,aresample=async=1000[a5];[0:a]pan=mono|c0=c6,aresample=async=1000[a6];[0:a]pan=mono|c0=c7,aresample=async=1000[a7];[0:a]pan=mono|c0=c8,aresample=async=1000[a8];[0:a]pan=mono|c0=c9,aresample=async=1000[a9];[0:a]pan=mono|c0=c10,aresample=async=1000[a10];[0:a]pan=mono|c0=c11,aresample=async=1000[a11];[0:a]pan=mono|c0=c12,aresample=async=1000[a12];[0:a]pan=mono|c0=c13,aresample=async=1000[a13];[0:a]pan=mono|c0=c14,aresample=async=1000[a14];[0:a]pan=mono|c0=c15,aresample=async=1000[a15]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream15 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream16 -map 0:v -map [a4] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a5] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a6] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream7 -map 0:v -map [a7] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream8 -map 0:v -map [a8] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream5 -map 0:v -map [a9] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream6 -map 0:v -map [a10] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream9 -map 0:v -map [a11] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream10 -map 0:v -map [a12] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream11 -map 0:v -map [a13] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream12 -map 0:v -map [a14] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream13 -map 0:v -map [a15] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream14
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]};${map[10]};${map[11]};${map[12]};${map[13]};${map[14]};${map[15]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]} ${stream[11]} ${stream[12]} ${stream[13]} ${stream[14]} ${stream[15]} ${stream[16]}
 echo "Restarting remapping..."
 sleep .2
 done
 ;;
 
 *)
-echo "Remapping is already off"
+echo "6 channel remapping is not possible due to OBS issues. Set OBS audio to 7.0 and remap in NGINX with 7. Stream 1-6 will have channels 1-6. Stream 7 will have no audio."
 exit 0
 esac
 
