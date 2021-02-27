@@ -1,5 +1,11 @@
 
 <?php
+$streamno = $_GET['streamname'];
+$streamapp = $_GET['appname'];
+$output = exec("sudo /bin/bash /usr/local/nginx/scripts/player.sh $streamno $streamapp on");echo $output;
+
+
+
 
 if (isset($_GET['1on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/player.sh 1 on");echo $output;}
 if (isset($_GET['2on'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/player.sh 2 on");echo $output;}
