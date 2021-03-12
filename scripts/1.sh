@@ -424,7 +424,7 @@ exit 0
 ;;
 
 *) #Instagram encoding at 480x854 at 1mbps. Flags global headers needed because tee muxer will not automatically generate headers needed for rtmp flv format
-encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 480x854 -b:v 1000k -preset veryfast -flags +global_header"
+encodeparam="-acodec aac -async 1 -ar 44100 -ac 1 -b:a 128k -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 480x854 -b:v 1000k -preset veryfast -flags +global_header"
 screenname=$id$1;
 LCK="/usr/local/nginx/scripts/tmp/${screenname}.LCK";
 
