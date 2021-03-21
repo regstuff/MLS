@@ -223,7 +223,15 @@ fi
 
 ##### END SRT SEND - START REMAP ##########
 remap)
-LCK="/usr/local/nginx/scripts/tmp/remap.LCK";
+
+case $3 in
+main)
+LCK="/usr/local/nginx/scripts/tmp/remapmain.LCK";
+;;
+
+back)
+LCK="/usr/local/nginx/scripts/tmp/remapback.LCK";
+esac
 
 exec 8>$LCK;
 
@@ -236,7 +244,7 @@ if [ $chcount == "6" ]; then
 chcount=1000
 else
 echo "Remapping $2 channels"
-exec screen -dm -S remap /bin/bash "$0" "$1" "$2";
+exec screen -dm -S remap /bin/bash "$0" "$1" "$2" "$3";
 fi
 fi
 
@@ -248,6 +256,9 @@ c0=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut
 c1=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 3`
 mapping=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 4`
 rtmpapp=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 5`
+if [ $rtmpapp == "main_back" ]; then
+rtmpapp=$3
+fi
 
 #Fix for OBS-ffmpeg remap diff
 #To generate multi-channel files with ffmpeg for OBS use, upto 5.0 is safe. Beyond that there are mapping issues
@@ -398,6 +409,9 @@ if [[ $mapping = "mono" ]]
 then
 stream[j]="-map 0:v -map [a$i] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/$rtmpapp/stream$j"
 map[i]="[0:a]pan=mono|c0=$c0,aresample=async=1000[a$i]"
+elif [[ $mapping = "none" ]]
+then
+:
 else
 stream[j]="-map 0:v -map [a$i] -vcodec copy -acodec aac -ac 2 -ab 256k -f flv -strict -2 rtmp://127.0.0.1/$rtmpapp/stream$j"
 map[i]="[0:a]pan=stereo|c0=$c0|c1=$c1,aresample=async=1000[a$i]"
@@ -406,8 +420,6 @@ map[i]="[0:a]pan=stereo|c0=$c0|c1=$c1,aresample=async=1000[a$i]"
 fi
 ((j=j+1))
 done
-#echo ${map[2]}
-#echo ${stream[2]}
 
 case $chcount in
 0)

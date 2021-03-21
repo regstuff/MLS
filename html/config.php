@@ -61,7 +61,8 @@ echo $output;
 
 if (isset($_GET['remap'])) {
 $channel = $_POST['channel_no'];
-$output = exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh remap $channel");echo $output;}
+$outputdest = $_POST['outputdest'];
+$output = exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh remap \"$channel\" $outputdest");echo $output;}
 
 if (isset($_GET['audiolist'])) {
 $output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh audiolist");
