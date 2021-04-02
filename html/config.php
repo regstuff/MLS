@@ -71,7 +71,9 @@ echo "<pre>$output</pre>";
 #echo "<pre>$output</pre>";
 }
 
-if (isset($_GET['remapoff'])) {$output = exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh remap off");echo $output;}
+if (isset($_GET['remapoff'])) {
+$outputdest = $_POST['outputdest'];
+$output = exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh remap off $outputdest");echo $output;}
 
 if (isset($_GET['srtaccept'])) {
 $output = exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh srtaccept on");echo $output;}

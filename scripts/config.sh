@@ -224,14 +224,7 @@ fi
 ##### END SRT SEND - START REMAP ##########
 remap)
 
-case $3 in
-main)
-LCK="/usr/local/nginx/scripts/tmp/remapmain.LCK";
-;;
-
-back)
-LCK="/usr/local/nginx/scripts/tmp/remapback.LCK";
-esac
+LCK="/usr/local/nginx/scripts/tmp/remap$3.LCK";
 
 exec 8>$LCK;
 
@@ -243,8 +236,8 @@ if [ $chcount == "6" ]; then
 #echo "6 channel remapping is not possible due to OBS issues. Set OBS audio to 7.0 and remap in NGINX with 7. Stream 1-6 will have channels 1-6. Stream 7 will have no audio."
 chcount=1000
 else
-echo "Remapping $2 channels"
-exec screen -dm -S remap /bin/bash "$0" "$1" "$2" "$3";
+echo "Remapping $2 channels of $3 audio"
+exec screen -dm -S remap$3 /bin/bash "$0" "$1" "$2" "$3";
 fi
 fi
 
@@ -252,9 +245,18 @@ i=0
 j=1
 
 for (( i=0; i<$chcount; i++ )); do
+while true #Keep checking till mapping is not none
+do
+mapping=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 4`
+if [ $mapping == "mono" ] || [ $mapping == "stereo" ]
+then
+break
+fi
+((j=j+1))
+done
+
 c0=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 2`
 c1=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 3`
-mapping=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 4`
 rtmpapp=`cat /usr/local/nginx/scripts/config.txt | grep '__stream'$j'__audio__' | cut -d ' ' -f 5`
 if [ $rtmpapp == "main_back" ]; then
 rtmpapp=$3
@@ -407,16 +409,15 @@ esac
 
 if [[ $mapping = "mono" ]]
 then
-stream[j]="-map 0:v -map [a$i] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/$rtmpapp/stream$j"
+stream[i+1]="-map 0:v -map [a$i] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/$rtmpapp/stream$j"
 map[i]="[0:a]pan=mono|c0=$c0,aresample=async=1000[a$i]"
-elif [[ $mapping = "none" ]]
+elif [[ $mapping = "stereo" ]]
 then
-:
-else
-stream[j]="-map 0:v -map [a$i] -vcodec copy -acodec aac -ac 2 -ab 256k -f flv -strict -2 rtmp://127.0.0.1/$rtmpapp/stream$j"
+stream[i+1]="-map 0:v -map [a$i] -vcodec copy -acodec aac -ac 2 -ab 256k -f flv -strict -2 rtmp://127.0.0.1/$rtmpapp/stream$j"
 map[i]="[0:a]pan=stereo|c0=$c0|c1=$c1,aresample=async=1000[a$i]"
 ((chcount=chcount-1))
-#echo $chcount
+else
+:
 fi
 ((j=j+1))
 done
@@ -429,8 +430,7 @@ echo "You don't have enough channels to do that!"; exec bash
 1)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]}" ${stream[1]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]}" ${stream[1]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -439,8 +439,7 @@ done
 2)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]}" ${stream[1]} ${stream[2]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]}" ${stream[1]} ${stream[2]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -449,8 +448,7 @@ done
 3)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]}" ${stream[1]} ${stream[2]} ${stream[3]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1];[0:a]pan=mono|c0=c2,aresample=async=1000[a2]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]}" ${stream[1]} ${stream[2]} ${stream[3]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -459,8 +457,7 @@ done
 4)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1];[0:a]pan=mono|c0=c2,aresample=async=1000[a2];[0:a]pan=mono|c0=c3,aresample=async=1000[a3]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -469,8 +466,7 @@ done
 5)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1];[0:a]pan=mono|c0=c2,aresample=async=1000[a2];[0:a]pan=mono|c0=c3,aresample=async=1000[a3];[0:a]pan=mono|c0=c4,aresample=async=1000[a4]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4 -map 0:v -map [a4] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream5
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -479,8 +475,7 @@ done
 6)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1];[0:a]pan=mono|c0=c2,aresample=async=1000[a2];[0:a]pan=mono|c0=c3,aresample=async=1000[a3];[0:a]pan=mono|c0=c4,aresample=async=1000[a4];[0:a]pan=mono|c0=c5,aresample=async=1000[a5]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4 -map 0:v -map [a4] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream5 -map 0:v -map [a5] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream6
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -489,8 +484,7 @@ done
 7)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1,aresample=async=1000[a0];[0:a]pan=mono|c0=c2,aresample=async=1000[a1];[0:a]pan=mono|c0=c3,aresample=async=1000[a2];[0:a]pan=mono|c0=c3,aresample=async=1000[a3];[0:a]pan=mono|c0=c4,aresample=async=1000[a4];[0:a]pan=mono|c0=c5,aresample=async=1000[a5];[0:a]pan=mono|c0=c6,aresample=async=1000[a6]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 256k -f flv -strict -2 rtmp://127.0.0.1/distribute/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream20 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4 -map 0:v -map [a4] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream5 -map 0:v -map [a5] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream6 -map 0:v -map [a6] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream7
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -499,8 +493,7 @@ done
 8)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1];[0:a]pan=mono|c0=c2,aresample=async=1000[a2];[0:a]pan=mono|c0=c3,aresample=async=1000[a3];[0:a]pan=mono|c0=c4,aresample=async=1000[a4];[0:a]pan=mono|c0=c5,aresample=async=1000[a5];[0:a]pan=mono|c0=c6,aresample=async=1000[a6];[0:a]pan=mono|c0=c7,aresample=async=1000[a7]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4 -map 0:v -map [a4] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream5 -map 0:v -map [a5] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream6 -map 0:v -map [a6] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream7 -map 0:v -map [a7] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream8
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -509,8 +502,7 @@ done
 9)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1];[0:a]pan=mono|c0=c2,aresample=async=1000[a2];[0:a]pan=mono|c0=c3,aresample=async=1000[a3];[0:a]pan=mono|c0=c4,aresample=async=1000[a4];[0:a]pan=mono|c0=c5,aresample=async=1000[a5];[0:a]pan=mono|c0=c6,aresample=async=1000[a6];[0:a]pan=mono|c0=c7,aresample=async=1000[a7];[0:a]pan=mono|c0=c8,aresample=async=1000[a8]" -map 0:v -map [a0] -vcodec copy -acodec aac -ac 2 -ab 256k -f flv -strict -2 rtmp://127.0.0.1/distribute/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream20 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a4] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4 -map 0:v -map [a5] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream5 -map 0:v -map [a6] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream6 -map 0:v -map [a7] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream7 -map 0:v -map [a8] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream8
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -519,8 +511,7 @@ done
 10)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1];[0:a]pan=mono|c0=c2,aresample=async=1000[a2];[0:a]pan=mono|c0=c3,aresample=async=1000[a3];[0:a]pan=mono|c0=c4,aresample=async=1000[a4];[0:a]pan=mono|c0=c5,aresample=async=1000[a5];[0:a]pan=mono|c0=c6,aresample=async=1000[a6];[0:a]pan=mono|c0=c7,aresample=async=1000[a7];[0:a]pan=mono|c0=c8,aresample=async=1000[a8];[0:a]pan=mono|c0=c9,aresample=async=1000[a9]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4 -map 0:v -map [a4] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream5 -map 0:v -map [a5] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream6 -map 0:v -map [a6] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream7 -map 0:v -map [a7] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream8 -map 0:v -map [a8] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream9 -map 0:v -map [a9] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream10
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -529,8 +520,7 @@ done
 11)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]};${map[10]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]} ${stream[11]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1];[0:a]pan=mono|c0=c2,aresample=async=1000[a2];[0:a]pan=mono|c0=c3,aresample=async=1000[a3];[0:a]pan=mono|c0=c4,aresample=async=1000[a4];[0:a]pan=mono|c0=c5,aresample=async=1000[a5];[0:a]pan=mono|c0=c6,aresample=async=1000[a6];[0:a]pan=mono|c0=c7,aresample=async=1000[a7];[0:a]pan=mono|c0=c8,aresample=async=1000[a8];[0:a]pan=mono|c0=c9,aresample=async=1000[a9];[0:a]pan=mono|c0=c10,aresample=async=1000[a10]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4 -map 0:v -map [a4] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream5 -map 0:v -map [a5] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream6 -map 0:v -map [a6] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream7 -map 0:v -map [a7] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream8 -map 0:v -map [a8] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream9 -map 0:v -map [a9] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream10 -map 0:v -map [a10] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream11
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]};${map[10]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]} ${stream[11]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -539,8 +529,7 @@ done
 12)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]};${map[10]};${map[11]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]} ${stream[11]} ${stream[12]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1];[0:a]pan=mono|c0=c2,aresample=async=1000[a2];[0:a]pan=mono|c0=c3,aresample=async=1000[a3];[0:a]pan=mono|c0=c4,aresample=async=1000[a4];[0:a]pan=mono|c0=c5,aresample=async=1000[a5];[0:a]pan=mono|c0=c6,aresample=async=1000[a6];[0:a]pan=mono|c0=c7,aresample=async=1000[a7];[0:a]pan=mono|c0=c8,aresample=async=1000[a8];[0:a]pan=mono|c0=c9,aresample=async=1000[a9];[0:a]pan=mono|c0=c10,aresample=async=1000[a10];[0:a]pan=mono|c0=c11,aresample=async=1000[a11]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4 -map 0:v -map [a4] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream5 -map 0:v -map [a5] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream6 -map 0:v -map [a6] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream7 -map 0:v -map [a7] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream8 -map 0:v -map [a8] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream9 -map 0:v -map [a9] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream10 -map 0:v -map [a10] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream11 -map 0:v -map [a11] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream12
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]};${map[10]};${map[11]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]} ${stream[11]} ${stream[12]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -549,8 +538,7 @@ done
 13)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]};${map[10]};${map[11]};${map[12]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]} ${stream[11]} ${stream[12]} ${stream[13]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1];[0:a]pan=mono|c0=c2,aresample=async=1000[a2];[0:a]pan=mono|c0=c3,aresample=async=1000[a3];[0:a]pan=mono|c0=c4,aresample=async=1000[a4];[0:a]pan=mono|c0=c5,aresample=async=1000[a5];[0:a]pan=mono|c0=c6,aresample=async=1000[a6];[0:a]pan=mono|c0=c7,aresample=async=1000[a7];[0:a]pan=mono|c0=c8,aresample=async=1000[a8];[0:a]pan=mono|c0=c9,aresample=async=1000[a9];[0:a]pan=mono|c0=c10,aresample=async=1000[a10];[0:a]pan=mono|c0=c11,aresample=async=1000[a11];[0:a]pan=mono|c0=c12,aresample=async=1000[a12]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4 -map 0:v -map [a4] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream5 -map 0:v -map [a5] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream6 -map 0:v -map [a6] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream7 -map 0:v -map [a7] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream8 -map 0:v -map [a8] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream9 -map 0:v -map [a9] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream10 -map 0:v -map [a10] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream11 -map 0:v -map [a11] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream12 -map 0:v -map [a12] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream13
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]};${map[10]};${map[11]};${map[12]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]} ${stream[11]} ${stream[12]} ${stream[13]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -559,8 +547,7 @@ done
 14)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]};${map[10]};${map[11]};${map[12]};${map[13]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]} ${stream[11]} ${stream[12]} ${stream[13]} ${stream[14]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1];[0:a]pan=mono|c0=c2,aresample=async=1000[a2];[0:a]pan=mono|c0=c3,aresample=async=1000[a3];[0:a]pan=mono|c0=c4,aresample=async=1000[a4];[0:a]pan=mono|c0=c5,aresample=async=1000[a5];[0:a]pan=mono|c0=c6,aresample=async=1000[a6];[0:a]pan=mono|c0=c7,aresample=async=1000[a7];[0:a]pan=mono|c0=c8,aresample=async=1000[a8];[0:a]pan=mono|c0=c9,aresample=async=1000[a9];[0:a]pan=mono|c0=c10,aresample=async=1000[a10];[0:a]pan=mono|c0=c11,aresample=async=1000[a11];[0:a]pan=mono|c0=c12,aresample=async=1000[a12];[0:a]pan=mono|c0=c13,aresample=async=1000[a13]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4 -map 0:v -map [a4] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream5 -map 0:v -map [a5] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream6 -map 0:v -map [a6] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream7 -map 0:v -map [a7] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream8 -map 0:v -map [a8] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream9 -map 0:v -map [a9] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream10 -map 0:v -map [a10] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream11 -map 0:v -map [a11] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream12 -map 0:v -map [a12] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream13 -map 0:v -map [a13] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream14
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]};${map[10]};${map[11]};${map[12]};${map[13]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]} ${stream[11]} ${stream[12]} ${stream[13]} ${stream[14]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -569,8 +556,7 @@ done
 15)
 while true
 do
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]};${map[10]};${map[11]};${map[12]};${map[13]};${map[14]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]} ${stream[11]} ${stream[12]} ${stream[13]} ${stream[14]} ${stream[15]}
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1,aresample=async=1000[a0];[0:a]pan=mono|c0=c2,aresample=async=1000[a1];[0:a]pan=mono|c0=c3,aresample=async=1000[a2];[0:a]pan=mono|c0=c4,aresample=async=1000[a3];[0:a]pan=mono|c0=c5,aresample=async=1000[a4];[0:a]pan=mono|c0=c6,aresample=async=1000[a5];[0:a]pan=mono|c0=c7,aresample=async=1000[a6];[0:a]pan=mono|c0=c8,aresample=async=1000[a7];[0:a]pan=mono|c0=c9,aresample=async=1000[a8];[0:a]pan=mono|c0=c10,aresample=async=1000[a9];[0:a]pan=mono|c0=c11,aresample=async=1000[a10];[0:a]pan=mono|c0=c12,aresample=async=1000[a11];[0:a]pan=mono|c0=c13,aresample=async=1000[a12];[0:a]pan=mono|c0=c14,aresample=async=1000[a13];[0:a]pan=mono|c0=c15,aresample=async=1000[a14]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 256k -ac 2 -f flv -strict -2 rtmp://127.0.0.1/distribute/stream1 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4 -map 0:v -map [a4] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream5 -map 0:v -map [a5] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream6 -map 0:v -map [a6] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream7 -map 0:v -map [a7] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream8 -map 0:v -map [a8] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream9 -map 0:v -map [a9] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream10 -map 0:v -map [a10] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream11 -map 0:v -map [a11] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream12 -map 0:v -map [a12] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream13 -map 0:v -map [a13] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream14 -map 0:v -map [a14] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream15
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]};${map[10]};${map[11]};${map[12]};${map[13]};${map[14]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]} ${stream[11]} ${stream[12]} ${stream[13]} ${stream[14]} ${stream[15]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -579,8 +565,7 @@ done
 16)
 while true
 do
-#/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "[0:a]pan=mono|c0=c0,aresample=async=1000[a0];[0:a]pan=mono|c0=c1,aresample=async=1000[a1];[0:a]pan=mono|c0=c2,aresample=async=1000[a2];[0:a]pan=mono|c0=c3,aresample=async=1000[a3];[0:a]pan=mono|c0=c4,aresample=async=1000[a4];[0:a]pan=mono|c0=c5,aresample=async=1000[a5];[0:a]pan=mono|c0=c6,aresample=async=1000[a6];[0:a]pan=mono|c0=c7,aresample=async=1000[a7];[0:a]pan=mono|c0=c8,aresample=async=1000[a8];[0:a]pan=mono|c0=c9,aresample=async=1000[a9];[0:a]pan=mono|c0=c10,aresample=async=1000[a10];[0:a]pan=mono|c0=c11,aresample=async=1000[a11];[0:a]pan=mono|c0=c12,aresample=async=1000[a12];[0:a]pan=mono|c0=c13,aresample=async=1000[a13];[0:a]pan=mono|c0=c14,aresample=async=1000[a14];[0:a]pan=mono|c0=c15,aresample=async=1000[a15]" -map 0:v -map [a0] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream3 -map 0:v -map [a1] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream4 -map 0:v -map [a2] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream15 -map 0:v -map [a3] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream16 -map 0:v -map [a4] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream1 -map 0:v -map [a5] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream2 -map 0:v -map [a6] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream7 -map 0:v -map [a7] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream8 -map 0:v -map [a8] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream5 -map 0:v -map [a9] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream6 -map 0:v -map [a10] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream9 -map 0:v -map [a11] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream10 -map 0:v -map [a12] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream11 -map 0:v -map [a13] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream12 -map 0:v -map [a14] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream13 -map 0:v -map [a15] -vcodec copy -acodec aac -ab 128k -f flv -strict -2 rtmp://127.0.0.1/main/stream14
-/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/main/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]};${map[10]};${map[11]};${map[12]};${map[13]};${map[14]};${map[15]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]} ${stream[11]} ${stream[12]} ${stream[13]} ${stream[14]} ${stream[15]} ${stream[16]}
+/usr/bin/ffmpeg -re -i rtmp://127.0.0.1/$3/stream1080 -filter_complex "${map[0]};${map[1]};${map[2]};${map[3]};${map[4]};${map[5]};${map[6]};${map[7]};${map[8]};${map[9]};${map[10]};${map[11]};${map[12]};${map[13]};${map[14]};${map[15]}" ${stream[1]} ${stream[2]} ${stream[3]} ${stream[4]} ${stream[5]} ${stream[6]} ${stream[7]} ${stream[8]} ${stream[9]} ${stream[10]} ${stream[11]} ${stream[12]} ${stream[13]} ${stream[14]} ${stream[15]} ${stream[16]}
 echo "Restarting remapping..."
 sleep .2
 done
@@ -594,12 +579,12 @@ esac
 else
 case $2 in
 off)
-kill $(ps aux | grep "[S]CREEN.* remap" | awk '{print $2}')
-echo "Turning off remapping"
+kill $(ps aux | grep "[S]CREEN.* remap$3" | awk '{print $2}')
+echo "Turning off $3 remapping"
 ;;
 
 *)
-echo "Audio is already being remapped with $2 channels"
+echo "$3 audio is already being remapped with $2 channels"
 esac
 fi
 

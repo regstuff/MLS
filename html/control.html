@@ -80,8 +80,8 @@ return false;
 <div style="text-align:center" class="padded"><a href="/stat" target="_blank">Stats</a>   |||   <a href="/recording" target="_blank">Recordings</a>   |||   <a href="/settings.html" target="_blank">Settings</a>   |||   <a href="/config.php?proclist" target="_blank">Processes</a><br/>
 <p id="serverdetails">Test</p><script>var address = window.location.hostname; var rtmp = "Send primary stream to rtmp://"; fulladdress = rtmp.concat(address, "/main/stream1 or stream2 or stream 3 etc."); rtmp = "Send backup stream to rtmp://"; backupaddress = rtmp.concat(address, "/backup/stream1 or stream2 or stream 3 etc.");document.getElementById("serverdetails").innerHTML = fulladdress + "<br/>" + backupaddress;</script></div>
 
-<div style="text-align:center" class="padded"><form method="post" target="_blank" action="/config.php?remap"><p><b>No. of Audio Channels: </b><input type="text" name="channel_no" size="5" placeholder="4"/><select name="outputdest"><option value="main">Main</option><option value="back">Backup</option></select><input type="submit" value="Remap" /></p></form>
-<p><a href="/config.php?remapoff" target="_blank">Turn off Remapping</a></p></div>
+<div style="text-align:center" class="padded"><form method="post" target="_blank" action="/config.php?remap"><p><b>No. of Audio Channels: </b><input type="text" name="channel_no" size="5" placeholder="4"/><select name="outputdest"><option value="main">Main</option><option value="backup">Backup</option></select><input type="submit" value="Remap On" /></p></form>
+<form method="post" target="_blank" action="/config.php?remapoff"><p><b>Turn off Remapping: </b><select name="outputdest"><option value="main">Main</option><option value="backup">Backup</option></select><input type="submit" value="Remap Off" /></form></p></div>
 
 <div style="text-align:center" class="padded"><p>SRT Accept: <a href="/config.php?srtaccept" target="_blank">   ON</a>    |||    <a href="/config.php?srtacceptoff" target="_blank">   OFF</a></p></div>
 
