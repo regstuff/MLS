@@ -262,6 +262,10 @@ if [ $rtmpapp == "main_back" ]; then
 rtmpapp=$3
 fi
 
+if [ $3 == "backup" ]; then #Backup goes only to backup, not distribute. Avoid conflict with main
+rtmpapp=$3
+fi
+
 #Fix for OBS-ffmpeg remap diff
 #To generate multi-channel files with ffmpeg for OBS use, upto 5.0 is safe. Beyond that there are mapping issues
 #OBS-ffmpeg mapping match for 3,4,5,9,10,11,12,13,14. 6 seems to have lfe issue on channel 4 in OBS
