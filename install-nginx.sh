@@ -156,25 +156,25 @@ sudo systemctl restart php7.0-fpm
 sudo cp /usr/local/nginx/scripts/nginx.conf /usr/local/nginx/conf/
 sudo rm -R /usr/local/nginx/html
 sudo cp -R ~/MLS/html /usr/local/nginx
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/2.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/3.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/4.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/5.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/6.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/7.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/8.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/9.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/10.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/11.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/12.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/13.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/14.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/15.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/16.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/17.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/18.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/19.php
-sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/20.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/2.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/3.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/4.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/5.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/6.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/7.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/8.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/9.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/10.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/11.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/12.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/13.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/14.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/15.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/16.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/17.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/18.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/19.php
+#sudo cp /usr/local/nginx/html/1.php /usr/local/nginx/html/20.php
 
 #Setup HLS & Recording folders
 sudo mkdir /usr/local/nginx/html/hls
