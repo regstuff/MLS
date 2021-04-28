@@ -43,26 +43,6 @@ Resolution: <select name="resolution"><option value="source">Source</option><opt
 </div>
 
 <hr>
-<div class="padded">
-<h2>Upload Holding Screens</h2>
-<form method="post" target="_blank" action="config.php?uploadfile">
-Url: <br /> <input type="text" name="file_url" size="35" placeholder="https://www.dropbox.com/s/25xhzrtvom/filename.mp4?dl=0"/> <br/>
-Stream Id: <select name="stream_no"><option value="">Choose</option><option value="1">Stream 1</option><option value="2">Stream 2</option><option value="3">Stream 3</option><option value="4">Stream 4</option><option value="5">Stream 5</option><option value="6">Stream 6</option><option value="7">Stream 7</option><option value="8">Stream 8</option><option value="9">Stream 9</option><option value="10">Stream 10</option><option value="11">Stream 11</option><option value="12">Stream 12</option><option value="13">Stream 13</option><option value="14">Stream 14</option><option value="15">Stream 15</option><option value="16">Stream 16</option><option value="17">Stream 17</option><option value="18">Stream 18</option><option value="19">Stream 19</option><option value="20">Stream 20</option></select> <br/> 
-Video Type: <select name="type_id"><option value="">Choose</option><option value="holding.mp4">Holding</option><option value="video.mp4">Video</option><option value="failover.mp4">Failover</option><option value="lowerthird.png">Lower 3rd</option></select> <br/>
-<input type="submit" value="Upload File" /> <br/>
-</form>
-</div>
-<hr>
-
-<div class="padded">
-<h2>Upload Lowerthirds</h2>
-<form method="post" target="_blank" action="config.php?uploadlower" enctype="multipart/form-data">
-  Select image to upload:
-  <input type="file" name="fileToUpload" id="fileToUpload">
-  <input type="submit" value="Upload Image" name="submit">
-</form>
-</div>
-<hr>
 
 <div class="padded">
 <h2>Add Stream Config</h2>
@@ -92,8 +72,9 @@ Main/Distribute: <select name="rtmpparam"><option value="main_back">Main-Backup<
 <p><a href="/config.php?audiolist" target="_blank">Audio Configs List</a></p></div>
 
 <hr>
+
 <div class="padded">
-<h2>Instagram Config</h2>
+<h2>Instagram Authentication Test</h2>
 <form method="post" target="_blank" action="config.php?instatestauth">
 Stream Id: <select name="insta_id"><option value="1">Stream 1</option><option value="2">Stream 2</option><option value="3">Stream 3</option><option value="4">Stream 4</option><option value="5">Stream 5</option><option value="6">Stream 6</option><option value="7">Stream 7</option><option value="8">Stream 8</option><option value="9">Stream 9</option><option value="10">Stream 10</option><option value="11">Stream 11</option><option value="12">Stream 12</option><option value="13">Stream 13</option><option value="14">Stream 14</option><option value="15">Stream 15</option><option value="16">Stream 16</option><option value="17">Stream 17</option><option value="18">Stream 18</option><option value="19">Stream 19</option><option value="20">Stream 20</option></select> <input type="submit" value="Test Auth" /> <br/>
 </form>
@@ -109,6 +90,37 @@ Stream Id: <select name="insta_id"><option value="">Choose</option><option value
 <input type="submit" value="Add login" /> <br/>
 </form>
 </div>
+
+
+<hr>
+
+<div class="padded">
+<h2>Add/Remove Schedule</h2>
+<form method="post" target="_blank" action="/config.php?videoschedule"><p><b>Schedule: </b><input type="text" name="hour" size="5" placeholder="HH"/><input type="text" name="minute" size="5" placeholder="MM"/><select name="stream_no"><option value="">Choose</option><option value="1">Stream 1</option><option value="2">Stream 2</option><option value="3">Stream 3</option><option value="4">Stream 4</option><option value="5">Stream 5</option><option value="6">Stream 6</option><option value="7">Stream 7</option><option value="8">Stream 8</option><option value="9">Stream 9</option><option value="10">Stream 10</option><option value="11">Stream 11</option><option value="12">Stream 12</option><option value="13">Stream 13</option><option value="14">Stream 14</option><option value="15">Stream 15</option><option value="16">Stream 16</option><option value="17">Stream 17</option><option value="18">Stream 18</option><option value="19">Stream 19</option><option value="20">Stream 20</option></select><select name="type_id"><option value="">Choose</option><option value="holding">Holding</option><option value="video">Video</option><option value="out1">Output 1</option><option value="out2">Output 2</option><option value="out3">Output 3</option><option value="out4">Output 4</option><option value="out5">Output 5</option><option value="out6">Output 6</option><option value="out7">Output 7</option><option value="out8">Output 8</option><option value="out9">Output 9</option><option value="out10">Output 10</option><option value="out98">Record</option><option value="insta">Instagram</option></select><select name="on_off"><option value="">Choose</option><option value="on">On</option><option value="off">Off</option></select><select name="schedule_type"><option value="">Choose</option><option value="add">Add</option><option value="delete">Delete</option></select><input type="submit" value="Schedule" /></p></form>
+<p><a href="/config.php?schedulelist" target="_blank">Schedule List</a></p>
+<hr>
+
+<div class="padded">
+<h2>Upload Lowerthirds</h2>
+<form method="post" target="_blank" action="config.php?uploadlower" enctype="multipart/form-data">
+  Select image to upload:
+  <input type="file" name="fileToUpload" id="fileToUpload">
+  <input type="submit" value="Upload Image" name="submit">
+</form>
+</div>
+
+<hr>
+
+<div class="padded">
+<h2>Upload Holding Screens</h2>
+<form method="post" target="_blank" action="config.php?uploadfile">
+Url: <br /> <input type="text" name="file_url" size="35" placeholder="https://www.dropbox.com/s/25xhzrtvom/filename.mp4?dl=0"/> <br/>
+Stream Id: <select name="stream_no"><option value="">Choose</option><option value="1">Stream 1</option><option value="2">Stream 2</option><option value="3">Stream 3</option><option value="4">Stream 4</option><option value="5">Stream 5</option><option value="6">Stream 6</option><option value="7">Stream 7</option><option value="8">Stream 8</option><option value="9">Stream 9</option><option value="10">Stream 10</option><option value="11">Stream 11</option><option value="12">Stream 12</option><option value="13">Stream 13</option><option value="14">Stream 14</option><option value="15">Stream 15</option><option value="16">Stream 16</option><option value="17">Stream 17</option><option value="18">Stream 18</option><option value="19">Stream 19</option><option value="20">Stream 20</option></select> <br/> 
+Video Type: <select name="type_id"><option value="">Choose</option><option value="holding.mp4">Holding</option><option value="video.mp4">Video</option><option value="failover.mp4">Failover</option><option value="lowerthird.png">Lower 3rd</option></select> <br/>
+<input type="submit" value="Upload File" /> <br/>
+</form>
+</div>
+<hr>
 
 <br/><br/><br/></body>
 </html>

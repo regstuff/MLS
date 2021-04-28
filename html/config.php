@@ -131,6 +131,32 @@ echo "<br>";
 	echo $folder_id." : <pre>$output</pre>";
 	}
 
+if (isset($_GET['videoschedule'])) {
+$hour = $_POST['hour'];
+$minute = $_POST['minute'];
+$stream_no = $_POST['stream_no'];
+$type_id = $_POST['type_id'];
+$on_off = $_POST['on_off'];
+$schedule_type = $_POST['schedule_type'];
+
+echo "<h2>You Entered the following information:</h2>";
+echo "<b>Time: </b> $hour:$minute";
+echo "<br><b>Stream id: </b> $stream_no";
+echo "<br><b>Video: </b> $type_id";
+echo "<br><b>Schedule: </b> $schedule_type";
+echo "<br>";
+
+#	$output = shell_exec("(sudo crontab -l; echo '00 11 * * * sudo /bin/bash /usr/local/nginx/scripts/$stream_no.sh off && sudo /bin/bash /usr/local/nginx/scripts/$stream_no.sh out1 off') 2> /dev/null | sort -u | sudo crontab -");
+	$output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh videoschedule \"$stream_no\" \"$type_id\" \"$on_off\" \"$schedule_type\" \"$hour\" $minute");
+#	$output = shell_exec("sudo ls -l /usr/local/nginx/html");
+	echo $output;
+	}
+
+if (isset($_GET['schedulelist'])) {
+	$output = shell_exec("sudo /bin/bash /usr/local/nginx/scripts/config.sh schedulelist");
+	echo "<pre>$output</pre>";
+	}
+
 if (isset($_GET['uploadlower'])) {
 error_reporting(E_ALL);
 ini_set("display_errors", 1);

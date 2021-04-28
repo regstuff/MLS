@@ -29,7 +29,77 @@ sudo sed -i "s|'IG_PASS', '.*|'IG_PASS', '$4');|" /usr/local/nginx/scripts/Insta
 
 ;;
 
-##### END INSTA LOGIN - START AUDIO CONFIG ##########
+##### END INSTA LOGIN - START VIDEO SCHEDULE ##########
+
+videoschedule)
+case $5 in
+add)
+case $4 in
+on)
+case $3 in
+holding)
+(sudo crontab -l; echo "$7 $6 * * * sudo /bin/bash /usr/local/nginx/scripts/$2.sh on && sudo /bin/bash /usr/local/nginx/scripts/$2.sh $3") 2> /dev/null | sort -u | sudo crontab -
+;;
+video)
+(sudo crontab -l; echo "$7 $6 * * * sudo /bin/bash /usr/local/nginx/scripts/$2.sh on && sudo /bin/bash /usr/local/nginx/scripts/$2.sh $3") 2> /dev/null | sort -u | sudo crontab -
+;;
+*)
+(sudo crontab -l; echo "$7 $6 * * * sudo /bin/bash /usr/local/nginx/scripts/$2.sh $3") 2> /dev/null | sort -u | sudo crontab -
+esac
+;;
+
+off)
+case $3 in
+holding)
+(sudo crontab -l; echo "$7 $6 * * * sudo /bin/bash /usr/local/nginx/scripts/$2.sh off") 2> /dev/null | sort -u | sudo crontab -
+;;
+video)
+(sudo crontab -l; echo "$7 $6 * * * sudo /bin/bash /usr/local/nginx/scripts/$2.sh off") 2> /dev/null | sort -u | sudo crontab -
+;;
+*)
+(sudo crontab -l; echo "$7 $6 * * * sudo /bin/bash /usr/local/nginx/scripts/$2.sh $3 off") 2> /dev/null | sort -u | sudo crontab -
+esac
+esac
+;;
+
+delete)
+case $4 in
+on)
+case $3 in
+holding)
+(sudo crontab -l | grep -v "$7 $6 \* \* \* sudo /bin/bash /usr/local/nginx/scripts/$2.sh on && sudo /bin/bash /usr/local/nginx/scripts/$2.sh $3") 2> /dev/null | sort -u | sudo crontab -
+;;
+video)
+(sudo crontab -l | grep -v "$7 $6 \* \* \* sudo /bin/bash /usr/local/nginx/scripts/$2.sh on && sudo /bin/bash /usr/local/nginx/scripts/$2.sh $3") 2> /dev/null | sort -u | sudo crontab -
+;;
+*)
+(sudo crontab -l | grep -v "$7 $6 \* \* \* sudo /bin/bash /usr/local/nginx/scripts/$2.sh $3") 2> /dev/null | sort -u | sudo crontab -
+esac
+;;
+
+off)
+case $3 in
+holding)
+(sudo crontab -l | grep -v "$7 $6 \* \* \* sudo /bin/bash /usr/local/nginx/scripts/$2.sh off") 2> /dev/null | sort -u | sudo crontab -
+;;
+video)
+(sudo crontab -l | grep -v "$7 $6 \* \* \* sudo /bin/bash /usr/local/nginx/scripts/$2.sh off") 2> /dev/null | sort -u | sudo crontab -
+;;
+*)
+(sudo crontab -l | grep -v "$7 $6 \* \* \* sudo /bin/bash /usr/local/nginx/scripts/$2.sh $3 off") 2> /dev/null | sort -u | sudo crontab -
+esac
+esac
+
+esac
+;;
+
+##### END VIDEO SCHEDULE - START SCHEDULE LIST ##########
+schedulelist)
+sudo crontab -l | grep -v "#" | sort;
+
+;;
+
+##### END SCHEDULE LIST- START AUDIO CONFIG ##########
 
 audioconfig)
 sudo sed -i "s|stream$2__audio__.*|stream$2__audio__ $4 $5 $3 $6|" /usr/local/nginx/scripts/config.txt;
