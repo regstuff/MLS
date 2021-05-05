@@ -38,10 +38,10 @@ case $4 in
 on)
 case $3 in
 holding)
-(sudo crontab -l; echo "$7 $6 * * * sudo /bin/bash /usr/local/nginx/scripts/$2.sh on && sudo /bin/bash /usr/local/nginx/scripts/$2.sh $3") 2> /dev/null | sort -u | sudo crontab -
+(sudo crontab -l; echo "$7 $6 * * * sudo /bin/bash /usr/local/nginx/scripts/$2.sh on && sudo /bin/bash /usr/local/nginx/scripts/$2.sh $3 $8") 2> /dev/null | sort -u | sudo crontab -
 ;;
 video)
-(sudo crontab -l; echo "$7 $6 * * * sudo /bin/bash /usr/local/nginx/scripts/$2.sh on && sudo /bin/bash /usr/local/nginx/scripts/$2.sh $3") 2> /dev/null | sort -u | sudo crontab -
+(sudo crontab -l; echo "$7 $6 * * * sudo /bin/bash /usr/local/nginx/scripts/$2.sh on && sudo /bin/bash /usr/local/nginx/scripts/$2.sh $3 $8") 2> /dev/null | sort -u | sudo crontab -
 ;;
 *)
 (sudo crontab -l; echo "$7 $6 * * * sudo /bin/bash /usr/local/nginx/scripts/$2.sh $3") 2> /dev/null | sort -u | sudo crontab -
