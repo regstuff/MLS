@@ -257,13 +257,13 @@ fi
 done
 
 if [ -z "$STY" ]; then
-echo "Turning on $streamid holding screen"
-exec screen -dm -S $screenname /bin/bash "$0" holding;
+echo "Turning on $streamid holding screen at $2 seconds"
+exec screen -dm -S $screenname /bin/bash "$0" holding $2;
 fi
 
 while true #Loop the same file using stream_loop -1. genpts needed to continue PTS for each iteration
 do
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -ss $2 -1 -i /usr/local/nginx/scripts/images/$holdingvideo -c copy -vbsf h264_mp4toannexb -f mpegts pipe:1 > $inputparam
+/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -ss $2 -i /usr/local/nginx/scripts/images/$holdingvideo -c copy -vbsf h264_mp4toannexb -f mpegts pipe:1 > $inputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done
@@ -290,13 +290,13 @@ fi
 done
 
 if [ -z "$STY" ]; then
-echo "Turning on $streamid Ad video"
-exec screen -dm -S $screenname /bin/bash "$0" video;
+echo "Turning on $streamid Ad video at $2 seconds"
+exec screen -dm -S $screenname /bin/bash "$0" video $2;
 fi
 
 while true
 do
-/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -i /usr/local/nginx/scripts/images/$advideo -c copy -vbsf h264_mp4toannexb -f mpegts pipe:1 > $inputparam
+/usr/local/bin/ffmpeg -nostdin -re -fflags +genpts -stream_loop -1 -ss $2 -i /usr/local/nginx/scripts/images/$advideo -c copy -vbsf h264_mp4toannexb -f mpegts pipe:1 > $inputparam
 echo "Restarting ffmpeg..."
 sleep .2
 done

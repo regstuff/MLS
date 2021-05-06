@@ -213,7 +213,7 @@ destlist)
 startline=`grep -n '***DESTINATION CONFIG***' /usr/local/nginx/scripts/config.txt | cut -d: -f 1`
 endline=`grep -n '***STREAM CONFIG***' /usr/local/nginx/scripts/config.txt | cut -d: -f 1`
 rangeoflines=$startline','$endline'p'
-sed -n $rangeoflines /usr/local/nginx/scripts/config.txt | grep -v "rtmp://anyserver.com source" | grep -v "instagram.*YourKey source"
+sed -n $rangeoflines /usr/local/nginx/scripts/config.txt | grep -v "rtmp://unconfigured.blk source" | grep -v "instagram.*YourKey source" | grep -v "rtmp://localhost/recording/stream[0-9].* source"
 
 ;;
 
