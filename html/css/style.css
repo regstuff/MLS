@@ -1,0 +1,133 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #fff7eb;
+	color: #282b43;
+}
+.padded {
+	max-width: 720px;
+	margin: auto;
+	padding: 5px 20px 5px 20px;
+}
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+	background-color: #eee;
+	color: #444;
+	cursor: pointer;
+	padding: 18px;
+	width: 100%;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-size: 15px;
+}
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.collapsible:hover {
+	background-color: #ccc;
+}
+/* Style the collapsible content. Note: hidden by default */
+.content {
+	padding: 0 18px;
+	display: none;
+	overflow: hidden;
+	background-color: #f1f1f1;
+}
+
+h2 {
+	color: #7c0514;
+}
+.hero-section {
+	height: 100px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	background-color: #cf4521;
+	color: #fff7eb;
+}
+
+.divider {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 30px 0;
+}
+
+.divider img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.hero-header {
+	background-color: #cf4521;
+}
+
+.stream-selector {
+	min-width: 200px;
+}
+
+form input,
+form select {
+	margin: 2px 0;
+}
+
+/* buttons */
+input[type='submit'],
+.save-table {
+	min-width: 200px;
+	padding: 5px;
+	margin: 15px 0;
+	font-size: 14px;
+	border-radius: 5px;
+	background-color: #cf4521;
+	border: 0px;
+	color: #fff7eb;
+	font-weight: bold;
+}
+input[type='submit']:active,
+.save-table:active {
+	background-color: #e08366;
+}
+
+/* details */
+details {
+	border: 1px solid #7c0514aa;
+	border-radius: 4px;
+	padding: 0.5em 0.5em 0;
+	width: 100%;
+}
+
+summary {
+	color: #7c0514;
+	font-weight: bold;
+	margin: -0.5em -0.5em 0;
+	padding: 0.5em;
+}
+
+details[open] {
+	padding: 0.5em;
+}
+
+details[open] summary {
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 0.5em;
+}
+
+/* ===== Ajax Responses View ===== */
+
+.response-box {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 400px;
+	height: 200px;
+	background-color: #fff7ebee;
+	border: 1px solid #e08366;
+	border-top: 5px solid #e08366;
+	border-bottom: 5px solid #e08366;
+	border-radius: 20px;
+	padding: 10px;
+	overflow-y: auto;
+}
