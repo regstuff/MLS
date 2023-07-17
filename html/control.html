@@ -5,32 +5,6 @@
 		<link rel="stylesheet" type="text/css" href="/css/style.css" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 		<script type="text/javascript" src="/js/tools.js"></script>
-		<style type="text/css">
-			/* Style the button that is used to open and close the collapsible content */
-			.collapsible {
-				background-color: #eee;
-				color: #444;
-				cursor: pointer;
-				padding: 18px;
-				width: 100%;
-				border: none;
-				text-align: left;
-				outline: none;
-				font-size: 15px;
-			}
-			/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-			.active,
-			.collapsible:hover {
-				background-color: #ccc;
-			}
-			/* Style the collapsible content. Note: hidden by default */
-			.content {
-				padding: 0 18px;
-				display: none;
-				overflow: hidden;
-				background-color: #f1f1f1;
-			}
-		</style>
 		<script type="text/javascript" src="jsmpeg.min.js"></script>
 		<script type="text/javascript">
 			function genericFunction(url, cFunction, elem) {
@@ -115,11 +89,13 @@
 			</form>
 			<form method="post" target="_blank" action="/config.php?remapoff">
 				<p>
-					<b>Turn off Remapping: </b
-					><select name="outputdest">
+					<b>Turn off Remapping: </b>
+					<select name="outputdest">
 						<option value="main">Main</option>
-						<option value="backup">Backup</option></select
-					><input type="submit" value="Remap Off" />
+						<option value="backup">Backup</option>
+					</select>
+					&nbsp;
+					<input type="submit" value="Remap Off" />
 				</p>
 			</form>
 		</div>
@@ -138,121 +114,129 @@
 			</p>
 		</div>
 
-		<h2 class="padded">Stream 1</h2>
-
-		<div class="padleft jsmpeg">
-			<canvas width="320" height="180" id="video-canvas1"></canvas>
-			<script type="text/javascript">
-				var canvas1 = document.getElementById('video-canvas1');
-				var url1 = 'ws://' + document.location.hostname + ':443/';
-				var player1 = 'initial state';
-			</script>
-
-			<p id="stream1" style="text-align: center">
-				<a href="javascript:void(0);" onclick="genericFunction('player.php?appname=main&streamname=',jsmpegPlay,this)"
-					><i style="font-size: 36px" class="material-icons">play_arrow</i>M</a
-				>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" onclick="genericFunction('player.php?appname=backup&streamname=',jsmpegPlay,this)"
-					><i style="font-size: 36px" class="material-icons">play_arrow</i>B</a
-				>&nbsp;&nbsp;&nbsp;<a
-					href="javascript:void(0);"
-					onclick="genericFunction('player.php?appname=distribute&streamname=',jsmpegPlay,this)"
-					><i style="font-size: 36px" class="material-icons">play_arrow</i>D</a
-				>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="jsmpegStop()"><i style="font-size: 36px" class="material-icons">stop</i></a
-				>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="jsmpegVolumeup()"
-					><i style="font-size: 36px" class="material-icons">volume_up</i></a
-				>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="jsmpegVolumedown()"
-					><i style="font-size: 36px" class="material-icons">volume_down</i></a
-				>
-			</p>
-		</div>
-
 		<div class="padded">
-			<p>
-				Out1: <a href="/control.php?streamno=1&action=out&actnumber=1&state=on" target="_blank">On</a> |||
-				<a href="/control.php?streamno=1&action=out&actnumber=1&state=off" target="_blank">Off</a>
-			</p>
-			<p>
-				Out2: <a href="/control.php?streamno=1&action=out&actnumber=2&state=on" target="_blank">On</a> |||
-				<a href="/control.php?streamno=1&action=out&actnumber=2&state=off" target="_blank">Off</a>
-			</p>
-			<p>
-				Out3: <a href="/control.php?streamno=1&action=out&actnumber=3&state=on" target="_blank">On</a> |||
-				<a href="/control.php?streamno=1&action=out&actnumber=3&state=off" target="_blank">Off</a>
-			</p>
-			<p>
-				Out4: <a href="/control.php?streamno=1&action=out&actnumber=4&state=on" target="_blank">On</a> |||
-				<a href="/control.php?streamno=1&action=out&actnumber=4&state=off" target="_blank">Off</a>
-			</p>
-			<p>
-				Out5: <a href="/control.php?streamno=1&action=out&actnumber=5&state=on" target="_blank">On</a> |||
-				<a href="/control.php?streamno=1&action=out&actnumber=5&state=off" target="_blank">Off</a>
-			</p>
-			<p>
-				Out6: <a href="/control.php?streamno=1&action=out&actnumber=6&state=on" target="_blank">On</a> |||
-				<a href="/control.php?streamno=1&action=out&actnumber=6&state=off" target="_blank">Off</a>
-			</p>
-			<p>
-				Out7: <a href="/control.php?streamno=1&action=out&actnumber=7&state=on" target="_blank">On</a> |||
-				<a href="/control.php?streamno=1&action=out&actnumber=7&state=off" target="_blank">Off</a>
-			</p>
-			<p>
-				Out8: <a href="/control.php?streamno=1&action=out&actnumber=8&state=on" target="_blank">On</a> |||
-				<a href="/control.php?streamno=1&action=out&actnumber=8&state=off" target="_blank">Off</a>
-			</p>
-			<p>
-				Out9: <a href="/control.php?streamno=1&action=out&actnumber=9&state=on" target="_blank">On</a> |||
-				<a href="/control.php?streamno=1&action=out&actnumber=9&state=off" target="_blank">Off</a>
-			</p>
-			<p>
-				Out10: <a href="/control.php?streamno=1&action=out&actnumber=10&state=on" target="_blank">On</a> |||
-				<a href="/control.php?streamno=1&action=out&actnumber=10&state=off" target="_blank">Off</a>
-			</p>
-			<p>
-				Record: <a href="/control.php?streamno=1&action=out&actnumber=98&state=on" target="_blank">On</a> |||
-				<a href="/control.php?streamno=1&action=out&actnumber=98&state=off" target="_blank">Off</a>
-			</p>
-			<p>
-				Instagram: <a href="/control.php?streamno=1&action=insta&actnumber=&state=on" target="_blank">On</a> |||
-				<a href="/control.php?streamno=1&action=instaoff&actnumber=&state=" target="_blank">Off</a> ||| For Emergencies --> |||
-				<a href="/control.php?streamno=1&action=out&actnumber=99&state=on" target="_blank">Turn on out99</a> |||
-				<a href="/control.php?streamno=1&action=out&actnumber=99&state=off" target="_blank">Turn off out99</a>
-			</p>
+			<h2>Stream 1</h2>
 
-			<p>
-				<b>Supers:</b> <a href="/control.php?streamno=1&action=super&actnumber=1&state=" target="_blank">Add 1</a> |||
-				<a href="/control.php?streamno=1&action=super&actnumber=2&state=" target="_blank">Add 2</a> |||
-				<a href="/control.php?streamno=1&action=super&actnumber=3&state=" target="_blank">Add 3</a> |||
-				<a href="/control.php?streamno=1&action=super&actnumber=4&state=" target="_blank">Add 4</a> |||
-				<a href="/control.php?streamno=1&action=super&actnumber=5&state=" target="_blank">Add 5</a> |||
-				<a href="/control.php?streamno=1&action=super&actnumber=6&state=" target="_blank">Add 6</a> |||
-				<a href="/control.php?streamno=1&action=super&actnumber=7&state=" target="_blank">Add 7</a> |||
-				<a href="/control.php?streamno=1&action=super&actnumber=8&state=" target="_blank">Add 8</a> |||
-				<a href="/control.php?streamno=1&action=super&actnumber=off&state=" target="_blank">Remove</a>
-			</p>
+			<div class="padleft jsmpeg">
+				<canvas width="320" height="180" id="video-canvas1"></canvas>
+				<script type="text/javascript">
+					var canvas1 = document.getElementById('video-canvas1');
+					var url1 = 'ws://' + document.location.hostname + ':443/';
+					var player1 = 'initial state';
+				</script>
 
-			<form method="post" target="_blank" action="/control.php?streamno=1&action=volume&actnumber=&state=volume">
-				<p><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1" /><input type="submit" value="Change" /></p>
-			</form>
-
-			<form method="post" target="_blank" action="/control.php?streamno=1&action=video&actnumber=&state=turnon" style="margin: 0; padding: 0">
-				<p>
-					<b>Choose Input:</b> <a href="/control.php?streamno=1&action=main&actnumber=&state=turnon" target="_blank">Main</a> |||
-					<a href="/control.php?streamno=1&action=back&actnumber=&state=turnon" target="_blank">Backup</a> |||
-					<select name="video_no">
-						<option value="">Choose</option>
-						<option value="holding">Holding</option>
-						<option value="video">Video</option></select
-					><input type="text" name="startmin" size="1" value="0" /><input
-						type="text"
-						style="display: inline"
-						name="startsec"
-						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
-					<a href="/control.php?streamno=1&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
-					<a href="/control.php?streamno=1&action=off&actnumber=&state=" target="_blank">Turn off</a>
+				<p id="stream1" style="text-align: center">
+					<a href="javascript:void(0);" onclick="genericFunction('player.php?appname=main&streamname=',jsmpegPlay,this)"
+						><i style="font-size: 36px" class="material-icons">play_arrow</i>M</a
+					>&nbsp;&nbsp;&nbsp;<a
+						href="javascript:void(0);"
+						onclick="genericFunction('player.php?appname=backup&streamname=',jsmpegPlay,this)"
+						><i style="font-size: 36px" class="material-icons">play_arrow</i>B</a
+					>&nbsp;&nbsp;&nbsp;<a
+						href="javascript:void(0);"
+						onclick="genericFunction('player.php?appname=distribute&streamname=',jsmpegPlay,this)"
+						><i style="font-size: 36px" class="material-icons">play_arrow</i>D</a
+					>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="jsmpegStop()"
+						><i style="font-size: 36px" class="material-icons">stop</i></a
+					>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="jsmpegVolumeup()"
+						><i style="font-size: 36px" class="material-icons">volume_up</i></a
+					>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="jsmpegVolumedown()"
+						><i style="font-size: 36px" class="material-icons">volume_down</i></a
+					>
 				</p>
-			</form>
+			</div>
+
+			<div>
+				<p>
+					Out1: <a href="/control.php?streamno=1&action=out&actnumber=1&state=on" target="_blank">On</a> |||
+					<a href="/control.php?streamno=1&action=out&actnumber=1&state=off" target="_blank">Off</a>
+				</p>
+				<p>
+					Out2: <a href="/control.php?streamno=1&action=out&actnumber=2&state=on" target="_blank">On</a> |||
+					<a href="/control.php?streamno=1&action=out&actnumber=2&state=off" target="_blank">Off</a>
+				</p>
+				<p>
+					Out3: <a href="/control.php?streamno=1&action=out&actnumber=3&state=on" target="_blank">On</a> |||
+					<a href="/control.php?streamno=1&action=out&actnumber=3&state=off" target="_blank">Off</a>
+				</p>
+				<p>
+					Out4: <a href="/control.php?streamno=1&action=out&actnumber=4&state=on" target="_blank">On</a> |||
+					<a href="/control.php?streamno=1&action=out&actnumber=4&state=off" target="_blank">Off</a>
+				</p>
+				<p>
+					Out5: <a href="/control.php?streamno=1&action=out&actnumber=5&state=on" target="_blank">On</a> |||
+					<a href="/control.php?streamno=1&action=out&actnumber=5&state=off" target="_blank">Off</a>
+				</p>
+				<p>
+					Out6: <a href="/control.php?streamno=1&action=out&actnumber=6&state=on" target="_blank">On</a> |||
+					<a href="/control.php?streamno=1&action=out&actnumber=6&state=off" target="_blank">Off</a>
+				</p>
+				<p>
+					Out7: <a href="/control.php?streamno=1&action=out&actnumber=7&state=on" target="_blank">On</a> |||
+					<a href="/control.php?streamno=1&action=out&actnumber=7&state=off" target="_blank">Off</a>
+				</p>
+				<p>
+					Out8: <a href="/control.php?streamno=1&action=out&actnumber=8&state=on" target="_blank">On</a> |||
+					<a href="/control.php?streamno=1&action=out&actnumber=8&state=off" target="_blank">Off</a>
+				</p>
+				<p>
+					Out9: <a href="/control.php?streamno=1&action=out&actnumber=9&state=on" target="_blank">On</a> |||
+					<a href="/control.php?streamno=1&action=out&actnumber=9&state=off" target="_blank">Off</a>
+				</p>
+				<p>
+					Out10: <a href="/control.php?streamno=1&action=out&actnumber=10&state=on" target="_blank">On</a> |||
+					<a href="/control.php?streamno=1&action=out&actnumber=10&state=off" target="_blank">Off</a>
+				</p>
+				<p>
+					Record: <a href="/control.php?streamno=1&action=out&actnumber=98&state=on" target="_blank">On</a> |||
+					<a href="/control.php?streamno=1&action=out&actnumber=98&state=off" target="_blank">Off</a>
+				</p>
+				<p>
+					Instagram: <a href="/control.php?streamno=1&action=insta&actnumber=&state=on" target="_blank">On</a> |||
+					<a href="/control.php?streamno=1&action=instaoff&actnumber=&state=" target="_blank">Off</a> ||| For Emergencies --> |||
+					<a href="/control.php?streamno=1&action=out&actnumber=99&state=on" target="_blank">Turn on out99</a> |||
+					<a href="/control.php?streamno=1&action=out&actnumber=99&state=off" target="_blank">Turn off out99</a>
+				</p>
+
+				<p>
+					<b>Supers:</b> <a href="/control.php?streamno=1&action=super&actnumber=1&state=" target="_blank">Add 1</a> |||
+					<a href="/control.php?streamno=1&action=super&actnumber=2&state=" target="_blank">Add 2</a> |||
+					<a href="/control.php?streamno=1&action=super&actnumber=3&state=" target="_blank">Add 3</a> |||
+					<a href="/control.php?streamno=1&action=super&actnumber=4&state=" target="_blank">Add 4</a> |||
+					<a href="/control.php?streamno=1&action=super&actnumber=5&state=" target="_blank">Add 5</a> |||
+					<a href="/control.php?streamno=1&action=super&actnumber=6&state=" target="_blank">Add 6</a> |||
+					<a href="/control.php?streamno=1&action=super&actnumber=7&state=" target="_blank">Add 7</a> |||
+					<a href="/control.php?streamno=1&action=super&actnumber=8&state=" target="_blank">Add 8</a> |||
+					<a href="/control.php?streamno=1&action=super&actnumber=off&state=" target="_blank">Remove</a>
+				</p>
+
+				<form method="post" target="_blank" action="/control.php?streamno=1&action=volume&actnumber=&state=volume">
+					<p><b>Volume: </b><input type="text" name="vol_level" size="5" placeholder="1" /><input type="submit" value="Change" /></p>
+				</form>
+
+				<form
+					method="post"
+					target="_blank"
+					action="/control.php?streamno=1&action=video&actnumber=&state=turnon"
+					style="margin: 0; padding: 0">
+					<p>
+						<b>Choose Input:</b> <a href="/control.php?streamno=1&action=main&actnumber=&state=turnon" target="_blank">Main</a> |||
+						<a href="/control.php?streamno=1&action=back&actnumber=&state=turnon" target="_blank">Backup</a> |||
+						<select name="video_no">
+							<option value="">Choose</option>
+							<option value="holding">Holding</option>
+							<option value="video">Video</option></select
+						><input type="text" name="startmin" size="1" value="0" /><input
+							type="text"
+							style="display: inline"
+							name="startsec"
+							size="1"
+							value="0" /><input type="submit" style="display: inline" value="Start" /> |||
+						<a href="/control.php?streamno=1&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
+						<a href="/control.php?streamno=1&action=off&actnumber=&state=" target="_blank">Turn off</a>
+					</p>
+				</form>
+			</div>
 		</div>
 		<hr />
 
@@ -357,8 +341,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=2&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=2&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -467,8 +450,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=3&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=3&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -577,8 +559,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=4&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=4&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -687,8 +668,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=5&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=5&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -797,8 +777,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=6&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=6&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -907,8 +886,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=7&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=7&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -1017,8 +995,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=8&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=8&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -1127,8 +1104,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=9&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=9&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -1237,8 +1213,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=10&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=10&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -1347,8 +1322,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=11&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=11&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -1457,8 +1431,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=12&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=12&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -1567,8 +1540,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=13&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=13&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -1677,8 +1649,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=14&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=14&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -1787,8 +1758,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=15&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=15&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -1897,8 +1867,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=16&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=16&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -2007,8 +1976,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=17&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=17&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -2117,8 +2085,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=18&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=18&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -2227,8 +2194,7 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=19&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=19&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
@@ -2337,29 +2303,15 @@
 						style="display: inline"
 						name="startsec"
 						size="1"
-						value="0"
-					/><input type="submit" style="display: inline" value="Start" /> |||
+						value="0" /><input type="submit" style="display: inline" value="Start" /> |||
 					<a href="/control.php?streamno=20&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					<a href="/control.php?streamno=20&action=off&actnumber=&state=" target="_blank">Turn off</a>
 				</p>
 			</form>
 		</div>
-		<hr />
-		<br /><br /><br /><br /><br /><br /><br /><br />
-		<script>
-			var coll = document.getElementsByClassName('collapsible');
-			var i;
-			for (i = 0; i < coll.length; i++) {
-				coll[i].addEventListener('click', function () {
-					this.classList.toggle('active');
-					var content = this.nextElementSibling;
-					if (content.style.display === 'block') {
-						content.style.display = 'none';
-					} else {
-						content.style.display = 'block';
-					}
-				});
-			}
-		</script>
+
+		<div class="divider">
+			<img src="./img/red-divider.svg" alt="divider" />
+		</div>
 	</body>
 </html>

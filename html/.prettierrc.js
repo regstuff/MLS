@@ -6,6 +6,7 @@ module.exports = {
 	semi: true,
 	trailingComma: 'all',
 	arrowParens: 'always',
+	bracketSameLine: true,
 	overrides: [
 		{
 			files: '*.html',
