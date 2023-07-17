@@ -43,7 +43,7 @@ function renderStreamNameTable() {
 	for (let i = 1; i <= 20; i++) {
 		let tr = table.insertRow();
 		const td = tr.insertCell();
-		td.innerHTML = 'Stream ' + i;
+		td.innerHTML = 'Stream' + i;
 		for (let j = 0; j <= 10; j++) {
 			const td = tr.insertCell();
 			const input = document.createElement('input');
