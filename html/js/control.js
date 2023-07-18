@@ -6,38 +6,28 @@ function renderStreamControls() {
 		const divContainer = document.createElement('div');
 		divContainer.classList.add('padded');
 
-		// Create the h2 title element
-		const titleElement = document.createElement('h2');
-		titleElement.textContent = 'Stream ' + i;
-		divContainer.appendChild(titleElement);
+		divContainer.innerHTML += `
+		<div class="divider" style="margin: 30px auto;">
+			<img src="./img/light-divider.svg" alt="divider" style="margin: 0 50px" />
+			<img src="./img/divider.svg" alt="divider" style="margin: 0 50px" />
+			<img src="./img/light-divider.svg" alt="divider" style="margin: 0 50px" />
+		</div>`;
+		const streamName = streamNames[i][0];
+		const suffix = streamName ? ` (${streamName})` : '';
+		divContainer.innerHTML += `<h2>Stream ${i}${suffix}</h2>`;
 
 		// Create the div for jsmpeg
 		var jsmpegDiv = document.createElement('div');
 		jsmpegDiv.classList.add('jsmpeg');
 
-		// Create the canvas element
-		var canvasElement = document.createElement('canvas');
-		canvasElement.width = '320';
-		canvasElement.height = '180';
-		canvasElement.id = 'video-canvas' + i;
-		jsmpegDiv.appendChild(canvasElement);
-
-		// Create the script element
-		var scriptElement = document.createElement('script');
-		scriptElement.type = 'text/javascript';
-		scriptElement.textContent =
-			'var canvas' +
-			i +
-			" = document.getElementById('video-canvas" +
-			i +
-			"');\n" +
-			'var url' +
-			i +
-			" = 'ws://' + document.location.hostname + ':443/';\n" +
-			'var player' +
-			i +
-			" = 'initial state';";
-		jsmpegDiv.appendChild(scriptElement);
+		jsmpegDiv.innerHTML += `
+		<canvas width="320" height="180" id="video-canvas${i}"></canvas>`;
+		jsmpegDiv.innerHTML += `
+		<script type="text/javascript">
+			var canvas${i} = document.getElementById('video-canvas${i}');
+			var url${i} = 'ws://' + document.location.hostname + ':443/';
+			var player${i} = 'initial state';
+		</script>`;
 
 		// Create the p element
 		var pElement = document.createElement('p');
@@ -48,21 +38,15 @@ function renderStreamControls() {
 		var actions = ['main', 'backup', 'distribute'];
 		var icons = ['play_arrow', 'play_arrow', 'play_arrow'];
 		actions.forEach(function (action, index) {
-			anchorElements +=
-				'<a href="javascript:void(0);" ' +
-				'onclick="genericFunction(\'player.php?appname=' +
-				action +
-				'&streamname=\', jsmpegPlay, this)">' +
-				'<i class="material-icons">' +
-				icons[index] +
-				'</i>' +
-				action.charAt(0).toUpperCase() +
-				'</a>';
+			anchorElements += `
+				<a href="javascript:void(0);" onclick="genericFunction('player.php?appname=${action}&streamname=', jsmpegPlay, this)">
+					<i class="material-icons">${icons[index]}</i>${action.charAt(0).toUpperCase()}
+				</a>`;
 		});
-		anchorElements +=
-			'<a href="javascript:void(0);" onclick="jsmpegStop()"><i class="material-icons">stop</i></a>' +
-			'<a href="javascript:void(0);" onclick="jsmpegVolumeup()"><i class="material-icons">volume_up</i></a>' +
-			'<a href="javascript:void(0);" onclick="jsmpegVolumedown()"><i class="material-icons">volume_down</i></a>';
+		anchorElements += `
+		<a href="javascript:void(0);" onclick="jsmpegStop()"><i class="material-icons">stop</i></a>
+		<a href="javascript:void(0);" onclick="jsmpegVolumeup()"><i class="material-icons">volume_up</i></a>
+		<a href="javascript:void(0);" onclick="jsmpegVolumedown()"><i class="material-icons">volume_down</i></a>`;
 
 		pElement.innerHTML = anchorElements;
 		jsmpegDiv.appendChild(pElement);
@@ -70,11 +54,15 @@ function renderStreamControls() {
 		// Append jsmpegDiv to the divContainer
 		divContainer.appendChild(jsmpegDiv);
 
+		// creating controls bellow the video preview
 		var outsDiv = document.createElement('div');
 		for (var j = 1; j <= 10; j++) {
-			var on = `<a href="/control.php?streamno=${i}&action=out&actnumber=${j}&state=on" target="_blank">On</a>`;
-			var off = `<a href="/control.php?streamno=${i}&action=out&actnumber=${j}&state=off" target="_blank">Off</a>`;
-			outsDiv.innerHTML += `<p>Out${j}: ${on} ||| ${off}</p>`;
+			var on = `<a class="small-btn" href="/control.php?streamno=${i}&action=out&actnumber=${j}&state=on" target="_blank">On</a>`;
+			var off = `<a class="small-btn off" href="/control.php?streamno=${i}&action=out&actnumber=${j}&state=off" target="_blank">Off</a>`;
+			const outName = streamNames[i][j];
+			const suffix = outName ? ` (${outName})` : '';
+			outsDiv.innerHTML += `
+			<div class="out-config" id="status${i}-${j}"><span class="stream-status"></span>Out ${j}${suffix}: ${on} | ${off}</div>`;
 		}
 		divContainer.appendChild(outsDiv);
 
@@ -135,19 +123,12 @@ function renderStreamControls() {
 
 			<input type="text" name="startmin" size="1" value="0" />
 			<input type="text" style="display: inline" name="startsec" size="1" value="0" />
-			<input type="submit" style="display: inline" value="Start" /> |||
+			<input type="submit" class="small-btn" style="display: inline" value="Start" /> |||
 			<a href="/control.php?streamno=${i}&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 			<a href="/control.php?streamno=${i}&action=off&actnumber=&state=" target="_blank">Turn off</a></li>
 		</ul>
 		</div>
 		</form>`;
-
-		otherControlsDiv.innerHTML += `
-		<div class="divider" style="margin: 30px auto;">
-			<img src="./img/light-divider.svg" alt="divider" style="margin: 0 50px" />
-			<img src="./img/divider.svg" alt="divider" style="margin: 0 50px" />
-			<img src="./img/light-divider.svg" alt="divider" style="margin: 0 50px" />
-		</div>`;
 
 		divContainer.appendChild(otherControlsDiv);
 

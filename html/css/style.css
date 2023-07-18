@@ -91,6 +91,21 @@ input[type='submit']:active,
 	background-color: #e08366;
 }
 
+.small-btn {
+	min-width: 50px;
+	padding: 0 5px;
+	margin: 0 5px;
+	font-size: 16px;
+	border-radius: 5px;
+	background-color: #cf4521;
+	border: 0px;
+	color: #fff7eb;
+	text-decoration: none;
+}
+.small-btn:active {
+	background-color: #e08366;
+}
+
 /* details */
 details {
 	border: 1px solid #7c0514aa;
@@ -147,4 +162,28 @@ details[open] summary {
 
 .jsmpeg p a {
 	margin-right: 20px;
+}
+
+/* === On Off vusual === */
+.stream-status {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	margin: 0 5px;
+	background-color: white;
+}
+
+.on,
+.stream-status.on {
+	background-color: green;
+}
+
+.off,
+.stream-status.off {
+	background-color: gray;
+}
+
+.out-config {
+	margin: 5px 0;
 }
