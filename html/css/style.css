@@ -131,3 +131,20 @@ details[open] summary {
 	padding: 10px;
 	overflow-y: auto;
 }
+
+/* === controls === */
+.material-icons {
+	font-size: 36px !important;
+}
+
+.jsmpeg canvas {
+	border: 1px solid #ccc;
+	display: inline;
+}
+.jsmpeg {
+	text-align: center;
+}
+
+.jsmpeg p a {
+	margin-right: 20px;
+}

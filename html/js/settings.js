@@ -3,7 +3,7 @@ function renderStreamSelectors() {
 
 	for (let selector of streamSelectors) clearAndAddChooseOption(selector);
 
-	for (let i = 1; i < 21; i++) {
+	for (let i = 1; i <= 20; i++) {
 		for (let selector of streamSelectors) {
 			let option = document.createElement('option');
 			option.value = String(i);
@@ -75,39 +75,9 @@ function saveStreamNamesTable() {
 	renderStreamSelectors();
 	writeStreamNames();
 }
-function writeStreamNames() {
-	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'save-stream-names.php', true);
-	xhr.setRequestHeader('Content-Type', 'application/json');
-
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-			console.log(xhr.responseText);
-		}
-	};
-
-	var jsonData = JSON.stringify({ csvData: streamNames });
-	xhr.send(jsonData);
-}
-
-function fetchStreamNames() {
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'fetch-stream-names.php', true);
-
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-			var response = JSON.parse(xhr.responseText);
-			streamNames = response.csvData;
-			console.log('CSV fetched successfully.');
-			renderStreamNameTable();
-			renderStreamSelectors();
-		}
-	};
-
-	xhr.send();
-}
-
-window.onload = function () {
+window.onload = async function () {
+	streamNames = await fetchStreamNames();
 	updateOutputs();
-	fetchStreamNames();
+	renderStreamNameTable();
+	renderStreamSelectors();
 };

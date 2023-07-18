@@ -69,3 +69,34 @@ function sendRequest(formId, phpUrl) {
 		form.reportValidity();
 	}
 }
+
+function writeStreamNames() {
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'save-stream-names.php', true);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+			console.log(xhr.responseText);
+		}
+	};
+
+	var jsonData = JSON.stringify({ csvData: streamNames });
+	xhr.send(jsonData);
+}
+
+async function fetchStreamNames() {
+	try {
+		const response = await fetch('fetch-stream-names.php');
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
+		const data = await response.json();
+		const streamNames = data.csvData;
+		console.log('CSV fetched successfully.');
+		return streamNames;
+	} catch (error) {
+		console.error('Error fetching stream names:', error);
+		throw error; // Propagate the error to the caller
+	}
+}
