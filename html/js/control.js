@@ -8,9 +8,7 @@ function renderStreamControls() {
 
 		divContainer.innerHTML += `
 		<div class="divider" style="margin: 30px auto;">
-			<img src="./img/light-divider.svg" alt="divider" style="margin: 0 50px" />
-			<img src="./img/divider.svg" alt="divider" style="margin: 0 50px" />
-			<img src="./img/light-divider.svg" alt="divider" style="margin: 0 50px" />
+			<img src="./img/red-divider.svg" alt="divider" />
 		</div>`;
 		const streamName = streamNames[i][0];
 		const suffix = streamName ? ` (${streamName})` : '';
@@ -57,8 +55,8 @@ function renderStreamControls() {
 		// creating controls bellow the video preview
 		var outsDiv = document.createElement('div');
 		for (var j = 1; j <= 10; j++) {
-			var on = `<a class="small-btn" href="/control.php?streamno=${i}&action=out&actnumber=${j}&state=on" target="_blank">On</a>`;
-			var off = `<a class="small-btn off" href="/control.php?streamno=${i}&action=out&actnumber=${j}&state=off" target="_blank">Off</a>`;
+			var on = `<a class="small-btn" href="/control.php?streamno=${i}&action=out&actnumber=${j}&state=on" target="_blank">on</a>`;
+			var off = `<a class="small-btn off" href="/control.php?streamno=${i}&action=out&actnumber=${j}&state=off" target="_blank">off</a>`;
 			const outName = streamNames[i][j];
 			const suffix = outName ? ` (${outName})` : '';
 			outsDiv.innerHTML += `
@@ -70,8 +68,8 @@ function renderStreamControls() {
 		var otherControlsDiv = document.createElement('div');
 		otherControlsDiv.innerHTML += `
 		<p>
-        Record: <a href="/control.php?streamno=${i}&action=out&actnumber=98&state=on" target="_blank">On</a> |||
-        <a href="/control.php?streamno=${i}&action=out&actnumber=98&state=off" target="_blank">Off</a>
+        Record: <a class="small-btn" href="/control.php?streamno=${i}&action=out&actnumber=98&state=on" target="_blank">on</a> |
+        <a class="small-btn off" href="/control.php?streamno=${i}&action=out&actnumber=98&state=off" target="_blank">off</a>
       </p>`;
 
 		otherControlsDiv.innerHTML += `
@@ -108,11 +106,12 @@ function renderStreamControls() {
 		otherControlsDiv.innerHTML += `
 		<form method="post" target="_blank" action="/control.php?streamno=${i}&action=video&actnumber=&state=turnon" style="margin: 0; padding: 0">
 		<div>
-		<b>Choose Input:</b> <br />
-		<ul>
+		<b>Choose Input:</b>
+		<ul class="input-options">
 			<li>Live stream:
-				<a href="/control.php?streamno=${i}&action=main&actnumber=&state=turnon" target="_blank">Main</a> |||
-				<a href="/control.php?streamno=${i}&action=back&actnumber=&state=turnon" target="_blank">Backup</a></li>
+				<a href="/control.php?streamno=${i}&action=main&actnumber=&state=turnon" class="small-btn" target="_blank">main</a></li>
+			<li>Live stream:
+				<a href="/control.php?streamno=${i}&action=back&actnumber=&state=turnon" class="small-btn" target="_blank">backup</a></li>
 			
 			<li>Uploaded Video:
 				<select name="video_no">
@@ -123,9 +122,9 @@ function renderStreamControls() {
 
 			<input type="text" name="startmin" size="1" value="0" />
 			<input type="text" style="display: inline" name="startsec" size="1" value="0" />
-			<input type="submit" class="small-btn" style="display: inline" value="Start" /> |||
+			<input type="submit" class="small-btn" style="display: inline" value="start" /> |||
 			<a href="/control.php?streamno=${i}&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
-			<a href="/control.php?streamno=${i}&action=off&actnumber=&state=" target="_blank">Turn off</a></li>
+			<a href="/control.php?streamno=${i}&action=off&actnumber=&state=" class="small-btn off" target="_blank">turn off</a></li>
 		</ul>
 		</div>
 		</form>`;

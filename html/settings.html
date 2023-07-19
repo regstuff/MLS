@@ -14,7 +14,15 @@
 		</div>
 
 		<section class="hero-section">
-			<h1 class="hero-header">Settings</h1>
+			<nav>
+				<ul>
+					<li><a href="/stat" target="_blank">Stats</a></li>
+					<li><a href="/recording" target="_blank">Recordings</a></li>
+					<li><a href="/settings.html" target="_blank">Settings</a></li>
+					<li><a href="/config.php?proclist" target="_blank">Processes</a></li>
+				</ul>
+			</nav>
+			<h1>Settings</h1>
 		</section>
 
 		<div class="divider">
@@ -64,7 +72,11 @@
 				<select name="stream_id" class="stream-selector" id="new-destination-stream" onchange="updateOutputs()"></select>
 				&nbsp; Output Id:
 				<select name="output_id" id="out-selector" style="min-width: 200px"></select>
-				<input type="submit" value="Add Destination" onclick="event.preventDefault(); sendRequest('destinationForm','config.php?destadd');" />
+				<input
+					type="submit"
+					class="big-btn"
+					value="Add Destination"
+					onclick="event.preventDefault(); sendRequest('destinationForm','config.php?destadd');" />
 			</form>
 			<details open>
 				<summary>Description</summary>
@@ -115,7 +127,7 @@
 					<option value="mainfail">Main-Failover</option>
 					<option value="mainbackfail">Main-Backup-Failover</option></select
 				><br />
-				<input type="submit" value="Add Config" /> <br />
+				<input type="submit" class="big-btn" value="Add Config" /> <br />
 			</form>
 		</div>
 
@@ -341,7 +353,7 @@
 				<tbody id="name-table-body"></tbody>
 			</table>
 
-			<button onclick="saveStreamNamesTable()" class="save-table">Submit</button>
+			<button onclick="saveStreamNamesTable()" class="big-btn">Submit</button>
 
 			<details open>
 				<summary>Description</summary>
