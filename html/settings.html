@@ -16,10 +16,11 @@
 		<section class="hero-section">
 			<nav>
 				<ul>
-					<li><a href="/stat" target="_blank">Stats</a></li>
-					<li><a href="/recording" target="_blank">Recordings</a></li>
-					<li><a href="/settings.html" target="_blank">Settings</a></li>
-					<li><a href="/config.php?proclist" target="_blank">Processes</a></li>
+					<li><a href="/control.html">Control</a></li>
+					<li><a href="/settings.html">Settings</a></li>
+					<li><a href="/stat">Stats</a></li>
+					<li><a href="/recording">Recordings</a></li>
+					<li><a href="/config.php?proclist">Processes</a></li>
 				</ul>
 			</nav>
 			<h1>Settings</h1>
@@ -31,7 +32,7 @@
 
 		<div class="padded">
 			<h2>Add New Destination [ <a href="/config.php?destlist" target="_blank" style="">Destination List</a> ]</h2>
-			<form method="post" id="destinationForm" action="config.php?destadd">
+			<form method="post" id="destinationForm">
 				Server URL:
 				<select id="server-url" onchange="updateRtmpUrl()">
 					<option value="">Custom</option>
@@ -76,7 +77,7 @@
 					type="submit"
 					class="big-btn"
 					value="Add Destination"
-					onclick="event.preventDefault(); sendRequest('destinationForm','config.php?destadd');" />
+					onclick="event.preventDefault(); submitFormAndShowResponse('destinationForm','config.php?destadd');" />
 			</form>
 			<details open>
 				<summary>Description</summary>

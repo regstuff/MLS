@@ -7,7 +7,7 @@ sudo cp /usr/local/nginx/scripts/images/lowerthird/*lowerthird.png /usr/local/ng
 
 # Replaces page titles in webpages to name of instance
 sudo sed -i "s|<title>.*</title>|<title>$(hostname)</title>|" /usr/local/nginx/html/control.html
-sudo sed -i "s|<p align="\""center"\"" id="\""server-name"\""><b>.*</b></p>|<p align="\""center"\"" id="\""server-name"\""><b>$(hostname)</b></p>|" /usr/local/nginx/html/control.html
+sudo sed -i "s|<h1 id="\""server-name"\"">.*</h1>|<h1 id="\""server-name"\"">$(hostname)</h1>|" /usr/local/nginx/html/control.html
 sudo sed -i "s|<title>.*</title>|<title>$(hostname) Settings</title>|" /usr/local/nginx/html/settings.html
 sudo sed -i "s|<title>.*</title>|<title>$(hostname) Stats</title>|" /usr/local/nginx/html/stat.xsl
 
