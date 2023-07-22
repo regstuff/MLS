@@ -158,9 +158,10 @@ async function fetchActiveOuts() {
 	streamOutsConfig = await fetchConfigFile();
 	const rtmpJson = await fetchStats();
 
-	const outStreams = rtmpJson.rtmp.server.application
-		.find((app) => app.name['#text'] == 'output')
-		.live.stream.map((s) => s.name['#text']);
+	let outStreams = rtmpJson.rtmp.server.application.find((app) => app.name['#text'] == 'output')
+		.live.stream;
+	if (outStreams === undefined) return [];
+	outStreams = outStreams.map((s) => s.name['#text']);
 	return outStreams
 		.map((name) => parseOutputStreamName(name))
 		.map((p) => ({
