@@ -6,9 +6,10 @@ services:
     container_name: "nginx-mls"
     ports:
       - 8080:80
+      - 1935:1935
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf.template
-      - ./html:/www/static
+      - .:/app
     depends_on:
       - php
     networks:
@@ -18,7 +19,7 @@ services:
     image: php:7.0-fpm-alpine
     container_name: "php-mls"
     volumes:
-      - ./html:/www/static
+      - .:/app
     networks:
       - internal
 

@@ -37,17 +37,6 @@ body {
 h2 {
 	color: #7c0514;
 }
-.hero-section {
-	height: 100px;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	background-color: #cf4521;
-	color: #fff7eb;
-}
-
 .divider {
 	display: flex;
 	justify-content: center;
@@ -60,10 +49,6 @@ h2 {
 	max-height: 100%;
 }
 
-.hero-header {
-	background-color: #cf4521;
-}
-
 .stream-selector {
 	min-width: 200px;
 }
@@ -74,8 +59,7 @@ form select {
 }
 
 /* buttons */
-input[type='submit'],
-.save-table {
+.big-btn {
 	min-width: 200px;
 	padding: 5px;
 	margin: 15px 0;
@@ -86,8 +70,25 @@ input[type='submit'],
 	color: #fff7eb;
 	font-weight: bold;
 }
-input[type='submit']:active,
-.save-table:active {
+
+.big-btn:active {
+	background-color: #e08366;
+}
+
+.small-btn {
+	min-width: 50px;
+	padding: 0 5px;
+	margin: 0 5px;
+	font-size: 16px;
+	border-radius: 5px;
+	background-color: #cf4521;
+	border: 0px;
+	color: #fff7eb;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.small-btn:active {
 	background-color: #e08366;
 }
 
@@ -147,4 +148,79 @@ details[open] summary {
 
 .jsmpeg p a {
 	margin-right: 20px;
+}
+
+/* === On Off vusual === */
+.stream-status {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	margin: 0 5px;
+	background-color: white;
+}
+
+.on,
+.stream-status.on {
+	background-color: green;
+}
+
+.off,
+.stream-status.off {
+	background-color: gray;
+}
+
+.out-config {
+	margin: 5px 0;
+}
+
+/* CSS styles for the navigation and section */
+.hero-section {
+	text-align: center;
+	border-bottom: 4px solid #7c0514;
+	border-radius: 0 0 50px 50px;
+}
+
+nav {
+	padding: 10px;
+	display: inline-block;
+	border-bottom: 2px solid #7c0514;
+	border-radius: 0 0 10px 10px;
+}
+
+nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+nav ul li {
+	display: inline;
+	margin-right: 10px;
+}
+
+nav ul li a {
+	text-decoration: none;
+	color: #7c0514;
+	padding: 5px;
+}
+
+nav ul li a:hover {
+	background-color: #7c0514;
+	color: #fff7eb;
+	border-radius: 0 0 10px 10px;
+}
+
+section {
+	padding: 20px;
+}
+
+.input-options li {
+	margin: 3px 0;
+}
+
+.input-options {
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }

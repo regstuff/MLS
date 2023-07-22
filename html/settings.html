@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>gp-main-nginx Settings</title>
+		<title>Settings</title>
 		<link href="https://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="/css/style.css" />
 		<script src="https://releases.flowplayer.org/js/flowplayer-3.2.12.min.js"></script>
@@ -14,7 +14,16 @@
 		</div>
 
 		<section class="hero-section">
-			<h1 class="hero-header">Settings</h1>
+			<nav>
+				<ul>
+					<li><a href="/control.html">Control</a></li>
+					<li><a href="/settings.html">Settings</a></li>
+					<li><a href="/stat">Stats</a></li>
+					<li><a href="/recording">Recordings</a></li>
+					<li><a href="/config.php?proclist">Processes</a></li>
+				</ul>
+			</nav>
+			<h1>Settings</h1>
 		</section>
 
 		<div class="divider">
@@ -23,7 +32,7 @@
 
 		<div class="padded">
 			<h2>Add New Destination [ <a href="/config.php?destlist" target="_blank" style="">Destination List</a> ]</h2>
-			<form method="post" id="destinationForm" action="config.php?destadd">
+			<form method="post" id="destinationForm">
 				Server URL:
 				<select id="server-url" onchange="updateRtmpUrl()">
 					<option value="">Custom</option>
@@ -64,7 +73,11 @@
 				<select name="stream_id" class="stream-selector" id="new-destination-stream" onchange="updateOutputs()"></select>
 				&nbsp; Output Id:
 				<select name="output_id" id="out-selector" style="min-width: 200px"></select>
-				<input type="submit" value="Add Destination" onclick="event.preventDefault(); sendRequest('destinationForm','config.php?destadd');" />
+				<input
+					type="submit"
+					class="big-btn"
+					value="Add Destination"
+					onclick="event.preventDefault(); submitFormAndShowResponse('destinationForm','config.php?destadd');" />
 			</form>
 			<details open>
 				<summary>Description</summary>
@@ -115,7 +128,7 @@
 					<option value="mainfail">Main-Failover</option>
 					<option value="mainbackfail">Main-Backup-Failover</option></select
 				><br />
-				<input type="submit" value="Add Config" /> <br />
+				<input type="submit" class="big-btn" value="Add Config" /> <br />
 			</form>
 		</div>
 
@@ -341,7 +354,7 @@
 				<tbody id="name-table-body"></tbody>
 			</table>
 
-			<button onclick="saveStreamNamesTable()" class="save-table">Submit</button>
+			<button onclick="saveStreamNamesTable()" class="big-btn">Submit</button>
 
 			<details open>
 				<summary>Description</summary>
