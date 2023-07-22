@@ -10,7 +10,7 @@ Don't use Ubuntu minimal. Use the regular 16.04 image
 
 1. On the terminal, type:
    ```bash
-   cd ~ && sudo git clone git://github.com/AlexFreik/MLS.git && cd MLS && sudo ./install-nginx.sh
+   cd ~ && sudo git clone git@github.com:AlexFreik/MLS.git && cd MLS && sudo ./install-nginx.sh
    ```
 1. The install is automatic, except for the initial part where you need to choose your timezone for time and date configguration.  
    Note: Installation may take upto an hour on a single CPU instance.
