@@ -1,3 +1,7 @@
+// CONSTANTS
+const STREAM_NUM = 20;
+const OUT_NUM = 10;
+
 // Tools
 function removeAllChildNodes(parent) {
 	while (parent.firstChild) {
@@ -83,19 +87,6 @@ async function executePhpAndShowResponse(phpUrl) {
 function showResponse(response) {
 	var responseBox = document.getElementById('responseBox');
 	responseBox.innerHTML += `<p>${response}</p><div class="divider"><img src="./img/divider.svg" alt="divider" /></div>`;
-}
-
-async function refreshStatuses() {
-	Array.from(document.getElementsByClassName('stream-status')).forEach(
-		(s) => (s.className = 'stream-status off'),
-	);
-	const rtmpJson = await fetchStats();
-	console.log(xmlData);
-	const outs = xmlData.rtmp.server.application.filter((a) => a.name['#text'] === 'output');
-	const streamNames = Array.from(nameElements, (nameElement) => nameElement.textContent);
-	streamNames.forEach(
-		(name) => (document.getElementById(name + '-main').class = 'stream-status off'),
-	);
 }
 
 async function fetchStats() {

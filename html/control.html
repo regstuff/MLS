@@ -9,61 +9,6 @@
 		<script type="text/javascript" src="/js/control.js"></script>
 
 		<script type="text/javascript" src="jsmpeg.min.js"></script>
-		<script type="text/javascript">
-			function genericFunction(url, cFunction, elem) {
-				var streamno = elem.parentNode.id;
-				url += streamno;
-				console.log(url);
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function () {
-					if (this.readyState == 4 && this.status == 200) {
-						cFunction(this, streamno);
-					}
-				};
-				xhttp.open('GET', url, true);
-				xhttp.send();
-			}
-
-			function loadText(xhttp, streamno) {
-				document.getElementById('demo').innerHTML = xhttp.responseText;
-			}
-
-			function jsmpegPlay(xhttp, streamno) {
-				var stream1 = document.getElementById(streamno);
-				console.log(stream1.parentElement);
-				stream1.parentElement.insertBefore(canvas1, stream1);
-				if (player1 == 'initial state') {
-					player1 = new JSMpeg.Player(url1, {
-						canvas: canvas1,
-						autoplay: false,
-						pauseWhenHidden: false,
-						videoBufferSize: 100 * 1024,
-						audioBufferSize: 50 * 1024,
-					});
-				}
-				player1.play();
-				player1.volume = 1;
-				return false;
-			}
-
-			function jsmpegStop() {
-				player1.stop();
-				return false;
-			}
-
-			function jsmpegVolumeup() {
-				player1.volume = player1.volume + 0.2;
-				return false;
-			}
-
-			function jsmpegVolumedown() {
-				player1.volume = player1.volume - 0.2;
-				if (player1.volume < 0) {
-					player1.volume = 0;
-				}
-				return false;
-			}
-		</script>
 	</head>
 	<body>
 		<div class="response-box" id="responseBox">

@@ -18,14 +18,10 @@ function renderStreamControls() {
 		var jsmpegDiv = document.createElement('div');
 		jsmpegDiv.classList.add('jsmpeg');
 
-		jsmpegDiv.innerHTML += `
-		<canvas width="320" height="180" id="video-canvas${i}"></canvas>`;
-		jsmpegDiv.innerHTML += `
-		<script type="text/javascript">
-			var canvas${i} = document.getElementById('video-canvas${i}');
-			var url${i} = 'ws://' + document.location.hostname + ':443/';
-			var player${i} = 'initial state';
-		</script>`;
+		if (i === 1) {
+			jsmpegDiv.innerHTML += `
+			<canvas width="320" height="180" id="video-canvas${i}"></canvas>`;
+		}
 
 		// Create the p element
 		var pElement = document.createElement('p');
@@ -152,8 +148,89 @@ async function renderDestinations() {
 	}
 }
 
+async function refreshStatuses() {
+	Array.from(document.getElementsByClassName('stream-status')).forEach(
+		(s) => (s.className = 'stream-status off'),
+	);
+	const rtmpJson = await fetchStats();
+	console.log(xmlData);
+	const outs = xmlData.rtmp.server.application.filter((a) => a.name['#text'] === 'output');
+	const streamNames = Array.from(nameElements, (nameElement) => nameElement.textContent);
+	streamNames.forEach(
+		(name) => (document.getElementById(name + '-main').class = 'stream-status off'),
+	);
+}
+
+function setVideoPlayers() {
+	for (let i = 1; i <= STREAM_NUM; i++) {
+		for (let j = 1; j <= OUT_NUM; j++) {
+			eval(`window.canvas${i} = document.getElementById('video-canvas${i}');`);
+			eval(`window.url${i} = 'ws://' + document.location.hostname + ':443/';`);
+			eval(`window.player${i} = 'initial state';`);
+		}
+	}
+}
+
+function genericFunction(url, cFunction, elem) {
+	var streamno = elem.parentNode.id;
+	url += streamno;
+	console.log(url);
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function () {
+		if (this.readyState == 4 && this.status == 200) {
+			cFunction(this, streamno);
+		}
+	};
+	xhttp.open('GET', url, true);
+	xhttp.send();
+}
+
+function loadText(xhttp, streamno) {
+	document.getElementById('demo').innerHTML = xhttp.responseText;
+}
+
+var canvas1 = document.getElementById('video-canvas1');
+var url1 = 'ws://' + document.location.hostname + ':443/';
+var player1 = 'initial state';
+
+function jsmpegPlay(xhttp, streamno) {
+	var stream1 = document.getElementById(streamno);
+	stream1.parentElement.insertBefore(canvas1, stream1);
+	if (player1 == 'initial state') {
+		player1 = new JSMpeg.Player(url1, {
+			canvas: canvas1,
+			autoplay: false,
+			pauseWhenHidden: false,
+			videoBufferSize: 100 * 1024,
+			audioBufferSize: 50 * 1024,
+		});
+	}
+	player1.play();
+	player1.volume = 1;
+	return false;
+}
+
+function jsmpegStop() {
+	player1.stop();
+	return false;
+}
+
+function jsmpegVolumeup() {
+	player1.volume = player1.volume + 0.2;
+	return false;
+}
+
+function jsmpegVolumedown() {
+	player1.volume = player1.volume - 0.2;
+	if (player1.volume < 0) {
+		player1.volume = 0;
+	}
+	return false;
+}
+
 window.onload = async function () {
 	streamNames = await fetchStreamNames();
 	renderStreamControls();
 	await renderDestinations();
+	setVideoPlayers();
 };
