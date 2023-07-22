@@ -64,8 +64,9 @@ function renderStreamControls() {
 		var otherControlsDiv = document.createElement('div');
 		otherControlsDiv.innerHTML += `
 		<p>
-			Record: <button class="small-btn" href="/control.php?streamno=${i}&action=out&actnumber=98&state=on" target="_blank">on</button> |
+			<button class="small-btn" href="/control.php?streamno=${i}&action=out&actnumber=98&state=on" target="_blank">on</button> |
 			<button class="small-btn off" href="/control.php?streamno=${i}&action=out&actnumber=98&state=off" target="_blank">off</button>
+			Record
 		</p>`;
 
 		otherControlsDiv.innerHTML += `
@@ -103,10 +104,14 @@ function renderStreamControls() {
 		<div>
 		<b>Choose Input:</b>
 		<ul class="input-options">
-			<li><span class="stream-status"></span>Main Live Stream:
-				<button onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=main&actnumber=&state=turnon')" class="small-btn" id="stream${i}-main">start</button></li>
-			<li><span class="stream-status"></span>Backup Live stream:
-				<button href="/control.php?streamno=${i}&action=back&actnumber=&state=turnon" class="small-btn" target="_blank">start</button></li>
+			<li>
+				<button onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=main&actnumber=&state=turnon')" class="small-btn" id="stream${i}-main">start</button>
+				Main Live Stream
+			</li>
+			<li>
+				<button href="/control.php?streamno=${i}&action=back&actnumber=&state=turnon" class="small-btn" target="_blank">start</button>
+				Backup Live stream
+			</li>
 			
 			<li>
 				<form method="post" target="_blank" action="/control.php?streamno=${i}&action=video&actnumber=&state=turnon" style="margin: 0; padding: 0">

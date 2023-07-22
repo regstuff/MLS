@@ -91,7 +91,7 @@ function showResponse(response) {
 
 async function fetchStats() {
 	try {
-		const response = await fetch('/stat.xml');
+		const response = await fetch('/stat-test.xml');
 		const data = await response.text();
 		const parser = new DOMParser();
 		const xmlData = parser.parseFromString(data, 'text/xml');
