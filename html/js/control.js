@@ -56,7 +56,7 @@ function renderStreamControls() {
 			const outName = streamNames[i][j];
 			const suffix = outName ? ` (${outName})` : '';
 			outsDiv.innerHTML += `
-			<div class="out-config"><span class="stream-status" id="status${i}-${j}"></span>Out ${j}${suffix}: ${on} | ${off} <div id="destination${i}-${j}" style="margin-left: 30px;"></div></div>`;
+			<div class="out-config"><span class="stream-status" id="status${i}-${j}"></span>${on} | ${off} Out ${j}${suffix}<span id="destination${i}-${j}"></span></div>`;
 		}
 		divContainer.appendChild(outsDiv);
 
@@ -140,9 +140,7 @@ async function renderDestinations() {
 			const elem = document.getElementById(`destination${i}-${j}`);
 			const info = streamOutsConfig[i][j];
 			if (Object.keys(info).length !== 0) {
-				elem.innerHTML = `
-			Destination (${info.name}, ${info.source}): ${info.url}
-			`;
+				elem.innerHTML = `, destination: ${info.name}`;
 			}
 		}
 	}
