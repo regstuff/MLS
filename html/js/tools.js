@@ -91,7 +91,7 @@ function showResponse(response) {
 
 async function fetchStats() {
 	try {
-		const response = await fetch('/stat-test.xml');
+		const response = await fetch('/stat.xml');
 		const data = await response.text();
 		const parser = new DOMParser();
 		const xmlData = parser.parseFromString(data, 'text/xml');
@@ -140,14 +140,11 @@ async function fetchConfigFile() {
 	const streamOutsConfig = [];
 
 	for (const line of lines) {
-		const matches = line.match(/^__stream(\d+)__out(\d+)__ (.+)$/);
+		const matches = line.match(/^__stream(\d+)__out(\d+)__(.*)$/);
 		if (matches) {
 			const i = parseInt(matches[1]);
 			const j = parseInt(matches[2]);
-			const remainingLine =
-				matches[3].trim() === 'rtmp://unconfigured.blk source channel_name'
-					? ''
-					: matches[3].trim();
+			let remainingLine = matches[3].trim();
 
 			if (!streamOutsConfig[i]) {
 				streamOutsConfig[i] = [];

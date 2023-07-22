@@ -148,17 +148,40 @@ async function renderDestinations() {
 	}
 }
 
-async function refreshStatuses() {
-	Array.from(document.getElementsByClassName('stream-status')).forEach(
-		(s) => (s.className = 'stream-status off'),
-	);
+function parseOutputStreamName(str) {
+	const dashIndex = str.indexOf('-');
+	return {
+		streamId: str.substring(6, dashIndex),
+		destinationName: str.substring(dashIndex + 1),
+	};
+}
+
+async function fetchActiveOuts() {
+	streamOutsConfig = await fetchConfigFile();
 	const rtmpJson = await fetchStats();
-	console.log(xmlData);
-	const outs = xmlData.rtmp.server.application.filter((a) => a.name['#text'] === 'output');
-	const streamNames = Array.from(nameElements, (nameElement) => nameElement.textContent);
-	streamNames.forEach(
-		(name) => (document.getElementById(name + '-main').class = 'stream-status off'),
-	);
+
+	const outStreams = rtmpJson.rtmp.server.application
+		.find((app) => app.name['#text'] == 'output')
+		.live.stream.map((s) => s.name['#text']);
+	return outStreams
+		.map((name) => parseOutputStreamName(name))
+		.map((p) => ({
+			streamId: p.streamId,
+			outId: streamOutsConfig[p.streamId].findIndex(
+				(info) => info?.name === p.destinationName,
+			),
+		}))
+		.filter((p) => p.outId !== -1);
+}
+
+async function refreshStatuses() {
+	const activeOuts = await fetchActiveOuts();
+	const activeStatusIds = activeOuts.map((p) => `status${p.streamId}-${p.outId}`);
+	Array.from(document.getElementsByClassName('stream-status')).forEach((s) => {
+		s.className = activeStatusIds.includes(s.id)
+			? (s.className = 'stream-status on')
+			: (s.className = 'stream-status off');
+	});
 }
 
 function setVideoPlayers() {
@@ -233,4 +256,5 @@ window.onload = async function () {
 	renderStreamControls();
 	await renderDestinations();
 	setVideoPlayers();
+	setInterval(refreshStatuses, 3000);
 };
