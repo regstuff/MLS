@@ -1,7 +1,7 @@
 function renderStreamControls() {
 	const streamControls = document.getElementById('stream-controls');
 
-	for (let i = 1; i <= 20; i++) {
+	for (let i = 1; i <= STREAM_NUM; i++) {
 		// Create the div container
 		const divContainer = document.createElement('div');
 		divContainer.classList.add('padded');
@@ -140,8 +140,8 @@ function renderStreamControls() {
 
 async function renderDestinations() {
 	streamOutsConfig = await fetchConfigFile();
-	for (let i = 1; i <= 20; i++) {
-		for (let j = 1; j <= 10; j++) {
+	for (let i = 1; i <= STREAM_NUM; i++) {
+		for (let j = 1; j <= OUT_NUM; j++) {
 			const elem = document.getElementById(`destination${i}-${j}`);
 			const info = streamOutsConfig[i][j];
 			if (Object.keys(info).length !== 0) {
