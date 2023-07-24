@@ -2,20 +2,20 @@
 
 # Function to update or add a global variable to ~/.bashrc
 update_or_add_global_variable() {
-    local variable_name="$1"
-    local new_value="$2"
-    local grep_result
+	local variable_name="$1"
+	local new_value="$2"
+	local grep_result
 
-    # Check if the variable is already set in ~/.bashrc
-    grep_result=$(grep -E "^export $variable_name=" ~/.bashrc)
+	# Check if the variable is already set in ~/.bashrc
+	grep_result=$(grep -E "^export $variable_name=" ~/.bashrc)
 
-    if [ -n "$grep_result" ]; then
-        # Variable exists, replace its value
-        sed -i "s/^export $variable_name=.*/export $variable_name=\"$new_value\"/" ~/.bashrc
-    else
-        # Variable does not exist, add it to ~/.bashrc
-        echo -e "\nexport $variable_name=\"$new_value\"\n" >> ~/.bashrc
-    fi
+	if [ -n "$grep_result" ]; then
+		# Variable exists, replace its value
+		sed -i "s/^export $variable_name=.*/export $variable_name=\"$new_value\"/" ~/.bashrc
+	else
+		# Variable does not exist, add it to ~/.bashrc
+		echo -e "\nexport $variable_name=\"$new_value\"\n" >>~/.bashrc
+	fi
 }
 
 # Set global variables
@@ -26,7 +26,7 @@ update_or_add_global_variable "OUT_NUM" "90"
 sudo dpkg-reconfigure tzdata
 
 #Install dependencies
-sudo apt-get update && sudo apt-get -y install build-essential checkinstall libpcre3 libpcre3-dev libssl-dev libx264-dev libx265-dev libnuma-dev libvpx-dev libfdk-aac-dev libmp3lame-dev libopus-dev libsdl2-dev libfreetype6-dev libass-dev libtool git zip unzip curl php7.0-cli php7.0-mbstring php7.0-fpm php7.0-mysql php7.0-curl php7.0-gd php7.0-bcmath autoconf automake cmake git-core pkg-config texinfo zlib1g-dev uuid-dev libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm yasm htop ffmpeg youtube-dl 
+sudo apt-get update && sudo apt-get -y install build-essential checkinstall libpcre3 libpcre3-dev libssl-dev libx264-dev libx265-dev libnuma-dev libvpx-dev libfdk-aac-dev libmp3lame-dev libopus-dev libsdl2-dev libfreetype6-dev libass-dev libtool git zip unzip curl php7.0-cli php7.0-mbstring php7.0-fpm php7.0-mysql php7.0-curl php7.0-gd php7.0-bcmath autoconf automake cmake git-core pkg-config texinfo zlib1g-dev uuid-dev libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm yasm htop ffmpeg youtube-dl
 
 #Install NGINX with RTMP module
 sudo mkdir ~/build && cd ~/build
@@ -72,15 +72,13 @@ sudo chmod +x -R /usr/local/nginx/scripts
 sudo mkdir /usr/local/nginx/scripts
 sudo chmod +x -R /usr/local/nginx/scripts
 
-
-
 cd /usr/local/nginx/scripts/
 for i in {2..${STREAM_NUM}}; do
-	sudo cp 1.sh ${i}.sh;
-	sudo cp ./images/1lowerthird.png ./images/${i}lowerthird.png;
-	sudo cp ./images/1video.mp4 ./images/${i}video.mp4;
-	sudo cp ./images/1holding.mp4 ./images/${i}holding.mp4;
-	sudo cp ./images/1failover.mp4 ./images/${1}failover.mp5;
+	sudo cp 1.sh ${i}.sh
+	sudo cp ./images/1lowerthird.png ./images/${i}lowerthird.png
+	sudo cp ./images/1video.mp4 ./images/${i}video.mp4
+	sudo cp ./images/1holding.mp4 ./images/${i}holding.mp4
+	sudo cp ./images/1failover.mp4 ./images/${1}failover.mp5
 done
 sudo cp /usr/local/nginx/scripts/.htpasswd /usr/local/nginx/conf/
 sudo cp /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.old
@@ -145,28 +143,28 @@ sudo mkdir -p ~/ffmpeg_sources ~/bin && cd ~ && sudo wget -O ffmpeg-4.0.6.tar.bz
 #sudo make install
 
 #install Latest FFMPEG   --enable-libsrt \ removed because ffmpeg build is failing with it
-cd ~/ffmpeg && \
-PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
-  --prefix="$HOME/ffmpeg_build" \
-  --pkg-config-flags="--static" \
-  --extra-cflags="-I$HOME/ffmpeg_build/include" \
-  --extra-ldflags="-L$HOME/ffmpeg_build/lib" \
-  --extra-libs="-lpthread -lm" \
-  --enable-gpl \
-  --enable-openssl \
-  --enable-libass \
-  --enable-libfdk-aac \
-  --enable-libfreetype \
-  --enable-libmp3lame \
-  --enable-libopus \
-  --enable-libvorbis \
-  --enable-libvpx \
-  --enable-libx264 \
-  --enable-libx265 \
-  --enable-libzmq \
-  --enable-network \
-  --enable-nonfree && \
-PATH="$HOME/bin:$PATH" make
+cd ~/ffmpeg &&
+	PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
+		--prefix="$HOME/ffmpeg_build" \
+		--pkg-config-flags="--static" \
+		--extra-cflags="-I$HOME/ffmpeg_build/include" \
+		--extra-ldflags="-L$HOME/ffmpeg_build/lib" \
+		--extra-libs="-lpthread -lm" \
+		--enable-gpl \
+		--enable-openssl \
+		--enable-libass \
+		--enable-libfdk-aac \
+		--enable-libfreetype \
+		--enable-libmp3lame \
+		--enable-libopus \
+		--enable-libvorbis \
+		--enable-libvpx \
+		--enable-libx264 \
+		--enable-libx265 \
+		--enable-libzmq \
+		--enable-network \
+		--enable-nonfree &&
+	PATH="$HOME/bin:$PATH" make
 
 sudo make install && hash -r
 
@@ -196,7 +194,7 @@ sudo cp /usr/local/nginx/scripts/nginxrestart.sh /etc/init.d && sudo update-rc.d
 
 #make a little announcment with useful data for the user
 WANIP=$(curl -s http://whatismyip.akamai.com/)
-echo "Send source RTMP input on port 1935 to $WANIP" 
+echo "Send source RTMP input on port 1935 to $WANIP"
 echo " "
 echo "Add www-data ALL=NOPASSWD: /bin/bash, /bin/ls to sudo visudo"
 echo " "

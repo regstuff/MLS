@@ -12,4 +12,5 @@ sudo sed -i "s|<title>.*</title>|<title>$(hostname) Settings</title>|" /usr/loca
 sudo sed -i "s|<title>.*</title>|<title>$(hostname) Stats</title>|" /usr/local/nginx/html/stat.xsl
 
 # Restart NGINX
-sudo /usr/local/nginx/sbin/nginx -s stop; sudo /usr/local/nginx/sbin/nginx
+sudo /usr/local/nginx/sbin/nginx -s stop
+sudo /usr/local/nginx/sbin/nginx
