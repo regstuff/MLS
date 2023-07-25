@@ -50,7 +50,10 @@ function renderStreamControls() {
 
 		// creating controls bellow the video preview
 		var outsDiv = document.createElement('div');
-		for (var j = 1; j <= 10; j++) {
+		outsDiv.classList.add('stream-outs');
+		outsDiv.id = `stream-outs-${i}`;
+		for (var j = 1; j <= OUT_NUM; j++) {
+			if (i !== 1 && j > 20) break;
 			var on = `<button class="small-btn" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=on')">on</button>`;
 			var off = `<button class="small-btn off" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=off')">off</button>`;
 			const outName = streamNames[i][j];
@@ -59,6 +62,7 @@ function renderStreamControls() {
 			<div class="out-config"><span class="stream-status" id="status${i}-${j}"></span>${on} | ${off} Out ${j}${suffix}<span id="destination${i}-${j}"></span></div>`;
 		}
 		divContainer.appendChild(outsDiv);
+		divContainer.innerHTML += `<button id="show-outs-${i}" class="show-or-hide-btn small-btn" onclick="toggleOuts(${i})">Show More</button>`;
 
 		// Other options
 		var otherControlsDiv = document.createElement('div');
@@ -135,6 +139,21 @@ function renderStreamControls() {
 
 		// Append the divContainer to streamControls section
 		streamControls.appendChild(divContainer);
+	}
+}
+
+function toggleOuts(streamId) {
+	const outs = document.getElementById(`stream-outs-${streamId}`);
+	const showMoreBtn = document.getElementById(`show-outs-${streamId}`);
+
+	if (outs.classList.contains('show-more')) {
+		// Hide the full text
+		outs.classList.remove('show-more');
+		showMoreBtn.textContent = 'show more';
+	} else {
+		// Show the full text
+		outs.classList.add('show-more');
+		showMoreBtn.textContent = 'hide';
 	}
 }
 

@@ -38,8 +38,15 @@ function updateRtmpUrl() {
 }
 
 function renderStreamNameTable() {
-	const table = document.getElementById('name-table-body');
+	const tableHead = document.getElementById('name-table').tHead;
+	let tHeadHtml = '<tr><th></th><th>Name</th>';
+	for (let j = 1; j <= OUT_NUM; j++) {
+		tHeadHtml += `<th>Out${j}</th>`;
+	}
+	tHeadHtml += '</tr>';
+	tableHead.innerHTML = tHeadHtml;
 
+	const table = document.getElementById('name-table-body');
 	for (let i = 1; i <= STREAM_NUM; i++) {
 		let tr = table.insertRow();
 		const td = tr.insertCell();
