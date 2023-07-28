@@ -185,6 +185,7 @@ async function fetchActiveOuts() {
 	let outStreams = rtmpJson.rtmp.server.application.find((app) => app.name['#text'] == 'output')
 		.live.stream;
 	if (outStreams === undefined) return [];
+	if (!Array.isArray(outStreams)) outStreams = [outStreams];
 	outStreams = outStreams.map((s) => s.name['#text']);
 	return outStreams
 		.map((name) => parseOutputStreamName(name))
