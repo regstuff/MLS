@@ -59,7 +59,7 @@ function renderStreamControls() {
 			const outName = streamNames[i][j];
 			const suffix = outName ? ` (${outName})` : '';
 			outsDiv.innerHTML += `
-			<div class="out-config"><span class="stream-status" id="status${i}-${j}"></span>${on} | ${off} Out ${j}${suffix}<span id="destination${i}-${j}"></span></div>`;
+			<div class="out-config"><span class="stream-status" id="status${i}-${j}"></span>${on} | ${off} Out ${j}${suffix}<span id=outStreams"destination${i}-${j}"></span></div>`;
 		}
 		divContainer.appendChild(outsDiv);
 		divContainer.innerHTML += `<button id="show-outs-${i}" class="show-or-hide-btn small-btn" onclick="toggleOuts(${i})">Show More</button>`;
@@ -119,6 +119,9 @@ function renderStreamControls() {
 			
 			<li>
 				<form method="post" target="_blank" action="/control.php?streamno=${i}&action=video&actnumber=&state=turnon" style="margin: 0; padding: 0">
+				<input type="submit" class="small-btn" style="display: inline" value="start" /> |
+				<a href="/control.php?streamno=${i}&action=off&actnumber=&state=" class="small-btn off" target="_blank">turn off</a> |||
+				<a href="/control.php?streamno=${i}&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					Uploaded Video:
 					<select name="video_no">
 						<option value="">Choose</option>
@@ -128,9 +131,6 @@ function renderStreamControls() {
 
 				<input type="text" name="startmin" size="1" value="0" />
 				<input type="text" style="display: inline" name="startsec" size="1" value="0" />
-				<input type="submit" class="small-btn" style="display: inline" value="start" /> |||
-				<a href="/control.php?streamno=${i}&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
-				<a href="/control.php?streamno=${i}&action=off&actnumber=&state=" class="small-btn off" target="_blank">turn off</a>
 				</form></li>
 		</ul>
 		</div>`;
