@@ -19,8 +19,8 @@ update_or_add_global_variable() {
 }
 
 # Set global variables
-update_or_add_global_variable "STREAM_NUM" "20"
-update_or_add_global_variable "OUT_NUM" "90"
+update_or_add_global_variable "STREAM_NUM" "25"
+update_or_add_global_variable "OUT_NUM" "95"
 
 #Configure Timezone For Recording Timestamps
 sudo dpkg-reconfigure tzdata
