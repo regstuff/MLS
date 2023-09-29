@@ -136,8 +136,6 @@ function renderStreamControls() {
 		</div>`;
 
 		divContainer.appendChild(otherControlsDiv);
-
-		// Append the divContainer to streamControls section
 		streamControls.appendChild(divContainer);
 	}
 }
@@ -281,4 +279,5 @@ window.onload = async function () {
 	await renderDestinations();
 	setVideoPlayers();
 	setInterval(refreshStatuses, 3000);
+	setInterval(renderDestinations, 3000);
 };
