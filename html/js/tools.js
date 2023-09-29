@@ -18,7 +18,6 @@ function clearAndAddChooseOption(selector) {
 // This will be fetched from a file
 let streamNames = [];
 let streamOutsConfig = [];
-let noCacheHeader = { 'Cache-Control': 'no-store' };
 
 // AJAX request function
 async function submitFormAndShowResponse(formId, phpUrl) {
@@ -26,11 +25,7 @@ async function submitFormAndShowResponse(formId, phpUrl) {
 	if (form.checkValidity()) {
 		try {
 			var formData = new FormData(form);
-			var response = await fetch(phpUrl, {
-				method: 'POST',
-				body: formData,
-				headers: noCacheHeader,
-			});
+			var response = await fetch(phpUrl, { method: 'POST', body: formData });
 			if (response.ok) {
 				showResponse(await response.text());
 			} else {
@@ -46,7 +41,7 @@ async function submitFormAndShowResponse(formId, phpUrl) {
 
 // AJAX request function
 async function executePhpAndShowResponse(phpUrl) {
-	var response = await fetch(phpUrl, { method: 'POST', headers: noCacheHeader });
+	var response = await fetch(phpUrl, { method: 'POST' });
 	if (response.ok) {
 		showResponse(await response.text());
 		refreshStatuses();
@@ -62,7 +57,7 @@ function showResponse(response) {
 
 async function fetchStats() {
 	try {
-		const response = await fetch('/stat-test.xml', { headers: noCacheHeader });
+		const response = await fetch('/stat-test.xml');
 		const data = await response.text();
 		const parser = new DOMParser();
 		const xmlData = parser.parseFromString(data, 'text/xml');
@@ -89,7 +84,7 @@ function writeStreamNames() {
 
 async function fetchStreamNames() {
 	try {
-		const response = await fetch('fetch-stream-names.php', { headers: noCacheHeader });
+		const response = await fetch('fetch-stream-names.php');
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
@@ -104,7 +99,7 @@ async function fetchStreamNames() {
 }
 
 async function fetchConfigFile() {
-	const response = await fetch('/config.txt', { headers: noCacheHeader });
+	const response = await fetch('/config.txt');
 	const text = await response.text();
 	const lines = text.split('\n');
 
