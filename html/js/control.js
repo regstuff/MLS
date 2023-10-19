@@ -10,7 +10,7 @@ function renderStreamControls() {
 		<div class="divider" style="margin: 30px auto;">
 			<img src="./img/red-divider.svg" alt="divider" />
 		</div>`;
-		const streamName = streamNames[i][0];
+		const streamName = streamNames[i];
 		const suffix = streamName ? ` (${streamName})` : '';
 		divContainer.innerHTML += `<h2>Stream ${i}${suffix}</h2>`;
 
@@ -56,10 +56,8 @@ function renderStreamControls() {
 			if (i !== 1 && j > 20) break;
 			var on = `<button class="small-btn" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=on')">on</button>`;
 			var off = `<button class="small-btn off" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=off')">off</button>`;
-			const outName = streamNames[i][j];
-			const suffix = outName ? ` (${outName})` : '';
 			outsDiv.innerHTML += `
-			<div class="out-config"><span class="stream-status" id="status${i}-${j}"></span>${on} | ${off} Out ${j}${suffix}<span id="destination${i}-${j}"></span></div>`;
+			<div class="out-config"><span class="stream-status" id="status${i}-${j}"></span>${on} | ${off} Out ${j}<span id="destination${i}-${j}"></span></div>`;
 		}
 		divContainer.appendChild(outsDiv);
 		divContainer.innerHTML += `<button id="show-outs-${i}" class="show-or-hide-btn small-btn" onclick="toggleOuts(${i})">Show More</button>`;
@@ -162,7 +160,7 @@ async function renderDestinations() {
 			const elem = document.getElementById(`destination${i}-${j}`);
 			const info = streamOutsConfig[i][j];
 			if (Object.keys(info).length !== 0) {
-				elem.innerHTML = `, destination: ${info.name}`;
+				elem.innerHTML = `: ${info.name}`;
 			}
 		}
 	}

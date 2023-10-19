@@ -69,6 +69,7 @@ form select {
 	border: 0px;
 	color: #fff7eb;
 	font-weight: bold;
+	cursor: pointer;
 }
 
 .big-btn:active {
@@ -86,6 +87,7 @@ form select {
 	color: #fff7eb;
 	font-weight: normal;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 .small-btn:active {

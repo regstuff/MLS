@@ -52,7 +52,9 @@ async function executePhpAndShowResponse(phpUrl) {
 
 function showResponse(response) {
 	var responseBox = document.getElementById('responseBox');
-	responseBox.innerHTML += `<p>${response}</p><div class="divider"><img src="./img/divider.svg" alt="divider" /></div>`;
+	responseBox.innerHTML =
+		`<p>${response}</p><div class="divider"><img src="./img/divider.svg" alt="divider" /></div>` +
+		responseBox.innerHTML;
 }
 
 async function fetchStats() {
@@ -67,18 +69,18 @@ async function fetchStats() {
 	}
 }
 
-function writeStreamNames() {
+async function writeStreamNames() {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'save-stream-names.php', true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 
 	xhr.onreadystatechange = function () {
-		if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-			console.log(xhr.responseText);
+		if (xhr.readyState === XMLHttpRequest.DONE) {
+			showResponse(xhr.responseText);
 		}
 	};
 
-	var jsonData = JSON.stringify({ csvData: streamNames });
+	var jsonData = JSON.stringify({ csvData: [streamNames] });
 	xhr.send(jsonData);
 }
 
@@ -89,7 +91,7 @@ async function fetchStreamNames() {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
 		const data = await response.json();
-		const streamNames = data.csvData;
+		const streamNames = data.csvData[0];
 		console.log('CSV fetched successfully.');
 		return streamNames;
 	} catch (error) {
