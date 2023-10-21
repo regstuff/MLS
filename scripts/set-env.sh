@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Function to update or add a global variable to ~/.bashrc
-update_or_add_global_variable() {
+update_env_variable() {
 	local variable_name="$1"
 	local new_value="$2"
 	local grep_result
@@ -19,14 +19,5 @@ update_or_add_global_variable() {
 }
 
 # Set global variables
-update_or_add_global_variable "STREAM_NUM" "25"
-update_or_add_global_variable "OUT_NUM" "95"
-
-sudo chgrp -R www-data ~/MLS
-sudo chmod g+rw -R ~/MLS
-sudo cp -R ~/MLS/html /usr/local/nginx
-sudo cp scripts/nginx.conf /usr/local/nginx/conf/
-sudo cp -R ~/MLS/scripts /usr/local/nginx
-sudo chmod +x -R /usr/local/nginx/scripts
-
-sudo ./scripts/nginxrestart.sh
+update_env_variable "STREAM_NUM" "25"
+update_env_variable "OUT_NUM" "95"

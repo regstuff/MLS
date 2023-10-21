@@ -1,26 +1,6 @@
 #!/bin/bash
 
-# Function to update or add a global variable to ~/.bashrc
-update_or_add_global_variable() {
-	local variable_name="$1"
-	local new_value="$2"
-	local grep_result
-
-	# Check if the variable is already set in ~/.bashrc
-	grep_result=$(grep -E "^export $variable_name=" ~/.bashrc)
-
-	if [ -n "$grep_result" ]; then
-		# Variable exists, replace its value
-		sed -i "s/^export $variable_name=.*/export $variable_name=\"$new_value\"/" ~/.bashrc
-	else
-		# Variable does not exist, add it to ~/.bashrc
-		echo -e "\nexport $variable_name=\"$new_value\"\n" >>~/.bashrc
-	fi
-}
-
-# Set global variables
-update_or_add_global_variable "STREAM_NUM" "25"
-update_or_add_global_variable "OUT_NUM" "95"
+source scripts/set-env.sh
 
 #Configure Timezone For Recording Timestamps
 sudo dpkg-reconfigure tzdata
@@ -56,7 +36,6 @@ sudo unzip ~/MLS/insta_php.zip -d ~/
 # Download and move config files
 cd ~/MLS/scripts/
 sudo mkdir images
-sudo mkdir tmp
 cd images
 sudo wget -O 1lowerthird.png https://www.dropbox.com/s/25xvndu4hzrtvom/1lowerthird.png?dl=0
 sudo wget -O 1video.mp4 https://www.dropbox.com/s/il7qa994iv9r7gu/1video.mp4?dl=0
@@ -68,6 +47,7 @@ sudo mkdir lowerthird
 sudo chgrp -R www-data ~/MLS
 sudo chmod g+rw -R ~/MLS
 sudo cp -R ~/MLS/scripts /usr/local/nginx
+sudo rm -R ~/MLS/scripts/images
 sudo chmod +x -R /usr/local/nginx/scripts
 sudo mkdir /usr/local/nginx/scripts
 sudo chmod +x -R /usr/local/nginx/scripts
@@ -80,13 +60,12 @@ for i in {2..${STREAM_NUM}}; do
 	sudo cp ./images/1holding.mp4 ./images/${i}holding.mp4
 	sudo cp ./images/1failover.mp4 ./images/${1}failover.mp5
 done
+
 sudo cp /usr/local/nginx/scripts/.htpasswd /usr/local/nginx/conf/
 sudo cp /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.old
 sudo cp /usr/local/nginx/scripts/php.ini /etc/php/7.0/fpm/
 sudo cp /usr/local/nginx/scripts/images/*lowerthird.png /usr/local/nginx/scripts/images/lowerthird
 
-sudo rm -R ~/MLS/scripts/images
-sudo rm -R ~/MLS/scripts/tmp
 sudo systemctl restart php7.0-fpm
 
 sudo cp /usr/local/nginx/scripts/nginx.conf /usr/local/nginx/conf/
