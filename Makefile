@@ -2,6 +2,7 @@
 
 pretty:
 	cd html && npx prettier --write ..
+	shfmt -w .
 
 install:
 	sudo ./setup-nginx-docker.sh

@@ -1,6 +1,6 @@
 // CONSTANTS
-const STREAM_NUM = 20;
-const OUT_NUM = 10;
+const STREAM_NUM = 25;
+const OUT_NUM = 95;
 
 // Tools
 function removeAllChildNodes(parent) {
@@ -16,41 +16,7 @@ function clearAndAddChooseOption(selector) {
 	selector.appendChild(option);
 }
 // This will be fetched from a file
-let streamNames = [
-	[
-		'Name',
-		'Out 1',
-		'Out 2',
-		'Out 3',
-		'Out 4',
-		'Out 5',
-		'Out 6',
-		'Out 7',
-		'Out 8',
-		'Out 9',
-		'Out 10',
-	],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', '', '', '', ''],
-];
+let streamNames = [];
 let streamOutsConfig = [];
 
 // AJAX request function
@@ -86,7 +52,9 @@ async function executePhpAndShowResponse(phpUrl) {
 
 function showResponse(response) {
 	var responseBox = document.getElementById('responseBox');
-	responseBox.innerHTML += `<p>${response}</p><div class="divider"><img src="./img/divider.svg" alt="divider" /></div>`;
+	responseBox.innerHTML =
+		`<p>${response}</p><div class="divider"><img src="./img/divider.svg" alt="divider" /></div>` +
+		responseBox.innerHTML;
 }
 
 async function fetchStats() {
@@ -101,18 +69,18 @@ async function fetchStats() {
 	}
 }
 
-function writeStreamNames() {
+async function writeStreamNames() {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'save-stream-names.php', true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 
 	xhr.onreadystatechange = function () {
-		if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-			console.log(xhr.responseText);
+		if (xhr.readyState === XMLHttpRequest.DONE) {
+			showResponse(xhr.responseText);
 		}
 	};
 
-	var jsonData = JSON.stringify({ csvData: streamNames });
+	var jsonData = JSON.stringify({ csvData: [streamNames] });
 	xhr.send(jsonData);
 }
 
@@ -123,7 +91,7 @@ async function fetchStreamNames() {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
 		const data = await response.json();
-		const streamNames = data.csvData;
+		const streamNames = data.csvData[0];
 		console.log('CSV fetched successfully.');
 		return streamNames;
 	} catch (error) {
@@ -138,6 +106,12 @@ async function fetchConfigFile() {
 	const lines = text.split('\n');
 
 	const streamOutsConfig = [];
+	for (let i = 1; i <= STREAM_NUM; i++) {
+		streamOutsConfig[i] = [];
+		for (let j = 1; j <= OUT_NUM; j++) {
+			streamOutsConfig[i][j] = {};
+		}
+	}
 
 	for (const line of lines) {
 		const matches = line.match(/^__stream(\d+)__out(\d+)__(.*)$/);
@@ -145,13 +119,9 @@ async function fetchConfigFile() {
 			const i = parseInt(matches[1]);
 			const j = parseInt(matches[2]);
 			let remainingLine = matches[3].trim();
+			const split = remainingLine.split(' ');
 
-			if (!streamOutsConfig[i]) {
-				streamOutsConfig[i] = [];
-			}
-
-			if (remainingLine !== '') {
-				const split = remainingLine.split(' ');
+			if (split.length === 3) {
 				streamOutsConfig[i][j] = { url: split[0], source: split[1], name: split[2] };
 			} else {
 				streamOutsConfig[i][j] = {};

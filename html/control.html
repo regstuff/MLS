@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Control</title>
@@ -29,11 +29,13 @@
 			<p id="serverdetails">Test</p>
 			<script>
 				var address = window.location.hostname;
-				var rtmp = 'Send primary stream to rtmp://';
-				fulladdress = rtmp.concat(address, '/main/stream1 or stream2 or stream 3 etc.');
-				rtmp = 'Send backup stream to rtmp://';
-				backupaddress = rtmp.concat(address, '/backup/stream1 or stream2 or stream 3 etc.');
-				document.getElementById('serverdetails').innerHTML = fulladdress + '<br/>' + backupaddress;
+				document.getElementById('serverdetails').innerHTML = `
+					Send stream to rtmp://${address}/distribute/stream1
+						or stream2 or stream3 etc. <br/>
+					Send primary stream to rtmp://${address}/main/stream1
+						or stream2 or stream3 etc. <br/>
+					backupaddress = Send backup stream to rtmp://${address}/backup/stream1
+						or stream2 or stream3 etc.`;
 			</script>
 		</section>
 

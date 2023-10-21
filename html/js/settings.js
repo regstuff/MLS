@@ -3,11 +3,11 @@ function renderStreamSelectors() {
 
 	for (let selector of streamSelectors) clearAndAddChooseOption(selector);
 
-	for (let i = 1; i <= 20; i++) {
+	for (let i = 1; i <= STREAM_NUM; i++) {
 		for (let selector of streamSelectors) {
 			let option = document.createElement('option');
 			option.value = String(i);
-			const name = streamNames[i][0];
+			const name = streamNames[i];
 			option.text = 'Stream ' + i + (name ? ': ' + name : '');
 			selector.appendChild(option);
 		}
@@ -15,17 +15,14 @@ function renderStreamSelectors() {
 	const outSelectors = document.getElementsByClassName('out-selector');
 }
 
-function updateOutputs() {
-	const streamId = Number(document.getElementById('new-destination-stream').value);
+function renderOutputs() {
 	const outSelector = document.getElementById('out-selector');
 	clearAndAddChooseOption(outSelector);
 
-	if (streamId === 0) return;
-	for (let i = 1; i < 11; i++) {
+	for (let i = 1; i <= OUT_NUM; i++) {
 		let option = document.createElement('option');
 		option.value = String(i);
-		const suffix = streamNames[streamId][i];
-		option.text = 'Out ' + i + (suffix ? ': ' + suffix : '');
+		option.text = 'Out ' + i;
 		outSelector.appendChild(option);
 	}
 }
@@ -38,46 +35,47 @@ function updateRtmpUrl() {
 }
 
 function renderStreamNameTable() {
-	const table = document.getElementById('name-table-body');
+	const tableHead = document.getElementById('name-table').tHead;
+	let tHeadHtml = '<tr>';
+	for (let i = 1; i <= STREAM_NUM; i++) {
+		tHeadHtml += `<th>Stream${i}</th>`;
+	}
+	tHeadHtml += '</tr>';
+	tableHead.innerHTML = tHeadHtml;
 
-	for (let i = 1; i <= 20; i++) {
-		let tr = table.insertRow();
+	const table = document.getElementById('name-table-body');
+	let tr = table.insertRow();
+	for (let i = 1; i <= STREAM_NUM; i++) {
 		const td = tr.insertCell();
-		td.innerHTML = 'Stream' + i;
-		for (let j = 0; j <= 10; j++) {
-			const td = tr.insertCell();
-			const input = document.createElement('input');
-			input.type = 'text';
-			input.size = '10';
-			input.value = streamNames[i][j];
-			input.name = streamNames[0][j];
-			td.appendChild(input);
-		}
+		const input = document.createElement('input');
+		input.type = 'text';
+		input.size = '10';
+		input.value = streamNames[i];
+		input.name = streamNames[i];
+		td.appendChild(input);
 	}
 }
 
-function saveStreamNamesTable() {
-	var table = document.getElementById('name-table');
+function extractStreamNamesFromTable() {
+	const table = document.getElementById('name-table');
 
-	// Iterate through each row of the table
-	for (let i = 1; i < table.rows.length; i++) {
-		var rowValues = [];
-		var row = table.rows[i];
-
-		// Iterate through each cell in the row
-		for (var j = 1; j < row.cells.length; j++) {
-			var cell = row.cells[j];
-			rowValues.push(cell.firstChild.value);
-		}
-
-		streamNames[i] = rowValues;
+	const ans = ['ignored'];
+	const row = table.rows[1];
+	for (let i = 0; i < STREAM_NUM; i++) {
+		const cell = row.cells[i];
+		ans.push(cell.firstChild.value);
 	}
+	return ans;
+}
+
+function saveStreamNamesTable() {
+	streamNames = extractStreamNamesFromTable();
 	renderStreamSelectors();
 	writeStreamNames();
 }
 window.onload = async function () {
 	streamNames = await fetchStreamNames();
-	updateOutputs();
+	renderOutputs();
 	renderStreamNameTable();
 	renderStreamSelectors();
 };

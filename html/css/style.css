@@ -69,6 +69,7 @@ form select {
 	border: 0px;
 	color: #fff7eb;
 	font-weight: bold;
+	cursor: pointer;
 }
 
 .big-btn:active {
@@ -86,6 +87,7 @@ form select {
 	color: #fff7eb;
 	font-weight: normal;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 .small-btn:active {
@@ -114,6 +116,15 @@ details[open] {
 details[open] summary {
 	border-bottom: 1px solid #ccc;
 	margin-bottom: 0.5em;
+}
+
+/* ===== Table ===== */
+.table-wrapper {
+	overflow-x: auto;
+}
+
+#name-table {
+	border-spacing: 0px;
 }
 
 /* ===== Ajax Responses View ===== */
@@ -162,7 +173,7 @@ details[open] summary {
 
 .on,
 .stream-status.on {
-	background-color: green;
+	background-color: #7fe363;
 }
 
 .off,
@@ -223,4 +234,24 @@ section {
 	list-style: none;
 	padding: 0;
 	margin: 0;
+}
+
+/* === show and hide outs === */
+.stream-outs {
+	max-height: calc(1.4em * 20); /* Show 20 lines of text (assuming 1.4em line height) */
+	overflow: hidden;
+	line-height: 1.4em; /* Set the line height for proper line count */
+}
+
+.show-more {
+	max-height: none; /* Show the full text */
+}
+
+.show-or-hide-btn {
+	display: block;
+	margin-top: 10px;
+
+	border: 1px solid #7c0514;
+	color: #7c0514;
+	background-color: #00000000;
 }

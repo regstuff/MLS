@@ -1,10 +1,32 @@
 #!/bin/bash
 
+# Function to update or add a global variable to ~/.bashrc
+update_or_add_global_variable() {
+	local variable_name="$1"
+	local new_value="$2"
+	local grep_result
+
+	# Check if the variable is already set in ~/.bashrc
+	grep_result=$(grep -E "^export $variable_name=" ~/.bashrc)
+
+	if [ -n "$grep_result" ]; then
+		# Variable exists, replace its value
+		sed -i "s/^export $variable_name=.*/export $variable_name=\"$new_value\"/" ~/.bashrc
+	else
+		# Variable does not exist, add it to ~/.bashrc
+		echo -e "\nexport $variable_name=\"$new_value\"\n" >>~/.bashrc
+	fi
+}
+
+# Set global variables
+update_or_add_global_variable "STREAM_NUM" "25"
+update_or_add_global_variable "OUT_NUM" "95"
+
 #Configure Timezone For Recording Timestamps
 sudo dpkg-reconfigure tzdata
 
 #Install dependencies
-sudo apt-get update && sudo apt-get -y install build-essential checkinstall libpcre3 libpcre3-dev libssl-dev libx264-dev libx265-dev libnuma-dev libvpx-dev libfdk-aac-dev libmp3lame-dev libopus-dev libsdl2-dev libfreetype6-dev libass-dev libtool git zip unzip curl php7.0-cli php7.0-mbstring php7.0-fpm php7.0-mysql php7.0-curl php7.0-gd php7.0-bcmath autoconf automake cmake git-core pkg-config texinfo zlib1g-dev uuid-dev libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm yasm htop ffmpeg youtube-dl 
+sudo apt-get update && sudo apt-get -y install build-essential checkinstall libpcre3 libpcre3-dev libssl-dev libx264-dev libx265-dev libnuma-dev libvpx-dev libfdk-aac-dev libmp3lame-dev libopus-dev libsdl2-dev libfreetype6-dev libass-dev libtool git zip unzip curl php7.0-cli php7.0-mbstring php7.0-fpm php7.0-mysql php7.0-curl php7.0-gd php7.0-bcmath autoconf automake cmake git-core pkg-config texinfo zlib1g-dev uuid-dev libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev nasm yasm htop ffmpeg youtube-dl
 
 #Install NGINX with RTMP module
 sudo mkdir ~/build && cd ~/build
@@ -49,106 +71,20 @@ sudo cp -R ~/MLS/scripts /usr/local/nginx
 sudo chmod +x -R /usr/local/nginx/scripts
 sudo mkdir /usr/local/nginx/scripts
 sudo chmod +x -R /usr/local/nginx/scripts
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/2.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/3.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/4.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/5.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/6.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/7.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/8.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/9.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/10.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/11.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/12.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/13.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/14.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/15.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/16.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/17.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/18.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/19.sh
-sudo cp /usr/local/nginx/scripts/1.sh /usr/local/nginx/scripts/20.sh
+
+cd /usr/local/nginx/scripts/
+for i in {2..${STREAM_NUM}}; do
+	sudo cp 1.sh ${i}.sh
+	sudo cp ./images/1lowerthird.png ./images/${i}lowerthird.png
+	sudo cp ./images/1video.mp4 ./images/${i}video.mp4
+	sudo cp ./images/1holding.mp4 ./images/${i}holding.mp4
+	sudo cp ./images/1failover.mp4 ./images/${1}failover.mp5
+done
 sudo cp /usr/local/nginx/scripts/.htpasswd /usr/local/nginx/conf/
 sudo cp /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.old
 sudo cp /usr/local/nginx/scripts/php.ini /etc/php/7.0/fpm/
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/2lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/3lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/4lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/5lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/6lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/7lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/8lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/9lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/10lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/11lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/12lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/13lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/14lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/15lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/16lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/17lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/18lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/19lowerthird.png
-sudo cp /usr/local/nginx/scripts/images/1lowerthird.png /usr/local/nginx/scripts/images/20lowerthird.png
 sudo cp /usr/local/nginx/scripts/images/*lowerthird.png /usr/local/nginx/scripts/images/lowerthird
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/2video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/3video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/4video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/5video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/6video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/7video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/8video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/9video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/10video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/11video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/12video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/13video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/14video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/15video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/16video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/17video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/18video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/19video.mp4
-sudo cp /usr/local/nginx/scripts/images/1video.mp4 /usr/local/nginx/scripts/images/20video.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/2holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/3holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/4holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/5holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/6holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/7holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/8holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/9holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/10holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/11holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/12holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/13holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/14holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/15holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/16holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/17holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/18holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/19holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/20holding.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/1failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/2failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/3failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/4failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/5failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/6failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/7failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/8failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/9failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/10failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/11failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/12failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/13failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/14failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/15failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/16failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/17failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/18failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/19failover.mp4
-sudo cp /usr/local/nginx/scripts/images/1holding.mp4 /usr/local/nginx/scripts/images/20failover.mp4
+
 sudo rm -R ~/MLS/scripts/images
 sudo rm -R ~/MLS/scripts/tmp
 sudo systemctl restart php7.0-fpm
@@ -207,28 +143,28 @@ sudo mkdir -p ~/ffmpeg_sources ~/bin && cd ~ && sudo wget -O ffmpeg-4.0.6.tar.bz
 #sudo make install
 
 #install Latest FFMPEG   --enable-libsrt \ removed because ffmpeg build is failing with it
-cd ~/ffmpeg && \
-PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
-  --prefix="$HOME/ffmpeg_build" \
-  --pkg-config-flags="--static" \
-  --extra-cflags="-I$HOME/ffmpeg_build/include" \
-  --extra-ldflags="-L$HOME/ffmpeg_build/lib" \
-  --extra-libs="-lpthread -lm" \
-  --enable-gpl \
-  --enable-openssl \
-  --enable-libass \
-  --enable-libfdk-aac \
-  --enable-libfreetype \
-  --enable-libmp3lame \
-  --enable-libopus \
-  --enable-libvorbis \
-  --enable-libvpx \
-  --enable-libx264 \
-  --enable-libx265 \
-  --enable-libzmq \
-  --enable-network \
-  --enable-nonfree && \
-PATH="$HOME/bin:$PATH" make
+cd ~/ffmpeg &&
+	PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
+		--prefix="$HOME/ffmpeg_build" \
+		--pkg-config-flags="--static" \
+		--extra-cflags="-I$HOME/ffmpeg_build/include" \
+		--extra-ldflags="-L$HOME/ffmpeg_build/lib" \
+		--extra-libs="-lpthread -lm" \
+		--enable-gpl \
+		--enable-openssl \
+		--enable-libass \
+		--enable-libfdk-aac \
+		--enable-libfreetype \
+		--enable-libmp3lame \
+		--enable-libopus \
+		--enable-libvorbis \
+		--enable-libvpx \
+		--enable-libx264 \
+		--enable-libx265 \
+		--enable-libzmq \
+		--enable-network \
+		--enable-nonfree &&
+	PATH="$HOME/bin:$PATH" make
 
 sudo make install && hash -r
 
@@ -258,7 +194,7 @@ sudo cp /usr/local/nginx/scripts/nginxrestart.sh /etc/init.d && sudo update-rc.d
 
 #make a little announcment with useful data for the user
 WANIP=$(curl -s http://whatismyip.akamai.com/)
-echo "Send source RTMP input on port 1935 to $WANIP" 
+echo "Send source RTMP input on port 1935 to $WANIP"
 echo " "
 echo "Add www-data ALL=NOPASSWD: /bin/bash, /bin/ls to sudo visudo"
 echo " "
