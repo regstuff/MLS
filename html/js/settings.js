@@ -3,7 +3,7 @@ function renderStreamSelectors() {
 
 	for (let selector of streamSelectors) clearAndAddChooseOption(selector);
 
-	for (let i = 1; i <= 20; i++) {
+	for (let i = 1; i <= STREAM_NUM; i++) {
 		for (let selector of streamSelectors) {
 			let option = document.createElement('option');
 			option.value = String(i);
@@ -21,7 +21,7 @@ function updateOutputs() {
 	clearAndAddChooseOption(outSelector);
 
 	if (streamId === 0) return;
-	for (let i = 1; i < 11; i++) {
+	for (let i = 1; i <= OUT_NUM; i++) {
 		let option = document.createElement('option');
 		option.value = String(i);
 		const suffix = streamNames[streamId][i];
@@ -38,13 +38,20 @@ function updateRtmpUrl() {
 }
 
 function renderStreamNameTable() {
-	const table = document.getElementById('name-table-body');
+	const tableHead = document.getElementById('name-table').tHead;
+	let tHeadHtml = '<tr><th></th><th>Name</th>';
+	for (let j = 1; j <= OUT_NUM; j++) {
+		tHeadHtml += `<th>Out${j}</th>`;
+	}
+	tHeadHtml += '</tr>';
+	tableHead.innerHTML = tHeadHtml;
 
-	for (let i = 1; i <= 20; i++) {
+	const table = document.getElementById('name-table-body');
+	for (let i = 1; i <= STREAM_NUM; i++) {
 		let tr = table.insertRow();
 		const td = tr.insertCell();
 		td.innerHTML = 'Stream' + i;
-		for (let j = 0; j <= 10; j++) {
+		for (let j = 0; j <= OUT_NUM; j++) {
 			const td = tr.insertCell();
 			const input = document.createElement('input');
 			input.type = 'text';

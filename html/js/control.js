@@ -1,7 +1,7 @@
 function renderStreamControls() {
 	const streamControls = document.getElementById('stream-controls');
 
-	for (let i = 1; i <= 20; i++) {
+	for (let i = 1; i <= STREAM_NUM; i++) {
 		// Create the div container
 		const divContainer = document.createElement('div');
 		divContainer.classList.add('padded');
@@ -50,22 +50,27 @@ function renderStreamControls() {
 
 		// creating controls bellow the video preview
 		var outsDiv = document.createElement('div');
-		for (var j = 1; j <= 10; j++) {
+		outsDiv.classList.add('stream-outs');
+		outsDiv.id = `stream-outs-${i}`;
+		for (var j = 1; j <= OUT_NUM; j++) {
+			if (i !== 1 && j > 20) break;
 			var on = `<button class="small-btn" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=on')">on</button>`;
 			var off = `<button class="small-btn off" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=off')">off</button>`;
 			const outName = streamNames[i][j];
 			const suffix = outName ? ` (${outName})` : '';
 			outsDiv.innerHTML += `
-			<div class="out-config"><span class="stream-status" id="status${i}-${j}"></span>Out ${j}${suffix}: ${on} | ${off} <div id="destination${i}-${j}" style="margin-left: 30px;"></div></div>`;
+			<div class="out-config"><span class="stream-status" id="status${i}-${j}"></span>${on} | ${off} Out ${j}${suffix}<span id="destination${i}-${j}"></span></div>`;
 		}
 		divContainer.appendChild(outsDiv);
+		divContainer.innerHTML += `<button id="show-outs-${i}" class="show-or-hide-btn small-btn" onclick="toggleOuts(${i})">Show More</button>`;
 
 		// Other options
 		var otherControlsDiv = document.createElement('div');
 		otherControlsDiv.innerHTML += `
 		<p>
-			Record: <button class="small-btn" href="/control.php?streamno=${i}&action=out&actnumber=98&state=on" target="_blank">on</button> |
+			<button class="small-btn" href="/control.php?streamno=${i}&action=out&actnumber=98&state=on" target="_blank">on</button> |
 			<button class="small-btn off" href="/control.php?streamno=${i}&action=out&actnumber=98&state=off" target="_blank">off</button>
+			Record
 		</p>`;
 
 		otherControlsDiv.innerHTML += `
@@ -103,13 +108,20 @@ function renderStreamControls() {
 		<div>
 		<b>Choose Input:</b>
 		<ul class="input-options">
-			<li><span class="stream-status"></span>Main Live Stream:
-				<button onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=main&actnumber=&state=turnon')" class="small-btn" id="stream${i}-main">start</button></li>
-			<li><span class="stream-status"></span>Backup Live stream:
-				<button href="/control.php?streamno=${i}&action=back&actnumber=&state=turnon" class="small-btn" target="_blank">start</button></li>
+			<li>
+				<button onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=main&actnumber=&state=turnon')" class="small-btn" id="stream${i}-main">start</button>
+				Main Live Stream
+			</li>
+			<li>
+				<button href="/control.php?streamno=${i}&action=back&actnumber=&state=turnon" class="small-btn" target="_blank">start</button>
+				Backup Live stream
+			</li>
 			
 			<li>
 				<form method="post" target="_blank" action="/control.php?streamno=${i}&action=video&actnumber=&state=turnon" style="margin: 0; padding: 0">
+				<input type="submit" class="small-btn" style="display: inline" value="start" /> |
+				<a href="/control.php?streamno=${i}&action=off&actnumber=&state=" class="small-btn off" target="_blank">turn off</a> |||
+				<a href="/control.php?streamno=${i}&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					Uploaded Video:
 					<select name="video_no">
 						<option value="">Choose</option>
@@ -119,30 +131,38 @@ function renderStreamControls() {
 
 				<input type="text" name="startmin" size="1" value="0" />
 				<input type="text" style="display: inline" name="startsec" size="1" value="0" />
-				<input type="submit" class="small-btn" style="display: inline" value="start" /> |||
-				<a href="/control.php?streamno=${i}&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
-				<a href="/control.php?streamno=${i}&action=off&actnumber=&state=" class="small-btn off" target="_blank">turn off</a>
 				</form></li>
 		</ul>
 		</div>`;
 
 		divContainer.appendChild(otherControlsDiv);
-
-		// Append the divContainer to streamControls section
 		streamControls.appendChild(divContainer);
+	}
+}
+
+function toggleOuts(streamId) {
+	const outs = document.getElementById(`stream-outs-${streamId}`);
+	const showMoreBtn = document.getElementById(`show-outs-${streamId}`);
+
+	if (outs.classList.contains('show-more')) {
+		// Hide the full text
+		outs.classList.remove('show-more');
+		showMoreBtn.textContent = 'show more';
+	} else {
+		// Show the full text
+		outs.classList.add('show-more');
+		showMoreBtn.textContent = 'hide';
 	}
 }
 
 async function renderDestinations() {
 	streamOutsConfig = await fetchConfigFile();
-	for (let i = 1; i <= 20; i++) {
-		for (let j = 1; j <= 10; j++) {
+	for (let i = 1; i <= STREAM_NUM; i++) {
+		for (let j = 1; j <= OUT_NUM; j++) {
 			const elem = document.getElementById(`destination${i}-${j}`);
 			const info = streamOutsConfig[i][j];
 			if (Object.keys(info).length !== 0) {
-				elem.innerHTML = `
-			Destination (${info.name}, ${info.source}): ${info.url}
-			`;
+				elem.innerHTML = `, destination: ${info.name}`;
 			}
 		}
 	}
@@ -160,9 +180,11 @@ async function fetchActiveOuts() {
 	streamOutsConfig = await fetchConfigFile();
 	const rtmpJson = await fetchStats();
 
-	const outStreams = rtmpJson.rtmp.server.application
-		.find((app) => app.name['#text'] == 'output')
-		.live.stream.map((s) => s.name['#text']);
+	let outStreams = rtmpJson.rtmp.server.application.find((app) => app.name['#text'] == 'output')
+		.live.stream;
+	if (outStreams === undefined) return [];
+	if (!Array.isArray(outStreams)) outStreams = [outStreams];
+	outStreams = outStreams.map((s) => s.name['#text']);
 	return outStreams
 		.map((name) => parseOutputStreamName(name))
 		.map((p) => ({
@@ -257,4 +279,5 @@ window.onload = async function () {
 	await renderDestinations();
 	setVideoPlayers();
 	setInterval(refreshStatuses, 3000);
+	setInterval(renderDestinations, 3000);
 };
