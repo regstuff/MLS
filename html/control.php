@@ -29,11 +29,9 @@ if ($action == "video") { #Get variables for starting holding screen
 } elseif ($action == "super") {
     $output = exec("sudo /bin/bash /usr/local/nginx/scripts/\"$streamno\".sh \"$action\" $actnumber");
     echo $output;
-} elseif ($action == "out") { #For outputs
+} else { #For outputs
     $output = exec("sudo /bin/bash /usr/local/nginx/scripts/\"$streamno\".sh \"$action$actnumber\" $state");
     echo $output;
-} else {
-    echo "no such action";
 }
 
 #### Global Controls - SUPERS ######
