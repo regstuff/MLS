@@ -9,6 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
   fclose($file);
 
-  echo 'CSV file saved successfully.';
+  echo 'Stream names saved successfully.';
 }
 ?>

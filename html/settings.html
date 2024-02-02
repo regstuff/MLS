@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Settings</title>
@@ -40,15 +40,8 @@
 					<option value="rtmp://b.rtmp.youtube.com/live2?backup=1/">YouTube Backup</option>
 					<option value="rtmps://live-api-s.facebook.com:443/rtmp/">Facebook</option>
 				</select>
-				&nbsp; Stream Key:
-				<input
-					type="text"
-					name="stream_key"
-					size="41"
-					placeholder="a5qb-dvjr-0v60-kx8t-90pj"
-					id="stream-key"
-					onchange="updateRtmpUrl()"
-					required />
+				&nbsp; Stream Key (or Custom URL):
+				<input type="text" name="stream_key" size="41" placeholder="a5qb-dvjr-0v60-kx8t-90pj" id="stream-key" onchange="updateRtmpUrl()" />
 				<br />
 				Full RTMP URL:
 				<input
@@ -60,7 +53,7 @@
 					style="background-color: #fff7eb; border: 1px #bbb solid"
 					readonly />
 				<br />
-				Name: <input type="text" name="name_id" size="45" placeholder="Sadhguru_English_YT" required />
+				Name: <input type="text" name="name_id" size="45" placeholder="Sadhguru_English_YT" />
 				&nbsp; Resolution:
 				<select name="resolution">
 					<option value="source">Source</option>
@@ -70,7 +63,7 @@
 				</select>
 				<br />
 				Stream Id:
-				<select name="stream_id" class="stream-selector" id="new-destination-stream" onchange="updateOutputs()"></select>
+				<select name="stream_id" class="stream-selector" id="new-destination-stream"></select>
 				&nbsp; Output Id:
 				<select name="output_id" id="out-selector" style="min-width: 200px"></select>
 				<input
@@ -333,7 +326,7 @@
 		</div>
 
 		<div class="padded" style="max-width: 1000px">
-			<h2 style="margin: auto; text-align: center">Streams Name Table</h2>
+			<h2 style="margin: auto; text-align: center">Stream Names</h2>
 			<div class="table-wrapper">
 				<table style="margin: auto" id="name-table">
 					<thead></thead>
@@ -352,5 +345,7 @@
 		<div class="divider">
 			<img src="./img/red-divider.svg" alt="divider" />
 		</div>
+
+		<div style="height: 200px"></div>
 	</body>
 </html>
