@@ -85,6 +85,8 @@ audio) #Volume control only. By default volume is doubled
 	inputencodeparam="-f image2 -loop 1 -i /usr/local/nginx/scripts/images/$lowerthird -af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2,aresample=44100:async=1 -c:a aac -b:a 128k -filter_complex overlay=0:H-h -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -s $inputres -b:v $inputbitrate -maxrate $inputbitrate -minrate $inputbitrate -bufsize $inputbitrate -profile:v high -f flv -strict -2" ;;
 esac
 
+inputencodeparamvertical="-vf 'transpose=1, scale=720:1280' -c:a copy -absf aac_adtstoasc -flags +global_header -f flv -strict 2" 
+
 case $1 in
 ####### Volume Modification ########
 volume)
@@ -129,8 +131,14 @@ on) #This ffmpeg process runs between inputs pipe and distribute
 			exec screen -dm -S $screenname /bin/bash "$0" on #Create screen and run same command inside screen
 		fi
 
+		if [ "$id" -eq 1 ]; then
+			encodeparam="$inputencodeparamvertical"
+		else
+			encodeparam="$inputencodeparam"
+		fi
+
 		while true; do #This infinite loop will run inside the screen
-			$newffmpegparam $inputparam $inputencodeparam $distributeparam
+			$newffmpegparam $inputparam $encodeparam $distributeparam
 			echo "Restarting ffmpeg..." #When above process fails for any reason, restart
 			sleep .2                    #Needed so CPU doesn't get stuck
 		done

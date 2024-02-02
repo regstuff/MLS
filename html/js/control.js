@@ -54,10 +54,11 @@ function renderStreamControls() {
 		outsDiv.id = `stream-outs-${i}`;
 		for (var j = 1; j <= OUT_NUM; j++) {
 			if (i !== 1 && j > 20) break;
-			var on = `<button class="small-btn" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=on')">on</button>`;
-			var off = `<button class="small-btn off" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=off')">off</button>`;
+			const on = `<button class="small-btn" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=on')">on</button>`;
+			const off = `<button class="small-btn off" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=off')">off</button>`;
+			let name = j === 1 ? `<b>Vertical Out ${j} </b>` : `Out ${j}`;
 			outsDiv.innerHTML += `
-			<div class="out-config"><span class="stream-status" id="status${i}-${j}"></span>${on} | ${off} Out ${j}<span id="destination${i}-${j}"></span></div>`;
+			<div class="out-config"><span class="stream-status" id="status${i}-${j}"></span>${on} | ${off} ${name} <span id="destination${i}-${j}"></span></div>`;
 		}
 		divContainer.appendChild(outsDiv);
 		divContainer.innerHTML += `<button id="show-outs-${i}" class="show-or-hide-btn small-btn" onclick="toggleOuts(${i})">Show More</button>`;
@@ -70,14 +71,6 @@ function renderStreamControls() {
 			<button class="small-btn off" href="/control.php?streamno=${i}&action=out&actnumber=98&state=off" target="_blank">off</button>
 			Record
 		</p>`;
-
-		otherControlsDiv.innerHTML += `
-      <p>
-        Instagram: <a href="/control.php?streamno=${i}&action=insta&actnumber=&state=on" target="_blank">On</a> |||
-        <a href="/control.php?streamno=${i}&action=instaoff&actnumber=&state=" target="_blank">Off</a> ||| For Emergencies --> |||
-        <a href="/control.php?streamno=${i}&action=out&actnumber=99&state=on" target="_blank">Turn on out99</a> |||
-        <a href="/control.php?streamno=${i}&action=out&actnumber=99&state=off" target="_blank">Turn off out99</a>
-      </p>`;
 
 		otherControlsDiv.innerHTML += `
       <p>
