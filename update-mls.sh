@@ -19,4 +19,4 @@ for i in {2..${STREAM_NUM}}; do
 	sudo cp ./images/1failover.mp4 ./images/${1}failover.mp5
 done
 
-sudo ./scripts/nginxrestart.sh
+sudo ./nginxrestart.sh
