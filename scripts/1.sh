@@ -502,8 +502,10 @@ out99) #For instagram
 			exec screen -dm -S $screenname /bin/bash "$0" "$1"
 		fi
 
+		ffmpegcommand="$newffmpegparam $distributeparam $encodeparam -strict -2 -f tee -map 0:v -map 0:a \"$checkout\""
+
 		while [ $i -lt 9000 ]; do
-			$newffmpegparam $distributeparam $encodeparam -strict -2 -f tee -map 0:v -map 0:a "$checkout"
+			eval "$ffmpegcommand"
 			echo "Waiting for English input... Feed me!!!"
 			sleep 0.2
 			i=$(($i + 1))
