@@ -470,7 +470,7 @@ out99) #For instagram
 	esac
 
 	if [ "$1" = "out1" ]; then
-		encodeparam="-vf 'transpose=1, scale=720:1280' -c:a copy -flags +global_header"
+		encodeparam="-vf 'transpose=1' -c:v libx264 -c:a aac -flags +global_header"
 	fi
 
 	case $2 in
