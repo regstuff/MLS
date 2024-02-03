@@ -646,31 +646,31 @@ __stream19__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Inst
 __stream20__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram20
 
 ***STREAM CONFIG***
-__stream1__config__ both 1080p nofailover
-__stream2__config__ both 1080p nofailover
-__stream3__config__ both 1080p nofailover
-__stream4__config__ both 1080p nofailover
-__stream5__config__ both 1080p nofailover
-__stream6__config__ both 1080p nofailover
-__stream7__config__ both 1080p nofailover
-__stream8__config__ none 1080p nofailover
-__stream9__config__ both 1080p nofailover
-__stream10__config__ both 1080p nofailover
-__stream11__config__ both 1080p nofailover
-__stream12__config__ both 1080p nofailover
-__stream13__config__ both 1080p nofailover
-__stream14__config__ both 1080p nofailover
-__stream15__config__ both 1080p nofailover
-__stream16__config__ both 1080p nofailover
-__stream17__config__ both 1080p nofailover
-__stream18__config__ both 1080p nofailover
-__stream19__config__ both 1080p nofailover
-__stream20__config__ both 1080p nofailover
-__stream21__config__ both 1080p nofailover
-__stream22__config__ both 1080p nofailover
-__stream23__config__ both 1080p nofailover
-__stream24__config__ both 1080p nofailover
-__stream25__config__ both 1080p nofailover
+__stream1__config__ none 720p nofailover
+__stream2__config__ none 720p nofailover
+__stream3__config__ none 720p nofailover
+__stream4__config__ none 720p nofailover
+__stream5__config__ none 720p nofailover
+__stream6__config__ none 720p nofailover
+__stream7__config__ none 720p nofailover
+__stream8__config__ none 720p nofailover
+__stream9__config__ none 720p nofailover
+__stream10__config__ none 720p nofailover
+__stream11__config__ none 720p nofailover
+__stream12__config__ none 720p nofailover
+__stream13__config__ none 720p nofailover
+__stream14__config__ none 720p nofailover
+__stream15__config__ none 720p nofailover
+__stream16__config__ none 720p nofailover
+__stream17__config__ none 720p nofailover
+__stream18__config__ none 720p nofailover
+__stream19__config__ none 720p nofailover
+__stream20__config__ none 720p nofailover
+__stream21__config__ none 720p nofailover
+__stream22__config__ none 720p nofailover
+__stream23__config__ none 720p nofailover
+__stream24__config__ none 720p nofailover
+__stream25__config__ none 720p nofailover
 
 ***AUDIO CONFIG***
 __stream1__audio__ c0 c1 stereo distribute
