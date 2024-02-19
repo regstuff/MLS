@@ -1,14 +1,16 @@
-body {
-	margin: 0;
-	padding: 0;
-	background-color: #fff7eb;
-	color: #282b43;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.stream-container {
+	@apply inline-block text-left bg-base-300 rounded-box m-2;
+	max-width: 420px;
 }
-.padded {
-	max-width: 720px;
-	margin: auto;
-	padding: 5px 20px 5px 20px;
+
+.jsmpeg {
+	min-height: 224px;
 }
+
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
 	background-color: #eee;
@@ -183,47 +185,6 @@ details[open] summary {
 
 .out-config {
 	margin: 5px 0;
-}
-
-/* CSS styles for the navigation and section */
-.hero-section {
-	text-align: center;
-	border-bottom: 4px solid #7c0514;
-	border-radius: 0 0 50px 50px;
-}
-
-nav {
-	padding: 10px;
-	display: inline-block;
-	border-bottom: 2px solid #7c0514;
-	border-radius: 0 0 10px 10px;
-}
-
-nav ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
-
-nav ul li {
-	display: inline;
-	margin-right: 10px;
-}
-
-nav ul li a {
-	text-decoration: none;
-	color: #7c0514;
-	padding: 5px;
-}
-
-nav ul li a:hover {
-	background-color: #7c0514;
-	color: #fff7eb;
-	border-radius: 0 0 10px 10px;
-}
-
-section {
-	padding: 20px;
 }
 
 .input-options li {

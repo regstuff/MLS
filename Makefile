@@ -1,7 +1,7 @@
 .PHONY: *
 
 pretty:
-	cd html && npx prettier --write ..
+	bunx prettier --write .
 	shfmt -w .
 
 install:
@@ -18,3 +18,6 @@ exec:
 
 
 dev: build run
+
+css:
+	bunx tailwindcss -i ./html/css/input.css -o ./html/css/output.css --watch

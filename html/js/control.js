@@ -1,15 +1,17 @@
+(function renderServerDetails() {
+	const address = window.location.hostname;
+	const detailsElem = document.getElementById('server-details');
+	detailsElem.innerHTML = detailsElem.innerHTML.replaceAll('${address}', address);
+})();
+
 function renderStreamControls() {
 	const streamControls = document.getElementById('stream-controls');
 
 	for (let i = 1; i <= STREAM_NUM; i++) {
 		// Create the div container
 		const divContainer = document.createElement('div');
-		divContainer.classList.add('padded');
+		divContainer.classList.add('stream-container');
 
-		divContainer.innerHTML += `
-		<div class="divider" style="margin: 30px auto;">
-			<img src="./img/red-divider.svg" alt="divider" />
-		</div>`;
 		const streamName = streamNames[i];
 		const suffix = streamName ? ` (${streamName})` : '';
 		divContainer.innerHTML += `<h2>Stream ${i}${suffix}</h2>`;
@@ -54,11 +56,11 @@ function renderStreamControls() {
 		outsDiv.id = `stream-outs-${i}`;
 		for (var j = 1; j <= OUT_NUM; j++) {
 			if (i !== 1 && j > 20) break;
-			const on = `<button class="small-btn" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=on')">on</button>`;
-			const off = `<button class="small-btn off" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=off')">off</button>`;
-			let name = j === 1 ? `<b>Vertical Out ${j} </b>` : `Out ${j}`;
+			const on = `<button class="btn btn-xs btn-primary" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=on')">on</button>`;
+			const off = `<button class="btn btn-xs btn-error" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=off')">off</button>`;
+			let name = j === 1 ? `<b>Vertical Out ${j}</b>` : `Out ${j}`;
 			outsDiv.innerHTML += `
-			<div class="out-config"><span class="stream-status" id="status${i}-${j}"></span>${on} | ${off} ${name} <span id="destination${i}-${j}"></span></div>`;
+			<div class="out-config"><span class="stream-status" id="status${i}-${j}"></span>${on} ${off} ${name}<span id="destination${i}-${j}"></span></div>`;
 		}
 		divContainer.appendChild(outsDiv);
 		divContainer.innerHTML += `<button id="show-outs-${i}" class="show-or-hide-btn small-btn" onclick="toggleOuts(${i})">Show More</button>`;
@@ -67,31 +69,31 @@ function renderStreamControls() {
 		var otherControlsDiv = document.createElement('div');
 		otherControlsDiv.innerHTML += `
 		<p>
-			<button class="small-btn" href="/control.php?streamno=${i}&action=out&actnumber=98&state=on" target="_blank">on</button> |
-			<button class="small-btn off" href="/control.php?streamno=${i}&action=out&actnumber=98&state=off" target="_blank">off</button>
+			<button class="btn btn-xs btn-primary" href="/control.php?streamno=${i}&action=out&actnumber=98&state=on" target="_blank">on</button>
+			<button class="btn btn-xs btn-error" href="/control.php?streamno=${i}&action=out&actnumber=98&state=off" target="_blank">off</button>
 			Record
 		</p>`;
 
 		otherControlsDiv.innerHTML += `
       <p>
         <b>Overlays:</b> 
-        <a href="/control.php?streamno=${i}&action=super&actnumber=1&state=" target="_blank">Add 1</a> |||
-        <a href="/control.php?streamno=${i}&action=super&actnumber=2&state=" target="_blank">Add 2</a> |||
-        <a href="/control.php?streamno=${i}&action=super&actnumber=3&state=" target="_blank">Add 3</a> |||
-        <a href="/control.php?streamno=${i}&action=super&actnumber=4&state=" target="_blank">Add 4</a> |||
-        <a href="/control.php?streamno=${i}&action=super&actnumber=5&state=" target="_blank">Add 5</a> |||
-        <a href="/control.php?streamno=${i}&action=super&actnumber=6&state=" target="_blank">Add 6</a> |||
-        <a href="/control.php?streamno=${i}&action=super&actnumber=7&state=" target="_blank">Add 7</a> |||
-        <a href="/control.php?streamno=${i}&action=super&actnumber=8&state=" target="_blank">Add 8</a> |||
-        <a href="/control.php?streamno=${i}&action=super&actnumber=off&state=" target="_blank">Remove</a>
+        <a href="/control.php?streamno=${i}&action=super&actnumber=1&state=" target="_blank" class="btn btn-xs btn-primary">Add 1</a>
+        <a href="/control.php?streamno=${i}&action=super&actnumber=2&state=" target="_blank" class="btn btn-xs btn-primary">Add 2</a>
+        <a href="/control.php?streamno=${i}&action=super&actnumber=3&state=" target="_blank" class="btn btn-xs btn-primary">Add 3</a>
+        <a href="/control.php?streamno=${i}&action=super&actnumber=4&state=" target="_blank" class="btn btn-xs btn-primary">Add 4</a>
+        <a href="/control.php?streamno=${i}&action=super&actnumber=5&state=" target="_blank" class="btn btn-xs btn-primary">Add 5</a>
+        <a href="/control.php?streamno=${i}&action=super&actnumber=6&state=" target="_blank" class="btn btn-xs btn-primary">Add 6</a>
+        <a href="/control.php?streamno=${i}&action=super&actnumber=7&state=" target="_blank" class="btn btn-xs btn-primary">Add 7</a>
+        <a href="/control.php?streamno=${i}&action=super&actnumber=8&state=" target="_blank" class="btn btn-xs btn-primary">Add 8</a>
+        <a href="/control.php?streamno=${i}&action=super&actnumber=off&state=" target="_blank" class="btn btn-xs btn-error">Remove</a>
       </p>`;
 
 		otherControlsDiv.innerHTML += `
       <form method="post" target="_blank" action="/control.php?streamno=${i}&action=volume&actnumber=&state=volume">
         <p>
           <b>Volume: </b>
-          <input type="text" name="vol_level" size="5" placeholder="1" />
-          <input type="submit" value="Change" />
+          <input type="text" name="vol_level" size="5" placeholder="1" class="input input-bordered input-neutral input-xs max-w-xs"/>
+          <input type="submit" value="Change" class="btn btn-xs btn-outline"/>
         </p>
       </form>`;
 
@@ -100,18 +102,20 @@ function renderStreamControls() {
 		<b>Choose Input:</b>
 		<ul class="input-options">
 			<li>
-				<button onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=main&actnumber=&state=turnon')" class="small-btn" id="stream${i}-main">start</button>
+				<button onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=main&actnumber=&state=turnon')" 
+					id="stream${i}-main" class="btn btn-xs btn-primary">on</button>
 				Main Live Stream
 			</li>
 			<li>
-				<button href="/control.php?streamno=${i}&action=back&actnumber=&state=turnon" class="small-btn" target="_blank">start</button>
+				<button href="/control.php?streamno=${i}&action=back&actnumber=&state=turnon" 
+					class="btn btn-xs btn-primary" target="_blank">on</button>
 				Backup Live stream
 			</li>
 			
 			<li>
 				<form method="post" target="_blank" action="/control.php?streamno=${i}&action=video&actnumber=&state=turnon" style="margin: 0; padding: 0">
-				<input type="submit" class="small-btn" style="display: inline" value="start" /> |
-				<a href="/control.php?streamno=${i}&action=off&actnumber=&state=" class="small-btn off" target="_blank">turn off</a> |||
+				<input type="submit" class="btn btn-xs btn-primary" style="display: inline" value="on" />
+				<a href="/control.php?streamno=${i}&action=off&actnumber=&state=" class="btn btn-xs btn-error" target="_blank">off</a> |||
 				<a href="/control.php?streamno=${i}&action=playlist&actnumber=&state=" target="_blank">Playlist</a> |||
 					Uploaded Video:
 					<select name="video_no">

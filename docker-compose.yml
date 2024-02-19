@@ -1,28 +1,28 @@
-version: "3"
+version: '3'
 
 services:
-  nginx:
-    image: alfg/nginx-rtmp:v1.6.0
-    container_name: "nginx-mls"
-    ports:
-      - 8080:80
-      - 1935:1935
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf.template
-      - .:/app
-    depends_on:
-      - php
-    networks:
-      - internal
+    nginx:
+        image: alfg/nginx-rtmp:v1.6.0
+        container_name: 'nginx-mls'
+        ports:
+            - 8080:80
+            - 1935:1935
+        volumes:
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf.template
+            - .:/app
+        depends_on:
+            - php
+        networks:
+            - internal
 
-  php:
-    image: php:7.0-fpm-alpine
-    container_name: "php-mls"
-    volumes:
-      - .:/app
-    networks:
-      - internal
+    php:
+        image: php:7.0-fpm-alpine
+        container_name: 'php-mls'
+        volumes:
+            - .:/app
+        networks:
+            - internal
 
 networks:
-  internal:
-    driver: bridge
+    internal:
+        driver: bridge

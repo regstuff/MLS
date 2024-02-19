@@ -1,88 +1,94 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" data-theme="dim">
 	<head>
+		<meta charset="UTF-8" />
 		<title>Control</title>
-		<link rel="stylesheet" type="text/css" href="/css/style.css" />
+		<link rel="icon" type="image/png" href="./img/isha-logo.png" />
+		<link rel="stylesheet" type="text/css" href="/css/output.css" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-
 		<script type="text/javascript" src="/js/tools.js"></script>
-		<script type="text/javascript" src="/js/control.js"></script>
-
+		<script type="text/javascript" src="/js/control.js" defer></script>
 		<script type="text/javascript" src="jsmpeg.min.js"></script>
 	</head>
-	<body>
+	<body class="bg-base-100 text-base-content">
+		<div class="navbar bg-base-100">
+			<div class="flex-1">
+				<a class="btn btn-ghost text-xl" href="/control.html" id="server-name">MLS</a>
+			</div>
+			<div class="flex-none">
+				<ul class="menu menu-horizontal px-1">
+					<li><a href="/control.html">Control</a></li>
+					<li>
+						<a href="/stat" target="_blank" t>Stats</a>
+					</li>
+					<li><a href="/recording" target="_blank">Recordings</a></li>
+					<li><a href="/config.php?proclist" target="_blank">Processes</a></li>
+				</ul>
+			</div>
+		</div>
+
 		<div class="response-box" id="responseBox">
 			<!-- AJAX responses will appear here -->
 		</div>
 
-		<section class="hero-section">
-			<nav>
-				<ul>
-					<li><a href="/control.html">Control</a></li>
-					<li><a href="/settings.html">Settings</a></li>
-					<li><a href="/stat">Stats</a></li>
-					<li><a href="/recording">Recordings</a></li>
-					<li><a href="/config.php?proclist">Processes</a></li>
-				</ul>
-			</nav>
-			<h1 id="server-name">Control</h1>
-			<p id="serverdetails">Test</p>
-			<script>
-				var address = window.location.hostname;
-				document.getElementById('serverdetails').innerHTML = `
-					Send stream to rtmp://${address}/distribute/stream1
-						or stream2 or stream3 etc. <br/>
-					Send primary stream to rtmp://${address}/main/stream1
-						or stream2 or stream3 etc. <br/>
-					backupaddress = Send backup stream to rtmp://${address}/backup/stream1
-						or stream2 or stream3 etc.`;
-			</script>
+		<section class="mx-6 my-3 text-center">
+			<p id="server-details">
+				Send stream to <code>rtmp://${address}/distribute/stream1</code> or stream2 or stream3 etc. <br />
+				Send primary stream to rtmp://${address}/main/stream1 or stream2 or stream3 etc. <br />
+				backupaddress = Send backup stream to rtmp://${address}/backup/stream1 or stream2 or stream3 etc.
+			</p>
 		</section>
 
-		<div style="text-align: center" class="padded"></div>
-
-		<div style="text-align: center" class="padded">
+		<div class="mx-6 my-3 text-center">
 			<form method="post" target="_blank" action="/config.php?remap">
 				<p>
-					<b>No. of Audio Channels: </b><input type="text" name="channel_no" size="5" placeholder="4" /><select name="outputdest">
-						<option value="main">Main</option>
+					<b>No. of Audio Channels:</b>
+					<input type="text" name="channel_no" size="5" placeholder="4" class="input input-bordered input-neutral input-xs max-w-xs mx-1" />
+					<select name="outputdest" class="select select-bordered select-xs max-w-xs">
+						<option selected value="main">Main</option>
 						<option value="backup">Backup</option>
 					</select>
-					&nbsp;
-					<input type="submit" value="Remap On" />
+					<input type="submit" value="Remap On" class="btn btn-xs btn-primary" />
 				</p>
 			</form>
 			<form method="post" target="_blank" action="/config.php?remapoff">
 				<p>
 					<b>Turn off Remapping: </b>
-					<select name="outputdest">
-						<option value="main">Main</option>
+					<select name="outputdest" class="select select-bordered select-xs max-w-xs">
+						<option selected value="main">Main</option>
 						<option value="backup">Backup</option>
 					</select>
-					&nbsp;
-					<input type="submit" value="Remap Off" />
+					<input type="submit" value="Remap Off" class="btn btn-xs btn-error" />
 				</p>
 			</form>
 		</div>
 
-		<div style="text-align: center" class="padded">
-			<p>SRT Accept: <a href="/config.php?srtaccept" target="_blank"> ON</a> ||| <a href="/config.php?srtacceptoff" target="_blank"> OFF</a></p>
-		</div>
-
-		<div class="padded">
+		<div class="mx-6 my-3 text-center">
 			<p>
-				<b>Supers - Global Control:</b> <a href="/control.php?allsuper1on" target="_blank">Add 1</a> |||
-				<a href="/control.php?allsuper2on" target="_blank">Add 2</a> ||| <a href="/control.php?allsuper3on" target="_blank">Add 3</a> |||
-				<a href="/control.php?allsuper4on" target="_blank">Add 4</a> ||| <a href="/control.php?allsuper5on" target="_blank">Add 5</a> |||
-				<a href="/control.php?allsuper6on" target="_blank">Add 6</a> ||| <a href="/control.php?allsuper7on" target="_blank">Add 7</a> |||
-				<a href="/control.php?allsuper8on" target="_blank">Add 8</a> ||| <a href="/control.php?allsuperoff" target="_blank">Remove</a>
+				SRT Accept: <a href="/config.php?srtaccept" target="_blank" class="btn btn-xs btn-primary">ON</a>
+				<a href="/config.php?srtacceptoff" target="_blank" class="btn btn-xs btn-error">OFF</a>
 			</p>
 		</div>
 
-		<section id="stream-controls"></section>
-
-		<div class="divider">
-			<img src="./img/red-divider.svg" alt="divider" />
+		<div class="mx-6 my-3 text-center">
+			<p>
+				<b>Supers - Global Control:</b>
+				<a href="/control.php?allsuper1on" target="_blank" class="btn btn-xs btn-primary">Add 1</a>
+				<a href="/control.php?allsuper2on" target="_blank" class="btn btn-xs btn-primary">Add 2</a>
+				<a href="/control.php?allsuper3on" target="_blank" class="btn btn-xs btn-primary">Add 3</a>
+				<a href="/control.php?allsuper4on" target="_blank" class="btn btn-xs btn-primary">Add 4</a>
+				<a href="/control.php?allsuper5on" target="_blank" class="btn btn-xs btn-primary">Add 5</a>
+				<a href="/control.php?allsuper6on" target="_blank" class="btn btn-xs btn-primary">Add 6</a>
+				<a href="/control.php?allsuper7on" target="_blank" class="btn btn-xs btn-primary">Add 7</a>
+				<a href="/control.php?allsuper8on" target="_blank" class="btn btn-xs btn-primary">Add 8</a>
+				<a href="/control.php?allsuperoff" target="_blank" class="btn btn-xs btn-error">Remove</a>
+			</p>
 		</div>
+
+		<div class="divider"></div>
+
+		<section id="stream-controls" class="text-center"></section>
+
+		<div class="divider"></div>
 	</body>
 </html>
