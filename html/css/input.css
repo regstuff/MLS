@@ -7,61 +7,6 @@
 	max-width: 420px;
 }
 
-.stream-selector {
-	min-width: 200px;
-}
-
-/* buttons */
-.big-btn {
-	min-width: 200px;
-	padding: 5px;
-	margin: 15px 0;
-	font-size: 14px;
-	border-radius: 5px;
-	background-color: #cf4521;
-	border: 0px;
-	color: #fff7eb;
-	font-weight: bold;
-	cursor: pointer;
-}
-
-.big-btn:active {
-	background-color: #e08366;
-}
-
-/* details */
-details {
-	border: 1px solid #7c0514aa;
-	border-radius: 4px;
-	padding: 0.5em 0.5em 0;
-	width: 100%;
-}
-
-summary {
-	color: #7c0514;
-	font-weight: bold;
-	margin: -0.5em -0.5em 0;
-	padding: 0.5em;
-}
-
-details[open] {
-	padding: 0.5em;
-}
-
-details[open] summary {
-	border-bottom: 1px solid #ccc;
-	margin-bottom: 0.5em;
-}
-
-/* ===== Table ===== */
-.table-wrapper {
-	overflow-x: auto;
-}
-
-#name-table {
-	border-spacing: 0px;
-}
-
 .response-box {
 	@apply p-2 overflow-auto fixed bottom-3 right-3 w-96 h-48 bg-base-100 opacity-90 rounded-box;
 	@apply border border-solid border-neutral-content border-t-4 border-b-4;
@@ -74,4 +19,28 @@ details[open] summary {
 
 .stream-status.on {
 	@apply bg-primary;
+}
+
+.table :where(th, td) {
+	@apply p-1;
+}
+
+.input-label {
+	@apply form-control max-w-md inline-block mr-1;
+}
+
+.labeled-input {
+	@apply input input-bordered input-xs w-full max-w-md;
+}
+
+.labeled-select {
+	@apply select select-bordered select-xs;
+}
+
+.collapsible-header {
+	@apply collapse collapse-arrow border border-base-300 bg-base-200;
+}
+
+.collapse-title {
+	@apply text-xl font-medium;
 }
