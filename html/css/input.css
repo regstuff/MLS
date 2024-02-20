@@ -7,57 +7,8 @@
 	max-width: 420px;
 }
 
-.jsmpeg {
-	min-height: 224px;
-}
-
-/* Style the button that is used to open and close the collapsible content */
-.collapsible {
-	background-color: #eee;
-	color: #444;
-	cursor: pointer;
-	padding: 18px;
-	width: 100%;
-	border: none;
-	text-align: left;
-	outline: none;
-	font-size: 15px;
-}
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active,
-.collapsible:hover {
-	background-color: #ccc;
-}
-/* Style the collapsible content. Note: hidden by default */
-.content {
-	padding: 0 18px;
-	display: none;
-	overflow: hidden;
-	background-color: #f1f1f1;
-}
-
-h2 {
-	color: #7c0514;
-}
-.divider {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 30px 0;
-}
-
-.divider img {
-	max-width: 100%;
-	max-height: 100%;
-}
-
 .stream-selector {
 	min-width: 200px;
-}
-
-form input,
-form select {
-	margin: 2px 0;
 }
 
 /* buttons */
@@ -75,24 +26,6 @@ form select {
 }
 
 .big-btn:active {
-	background-color: #e08366;
-}
-
-.small-btn {
-	min-width: 50px;
-	padding: 0 5px;
-	margin: 0 5px;
-	font-size: 16px;
-	border-radius: 5px;
-	background-color: #cf4521;
-	border: 0px;
-	color: #fff7eb;
-	font-weight: normal;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.small-btn:active {
 	background-color: #e08366;
 }
 
@@ -129,90 +62,16 @@ details[open] summary {
 	border-spacing: 0px;
 }
 
-/* ===== Ajax Responses View ===== */
-
 .response-box {
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	width: 400px;
-	height: 200px;
-	background-color: #fff7ebee;
-	border: 1px solid #e08366;
-	border-top: 5px solid #e08366;
-	border-bottom: 5px solid #e08366;
-	border-radius: 20px;
-	padding: 10px;
-	overflow-y: auto;
+	@apply p-2 overflow-auto fixed bottom-3 right-3 w-96 h-48 bg-base-100 opacity-90 rounded-box;
+	@apply border border-solid border-neutral-content border-t-4 border-b-4;
 }
 
-/* === controls === */
-.material-icons {
-	font-size: 36px !important;
-}
-
-.jsmpeg canvas {
-	border: 1px solid #ccc;
-	display: inline;
-}
-.jsmpeg {
-	text-align: center;
-}
-
-.jsmpeg p a {
-	margin-right: 20px;
-}
-
-/* === On Off vusual === */
 .stream-status {
-	display: inline-block;
-	width: 12px;
-	height: 12px;
+	@apply inline-block w-3 h-3 mx-1 bg-base-100;
 	border-radius: 50%;
-	margin: 0 5px;
-	background-color: white;
 }
 
-.on,
 .stream-status.on {
-	background-color: #7fe363;
-}
-
-.off,
-.stream-status.off {
-	background-color: gray;
-}
-
-.out-config {
-	margin: 5px 0;
-}
-
-.input-options li {
-	margin: 3px 0;
-}
-
-.input-options {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-/* === show and hide outs === */
-.stream-outs {
-	max-height: calc(1.4em * 20); /* Show 20 lines of text (assuming 1.4em line height) */
-	overflow: hidden;
-	line-height: 1.4em; /* Set the line height for proper line count */
-}
-
-.show-more {
-	max-height: none; /* Show the full text */
-}
-
-.show-or-hide-btn {
-	display: block;
-	margin-top: 10px;
-
-	border: 1px solid #7c0514;
-	color: #7c0514;
-	background-color: #00000000;
+	@apply bg-primary;
 }

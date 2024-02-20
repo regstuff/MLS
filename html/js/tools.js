@@ -52,9 +52,7 @@ async function executePhpAndShowResponse(phpUrl) {
 
 function showResponse(response) {
 	var responseBox = document.getElementById('responseBox');
-	responseBox.innerHTML =
-		`<p>${response}</p><div class="divider"><img src="./img/divider.svg" alt="divider" /></div>` +
-		responseBox.innerHTML;
+	responseBox.innerHTML = `<p>${response}</p><div class="divider"></div>` + responseBox.innerHTML;
 }
 
 async function fetchStats() {

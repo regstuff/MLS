@@ -85,7 +85,6 @@ audio) #Volume control only. By default volume is doubled
 	inputencodeparam="-f image2 -loop 1 -i /usr/local/nginx/scripts/images/$lowerthird -af azmq=bind_address=tcp\\\://127.0.0.1\\\:"$audioport",volume=2,aresample=44100:async=1 -c:a aac -b:a 128k -filter_complex overlay=0:H-h -vcodec libx264 -pix_fmt yuv420p -preset veryfast -r 25 -g 50 -s $inputres -b:v $inputbitrate -maxrate $inputbitrate -minrate $inputbitrate -bufsize $inputbitrate -profile:v high -f flv -strict -2" ;;
 esac
 
-
 case $1 in
 ####### Volume Modification ########
 volume)
