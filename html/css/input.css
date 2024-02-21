@@ -8,8 +8,9 @@
 }
 
 .response-box {
-	@apply p-2 overflow-auto fixed bottom-3 right-3 w-96 h-48 bg-base-100 opacity-90 rounded-box;
-	@apply border border-solid border-neutral-content border-t-4 border-b-4;
+	@apply p-2 overflow-auto fixed bottom-3 right-3 w-96 h-48 bg-base-100 opacity-90;
+	@apply rounded-box border border-solid border-neutral-content border-t-4 border-b-4;
+	z-index: 999;
 }
 
 .stream-status {

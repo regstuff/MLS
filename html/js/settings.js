@@ -77,6 +77,6 @@ function saveStreamNamesTable() {
 window.onload = async function () {
 	streamNames = await fetchStreamNames();
 	renderOutputs();
-	renderStreamNameTable();
 	renderStreamSelectors();
+	renderStreamNameTable();
 };

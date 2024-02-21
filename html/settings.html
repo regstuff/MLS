@@ -27,13 +27,11 @@
 				</ul>
 			</div>
 		</div>
-		<div class="response-box" id="responseBox">
-			<!-- AJAX responses will appear here -->
-		</div>
+		<div class="response-box" id="responseBox"></div>
 
 		<div class="max-w-3xl mx-auto prose">
 			<div tabindex="0" class="collapsible-header">
-				<div class="collapse-title">Stream Names</div>
+				<div class="collapse-title">Stream Names <a href="/stream-names.csv" target="_blank" class="link link-accent">[file]</a></div>
 				<div class="collapse-content">
 					<p>You can assign names for the streams. This name will only have visual effect, and have no impact on the backend.</p>
 				</div>
@@ -45,13 +43,13 @@
 				</table>
 			</div>
 
-			<button onclick="saveStreamNamesTable()" class="btn btn-accent btn-sm my-2">Submit</button>
+			<button onclick="saveStreamNamesTable()" class="btn btn-accent btn-sm my-2">Update Names</button>
 
 			<div class="divider"></div>
 
 			<div tabindex="0" class="collapsible-header">
 				<div class="collapse-title text-xl font-medium">
-					Add New Destination [ <a href="/config.php?destlist" target="_blank" class="link link-accent">Destination List</a> ]
+					Add New Destination <a href="/config.php?destlist" target="_blank" class="link link-accent">[file]</a>
 				</div>
 				<div class="collapse-content">
 					<p>
@@ -115,6 +113,7 @@
 					</div>
 					<select name="resolution" class="labeled-select">
 						<option selected value="source">Source</option>
+						<option value="vertical">Vertical</option>
 						<option value="720p">720p</option>
 						<option value="540p">540p</option>
 						<option value="576p">PAL-720x576</option>
@@ -158,40 +157,78 @@
 
 			<div class="divider"></div>
 
-			<div class="padded">
-				<h2>Add Stream Config [ <a href="/config.php?streamlist" target="_blank" style="">Stream Configs List</a> ]</h2>
-				<form method="post" target="_blank" action="config.php?streamadd">
-					Stream Id:
-					<select name="stream_id" class="stream-selector"></select>
-					<br />
-					Config:
-					<select name="encodeparam">
+			<div tabindex="0" class="collapsible-header">
+				<div class="collapse-title">
+					Add Stream Config <a href="/config.php?streamlist" target="_blank" class="link link-accent">[file]</a>
+				</div>
+				<div class="collapse-content">
+					<p>
+						You can apply an encoding to the stream. When encoding <code>1080p</code> video into <code>720p</code> it takes about 2.5
+						vCores per stream.
+						<br />
+						Select "None" if you don't want any encodings then it will not take much CPU resources since it will be be only copying the
+						data and not processing it.
+						<br />
+						Select "Vertical" when streaming to Instagram. It will rotate the video by 90 degrees clockwise and encode into
+						<code>720p</code> resolution.
+					</p>
+				</div>
+			</div>
+			<form method="post" id="addConfigForm">
+				<label class="input-label">
+					<div class="label pb-0">
+						<span class="label-text text-sm">Stream Id</span>
+					</div>
+					<select name="stream_id" class="stream-selector labeled-select"></select>
+				</label>
+				<label class="input-label">
+					<div class="label pb-0">
+						<span class="label-text text-sm">Config</span>
+					</div>
+					<select name="encodeparam" class="labeled-select">
+						<option selected value="none">None</option>
 						<option value="audio">Audio</option>
-						<option value="none">None</option>
 						<option value="both">Audio & Video</option>
 					</select>
-					<br />
-					Resolution:
-					<select name="stream_res">
+				</label>
+				<label class="input-label">
+					<div class="label pb-0">
+						<span class="label-text text-sm">Resolution</span>
+					</div>
+					<select name="stream_res" class="labeled-select">
+						<option selected value="vertical">Vertical</option>
 						<option value="1080p">1080p</option>
 						<option value="720p">720p</option>
 						<option value="480p">480p</option>
-						<option value="576p">PAL-720x576</option></select
-					><br />
-					Failover:
-					<select name="failover_method">
+						<option value="576p">PAL-720x576</option>
+					</select>
+				</label>
+				<label class="input-label">
+					<div class="label pb-0">
+						<span class="label-text text-sm">Failover</span>
+					</div>
+					<select name="failover_method" class="labeled-select">
 						<option value="nofailover">No Failover</option>
 						<option value="mainback">Main-Backup</option>
 						<option value="mainfail">Main-Failover</option>
-						<option value="mainbackfail">Main-Backup-Failover</option></select
-					><br />
-					<input type="submit" class="btn btn-accent btn-sm my-2" value="Add Config" /> <br />
-				</form>
-			</div>
+						<option value="mainbackfail">Main-Backup-Failover</option>
+					</select>
+				</label>
+				<input
+					type="submit"
+					class="btn btn-accent btn-sm my-2"
+					value="Add Config"
+					onclick="event.preventDefault(); submitFormAndShowResponse('addConfigForm','config.php?streamadd');" />
+			</form>
 
 			<div class="divider"></div>
 
-			<h2>Add Audio Config [ <a href="/config.php?audiolist" target="_blank">Audio Configs List</a> ]</h2>
+			<div tabindex="0" class="collapsible-header">
+				<div class="collapse-title">Add Audio Config <a href="/config.php?audiolist" target="_blank" class="link link-accent">[file]</a></div>
+				<div class="collapse-content">
+					<p>Description...</p>
+				</div>
+			</div>
 			<form method="post" target="_blank" action="config.php?audioadd">
 				Stream Id:
 				<select name="stream_id" class="stream-selector"></select>
@@ -224,8 +261,9 @@
 					<option value="c16">Channel 17</option>
 					<option value="c17">Channel 18</option>
 					<option value="c18">Channel 19</option>
-					<option value="c19">Channel 20</option></select
-				><br />
+					<option value="c19">Channel 20</option>
+				</select>
+				<br />
 				Channel 2:
 				<select name="channel_2">
 					<option value="c0">Channel 1</option>
@@ -247,15 +285,16 @@
 					<option value="c16">Channel 17</option>
 					<option value="c17">Channel 18</option>
 					<option value="c18">Channel 19</option>
-					<option value="c19">Channel 20</option></select
-				><br />
+					<option value="c19">Channel 20</option>
+				</select>
+				<br />
 				Main/Distribute:
 				<select name="rtmpparam">
 					<option value="main_back">Main-Backup</option>
 					<option value="distribute">Distribute</option>
 				</select>
 				<br />
-				<input type="submit" value="Add Config" /> <br />
+				<input type="submit" value="Add Config" class="btn btn-accent btn-sm my-2" />
 			</form>
 			<form method="post" target="_blank" action="config.php?audiopreset">
 				<select name="audiopreset">
@@ -263,94 +302,100 @@
 					<option value="firststereo" selected>First Stereo</option>
 					<option value="allstereo">All Stereo</option>
 				</select>
-				<input type="submit" value="Load Preset" />
+				<input type="submit" value="Load Preset" class="btn btn-accent btn-sm my-2" />
 			</form>
 
 			<div class="divider"></div>
 
-			<div>
-				<h2>Add/Remove Schedule</h2>
-				<form method="post" target="_blank" action="/config.php?videoschedule">
-					<p>
-						<b>Schedule: </b><input type="text" name="hour" size="2" placeholder="HH" /><input
-							type="text"
-							name="minute"
-							size="2"
-							placeholder="MM" /><select name="stream_no" class="stream-selector"></select>
-
-						<select name="type_id">
-							<option value="">Choose</option>
-							<option value="holding">Holding</option>
-							<option value="video">Video</option>
-							<option value="out1">Output 1</option>
-							<option value="out2">Output 2</option>
-							<option value="out3">Output 3</option>
-							<option value="out4">Output 4</option>
-							<option value="out5">Output 5</option>
-							<option value="out6">Output 6</option>
-							<option value="out7">Output 7</option>
-							<option value="out8">Output 8</option>
-							<option value="out9">Output 9</option>
-							<option value="out10">Output 10</option>
-							<option value="out98">Record</option>
-							<option value="insta">Instagram</option></select
-						><select name="on_off">
-							<option value="">Choose</option>
-							<option value="on">On</option>
-							<option value="off">Off</option></select
-						><select name="schedule_type">
-							<option value="">Choose</option>
-							<option value="add">Add</option>
-							<option value="delete">Delete</option></select
-						><input type="text" name="startmin" size="1" value="0" /><input type="text" name="startsec" size="1" value="0" /><input
-							type="submit"
-							value="Schedule" />
-					</p>
-				</form>
-				<p><a href="/config.php?schedulelist" target="_blank">Schedule List</a></p>
+			<div tabindex="0" class="collapsible-header">
+				<div class="collapse-title">
+					Add/Remove Schedule <a href="/config.php?schedulelist" target="_blank" class="link link-accent">[file]</a>
+				</div>
+				<div class="collapse-content">
+					<p>Description...</p>
+				</div>
 			</div>
-
-			<div class="divider">
-				<img src="./img/divider.svg" alt="divider" />
-			</div>
-
-			<div class="padded">
-				<h2>Upload Lowerthirds</h2>
-				<form method="post" target="_blank" action="config.php?uploadlower" enctype="multipart/form-data">
-					Select image to upload:
-					<input type="file" name="fileToUpload" id="fileToUpload" />
-					<input type="submit" value="Upload Image" name="submit" />
-				</form>
-			</div>
-
-			<div class="divider">
-				<img src="./img/divider.svg" alt="divider" />
-			</div>
-
-			<div class="padded">
-				<h2>Upload Holding Screens</h2>
-				<form method="post" target="_blank" action="config.php?uploadfile">
-					URL:
-					<input type="text" name="file_url" size="35" placeholder="https://www.dropbox.com/s/25xhzrtvom/filename.mp4?dl=0" /> <br />
-					Stream Id:
+			<form method="post" target="_blank" action="/config.php?videoschedule">
+				<p>
+					<b>Schedule: </b>
+					<input type="text" name="hour" size="2" placeholder="HH" />
+					<input type="text" name="minute" size="2" placeholder="MM" />
 					<select name="stream_no" class="stream-selector"></select>
-					<br />
-					Video Type:
+
 					<select name="type_id">
 						<option value="">Choose</option>
-						<option value="holding.mp4">Holding</option>
-						<option value="video.mp4">Video</option>
-						<option value="failover.mp4">Failover</option>
-						<option value="lowerthird.png">Lower 3rd</option>
+						<option value="holding">Holding</option>
+						<option value="video">Video</option>
+						<option value="out1">Output 1</option>
+						<option value="out2">Output 2</option>
+						<option value="out3">Output 3</option>
+						<option value="out4">Output 4</option>
+						<option value="out5">Output 5</option>
+						<option value="out6">Output 6</option>
+						<option value="out7">Output 7</option>
+						<option value="out8">Output 8</option>
+						<option value="out9">Output 9</option>
+						<option value="out10">Output 10</option>
+						<option value="out98">Record</option>
+						<option value="insta">Instagram</option>
 					</select>
+					<select name="on_off">
+						<option value="">Choose</option>
+						<option value="on">On</option>
+						<option value="off">Off</option>
+					</select>
+					<select name="schedule_type">
+						<option value="">Choose</option>
+						<option value="add">Add</option>
+						<option value="delete">Delete</option>
+					</select>
+					<input type="text" name="startmin" size="1" value="0" />
+					<input type="text" name="startsec" size="1" value="0" />
 					<br />
-					<input type="submit" value="Upload File" /> <br />
-				</form>
-			</div>
+					<input type="submit" value="Schedule" class="btn btn-accent btn-sm my-2" />
+				</p>
+			</form>
 
-			<div class="divider">
-				<img src="./img/divider.svg" alt="divider" />
+			<div class="divider"></div>
+
+			<div tabindex="0" class="collapsible-header">
+				<div class="collapse-title">Upload Lowerthirds</div>
+				<div class="collapse-content">
+					<p>Description...</p>
+				</div>
 			</div>
+			<form method="post" target="_blank" action="config.php?uploadlower" enctype="multipart/form-data">
+				Select image to upload:
+				<input type="file" name="fileToUpload" id="fileToUpload" />
+				<br />
+				<input type="submit" value="Upload Image" name="submit" class="btn btn-accent btn-sm my-2" />
+			</form>
+
+			<div class="divider"></div>
+
+			<div tabindex="0" class="collapsible-header">
+				<div class="collapse-title">Upload Holding Screens</div>
+				<div class="collapse-content">
+					<p>Description...</p>
+				</div>
+			</div>
+			<form method="post" target="_blank" action="config.php?uploadfile">
+				URL:
+				<input type="text" name="file_url" size="35" placeholder="https://www.dropbox.com/s/25xhzrtvom/filename.mp4?dl=0" /> <br />
+				Stream Id:
+				<select name="stream_no" class="stream-selector"></select>
+				<br />
+				Video Type:
+				<select name="type_id">
+					<option value="">Choose</option>
+					<option value="holding.mp4">Holding</option>
+					<option value="video.mp4">Video</option>
+					<option value="failover.mp4">Failover</option>
+					<option value="lowerthird.png">Lower 3rd</option>
+				</select>
+				<br />
+				<input type="submit" value="Upload File" class="btn btn-accent btn-sm my-2" /> <br />
+			</form>
 		</div>
 
 		<footer class="footer footer-center mt-10 bg-base-300 p-4 text-base-content">

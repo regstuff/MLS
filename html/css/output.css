@@ -3084,17 +3084,18 @@ html {
   height: 12rem;
   width: 24rem;
   overflow: auto;
-  border-radius: var(--rounded-box, 1rem);
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
   padding: 0.5rem;
   opacity: 0.9;
+  border-radius: var(--rounded-box, 1rem);
   border-width: 1px;
   border-top-width: 4px;
   border-bottom-width: 4px;
   border-style: solid;
   --tw-border-opacity: 1;
   border-color: var(--fallback-nc,oklch(var(--nc)/var(--tw-border-opacity)));
+  z-index: 999;
 }
 
 .stream-status {
