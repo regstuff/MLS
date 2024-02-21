@@ -14,9 +14,10 @@ function renderStreamControls() {
 		const divContainer = document.createElement('div');
 		divContainer.classList.add('stream-container', 'p-2');
 
-		const streamName = streamNames[i];
-		const suffix = streamName ? ` (${streamName})` : '';
-		divContainer.innerHTML += `<h1 class="text-xl"><span class="stream-status" id="status${i}"></span>Stream ${i}${suffix}</h2>`;
+		const streamHeader = document.createElement('h');
+		streamHeader.id = `streamHeader${i}`;
+		streamHeader.classList.add('text-xl');
+		divContainer.appendChild(streamHeader);
 
 		divContainer.appendChild(creteJsmpegPlayer(i));
 
@@ -91,12 +92,27 @@ function renderStreamControls() {
 	}
 }
 
+function renderStreamHeaders() {
+	const actives = getActiveStreams();
+	let statuses = Array(STREAM_NUM);
+	actives.forEach((stream) => (statuses[stream.id] = true));
+
+	for (let i = 1; i <= STREAM_NUM; i++) {
+		const headerElem = document.getElementById(`streamHeader${i}`);
+		const streamName = streamNames[i];
+		const suffix = streamName ? ` (${streamName})` : '';
+		headerElem.innerHTML = `
+			<span class="stream-status ${statuses[i] ? 'on' : 'off'}" id="status${i}"></span>
+			Stream ${i}${suffix}`;
+	}
+}
+
 function renderOuts() {
-	const activeOuts = getActiveOuts();
-	let outStatuses = Array(STREAM_NUM)
+	const actives = getActiveOuts();
+	let statuses = Array(STREAM_NUM)
 		.fill()
 		.map((_) => []);
-	activeOuts.forEach((out) => (outStatuses[out.streamId][out.outId] = true));
+	actives.forEach((out) => (statuses[out.streamId][out.outId] = true));
 
 	for (let i = 1; i <= STREAM_NUM; i++) {
 		const outsDiv = document.getElementById(`stream-outs-${i}`);
@@ -116,7 +132,7 @@ function renderOuts() {
 			const destName = outInfo.name ? `: ${outInfo.name}` : ``;
 			outsHtml += `
 				<div class="my-1">
-					<span class="stream-status ${outStatuses[i][j] ? 'on' : 'off'}" id="status${i}-${j}"></span>
+					<span class="stream-status ${statuses[i][j] ? 'on' : 'off'}" id="status${i}-${j}"></span>
 					${on} ${off} ${name}<span id="destination${i}-${j}">${destName}</span>
 				</div>`;
 		}
@@ -142,7 +158,7 @@ function getActiveOuts() {
 	if (outStreams === undefined) return [];
 	if (!Array.isArray(outStreams)) outStreams = [outStreams];
 	outStreams = outStreams.map((s) => s.name['#text']);
-	const ans = outStreams
+	return outStreams
 		.map((name) => parseOutputStreamName(name))
 		.map((p) => ({
 			streamId: p.streamId,
@@ -150,10 +166,18 @@ function getActiveOuts() {
 				(info) => info?.name === p.destinationName,
 			),
 		}))
-		.filter((p) => p.outId !== -1)
-		.sort((a, b) => (a.streamId - b.streamId) * STREAM_NUM + (a.outId - b.outId));
-	return ans;
+		.filter((p) => p.outId !== -1);
 }
+
+function getActiveStreams() {
+	// TODO
+	return [];
+}
+
+// ===== jsmpeg player =====
+var canvas1 = document.getElementById('video-canvas1');
+var url1 = 'ws://' + document.location.hostname + ':443/';
+var player1 = 'initial state';
 
 function setVideoPlayers() {
 	for (let i = 1; i <= STREAM_NUM; i++) {
@@ -164,25 +188,6 @@ function setVideoPlayers() {
 		}
 	}
 }
-
-function genericFunction(url, cFunction, elem) {
-	var streamno = elem.parentNode.id;
-	url += streamno;
-	console.log(url);
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function () {
-		if (this.readyState == 4 && this.status == 200) {
-			cFunction(this, streamno);
-		}
-	};
-	xhttp.open('GET', url, true);
-	xhttp.send();
-}
-
-// ===== jsmpeg player =====
-var canvas1 = document.getElementById('video-canvas1');
-var url1 = 'ws://' + document.location.hostname + ':443/';
-var player1 = 'initial state';
 
 function creteJsmpegPlayer(streamId) {
 	const jsmpegDiv = document.createElement('div');
@@ -211,6 +216,20 @@ function creteJsmpegPlayer(streamId) {
 
 	jsmpegDiv.appendChild(controlsElem);
 	return jsmpegDiv;
+}
+
+function genericFunction(url, cFunction, elem) {
+	var streamno = elem.parentNode.id;
+	url += streamno;
+	console.log(url);
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function () {
+		if (this.readyState == 4 && this.status == 200) {
+			cFunction(this, streamno);
+		}
+	};
+	xhttp.open('GET', url, true);
+	xhttp.send();
 }
 
 function jsmpegPlay(xhttp, streamno) {
@@ -250,12 +269,13 @@ function jsmpegVolumedown() {
 // ===== jsmpeg player =====
 
 window.onload = async function () {
-	streamNames = await fetchStreamNames();
 	renderStreamControls();
 	setVideoPlayers();
 	setInterval(async function () {
+		streamNames = await fetchStreamNames();
 		statsJson = await fetchStats();
 		streamOutsConfig = await fetchConfigFile();
+		renderStreamHeaders();
 		renderOuts();
 	}, 3000);
 };
