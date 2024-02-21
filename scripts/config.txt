@@ -619,31 +619,11 @@ __stream17__out98__ rtmp://localhost/recording/stream17 source Stream17_record
 __stream18__out98__ rtmp://localhost/recording/stream18 source Stream18_record
 __stream19__out98__ rtmp://localhost/recording/stream19 source Stream19_record
 __stream20__out98__ rtmp://localhost/recording/stream20 source Stream20_record
-__stream21__out98__ rtmp://localhost/recording/stream20 source Stream20_record
-__stream22__out98__ rtmp://localhost/recording/stream20 source Stream20_record
-__stream23__out98__ rtmp://localhost/recording/stream20 source Stream20_record
-__stream24__out98__ rtmp://localhost/recording/stream20 source Stream20_record
-__stream25__out98__ rtmp://localhost/recording/stream20 source Stream20_record
-__stream1__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram1
-__stream2__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram2
-__stream3__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram3
-__stream4__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram4
-__stream5__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram5
-__stream6__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram6
-__stream7__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram7
-__stream8__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram8
-__stream9__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram9
-__stream10__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram10
-__stream11__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram11
-__stream12__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram12
-__stream13__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram13
-__stream14__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram14
-__stream15__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram15
-__stream16__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram16
-__stream17__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram17
-__stream18__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram18
-__stream19__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram19
-__stream20__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram20
+__stream21__out98__ rtmp://localhost/recording/stream20 source Stream21_record
+__stream22__out98__ rtmp://localhost/recording/stream20 source Stream22_record
+__stream23__out98__ rtmp://localhost/recording/stream20 source Stream23_record
+__stream24__out98__ rtmp://localhost/recording/stream20 source Stream24_record
+__stream25__out98__ rtmp://localhost/recording/stream20 source Stream25_record
 
 ***STREAM CONFIG***
 __stream1__config__ none 720p nofailover
