@@ -18,49 +18,15 @@ function renderStreamControls() {
 		const suffix = streamName ? ` (${streamName})` : '';
 		divContainer.innerHTML += `<h1 class="text-xl"><span class="stream-status" id="status${i}"></span>Stream ${i}${suffix}</h2>`;
 
-		// Create the div for jsmpeg player
-		const jsmpegDiv = document.createElement('div');
-		jsmpegDiv.classList.add('jsmpeg', 'h-56', 'text-center');
-
-		if (i === 1) {
-			jsmpegDiv.innerHTML += `<canvas width="320" height="180" id="video-canvas${i}" class="inline border border-solid border-gray-400"></canvas>`;
-		}
-
-		// Create jsmpeg player controls
-		const controlsElem = document.createElement('p');
-		controlsElem.id = 'stream' + i;
-
-		controlsElem.innerHTML = `
-		<a href="javascript:void(0);" genericFunction('player.php?appname=main&streamname=', jsmpegPlay, this)" class="mx-1">
-			<i class="material-icons text-3xl">play_arrow</i>M</a>
-		<a href="javascript:void(0);" genericFunction('player.php?appname=backup&streamname=', jsmpegPlay, this)" class="mx-1">
-			<i class="material-icons text-3xl">play_arrow</i>B</a>
-		<a href="javascript:void(0);" genericFunction('player.php?appname=distribute&streamname=', jsmpegPlay, this)" class="mx-1">
-			<i class="material-icons text-3xl">play_arrow</i>D</a>
-		<a href="javascript:void(0);" onclick="jsmpegStop()" class="mx-1"><i class="material-icons text-3xl">stop</i></a>
-		<a href="javascript:void(0);" onclick="jsmpegVolumeup()" class="mx-1"><i class="material-icons text-3xl">volume_up</i></a>
-		<a href="javascript:void(0);" onclick="jsmpegVolumedown()" class="mx-1"><i class="material-icons text-3xl">volume_down</i></a>`;
-
-		jsmpegDiv.appendChild(controlsElem);
-		divContainer.appendChild(jsmpegDiv);
+		divContainer.appendChild(creteJsmpegPlayer(i));
 
 		// creating controls bellow the video preview
-		var outsDiv = document.createElement('div');
-		outsDiv.classList.add(OUTS_MAX_H, 'overflow-hidden');
+		const outsDiv = document.createElement('div');
 		outsDiv.id = `stream-outs-${i}`;
-		for (var j = 1; j <= OUT_NUM; j++) {
-			if (i !== 1 && j > 20) break;
-			const on = `<button class="btn btn-xs btn-primary" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=on')">on</button>`;
-			const off = `<button class="btn btn-xs btn-error" onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=off')">off</button>`;
-			let name = j === 1 ? `<b>Vertical Out ${j}</b>` : `Out ${j}`;
-			outsDiv.innerHTML += `
-			<div class="my-1"><span class="stream-status" id="status${i}-${j}"></span>${on} ${off} ${name}<span id="destination${i}-${j}"></span></div>`;
-		}
 		divContainer.appendChild(outsDiv);
-		divContainer.innerHTML += `<button id="show-outs-${i}" class="show-or-hide-btn btn btn-xs btn-outline" onclick="toggleOuts(${i})">show more</button>`;
 
 		// Other options
-		var otherControlsDiv = document.createElement('div');
+		const otherControlsDiv = document.createElement('div');
 		otherControlsDiv.innerHTML += `
 		<div class="divider"></div>
 		<div class="my-1">
@@ -125,50 +91,58 @@ function renderStreamControls() {
 	}
 }
 
-function toggleOuts(streamId) {
-	const outs = document.getElementById(`stream-outs-${streamId}`);
-	const showMoreBtn = document.getElementById(`show-outs-${streamId}`);
+function renderOuts() {
+	const activeOuts = getActiveOuts();
+	let outStatuses = Array(STREAM_NUM)
+		.fill()
+		.map((_) => []);
+	activeOuts.forEach((out) => (outStatuses[out.streamId][out.outId] = true));
 
-	if (outs.classList.contains(OUTS_MAX_H)) {
-		outs.classList.remove(OUTS_MAX_H);
-		showMoreBtn.textContent = 'hide';
-	} else {
-		outs.classList.add(OUTS_MAX_H);
-		showMoreBtn.textContent = 'show more';
-	}
-}
-
-async function renderDestinations() {
-	streamOutsConfig = await fetchConfigFile();
 	for (let i = 1; i <= STREAM_NUM; i++) {
-		for (let j = 1; j <= OUT_NUM; j++) {
-			const elem = document.getElementById(`destination${i}-${j}`);
-			const info = streamOutsConfig[i][j];
-			if (Object.keys(info).length !== 0) {
-				elem.innerHTML = `: ${info.name}`;
-			}
+		const outsDiv = document.getElementById(`stream-outs-${i}`);
+
+		let outsHtml = '';
+		// we need to slice slice(0, STREAM_NUM) because outs 98 are used for recording.
+		const outSize = streamOutsConfig[i]
+			.slice(0, STREAM_NUM)
+			.findLastIndex((info) => !isEmpty(info));
+		for (var j = 1; j <= outSize; j++) {
+			const outInfo = streamOutsConfig[i][j];
+			const on = `<button class="btn btn-xs btn-primary" 
+				onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=on')">on</button>`;
+			const off = `<button class="btn btn-xs btn-error" 
+				onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=off')">off</button>`;
+			let name = j === 1 ? `<b>Vertical Out ${j}</b>` : `Out ${j}`;
+			const destName = outInfo.name ? `: ${outInfo.name}` : ``;
+			outsHtml += `
+				<div class="my-1">
+					<span class="stream-status ${outStatuses[i][j] ? 'on' : 'off'}" id="status${i}-${j}"></span>
+					${on} ${off} ${name}<span id="destination${i}-${j}">${destName}</span>
+				</div>`;
 		}
+		if (outSize < 1) {
+			outsHtml += 'No configured outs...';
+		}
+
+		outsDiv.innerHTML = outsHtml;
 	}
 }
 
 function parseOutputStreamName(str) {
 	const dashIndex = str.indexOf('-');
 	return {
-		streamId: str.substring(6, dashIndex),
+		streamId: Number(str.substring(6, dashIndex)),
 		destinationName: str.substring(dashIndex + 1),
 	};
 }
 
-async function fetchActiveOuts() {
-	streamOutsConfig = await fetchConfigFile();
-	const rtmpJson = await fetchStats();
-
-	let outStreams = rtmpJson.rtmp.server.application.find((app) => app.name['#text'] == 'output')
+function getActiveOuts() {
+	let outStreams = statsJson.rtmp.server.application.find((app) => app.name['#text'] == 'output')
 		.live.stream;
 	if (outStreams === undefined) return [];
 	if (!Array.isArray(outStreams)) outStreams = [outStreams];
 	outStreams = outStreams.map((s) => s.name['#text']);
-	return outStreams
+	const ans = outStreams
 		.map((name) => parseOutputStreamName(name))
 		.map((p) => ({
 			streamId: p.streamId,
@@ -176,17 +150,9 @@ async function fetchActiveOuts() {
 				(info) => info?.name === p.destinationName,
 			),
 		}))
-		.filter((p) => p.outId !== -1);
-}
-
-async function refreshStatuses() {
-	const activeOuts = await fetchActiveOuts();
-	const activeStatusIds = activeOuts.map((p) => `status${p.streamId}-${p.outId}`);
-	Array.from(document.getElementsByClassName('stream-status')).forEach((s) => {
-		s.className = activeStatusIds.includes(s.id)
-			? (s.className = 'stream-status on')
-			: (s.className = 'stream-status off');
-	});
+		.filter((p) => p.outId !== -1)
+		.sort((a, b) => (a.streamId - b.streamId) * STREAM_NUM + (a.outId - b.outId));
+	return ans;
 }
 
 function setVideoPlayers() {
@@ -213,9 +179,39 @@ function genericFunction(url, cFunction, elem) {
 	xhttp.send();
 }
 
+// ===== jsmpeg player =====
 var canvas1 = document.getElementById('video-canvas1');
 var url1 = 'ws://' + document.location.hostname + ':443/';
 var player1 = 'initial state';
+
+function creteJsmpegPlayer(streamId) {
+	const jsmpegDiv = document.createElement('div');
+	jsmpegDiv.classList.add('jsmpeg', 'text-center');
+
+	if (streamId === 1) {
+		jsmpegDiv.innerHTML = `
+				<canvas width="320" height="180" id="video-canvas${streamId}"
+					class="inline border border-solid border-gray-400"></canvas>`;
+	}
+
+	// Create jsmpeg player controls
+	const controlsElem = document.createElement('p');
+	controlsElem.id = 'stream' + streamId;
+
+	controlsElem.innerHTML = `
+		<a href="javascript:void(0);" genericFunction('player.php?appname=main&streamname=', jsmpegPlay, this)" class="mx-1">
+			<i class="material-icons text-3xl">play_arrow</i>M</a>
+		<a href="javascript:void(0);" genericFunction('player.php?appname=backup&streamname=', jsmpegPlay, this)" class="mx-1">
+			<i class="material-icons text-3xl">play_arrow</i>B</a>
+		<a href="javascript:void(0);" genericFunction('player.php?appname=distribute&streamname=', jsmpegPlay, this)" class="mx-1">
+			<i class="material-icons text-3xl">play_arrow</i>D</a>
+		<a href="javascript:void(0);" onclick="jsmpegStop()" class="mx-1"><i class="material-icons text-3xl">stop</i></a>
+		<a href="javascript:void(0);" onclick="jsmpegVolumeup()" class="mx-1"><i class="material-icons text-3xl">volume_up</i></a>
+		<a href="javascript:void(0);" onclick="jsmpegVolumedown()" class="mx-1"><i class="material-icons text-3xl">volume_down</i></a>`;
+
+	jsmpegDiv.appendChild(controlsElem);
+	return jsmpegDiv;
+}
 
 function jsmpegPlay(xhttp, streamno) {
 	var stream1 = document.getElementById(streamno);
@@ -251,12 +247,15 @@ function jsmpegVolumedown() {
 	}
 	return false;
 }
+// ===== jsmpeg player =====
 
 window.onload = async function () {
 	streamNames = await fetchStreamNames();
 	renderStreamControls();
-	await renderDestinations();
 	setVideoPlayers();
-	setInterval(refreshStatuses, 3000);
-	setInterval(renderDestinations, 3000);
+	setInterval(async function () {
+		statsJson = await fetchStats();
+		streamOutsConfig = await fetchConfigFile();
+		renderOuts();
+	}, 3000);
 };

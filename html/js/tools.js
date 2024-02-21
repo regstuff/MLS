@@ -2,6 +2,18 @@
 const STREAM_NUM = 25;
 const OUT_NUM = 95;
 
+// This will be fetched from a file
+let streamNames = [];
+let streamOutsConfig = [];
+let statsJson = [];
+
+function isEmpty(obj) {
+	for (var i in obj) {
+		return false;
+	}
+	return true;
+}
+
 // Tools
 function removeAllChildNodes(parent) {
 	while (parent.firstChild) {
@@ -15,9 +27,6 @@ function clearAndAddChooseOption(selector) {
 	option.text = 'Choose';
 	selector.appendChild(option);
 }
-// This will be fetched from a file
-let streamNames = [];
-let streamOutsConfig = [];
 
 // AJAX request function
 async function submitFormAndShowResponse(formId, phpUrl) {
@@ -120,7 +129,7 @@ async function fetchConfigFile() {
 			const split = remainingLine.split(' ');
 
 			if (split.length === 3) {
-				streamOutsConfig[i][j] = { url: split[0], source: split[1], name: split[2] };
+				streamOutsConfig[i][j] = { url: split[0], encoding: split[1], name: split[2] };
 			} else {
 				streamOutsConfig[i][j] = {};
 			}
