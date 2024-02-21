@@ -456,6 +456,10 @@ out99) #For instagram
 		encodeparam="-c copy -flags +global_header"
 		;;
 
+	vertical) # Rotate video 90 degrees and scale to 720p
+		encodeparam="-vf transpose=1 -c:v libx264 -c:a aac -flags +global_header"
+		;;
+
 	720p) #1.3mbps video, audio copy
 		encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 1280x720 -b:v 1300k -preset veryfast -flags +global_header"
 		;;
@@ -467,10 +471,6 @@ out99) #For instagram
 	576p) #800k video, audio copy
 		encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 720x576 -b:v 800k -preset veryfast -flags +global_header" ;;
 	esac
-
-	if [ "$1" = "out1" ]; then
-		encodeparam="-vf transpose=1 -c:v libx264 -c:a aac -flags +global_header"
-	fi
 
 	case $2 in
 

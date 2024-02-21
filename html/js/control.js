@@ -128,7 +128,7 @@ function renderOuts() {
 				onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=on')">on</button>`;
 			const off = `<button class="btn btn-xs btn-error" 
 				onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=off')">off</button>`;
-			let name = j === 1 ? `<b>Vertical Out ${j}</b>` : `Out ${j}`;
+			let name = outInfo.encoding === 'vertical' ? `<b>Vertical Out ${j}</b>` : `Out ${j}`;
 			const destName = outInfo.name ? `: ${outInfo.name}` : ``;
 			outsHtml += `
 				<div class="my-1">
