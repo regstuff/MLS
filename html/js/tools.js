@@ -53,7 +53,6 @@ async function executePhpAndShowResponse(phpUrl) {
 	var response = await fetch(phpUrl, { method: 'POST' });
 	if (response.ok) {
 		showResponse(await response.text());
-		refreshStatuses();
 	} else {
 		console.error('Request failed with status:', response.status);
 	}

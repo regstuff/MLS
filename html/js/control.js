@@ -73,17 +73,18 @@ function renderStreamControls() {
 				Backup Live stream
 			</div>
 			
-				<form method="post" target="_blank" action="/control.php?streamno=${i}&action=video&actnumber=&state=turnon" class="my-1">
-				<input type="submit" class="btn btn-xs btn-primary" style="display: inline" value="on" />
-				<a href="executePhpAndShowResponse(/control.php?streamno=${i}&action=off&actnumber=&state=)" class="btn btn-xs btn-error" target="_blank">off</a>
-				<a href="/control.php?streamno=${i}&action=playlist&actnumber=&state=" target="_blank" class="btn btn-xs btn-outline">Playlist</a>
-				Uploaded
-				<select name="video_no" class="select select-bordered select-xs max-w-xs">
-					<option selected value="video">Video</option>
-					<option value="holding">Holding</option>
-				</select>
-				<input type="text" name="startmin" size="1" value="0" class="input input-bordered input-neutral input-xs max-w-xs"/>m
-				<input type="text" style="display: inline" name="startsec" size="1" value="0" class="input input-bordered input-neutral input-xs max-w-xs"/>s
+				<form method="post" id="videoInputForm" class="my-1">
+					<input type="submit" class="btn btn-xs btn-primary" style="display: inline" value="on" 
+						onclick="event.preventDefault(); submitFormAndShowResponse('videoInputForm','control.php?streamno=${i}&action=video&actnumber=&state=turnon');" />
+					<btn onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=off&actnumber=&state=')" class="btn btn-xs btn-error">off</btn>
+					<a href="/control.php?streamno=${i}&action=playlist&actnumber=&state=" target="_blank" class="btn btn-xs btn-outline">Playlist</a>
+					Uploaded
+					<select name="video_no" class="select select-bordered select-xs max-w-xs">
+						<option selected value="video">Video</option>
+						<option value="holding">Holding</option>
+					</select>
+					<input type="text" name="startmin" size="1" value="0" class="input input-bordered input-neutral input-xs max-w-xs"/>m
+					<input type="text" style="display: inline" name="startsec" size="1" value="0" class="input input-bordered input-neutral input-xs max-w-xs"/>s
 				</form>
 		</div>`;
 
