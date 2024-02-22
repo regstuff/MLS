@@ -205,11 +205,11 @@ function creteJsmpegPlayer(streamId) {
 	controlsElem.id = 'stream' + streamId;
 
 	controlsElem.innerHTML = `
-		<a href="javascript:void(0);" genericFunction('player.php?appname=main&streamname=', jsmpegPlay, this)" class="mx-1">
+		<a href="javascript:void(0);" onclick="genericFunction('player.php?appname=main&streamname=', jsmpegPlay, this)" class="mx-1">
 			<i class="material-icons text-3xl">play_arrow</i>M</a>
-		<a href="javascript:void(0);" genericFunction('player.php?appname=backup&streamname=', jsmpegPlay, this)" class="mx-1">
+		<a href="javascript:void(0);" onclick="genericFunction('player.php?appname=backup&streamname=', jsmpegPlay, this)" class="mx-1">
 			<i class="material-icons text-3xl">play_arrow</i>B</a>
-		<a href="javascript:void(0);" genericFunction('player.php?appname=distribute&streamname=', jsmpegPlay, this)" class="mx-1">
+		<a href="javascript:void(0);" onclick="genericFunction('player.php?appname=distribute&streamname=', jsmpegPlay, this)" class="mx-1">
 			<i class="material-icons text-3xl">play_arrow</i>D</a>
 		<a href="javascript:void(0);" onclick="jsmpegStop()" class="mx-1"><i class="material-icons text-3xl">stop</i></a>
 		<a href="javascript:void(0);" onclick="jsmpegVolumeup()" class="mx-1"><i class="material-icons text-3xl">volume_up</i></a>
