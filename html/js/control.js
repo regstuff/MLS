@@ -27,9 +27,14 @@ function renderStreamControls() {
 		divContainer.appendChild(outsDiv);
 
 		// Other options
+		const collapseContainer = document.createElement('details');
+		collapseContainer.className = 'collapse bg-base-200 mt-2';
+		collapseContainer.innerHTML =
+			'<summary class="collapse-title text-xl font-medium">More</summary>';
+
 		const otherControlsDiv = document.createElement('div');
+		otherControlsDiv.className = 'collapse-content';
 		otherControlsDiv.innerHTML += `
-		<div class="divider"></div>
 		<div class="my-1">
 			<button class="btn btn-xs btn-primary" href="/control.php?streamno=${i}&action=out&actnumber=98&state=on" target="_blank">on</button>
 			<button class="btn btn-xs btn-error" href="/control.php?streamno=${i}&action=out&actnumber=98&state=off" target="_blank">off</button>
@@ -88,7 +93,8 @@ function renderStreamControls() {
 				</form>
 		</div>`;
 
-		divContainer.appendChild(otherControlsDiv);
+		collapseContainer.appendChild(otherControlsDiv);
+		divContainer.appendChild(collapseContainer);
 		streamControls.appendChild(divContainer);
 	}
 }
