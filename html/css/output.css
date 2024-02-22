@@ -2991,6 +2991,10 @@ details.collapse summary::-webkit-details-marker {
   max-height: 13rem;
 }
 
+.w-10 {
+  width: 2.5rem;
+}
+
 .w-20 {
   width: 5rem;
 }
@@ -3119,7 +3123,7 @@ details.collapse summary::-webkit-details-marker {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity)));
   text-align: left;
-  width: 450px;
+  width: 460px;
 }
 
 .response-box {
