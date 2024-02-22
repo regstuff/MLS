@@ -154,12 +154,13 @@ function parseOutputStreamName(str) {
 }
 
 function getActiveOuts() {
-	let outStreams = statsJson.rtmp.server.application.find((app) => app.name['#text'] == 'output')
+	let streams = statsJson.rtmp.server.application.find((app) => app.name['#text'] == 'output')
 		.live.stream;
-	if (outStreams === undefined) return [];
-	if (!Array.isArray(outStreams)) outStreams = [outStreams];
-	outStreams = outStreams.map((s) => s.name['#text']);
-	return outStreams
+	if (streams === undefined) streams = []; // no streams
+	if (!Array.isArray(streams)) streams = [streams]; // only one stream
+	streams = streams.map((s) => s.name['#text']);
+
+	return streams
 		.map((name) => parseOutputStreamName(name))
 		.map((p) => ({
 			streamId: p.streamId,
@@ -171,8 +172,17 @@ function getActiveOuts() {
 }
 
 function getActiveStreams() {
-	// TODO
-	return [];
+	let streams = statsJson.rtmp.server.application.find((app) => app.name['#text'] == 'distribute')
+		.live.stream;
+	if (streams === undefined) streams = []; // no streams
+	if (!Array.isArray(streams)) streams = [streams]; // only one stream
+	streams = streams.map((s) => s.name['#text']);
+
+	return streams
+		.map((name) => Number(name.substring(6)))
+		.map((p) => ({
+			streamId: p.streamId,
+		}));
 }
 
 // ===== jsmpeg player =====
