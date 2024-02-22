@@ -98,7 +98,6 @@ async function fetchStreamNames() {
 		}
 		const data = await response.json();
 		const streamNames = data.csvData[0];
-		console.log('CSV fetched successfully.');
 		return streamNames;
 	} catch (error) {
 		console.error('Error fetching stream names:', error);

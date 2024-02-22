@@ -222,7 +222,6 @@ function creteJsmpegPlayer(streamId) {
 function genericFunction(url, cFunction, elem) {
 	var streamno = elem.parentNode.id;
 	url += streamno;
-	console.log(url);
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function () {
 		if (this.readyState == 4 && this.status == 200) {
