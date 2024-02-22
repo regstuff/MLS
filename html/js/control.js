@@ -29,8 +29,7 @@ function renderStreamControls() {
 		// Other options
 		const collapseContainer = document.createElement('details');
 		collapseContainer.className = 'collapse bg-base-200 mt-2';
-		collapseContainer.innerHTML =
-			'<summary class="collapse-title text-xl font-medium">More</summary>';
+		collapseContainer.innerHTML = '<summary class="collapse-title font-medium">More</summary>';
 
 		const otherControlsDiv = document.createElement('div');
 		otherControlsDiv.className = 'collapse-content';
@@ -78,19 +77,24 @@ function renderStreamControls() {
 				Backup Live stream
 			</div>
 			
-				<form method="post" id="videoInputForm" class="my-1">
-					<input type="submit" class="btn btn-xs btn-primary" style="display: inline" value="on" 
-						onclick="event.preventDefault(); submitFormAndShowResponse('videoInputForm','control.php?streamno=${i}&action=video&actnumber=&state=turnon');" />
-					<a href="/control.php?streamno=${i}&action=playlist&actnumber=&state=" target="_blank" class="btn btn-xs btn-outline">Playlist</a>
-					<btn onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=off&actnumber=&state=')" class="btn btn-xs btn-error">off</btn>
-					Uploaded
-					<select name="video_no" class="select select-bordered select-xs max-w-xs">
-						<option selected value="video">Video</option>
-						<option value="holding">Holding</option>
-					</select>
-					<input type="text" name="startmin" size="1" value="0" class="input input-bordered input-neutral input-xs w-9"/>m
-					<input type="text" style="display: inline" name="startsec" size="1" value="0" class="input input-bordered input-neutral input-xs w-10"/>s
-				</form>
+			<form method="post" id="videoInputForm" class="my-1">
+				<input type="submit" class="btn btn-xs btn-primary" style="display: inline" value="on" 
+					onclick="event.preventDefault(); submitFormAndShowResponse('videoInputForm','control.php?streamno=${i}&action=video&actnumber=&state=turnon');" />
+				<btn onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=off&actnumber=&state=')" class="btn btn-xs btn-error">off</btn>
+				Uploaded
+				<select name="video_no" class="select select-bordered select-xs max-w-xs">
+					<option selected value="video">Video</option>
+					<option value="holding">Holding</option>
+				</select>
+				<input type="text" name="startmin" size="1" value="0" class="input input-bordered input-neutral input-xs w-9"/>m
+				<input type="text" style="display: inline" name="startsec" size="1" value="0" class="input input-bordered input-neutral input-xs w-10"/>s
+			</form>
+
+			<div class="my-1">
+				<a href="/control.php?streamno=${i}&action=playlist&actnumber=&state=" target="_blank" class="btn btn-xs btn-primary">on</a>
+				<btn onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=off&actnumber=&state=')" class="btn btn-xs btn-error">off</btn>
+				Playlist
+			</div>
 		</div>`;
 
 		collapseContainer.appendChild(otherControlsDiv);

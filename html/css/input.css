@@ -4,7 +4,7 @@
 
 .stream-container {
 	@apply inline-block text-left bg-base-300 rounded-box m-2;
-	width: 455px;
+	width: 400px;
 }
 
 .response-box {
@@ -20,6 +20,10 @@
 
 .stream-status.on {
 	@apply bg-primary;
+}
+
+.collapse-title {
+	@apply !text-base;
 }
 
 .table :where(th, td) {
