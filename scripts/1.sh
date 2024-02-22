@@ -457,7 +457,7 @@ out99) #For instagram
 		;;
 
 	vertical) # Rotate video 90 degrees and scale to 720p
-		encodeparam="-vf transpose=1 -c:v libx264 -c:a aac -flags +global_header"
+		encodeparam="-vf 'transpose=1, scale=720:1280' -c:v libx264 -c:a aac -flags +global_header"
 		;;
 
 	720p) #1.3mbps video, audio copy
