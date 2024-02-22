@@ -180,8 +180,8 @@ function getActiveStreams() {
 
 	return streams
 		.map((name) => Number(name.substring(6)))
-		.map((p) => ({
-			streamId: p.streamId,
+		.map((id) => ({
+			streamId: id,
 		}));
 }
 
