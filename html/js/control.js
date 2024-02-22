@@ -96,7 +96,7 @@ function renderStreamControls() {
 function renderStreamHeaders() {
 	const actives = getActiveStreams();
 	let statuses = Array(STREAM_NUM);
-	actives.forEach((stream) => (statuses[stream.id] = true));
+	actives.forEach((stream) => (statuses[stream.streamId] = true));
 
 	for (let i = 1; i <= STREAM_NUM; i++) {
 		const headerElem = document.getElementById(`streamHeader${i}`);
