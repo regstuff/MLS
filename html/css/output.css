@@ -2999,6 +2999,10 @@ details.collapse summary::-webkit-details-marker {
   width: 5rem;
 }
 
+.w-9 {
+  width: 2.25rem;
+}
+
 .max-w-3xl {
   max-width: 48rem;
 }
@@ -3123,7 +3127,7 @@ details.collapse summary::-webkit-details-marker {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity)));
   text-align: left;
-  width: 460px;
+  width: 455px;
 }
 
 .response-box {

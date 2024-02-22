@@ -88,7 +88,7 @@ function renderStreamControls() {
 						<option selected value="video">Video</option>
 						<option value="holding">Holding</option>
 					</select>
-					<input type="text" name="startmin" size="1" value="0" class="input input-bordered input-neutral input-xs w-10"/>m
+					<input type="text" name="startmin" size="1" value="0" class="input input-bordered input-neutral input-xs w-9"/>m
 					<input type="text" style="display: inline" name="startsec" size="1" value="0" class="input input-bordered input-neutral input-xs w-10"/>s
 				</form>
 		</div>`;

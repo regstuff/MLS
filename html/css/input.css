@@ -4,7 +4,7 @@
 
 .stream-container {
 	@apply inline-block text-left bg-base-300 rounded-box m-2;
-	width: 460px;
+	width: 455px;
 }
 
 .response-box {
