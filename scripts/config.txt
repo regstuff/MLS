@@ -1,13 +1,13 @@
 ***DESTINATION CONFIG***
-__stream1__out1__ rtmp://a.rtmp.youtube.com/live2/9bkk-ewzp-c77f-y42s-cu8y source LB_Wb_Eng
-__stream1__out2__ rtmps://a.rtmps.youtube.com/live2/cw7u-d0ak-a6zm-dr8p-2yq1 source test
-__stream1__out3__ rtmps://live-api-s.facebook.com:443/rtmp/FB-799354741559184-0-Abyo9eFiZNKCJRxJ source Sadhguru_English_FB_GP
-__stream1__out4__ rtmp://ingest1.janya.video/source/sadhguru-live-main source Sadhguru_3rd_Party_GP
-__stream1__out5__ rtmp://a.rtmp.youtube.com/live2/a88j-7qvv-m5sq-6jx8-45dr source RajshriSoul_GP
-__stream1__out6__ rtmp://a.rtmp.youtube.com/live2/a836-rfdq-7yge-qy3g-0zv6 vertical Isha_Foundation_YT
+__stream1__out1__ rtmp://a.rtmp.youtube.com/live2/1111-aaaa-1111-aaaa-1111 source LB_Wb_Eng
+__stream1__out2__ rtmp://a.rtmp.youtube.com/live2/1111-aaaa-1111-aaaa-1111 vertical Isha_Foundation_YT
+__stream1__out3__ 
+__stream1__out4__  source 
+__stream1__out5__ rtmp://34.93.121.211/distribute/stream2 source test
+__stream1__out6__ 
 __stream1__out7__
-__stream1__out8__  source
-__stream1__out9__ rtmp://34.93.121.211/distribute/stream2 source str1_to_str2
+__stream1__out8__ 
+__stream1__out9__
 __stream1__out10__
 __stream1__out11__
 __stream1__out12__
@@ -95,11 +95,11 @@ __stream1__out93__
 __stream1__out94__
 __stream1__out95__
 
-__stream2__out1__ rtmp://a.rtmp.youtube.com/live2/m3wa-w9ge-5w3p-m5ah-365h source LB_Wb_Hindi
-__stream2__out2__ rtmp://a.rtmp.youtube.com/live2/a5qb-dvjr-0v60-kx8t-90pj source Sadhguru_Tamil_YT_GP
-__stream2__out3__ rtmps://live-api-s.facebook.com:443/rtmp/FB-347646590064392-0-Aby2NCC3QVM0Omr0 source Sadhguru_Tamil_FB_GP
-__stream2__out4__ rtmp://push-livestream.sharechat.com/live/b20a28a7-e9dc-4450-a26d-6be90acebce1?token=7ef9db1e-70f9-4747-8969-c68fe4c56328 source MOJ_TAMIL_GP
-__stream2__out5__ rtmp://a.rtmp.youtube.com/live2/bjp9-m3vd-mypy-9azz-15h2 source Tamil_DryRun
+__stream2__out1__ 
+__stream2__out2__ rtmp://a.rtmp.youtube.com/live2/1111-aaaa-1111-aaaa-1111 source LB_Wb_Hindi
+__stream2__out3__ rtmps://live-api-s.facebook.com:443/rtmp/FB-1111-aaaa-1111-aaaa-1111 source Sadhguru_Tamil_FB_GP
+__stream2__out4__ 
+__stream2__out5__ 
 __stream2__out6__ 
 __stream2__out7__ 
 __stream2__out8__ 

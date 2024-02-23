@@ -7,11 +7,8 @@ let streamNames = [];
 let streamOutsConfig = [];
 let statsJson = [];
 
-function isEmpty(obj) {
-	for (var i in obj) {
-		return false;
-	}
-	return true;
+function capitalize(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 // Tools
@@ -129,7 +126,7 @@ async function fetchConfigFile() {
 			if (split.length === 3) {
 				streamOutsConfig[i][j] = { url: split[0], encoding: split[1], name: split[2] };
 			} else {
-				streamOutsConfig[i][j] = {};
+				streamOutsConfig[i][j] = { url: '', encoding: '', name: '' };
 			}
 		}
 	}

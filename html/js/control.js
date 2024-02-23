@@ -132,19 +132,25 @@ function renderOuts() {
 		// we need to slice slice(0, STREAM_NUM) because outs 98 are used for recording.
 		const outSize = streamOutsConfig[i]
 			.slice(0, STREAM_NUM)
-			.findLastIndex((info) => !isEmpty(info));
+			.findLastIndex((info) => info?.name);
 		for (var j = 1; j <= outSize; j++) {
-			const outInfo = streamOutsConfig[i][j];
+			const info = streamOutsConfig[i][j];
 			const on = `<button class="btn btn-xs btn-primary" 
 				onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=on')">on</button>`;
 			const off = `<button class="btn btn-xs btn-error" 
 				onclick="executePhpAndShowResponse('/control.php?streamno=${i}&action=out&actnumber=${j}&state=off')">off</button>`;
-			let name = outInfo.encoding === 'vertical' ? `<b>Vertical Out ${j}</b>` : `Out ${j}`;
-			const destName = outInfo.name ? `: ${outInfo.name}` : ``;
+			let title = `Out ${j}`;
+			let destDiv = `<span id="destination${i}-${j}">${info.name}</span>`;
+			if (info.name !== '') {
+				title =
+					(info.encoding === 'source' ? '' : `<b>${capitalize(info.encoding)}</b> `) +
+					`${title}: `;
+				destDiv = `<div class="tooltip" data-tip="${info.url}">${destDiv}</div>`;
+			}
 			outsHtml += `
 				<div class="my-1">
 					<span class="stream-status ${statuses[i][j] ? 'on' : 'off'}" id="status${i}-${j}"></span>
-					${on} ${off} ${name}<span id="destination${i}-${j}">${destName}</span>
+					${on} ${off} ${title} ${destDiv}
 				</div>`;
 		}
 		if (outSize < 1) {
