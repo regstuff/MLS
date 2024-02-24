@@ -7,6 +7,9 @@ pretty:
 install:
 	sudo ./setup-nginx-docker.sh
 
+front:
+	bun run server.js
+
 run:
 	docker compose up
 
