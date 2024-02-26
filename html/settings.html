@@ -30,7 +30,7 @@
     </div>
     <div class="response-box" id="responseBox"></div>
 
-    <div class="max-w-3xl mx-auto prose">
+    <div class="prose mx-auto max-w-3xl">
       <div tabindex="0" class="collapsible-header">
         <div class="collapse-title">
           Stream Names
@@ -44,7 +44,7 @@
         </div>
       </div>
       <div class="overflow-x-auto">
-        <table class="table mb-0" id="name-table">
+        <table class="mb-0 table" id="name-table">
           <thead></thead>
           <tbody id="name-table-body"></tbody>
         </table>
@@ -89,10 +89,44 @@
           <input
             type="text"
             name="name_id"
-            size="45"
             placeholder="Sadhguru_English_YT"
-            class="input input-bordered input-neutral input-xs max-w-44" />
+            class="input input-bordered input-neutral input-xs w-44" />
         </label>
+
+        <label class="input-label">
+          <div class="label pb-0">
+            <span class="label-text text-sm">Stream Id</span>
+          </div>
+          <select
+            name="stream_id"
+            id="new-destination-stream"
+            class="stream-selector labeled-select w-32"></select>
+        </label>
+
+        <label class="input-label">
+          <div class="label pb-0">
+            <span class="label-text text-sm">Out Id</span>
+          </div>
+          <select
+            name="output_id"
+            id="out-selector"
+            class="select select-bordered select-xs w-32"></select>
+        </label>
+
+        <label class="input-label">
+          <div class="label pb-0">
+            <span class="label-text text-sm">Resolution</span>
+          </div>
+          <select name="resolution" class="labeled-select">
+            <option selected value="source">Source</option>
+            <option value="vertical">Vertical</option>
+            <option value="720p">720p</option>
+            <option value="540p">540p</option>
+            <option value="576p">PAL-720x576</option>
+          </select>
+        </label>
+
+        <br />
 
         <label class="input-label">
           <div class="label pb-0">
@@ -110,32 +144,18 @@
         </label>
         <label class="input-label">
           <div class="label pb-0">
-            <span class="label-text text-sm">Stream Key (or Custom URL)</span>
+            <span class="label-text text-sm">Stream Key or Custom URL</span>
           </div>
           <input
             type="text"
             name="stream_key"
-            size="41"
-            placeholder="a5qb-dvjr-0v60-kx8t-90pj"
+            placeholder=""
             id="stream-key"
             onchange="updateRtmpUrl()"
-            class="input input-bordered input-neutral input-xs max-w-xs" />
-        </label>
-        <label class="input-label">
-          <div class="label pb-0">
-            <span class="label-text text-sm">Resolution</span>
-          </div>
-          <select name="resolution" class="labeled-select">
-            <option selected value="source">Source</option>
-            <option value="vertical">Vertical</option>
-            <option value="720p">720p</option>
-            <option value="540p">540p</option>
-            <option value="576p">PAL-720x576</option>
-          </select>
+            class="input input-bordered input-neutral input-xs w-[40rem]" />
         </label>
 
-        <br />
-        <label class="input-label">
+        <label class="hidden">
           <div class="label pb-0">
             <span class="label-text text-sm">Full RTMP URL</span>
           </div>
@@ -145,29 +165,12 @@
             size="65"
             placeholder="Generated as Server URL + Stream Key"
             id="rtmp-url"
-            class="input input-bordered input-neutral input-xs max-w-md"
+            class="input input-neutral input-xs max-w-md"
             readonly />
         </label>
 
-        <label class="input-label">
-          <div class="label pb-0">
-            <span class="label-text text-sm">Stream Id</span>
-          </div>
-          <select
-            name="stream_id"
-            id="new-destination-stream"
-            class="stream-selector labeled-select"></select>
-        </label>
-        <label class="input-label">
-          <div class="label pb-0">
-            <span class="label-text text-sm">Out Id</span>
-          </div>
-          <select
-            name="output_id"
-            id="out-selector"
-            class="select select-bordered select-xs"></select>
-        </label>
         <br />
+
         <input
           type="submit"
           class="btn btn-accent btn-sm my-2"
@@ -437,7 +440,7 @@
       </form>
     </div>
 
-    <footer class="footer footer-center mt-10 bg-base-300 p-4 text-base-content">
+    <footer class="footer footer-center bg-base-300 text-base-content mt-10 p-4">
       <aside>
         <p>Copyright © 2024 - All right reserved by MLS</p>
       </aside>
