@@ -1,11 +1,14 @@
 .PHONY: *
 
 pretty:
-	cd html && npx prettier --write ..
+	bunx prettier --write .
 	shfmt -w .
 
 install:
 	sudo ./setup-nginx-docker.sh
+
+front:
+	bun run server.js
 
 run:
 	docker compose up
@@ -18,3 +21,6 @@ exec:
 
 
 dev: build run
+
+css:
+	bunx tailwindcss -i ./html/css/input.css -o ./html/css/output.css --watch

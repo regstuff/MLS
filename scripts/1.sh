@@ -456,6 +456,10 @@ out99) #For instagram
 		encodeparam="-c copy -flags +global_header"
 		;;
 
+	vertical) # Rotate video 90 degrees and scale to 720p
+		encodeparam="-vf 'transpose=1, scale=720:1280' -c:v libx264 -c:a aac -flags +global_header"
+		;;
+
 	720p) #1.3mbps video, audio copy
 		encodeparam="-acodec copy -vcodec libx264 -pix_fmt yuv420p -r 25 -g 50 -s 1280x720 -b:v 1300k -preset veryfast -flags +global_header"
 		;;
@@ -497,8 +501,10 @@ out99) #For instagram
 			exec screen -dm -S $screenname /bin/bash "$0" "$1"
 		fi
 
+		ffmpegcommand="$newffmpegparam $distributeparam $encodeparam -strict -2 -f tee -map 0:v -map 0:a \"$checkout\""
+
 		while [ $i -lt 9000 ]; do
-			$newffmpegparam $distributeparam $encodeparam -strict -2 -f tee -map 0:v -map 0:a "$checkout"
+			eval "$ffmpegcommand"
 			echo "Waiting for English input... Feed me!!!"
 			sleep 0.2
 			i=$(($i + 1))

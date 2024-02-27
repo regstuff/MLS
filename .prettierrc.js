@@ -10,8 +10,10 @@ module.exports = {
 	overrides: [
 		{
 			files: '*.html',
+
 			options: {
-				printWidth: 150,
+				useTabs: false,
+				tabWidth: 2,
 			},
 		},
 	],

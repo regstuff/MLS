@@ -12,7 +12,6 @@ function renderStreamSelectors() {
 			selector.appendChild(option);
 		}
 	}
-	const outSelectors = document.getElementsByClassName('out-selector');
 }
 
 function renderOutputs() {
@@ -38,7 +37,7 @@ function renderStreamNameTable() {
 	const tableHead = document.getElementById('name-table').tHead;
 	let tHeadHtml = '<tr>';
 	for (let i = 1; i <= STREAM_NUM; i++) {
-		tHeadHtml += `<th>Stream${i}</th>`;
+		tHeadHtml += `<th>Stream ${i}</th>`;
 	}
 	tHeadHtml += '</tr>';
 	tableHead.innerHTML = tHeadHtml;
@@ -48,8 +47,9 @@ function renderStreamNameTable() {
 	for (let i = 1; i <= STREAM_NUM; i++) {
 		const td = tr.insertCell();
 		const input = document.createElement('input');
+		input.className = 'input input-bordered w-20 max-w-sm input-xs';
 		input.type = 'text';
-		input.size = '10';
+		input.size = '20';
 		input.value = streamNames[i];
 		input.name = streamNames[i];
 		td.appendChild(input);
@@ -73,9 +73,10 @@ function saveStreamNamesTable() {
 	renderStreamSelectors();
 	writeStreamNames();
 }
+
 window.onload = async function () {
 	streamNames = await fetchStreamNames();
 	renderOutputs();
-	renderStreamNameTable();
 	renderStreamSelectors();
+	renderStreamNameTable();
 };

@@ -2,6 +2,15 @@
 const STREAM_NUM = 25;
 const OUT_NUM = 95;
 
+// This will be fetched from a file
+let streamNames = [];
+let streamOutsConfig = [];
+let statsJson = [];
+
+function capitalize(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 // Tools
 function removeAllChildNodes(parent) {
 	while (parent.firstChild) {
@@ -15,9 +24,6 @@ function clearAndAddChooseOption(selector) {
 	option.text = 'Choose';
 	selector.appendChild(option);
 }
-// This will be fetched from a file
-let streamNames = [];
-let streamOutsConfig = [];
 
 // AJAX request function
 async function submitFormAndShowResponse(formId, phpUrl) {
@@ -44,7 +50,6 @@ async function executePhpAndShowResponse(phpUrl) {
 	var response = await fetch(phpUrl, { method: 'POST' });
 	if (response.ok) {
 		showResponse(await response.text());
-		refreshStatuses();
 	} else {
 		console.error('Request failed with status:', response.status);
 	}
@@ -52,9 +57,7 @@ async function executePhpAndShowResponse(phpUrl) {
 
 function showResponse(response) {
 	var responseBox = document.getElementById('responseBox');
-	responseBox.innerHTML =
-		`<p>${response}</p><div class="divider"><img src="./img/divider.svg" alt="divider" /></div>` +
-		responseBox.innerHTML;
+	responseBox.innerHTML = `<p>${response}</p><div class="divider"></div>` + responseBox.innerHTML;
 }
 
 async function fetchStats() {
@@ -92,7 +95,6 @@ async function fetchStreamNames() {
 		}
 		const data = await response.json();
 		const streamNames = data.csvData[0];
-		console.log('CSV fetched successfully.');
 		return streamNames;
 	} catch (error) {
 		console.error('Error fetching stream names:', error);
@@ -122,9 +124,9 @@ async function fetchConfigFile() {
 			const split = remainingLine.split(' ');
 
 			if (split.length === 3) {
-				streamOutsConfig[i][j] = { url: split[0], source: split[1], name: split[2] };
+				streamOutsConfig[i][j] = { url: split[0], encoding: split[1], name: split[2] };
 			} else {
-				streamOutsConfig[i][j] = {};
+				streamOutsConfig[i][j] = { url: '', encoding: '', name: '' };
 			}
 		}
 	}
