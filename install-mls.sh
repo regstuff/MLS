@@ -53,7 +53,7 @@ sudo mkdir /usr/local/nginx/scripts
 sudo chmod +x -R /usr/local/nginx/scripts
 
 cd /usr/local/nginx/scripts/
-for i in {2..${STREAM_NUM}}; do
+for ((i = 2; i <= ${STREAM_NUM}; i++)); do
 	sudo cp 1.sh ${i}.sh
 	sudo cp ./images/1lowerthird.png ./images/${i}lowerthird.png
 	sudo cp ./images/1video.mp4 ./images/${i}video.mp4
