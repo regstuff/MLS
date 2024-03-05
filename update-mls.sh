@@ -11,12 +11,9 @@ sudo cp -R ~/MLS/scripts /usr/local/nginx
 sudo chmod +x -R /usr/local/nginx/scripts
 
 cd /usr/local/nginx/scripts/
-for i in {2..${STREAM_NUM}}; do
+
+for ((i = 2; i <= ${STREAM_NUM}; i++)); do
 	sudo cp 1.sh ${i}.sh
-	sudo cp ./images/1lowerthird.png ./images/${i}lowerthird.png
-	sudo cp ./images/1video.mp4 ./images/${i}video.mp4
-	sudo cp ./images/1holding.mp4 ./images/${i}holding.mp4
-	sudo cp ./images/1failover.mp4 ./images/${1}failover.mp5
 done
 
 sudo ./nginxrestart.sh
