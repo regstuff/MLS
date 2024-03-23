@@ -1,204 +1,604 @@
 ***DESTINATION CONFIG***
-__stream1__out1__ rtmp://unconfigured.blk source channel_name
-__stream1__out2__ rtmp://unconfigured.blk source channel_name
-__stream1__out3__ rtmp://unconfigured.blk source channel_name
-__stream1__out4__ rtmp://unconfigured.blk source channel_name
-__stream1__out5__ rtmp://unconfigured.blk source channel_name
-__stream1__out6__ rtmp://unconfigured.blk source channel_name
-__stream1__out7__ rtmp://unconfigured.blk source channel_name
-__stream1__out8__ rtmp://unconfigured.blk source channel_name
-__stream1__out9__ rtmp://unconfigured.blk source channel_name
-__stream1__out10__ rtmp://unconfigured.blk source channel_name
-__stream2__out1__ rtmp://unconfigured.blk source channel_name
-__stream2__out2__ rtmp://unconfigured.blk source channel_name
-__stream2__out3__ rtmp://unconfigured.blk source channel_name
-__stream2__out4__ rtmp://unconfigured.blk source channel_name
-__stream2__out5__ rtmp://unconfigured.blk source channel_name
-__stream2__out6__ rtmp://unconfigured.blk source channel_name
-__stream2__out7__ rtmp://unconfigured.blk source channel_name
-__stream2__out8__ rtmp://unconfigured.blk source channel_name
-__stream2__out9__ rtmp://unconfigured.blk source channel_name
-__stream2__out10__ rtmp://unconfigured.blk source channel_name
-__stream3__out1__ rtmp://unconfigured.blk source channel_name
-__stream3__out2__ rtmp://unconfigured.blk source channel_name
-__stream3__out3__ rtmp://unconfigured.blk source channel_name
-__stream3__out4__ rtmp://unconfigured.blk source channel_name
-__stream3__out5__ rtmp://unconfigured.blk source channel_name
-__stream3__out6__ rtmp://unconfigured.blk source channel_name
-__stream3__out7__ rtmp://unconfigured.blk source channel_name
-__stream3__out8__ rtmp://unconfigured.blk source channel_name
-__stream3__out9__ rtmp://unconfigured.blk source channel_name
-__stream3__out10__ rtmp://unconfigured.blk source channel_name
-__stream4__out1__ rtmp://unconfigured.blk source channel_name
-__stream4__out2__ rtmp://unconfigured.blk source channel_name
-__stream4__out3__ rtmp://unconfigured.blk source channel_name
-__stream4__out4__ rtmp://unconfigured.blk source channel_name
-__stream4__out5__ rtmp://unconfigured.blk source channel_name
-__stream4__out6__ rtmp://unconfigured.blk source channel_name
-__stream4__out7__ rtmp://unconfigured.blk source channel_name
-__stream4__out8__ rtmp://unconfigured.blk source channel_name
-__stream4__out9__ rtmp://unconfigured.blk source channel_name
-__stream4__out10__ rtmp://unconfigured.blk source channel_name
-__stream5__out1__ rtmp://unconfigured.blk source channel_name
-__stream5__out2__ rtmp://unconfigured.blk source channel_name
-__stream5__out3__ rtmp://unconfigured.blk source channel_name
-__stream5__out4__ rtmp://unconfigured.blk source channel_name
-__stream5__out5__ rtmp://unconfigured.blk source channel_name
-__stream5__out6__ rtmp://unconfigured.blk source channel_name
-__stream5__out7__ rtmp://unconfigured.blk source channel_name
-__stream5__out8__ rtmp://unconfigured.blk source channel_name
-__stream5__out9__ rtmp://unconfigured.blk source channel_name
-__stream5__out10__ rtmp://unconfigured.blk source channel_name
-__stream6__out1__ rtmp://unconfigured.blk source channel_name
-__stream6__out2__ rtmp://unconfigured.blk source channel_name
-__stream6__out3__ rtmp://unconfigured.blk source channel_name
-__stream6__out4__ rtmp://unconfigured.blk source channel_name
-__stream6__out5__ rtmp://unconfigured.blk source channel_name
-__stream6__out6__ rtmp://unconfigured.blk source channel_name
-__stream6__out7__ rtmp://unconfigured.blk source channel_name
-__stream6__out8__ rtmp://unconfigured.blk source channel_name
-__stream6__out9__ rtmp://unconfigured.blk source channel_name
-__stream6__out10__ rtmp://unconfigured.blk source channel_name
-__stream7__out1__ rtmp://unconfigured.blk source channel_name
-__stream7__out2__ rtmp://unconfigured.blk source channel_name
-__stream7__out3__ rtmp://unconfigured.blk source channel_name
-__stream7__out4__ rtmp://unconfigured.blk source channel_name
-__stream7__out5__ rtmp://unconfigured.blk source channel_name
-__stream7__out6__ rtmp://unconfigured.blk source channel_name
-__stream7__out7__ rtmp://unconfigured.blk source channel_name
-__stream7__out8__ rtmp://unconfigured.blk source channel_name
-__stream7__out9__ rtmp://unconfigured.blk source channel_name
-__stream7__out10__ rtmp://unconfigured.blk source channel_name
-__stream8__out1__ rtmp://unconfigured.blk source channel_name
-__stream8__out2__ rtmp://unconfigured.blk source channel_name
-__stream8__out3__ rtmp://unconfigured.blk source channel_name
-__stream8__out4__ rtmp://unconfigured.blk source channel_name
-__stream8__out5__ rtmp://unconfigured.blk source channel_name
-__stream8__out6__ rtmp://unconfigured.blk source channel_name
-__stream8__out7__ rtmp://unconfigured.blk source channel_name
-__stream8__out8__ rtmp://unconfigured.blk source channel_name
-__stream8__out9__ rtmp://unconfigured.blk source channel_name
-__stream8__out10__ rtmp://unconfigured.blk source channel_name
-__stream9__out1__ rtmp://unconfigured.blk source channel_name
-__stream9__out2__ rtmp://unconfigured.blk source channel_name
-__stream9__out3__ rtmp://unconfigured.blk source channel_name
-__stream9__out4__ rtmp://unconfigured.blk source channel_name
-__stream9__out5__ rtmp://unconfigured.blk source channel_name
-__stream9__out6__ rtmp://unconfigured.blk source channel_name
-__stream9__out7__ rtmp://unconfigured.blk source channel_name
-__stream9__out8__ rtmp://unconfigured.blk source channel_name
-__stream9__out9__ rtmp://unconfigured.blk source channel_name
-__stream9__out10__ rtmp://unconfigured.blk source channel_name
-__stream10__out1__ rtmp://unconfigured.blk source channel_name
-__stream10__out2__ rtmp://unconfigured.blk source channel_name
-__stream10__out3__ rtmp://unconfigured.blk source channel_name
-__stream10__out4__ rtmp://unconfigured.blk source channel_name
-__stream10__out5__ rtmp://unconfigured.blk source channel_name
-__stream10__out6__ rtmp://unconfigured.blk source channel_name
-__stream10__out7__ rtmp://unconfigured.blk source channel_name
-__stream10__out8__ rtmp://unconfigured.blk source channel_name
-__stream10__out9__ rtmp://unconfigured.blk source channel_name
-__stream10__out10__ rtmp://unconfigured.blk source channel_name
-__stream11__out1__ rtmp://unconfigured.blk source channel_name
-__stream11__out2__ rtmp://unconfigured.blk source channel_name
-__stream11__out3__ rtmp://unconfigured.blk source channel_name
-__stream11__out4__ rtmp://unconfigured.blk source channel_name
-__stream11__out5__ rtmp://unconfigured.blk source channel_name
-__stream11__out6__ rtmp://unconfigured.blk source channel_name
-__stream11__out7__ rtmp://unconfigured.blk source channel_name
-__stream11__out8__ rtmp://unconfigured.blk source channel_name
-__stream11__out9__ rtmp://unconfigured.blk source channel_name
-__stream11__out10__ rtmp://unconfigured.blk source channel_name
-__stream12__out1__ rtmp://unconfigured.blk source channel_name
-__stream12__out2__ rtmp://unconfigured.blk source channel_name
-__stream12__out3__ rtmp://unconfigured.blk source channel_name
-__stream12__out4__ rtmp://unconfigured.blk source channel_name
-__stream12__out5__ rtmp://unconfigured.blk source channel_name
-__stream12__out6__ rtmp://unconfigured.blk source channel_name
-__stream12__out7__ rtmp://unconfigured.blk source channel_name
-__stream12__out8__ rtmp://unconfigured.blk source channel_name
-__stream12__out9__ rtmp://unconfigured.blk source channel_name
-__stream12__out10__ rtmp://unconfigured.blk source channel_name
-__stream13__out1__ rtmp://unconfigured.blk source channel_name
-__stream13__out2__ rtmp://unconfigured.blk source channel_name
-__stream13__out3__ rtmp://unconfigured.blk source channel_name
-__stream13__out4__ rtmp://unconfigured.blk source channel_name
-__stream13__out5__ rtmp://unconfigured.blk source channel_name
-__stream13__out6__ rtmp://unconfigured.blk source channel_name
-__stream13__out7__ rtmp://unconfigured.blk source channel_name
-__stream13__out8__ rtmp://unconfigured.blk source channel_name
-__stream13__out9__ rtmp://unconfigured.blk source channel_name
-__stream13__out10__ rtmp://unconfigured.blk source channel_name
-__stream14__out1__ rtmp://unconfigured.blk source channel_name
-__stream14__out2__ rtmp://unconfigured.blk source channel_name
-__stream14__out3__ rtmp://unconfigured.blk source channel_name
-__stream14__out4__ rtmp://unconfigured.blk source channel_name
-__stream14__out5__ rtmp://unconfigured.blk source channel_name
-__stream14__out6__ rtmp://unconfigured.blk source channel_name
-__stream14__out7__ rtmp://unconfigured.blk source channel_name
-__stream14__out8__ rtmp://unconfigured.blk source channel_name
-__stream14__out9__ rtmp://unconfigured.blk source channel_name
-__stream14__out10__ rtmp://unconfigured.blk source channel_name
-__stream15__out1__ rtmp://unconfigured.blk source channel_name
-__stream15__out2__ rtmp://unconfigured.blk source channel_name
-__stream15__out3__ rtmp://unconfigured.blk source channel_name
-__stream15__out4__ rtmp://unconfigured.blk source channel_name
-__stream15__out5__ rtmp://unconfigured.blk source channel_name
-__stream15__out6__ rtmp://unconfigured.blk source channel_name
-__stream15__out7__ rtmp://unconfigured.blk source channel_name
-__stream15__out8__ rtmp://unconfigured.blk source channel_name
-__stream15__out9__ rtmp://unconfigured.blk source channel_name
-__stream15__out10__ rtmp://unconfigured.blk source channel_name
-__stream16__out1__ rtmp://unconfigured.blk source channel_name
-__stream16__out2__ rtmp://unconfigured.blk source channel_name
-__stream16__out3__ rtmp://unconfigured.blk source channel_name
-__stream16__out4__ rtmp://unconfigured.blk source channel_name
-__stream16__out5__ rtmp://unconfigured.blk source channel_name
-__stream16__out6__ rtmp://unconfigured.blk source channel_name
-__stream16__out7__ rtmp://unconfigured.blk source channel_name
-__stream16__out8__ rtmp://unconfigured.blk source channel_name
-__stream16__out9__ rtmp://unconfigured.blk source channel_name
-__stream16__out10__ rtmp://unconfigured.blk source channel_name
-__stream17__out1__ rtmp://unconfigured.blk source channel_name
-__stream17__out2__ rtmp://unconfigured.blk source channel_name
-__stream17__out3__ rtmp://unconfigured.blk source channel_name
-__stream17__out4__ rtmp://unconfigured.blk source channel_name
-__stream17__out5__ rtmp://unconfigured.blk source channel_name
-__stream17__out6__ rtmp://unconfigured.blk source channel_name
-__stream17__out7__ rtmp://unconfigured.blk source channel_name
-__stream17__out8__ rtmp://unconfigured.blk source channel_name
-__stream17__out9__ rtmp://unconfigured.blk source channel_name
-__stream17__out10__ rtmp://unconfigured.blk source channel_name
-__stream18__out1__ rtmp://unconfigured.blk source channel_name
-__stream18__out2__ rtmp://unconfigured.blk source channel_name
-__stream18__out3__ rtmp://unconfigured.blk source channel_name
-__stream18__out4__ rtmp://unconfigured.blk source channel_name
-__stream18__out5__ rtmp://unconfigured.blk source channel_name
-__stream18__out6__ rtmp://unconfigured.blk source channel_name
-__stream18__out7__ rtmp://unconfigured.blk source channel_name
-__stream18__out8__ rtmp://unconfigured.blk source channel_name
-__stream18__out9__ rtmp://unconfigured.blk source channel_name
-__stream18__out10__ rtmp://unconfigured.blk source channel_name
-__stream19__out1__ rtmp://unconfigured.blk source channel_name
-__stream19__out2__ rtmp://unconfigured.blk source channel_name
-__stream19__out3__ rtmp://unconfigured.blk source channel_name
-__stream19__out4__ rtmp://unconfigured.blk source channel_name
-__stream19__out5__ rtmp://unconfigured.blk source channel_name
-__stream19__out6__ rtmp://unconfigured.blk source channel_name
-__stream19__out7__ rtmp://unconfigured.blk source channel_name
-__stream19__out8__ rtmp://unconfigured.blk source channel_name
-__stream19__out9__ rtmp://unconfigured.blk source channel_name
-__stream19__out10__ rtmp://unconfigured.blk source channel_name
-__stream20__out1__ rtmp://unconfigured.blk source channel_name
-__stream20__out2__ rtmp://unconfigured.blk source channel_name
-__stream20__out3__ rtmp://unconfigured.blk source channel_name
-__stream20__out4__ rtmp://unconfigured.blk source channel_name
-__stream20__out5__ rtmp://unconfigured.blk source channel_name
-__stream20__out6__ rtmp://unconfigured.blk source channel_name
-__stream20__out7__ rtmp://unconfigured.blk source channel_name
-__stream20__out8__ rtmp://unconfigured.blk source channel_name
-__stream20__out9__ rtmp://unconfigured.blk source channel_name
-__stream20__out10__ rtmp://unconfigured.blk source channel_name
+__stream1__out1__ rtmp://a.rtmp.youtube.com/live2/1111-aaaa-1111-aaaa-1111 source LB_Wb_Eng
+__stream1__out2__ rtmp://a.rtmp.youtube.com/live2/1111-aaaa-1111-aaaa-1111 vertical Isha_Foundation_YT
+__stream1__out3__ 
+__stream1__out4__  source 
+__stream1__out5__ rtmp://34.93.121.211/distribute/stream2 source test
+__stream1__out6__ 
+__stream1__out7__
+__stream1__out8__ 
+__stream1__out9__
+__stream1__out10__
+__stream1__out11__
+__stream1__out12__
+__stream1__out13__
+__stream1__out14__
+__stream1__out15__
+__stream1__out16__
+__stream1__out17__
+__stream1__out18__
+__stream1__out19__
+__stream1__out20__
+__stream1__out21__
+__stream1__out22__
+__stream1__out23__
+__stream1__out24__
+__stream1__out25__
+__stream1__out26__
+__stream1__out27__
+__stream1__out28__
+__stream1__out29__
+__stream1__out30__
+__stream1__out31__
+__stream1__out32__
+__stream1__out33__
+__stream1__out34__
+__stream1__out35__
+__stream1__out36__
+__stream1__out37__
+__stream1__out38__
+__stream1__out39__
+__stream1__out40__
+__stream1__out41__
+__stream1__out42__
+__stream1__out43__
+__stream1__out44__
+__stream1__out45__
+__stream1__out46__
+__stream1__out47__
+__stream1__out48__
+__stream1__out49__
+__stream1__out50__
+__stream1__out51__
+__stream1__out52__
+__stream1__out53__
+__stream1__out54__
+__stream1__out55__
+__stream1__out56__
+__stream1__out57__
+__stream1__out58__
+__stream1__out59__
+__stream1__out60__
+__stream1__out61__
+__stream1__out62__
+__stream1__out63__
+__stream1__out64__
+__stream1__out65__
+__stream1__out66__
+__stream1__out67__
+__stream1__out68__
+__stream1__out69__
+__stream1__out70__
+__stream1__out71__
+__stream1__out72__
+__stream1__out73__
+__stream1__out74__
+__stream1__out75__
+__stream1__out76__
+__stream1__out77__
+__stream1__out78__
+__stream1__out79__
+__stream1__out80__
+__stream1__out81__
+__stream1__out82__
+__stream1__out83__
+__stream1__out84__
+__stream1__out85__
+__stream1__out86__
+__stream1__out87__
+__stream1__out88__
+__stream1__out89__
+__stream1__out90__
+__stream1__out91__
+__stream1__out92__
+__stream1__out93__
+__stream1__out94__
+__stream1__out95__
+
+__stream2__out1__ 
+__stream2__out2__ rtmp://a.rtmp.youtube.com/live2/1111-aaaa-1111-aaaa-1111 source LB_Wb_Hindi
+__stream2__out3__ rtmps://live-api-s.facebook.com:443/rtmp/FB-1111-aaaa-1111-aaaa-1111 source Sadhguru_Tamil_FB_GP
+__stream2__out4__ 
+__stream2__out5__ 
+__stream2__out6__ 
+__stream2__out7__ 
+__stream2__out8__ 
+__stream2__out9__ 
+__stream2__out10__
+__stream2__out11__
+__stream2__out12__
+__stream2__out13__
+__stream2__out14__
+__stream2__out15__
+__stream2__out16__
+__stream2__out17__
+__stream2__out18__
+__stream2__out19__
+__stream2__out20__
+
+__stream3__out1__  source 
+__stream3__out2__ 
+__stream3__out3__ 
+__stream3__out4__ 
+__stream3__out5__ 
+__stream3__out6__ 
+__stream3__out7__ 
+__stream3__out8__ 
+__stream3__out9__ 
+__stream3__out10__ 
+__stream3__out11__
+__stream3__out12__
+__stream3__out13__
+__stream3__out14__
+__stream3__out15__
+__stream3__out16__
+__stream3__out17__
+__stream3__out18__
+__stream3__out19__
+__stream3__out20__
+
+__stream4__out1__ 
+__stream4__out2__ 
+__stream4__out3__ 
+__stream4__out4__ 
+__stream4__out5__ 
+__stream4__out6__ 
+__stream4__out7__ 
+__stream4__out8__ 
+__stream4__out9__ 
+__stream4__out10__
+__stream4__out11__
+__stream4__out12__
+__stream4__out13__
+__stream4__out14__
+__stream4__out15__
+__stream4__out16__
+__stream4__out17__
+__stream4__out18__
+__stream4__out19__
+__stream4__out20__
+
+__stream5__out1__ 
+__stream5__out2__ 
+__stream5__out3__ 
+__stream5__out4__ 
+__stream5__out5__ 
+__stream5__out6__ 
+__stream5__out7__ 
+__stream5__out8__ 
+__stream5__out9__ 
+__stream5__out10__
+__stream5__out11__
+__stream5__out12__
+__stream5__out13__
+__stream5__out14__
+__stream5__out15__
+__stream5__out16__
+__stream5__out17__
+__stream5__out18__
+__stream5__out19__
+__stream5__out20__
+
+__stream6__out1__ 
+__stream6__out2__ 
+__stream6__out3__ 
+__stream6__out4__ 
+__stream6__out5__ 
+__stream6__out6__ 
+__stream6__out7__ 
+__stream6__out8__ 
+__stream6__out9__ 
+__stream6__out10__ 
+__stream6__out11__
+__stream6__out12__
+__stream6__out13__
+__stream6__out14__
+__stream6__out15__
+__stream6__out16__
+__stream6__out17__
+__stream6__out18__
+__stream6__out19__
+__stream6__out20__
+
+__stream7__out1__ 
+__stream7__out2__ 
+__stream7__out3__ 
+__stream7__out4__ 
+__stream7__out5__ 
+__stream7__out6__ 
+__stream7__out7__ 
+__stream7__out8__ 
+__stream7__out9__ 
+__stream7__out10__
+__stream7__out11__
+__stream7__out12__
+__stream7__out13__
+__stream7__out14__
+__stream7__out15__
+__stream7__out16__
+__stream7__out17__
+__stream7__out18__
+__stream7__out19__
+__stream7__out20__
+
+__stream8__out1__ 
+__stream8__out2__ 
+__stream8__out3__ 
+__stream8__out4__ 
+__stream8__out5__ 
+__stream8__out6__ 
+__stream8__out7__ 
+__stream8__out8__ 
+__stream8__out9__ 
+__stream8__out10__
+__stream8__out11__
+__stream8__out12__
+__stream8__out13__
+__stream8__out14__
+__stream8__out15__
+__stream8__out16__
+__stream8__out17__
+__stream8__out18__
+__stream8__out19__
+__stream8__out20__
+
+__stream9__out1__ 
+__stream9__out2__ 
+__stream9__out3__ 
+__stream9__out4__ 
+__stream9__out5__ 
+__stream9__out6__ 
+__stream9__out7__ 
+__stream9__out8__ 
+__stream9__out9__ 
+__stream9__out10__
+__stream3__out11__
+__stream3__out12__
+__stream3__out13__
+__stream3__out14__
+__stream3__out15__
+__stream3__out16__
+__stream3__out17__
+__stream3__out18__
+__stream3__out19__
+__stream3__out20__
+
+__stream10__out1__ 
+__stream10__out2__ 
+__stream10__out3__ 
+__stream10__out4__ 
+__stream10__out5__ 
+__stream10__out6__ 
+__stream10__out7__ 
+__stream10__out8__ 
+__stream10__out9__ 
+__stream10__out10__
+__stream10__out11__
+__stream10__out12__
+__stream10__out13__
+__stream10__out14__
+__stream10__out15__
+__stream10__out16__
+__stream10__out17__
+__stream10__out18__
+__stream10__out19__
+__stream10__out20__
+
+__stream11__out1__ 
+__stream11__out2__ 
+__stream11__out3__ 
+__stream11__out4__ 
+__stream11__out5__ 
+__stream11__out6__ 
+__stream11__out7__ 
+__stream11__out8__ 
+__stream11__out9__ 
+__stream11__out10__
+__stream11__out11__
+__stream11__out12__
+__stream11__out13__
+__stream11__out14__
+__stream11__out15__
+__stream11__out16__
+__stream11__out17__
+__stream11__out18__
+__stream11__out19__
+__stream11__out20__
+
+__stream12__out1__ 
+__stream12__out2__ 
+__stream12__out3__ 
+__stream12__out4__ 
+__stream12__out5__ 
+__stream12__out6__ 
+__stream12__out7__ 
+__stream12__out8__ 
+__stream12__out9__ 
+__stream12__out10__
+__stream12__out11__
+__stream12__out12__
+__stream12__out13__
+__stream12__out14__
+__stream12__out15__
+__stream12__out16__
+__stream12__out17__
+__stream12__out18__
+__stream12__out19__
+__stream12__out20__
+
+__stream13__out1__ 
+__stream13__out2__ 
+__stream13__out3__ 
+__stream13__out4__ 
+__stream13__out5__ 
+__stream13__out6__ 
+__stream13__out7__ 
+__stream13__out8__ 
+__stream13__out9__ 
+__stream13__out10__
+__stream13__out11__
+__stream13__out12__
+__stream13__out13__
+__stream13__out14__
+__stream13__out15__
+__stream13__out16__
+__stream13__out17__
+__stream13__out18__
+__stream13__out19__
+__stream13__out20__
+
+__stream14__out1__ 
+__stream14__out2__ 
+__stream14__out3__ 
+__stream14__out4__ 
+__stream14__out5__ 
+__stream14__out6__ 
+__stream14__out7__ 
+__stream14__out8__ 
+__stream14__out9__ 
+__stream14__out10__
+__stream14__out11__
+__stream14__out12__
+__stream14__out13__
+__stream14__out14__
+__stream14__out15__
+__stream14__out16__
+__stream14__out17__
+__stream14__out18__
+__stream14__out19__
+__stream14__out20__
+
+__stream15__out1__ 
+__stream15__out2__ 
+__stream15__out3__ 
+__stream15__out4__ 
+__stream15__out5__ 
+__stream15__out6__ 
+__stream15__out7__ 
+__stream15__out8__ 
+__stream15__out9__ 
+__stream15__out10__
+__stream15__out11__
+__stream15__out12__
+__stream15__out13__
+__stream15__out14__
+__stream15__out15__
+__stream15__out16__
+__stream15__out17__
+__stream15__out18__
+__stream15__out19__
+__stream15__out20__
+
+__stream16__out1__ 
+__stream16__out2__ 
+__stream16__out3__ 
+__stream16__out4__ 
+__stream16__out5__ 
+__stream16__out6__ 
+__stream16__out7__ 
+__stream16__out8__ 
+__stream16__out9__ 
+__stream16__out10__
+__stream16__out11__
+__stream16__out12__
+__stream16__out13__
+__stream16__out14__
+__stream16__out15__
+__stream16__out16__
+__stream16__out17__
+__stream16__out18__
+__stream16__out19__
+__stream16__out20__
+
+__stream17__out1__ 
+__stream17__out2__ 
+__stream17__out3__ 
+__stream17__out4__ 
+__stream17__out5__ 
+__stream17__out6__ 
+__stream17__out7__ 
+__stream17__out8__ 
+__stream17__out9__ 
+__stream17__out10__
+__stream17__out11__
+__stream17__out12__
+__stream17__out13__
+__stream17__out14__
+__stream17__out15__
+__stream17__out16__
+__stream17__out17__
+__stream17__out18__
+__stream17__out19__
+__stream17__out20__
+
+__stream18__out1__ 
+__stream18__out2__ 
+__stream18__out3__ 
+__stream18__out4__ 
+__stream18__out5__ 
+__stream18__out6__ 
+__stream18__out7__ 
+__stream18__out8__ 
+__stream18__out9__ 
+__stream18__out10__
+__stream18__out11__
+__stream18__out12__
+__stream18__out13__
+__stream18__out14__
+__stream18__out15__
+__stream18__out16__
+__stream18__out17__
+__stream18__out18__
+__stream18__out19__
+__stream18__out20__
+
+__stream19__out1__ 
+__stream19__out2__ 
+__stream19__out3__ 
+__stream19__out4__ 
+__stream19__out5__ 
+__stream19__out6__ 
+__stream19__out7__ 
+__stream19__out8__
+__stream19__out9__
+__stream19__out10__
+__stream19__out11__
+__stream19__out12__
+__stream19__out13__
+__stream19__out14__
+__stream19__out15__
+__stream19__out16__
+__stream19__out17__
+__stream19__out18__
+__stream19__out19__
+__stream19__out20__
+
+__stream20__out1__ 
+__stream20__out2__ 
+__stream20__out3__ 
+__stream20__out4__ 
+__stream20__out5__ 
+__stream20__out6__ 
+__stream20__out7__ 
+__stream20__out8__ 
+__stream20__out9__ 
+__stream20__out10__
+__stream20__out11__
+__stream20__out12__
+__stream20__out13__
+__stream20__out14__
+__stream20__out15__
+__stream20__out16__
+__stream20__out17__
+__stream20__out18__
+__stream20__out19__
+__stream20__out20__
+
+__stream21__out1__
+__stream21__out2__
+__stream21__out3__
+__stream21__out4__
+__stream21__out5__
+__stream21__out6__
+__stream21__out7__
+__stream21__out8__
+__stream21__out9__
+__stream21__out10__
+__stream21__out11__
+__stream21__out12__
+__stream21__out13__
+__stream21__out14__
+__stream21__out15__
+__stream21__out16__
+__stream21__out17__
+__stream21__out18__
+__stream21__out19__
+__stream21__out20__
+
+__stream22__out1__
+__stream22__out2__
+__stream22__out3__
+__stream22__out4__
+__stream22__out5__
+__stream22__out6__
+__stream22__out7__
+__stream22__out8__
+__stream22__out9__
+__stream22__out10__
+__stream22__out11__
+__stream22__out12__
+__stream22__out13__
+__stream22__out14__
+__stream22__out15__
+__stream22__out16__
+__stream22__out17__
+__stream22__out18__
+__stream22__out19__
+__stream22__out20__
+
+__stream23__out1__
+__stream23__out2__
+__stream23__out3__
+__stream23__out4__
+__stream23__out5__
+__stream23__out6__
+__stream23__out7__
+__stream23__out8__
+__stream23__out9__
+__stream23__out10__
+__stream23__out11__
+__stream23__out12__
+__stream23__out13__
+__stream23__out14__
+__stream23__out15__
+__stream23__out16__
+__stream23__out17__
+__stream23__out18__
+__stream23__out19__
+__stream23__out20__
+
+__stream24__out1__
+__stream24__out2__
+__stream24__out3__
+__stream24__out4__
+__stream24__out5__
+__stream24__out6__
+__stream24__out7__
+__stream24__out8__
+__stream24__out9__
+__stream24__out10__
+__stream24__out11__
+__stream24__out12__
+__stream24__out13__
+__stream24__out14__
+__stream24__out15__
+__stream24__out16__
+__stream24__out17__
+__stream24__out18__
+__stream24__out19__
+__stream24__out20__
+
+__stream25__out1__
+__stream25__out2__
+__stream25__out3__
+__stream25__out4__
+__stream25__out5__
+__stream25__out6__
+__stream25__out7__
+__stream25__out8__
+__stream25__out9__
+__stream25__out10__
+__stream25__out11__
+__stream25__out12__
+__stream25__out13__
+__stream25__out14__
+__stream25__out15__
+__stream25__out16__
+__stream25__out17__
+__stream25__out18__
+__stream25__out19__
+__stream25__out20__
+
 __stream1__out98__ rtmp://localhost/recording/stream1 source Stream1_record
 __stream2__out98__ rtmp://localhost/recording/stream2 source Stream2_record
 __stream3__out98__ rtmp://localhost/recording/stream3 source Stream3_record
@@ -219,48 +619,38 @@ __stream17__out98__ rtmp://localhost/recording/stream17 source Stream17_record
 __stream18__out98__ rtmp://localhost/recording/stream18 source Stream18_record
 __stream19__out98__ rtmp://localhost/recording/stream19 source Stream19_record
 __stream20__out98__ rtmp://localhost/recording/stream20 source Stream20_record
-__stream1__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram1
-__stream2__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram2
-__stream3__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram3
-__stream4__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram4
-__stream5__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram5
-__stream6__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram6
-__stream7__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram7
-__stream8__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram8
-__stream9__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram9
-__stream10__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram10
-__stream11__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram11
-__stream12__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram12
-__stream13__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram13
-__stream14__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram14
-__stream15__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram15
-__stream16__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram16
-__stream17__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram17
-__stream18__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram18
-__stream19__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram19
-__stream20__out99__ rtmp://live-upload.instagram.com:80/rtmp/YourKey source Instagram20
+__stream21__out98__ rtmp://localhost/recording/stream20 source Stream21_record
+__stream22__out98__ rtmp://localhost/recording/stream20 source Stream22_record
+__stream23__out98__ rtmp://localhost/recording/stream20 source Stream23_record
+__stream24__out98__ rtmp://localhost/recording/stream20 source Stream24_record
+__stream25__out98__ rtmp://localhost/recording/stream20 source Stream25_record
 
 ***STREAM CONFIG***
-__stream1__config__ both 1080p nofailover
-__stream2__config__ both 1080p nofailover
-__stream3__config__ both 1080p nofailover
-__stream4__config__ both 1080p nofailover
-__stream5__config__ both 1080p nofailover
-__stream6__config__ both 1080p nofailover
-__stream7__config__ both 1080p nofailover
-__stream8__config__ none 1080p nofailover
-__stream9__config__ both 1080p nofailover
-__stream10__config__ both 1080p nofailover
-__stream11__config__ both 1080p nofailover
-__stream12__config__ both 1080p nofailover
-__stream13__config__ both 1080p nofailover
-__stream14__config__ both 1080p nofailover
-__stream15__config__ both 1080p nofailover
-__stream16__config__ both 1080p nofailover
-__stream17__config__ both 1080p nofailover
-__stream18__config__ both 1080p nofailover
-__stream19__config__ both 1080p nofailover
-__stream20__config__ both 1080p nofailover
+__stream1__config__ none 720p nofailover
+__stream2__config__ none 720p nofailover
+__stream3__config__ none 720p nofailover
+__stream4__config__ none 720p nofailover
+__stream5__config__ none 720p nofailover
+__stream6__config__ none 720p nofailover
+__stream7__config__ none 720p nofailover
+__stream8__config__ none 720p nofailover
+__stream9__config__ none 720p nofailover
+__stream10__config__ none 720p nofailover
+__stream11__config__ none 720p nofailover
+__stream12__config__ none 720p nofailover
+__stream13__config__ none 720p nofailover
+__stream14__config__ none 720p nofailover
+__stream15__config__ none 720p nofailover
+__stream16__config__ none 720p nofailover
+__stream17__config__ none 720p nofailover
+__stream18__config__ none 720p nofailover
+__stream19__config__ none 720p nofailover
+__stream20__config__ none 720p nofailover
+__stream21__config__ none 720p nofailover
+__stream22__config__ none 720p nofailover
+__stream23__config__ none 720p nofailover
+__stream24__config__ none 720p nofailover
+__stream25__config__ none 720p nofailover
 
 ***AUDIO CONFIG***
 __stream1__audio__ c0 c1 stereo distribute
@@ -283,5 +673,10 @@ __stream17__audio__ c17 c33 mono main
 __stream18__audio__ c18 c35 mono main
 __stream19__audio__ c19 c37 mono main
 __stream20__audio__ c20 c39 mono main
+__stream21__audio__ c21 c41 mono main
+__stream22__audio__ c22 c43 mono main
+__stream23__audio__ c23 c45 mono main
+__stream24__audio__ c24 c47 mono main
+__stream25__audio__ c25 c49 mono main
 
 ***NEXT CONFIG***
